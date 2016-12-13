@@ -1,0 +1,43 @@
+{
+  "name": "boston",
+  "version": "1.0.0",
+  "description": "Boston",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --hot --inline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eltonjuan/boston.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eltonjuan/boston/issues"
+  },
+  "homepage": "https://github.com/eltonjuan/boston#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.9",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "css-loader": "^0.26.1",
+    "file-loader": "^0.9.0",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "deck.gl": "^3.1.1",
+    "luma.gl": "^2.10.3",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
+  }
+}

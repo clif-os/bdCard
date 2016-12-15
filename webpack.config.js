@@ -1,4 +1,5 @@
 var path = require('path');
+var transform = require('transform-loader');
 
 module.exports = {
   context: __dirname,
@@ -33,6 +34,11 @@ module.exports = {
       query: {
         presets: ['es2015', 'react', 'stage-0']
       }
+    },
+    {
+      test: /mapbox-gl.+\.js$/,
+      include: path.join(__dirname, "lib"),
+      loader: 'transform/cacheable?brfs'
     },
     {
       test: /\.json$/,

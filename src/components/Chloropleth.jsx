@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ChloroplethLayer} from 'deck.gl';
+import {ChoroplethLayer} from 'deck.gl';
 class Chloropleth extends Component {
   render() {
     const {viewport} = this.props;

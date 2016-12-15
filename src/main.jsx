@@ -1,8 +1,6 @@
 import 'babel-polyfill';
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import DeckGL from 'deck.gl/react';
-import {LineLayer} from 'deck.gl';
 import MapGL from 'react-map-gl';
 
 const token = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
@@ -29,13 +27,6 @@ class Root extends Component {
 
     const {viewport, width, height} = this.state;
 
-    const layers = [new LineLayer({
-      data: [{
-        sourcePosition: [-122.41669, 37.7853],
-        targetPosition: [-122.41669, 37.781],
-      }],
-    })];
-
     return (
       <MapGL
         {...viewport}
@@ -45,14 +36,7 @@ class Root extends Component {
         mapboxApiAccessToken={token}
         perspectiveEnabled
         width={width}
-        height={height}>
-        <DeckGL
-          {...viewport}
-          width={width}
-          height={height}
-          layers={layers}
-          debug />
-      </MapGL>
+        height={height} />
     );
   }
 

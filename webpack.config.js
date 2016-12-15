@@ -3,7 +3,7 @@ var path = require('path');
 module.exports = {
   context: __dirname,
   entry: {
-    bundle: './src/main.jsx',
+    bundle: ['babel-polyfill', './src/main.jsx'],
   },
   resolve: {
     extensions: ['', '.js'],
@@ -21,6 +21,9 @@ module.exports = {
     chunkFilename: '[hash]/js/[id].js',
     hotUpdateMainFilename: '[hash]/update.json',
     hotUpdateChunkFilename: '[hash]/js/[id].update.js'
+  },
+  node: {
+    fs: "empty"
   },
   module: {
     loaders: [{

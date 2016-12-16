@@ -2,12 +2,31 @@ import React from 'react';
 import {render} from 'react-dom';
 // import {Provider} from 'react-redux';
 // import {store} from './state/store';
-import AppContainer from './AppContainer.jsx';
+import AppInterface from './AppInterface.jsx';
+import Map from './Map.jsx';
 
-console.log("ASUHHH")
+import NINETY from './data/TBF_TM_1990_norm.json'
+import THOUSAND from './data/TBF_TM_2000_norm.json'
+import TEN from './data/TBF_TM_2010_norm.json'
+import FOURTEEN from './data/TBF_TM_2014_norm.json'
+import ALLYEARS from './data/TBF_TM_all.json'
+global.mapboxgl = require('mapbox-gl');
+
+const geojsons = {
+  "1990": NINETY,
+  "2000": THOUSAND,
+  "2010": TEN,
+  "2014":FOURTEEN,
+  "allYears": ALLYEARS
+};
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
+const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
+
+const m = new Map(geojsons, mapStyle);
 
 render(
-  <AppContainer />,
-  document.getElementById('AppContainer')
+  <AppInterface />,
+  document.getElementById('AppInterface')
 );
 

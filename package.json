@@ -2,7 +2,7 @@
   "name": "boston",
   "version": "1.0.0",
   "description": "Boston",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --hot --inline"
@@ -30,7 +30,11 @@
     "babel-preset-stage-0": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
     "brfs": "^1.4.3",
+    "css-loader": "^0.26.1",
     "json-loader": "^0.5.4",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.4.0",
     "transform-loader": "^0.2.3",
     "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",

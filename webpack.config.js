@@ -10,7 +10,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
     alias: {
       'webworkify': 'webworkify-webpack-dropin',
-      'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js'),
+      'mapbox-gl/js/mapbox-gl.js': 'mapbox-gl/dist/mapbox-gl.js',
       'gl-matrix': path.resolve('./node_modules/gl-matrix/dist/gl-matrix.js'),
     },
     modules: ['node_modules', 'src']

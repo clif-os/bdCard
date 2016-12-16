@@ -1,10 +1,13 @@
-import 'babel-polyfill';
+console.log("STARTING");
 
+import 'babel-polyfill';
+window.WebGLDebugUtils = require('webgl-debug');
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import DeckGL from 'deck.gl/react';
-import {LineLayer} from 'deck.gl';
+
 import MapGL from 'react-map-gl';
+
+console.log(window.WebGLDebugUtils);
 
 const token = '';
 
@@ -47,12 +50,7 @@ class Root extends Component {
         perspectiveEnabled
         width={width}
         height={height}>
-        <DeckGL
-          {...viewport}
-          width={width}
-          height={height}
-          layers={layers}
-          debug />
+      
       </MapGL>
     );
   }

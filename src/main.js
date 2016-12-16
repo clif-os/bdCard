@@ -1,9 +1,12 @@
 import 'babel-polyfill';
+
 import React, {Component} from 'react';
 import {render} from 'react-dom';
+import DeckGL from 'deck.gl/react';
+import {LineLayer} from 'deck.gl';
 import MapGL from 'react-map-gl';
 
-const token = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
+const token = '';
 
 if (!token) {
   throw new Error('Please specify a valid mapbox token');
@@ -27,16 +30,30 @@ class Root extends Component {
 
     const {viewport, width, height} = this.state;
 
+    const layers = [new LineLayer({
+      data: [{
+        sourcePosition: [-122.41669, 37.7853],
+        targetPosition: [-122.41669, 37.781],
+      }],
+    })];
+
     return (
       <MapGL
         {...viewport}
-        mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"
+        mapStyle="mapbox://styles/mapbox/dark-v9"
         onChangeViewport={v => this.setState({viewport: v})}
         preventStyleDiffing={false}
         mapboxApiAccessToken={token}
         perspectiveEnabled
         width={width}
-        height={height} />
+        height={height}>
+        <DeckGL
+          {...viewport}
+          width={width}
+          height={height}
+          layers={layers}
+          debug />
+      </MapGL>
     );
   }
 
@@ -46,15 +63,3 @@ const root = document.createElement('div');
 document.body.appendChild(root);
 
 render(<Root />, root);
-
-
-
-// import Chloropleth from './components/Chloropleth.jsx';
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
-
-
-// ReactDOM.render(<Chloropleth width={1920} height={1080} />, document.getElementById('app'));
-
-

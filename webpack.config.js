@@ -4,14 +4,14 @@ var transform = require('transform-loader');
 module.exports = {
   context: __dirname,
   entry: {
-    bundle: ['babel-polyfill', './src/main.jsx'],
+    bundle: [ './src/main.js'],
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     alias: {
-      'webworkify': 'webworkify-webpack',
-      'leaflet.css': path.resolve('./node_modules/leaflet/dist/leaflet.css'),
-      'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
+      'webworkify': 'webworkify-webpack-dropin',
+      'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js'),
+      'gl-matrix': path.resolve('./node_modules/gl-matrix/dist/gl-matrix.js'),
     },
     modules: ['node_modules', 'src']
   },
@@ -27,8 +27,13 @@ module.exports = {
     fs: "empty"
   },
   module: {
+    postLoaders: [{
+      include: /node_modules\/mapbox-gl/,
+      loader: 'transform-loader',
+      query: 'brfs',
+    }],
     loaders: [{
-      test: /\.jsx$/,
+      test: /\.js$/,
       exclude: 'node_modules',
       loader: 'babel',
       query: {
@@ -44,15 +49,8 @@ module.exports = {
       test: /\.json$/,
       loader: 'json-loader'
     },
-    {
-      test: /\.js$/,
-      include: path.resolve(__dirname, 'node_modules/webworkify/index.js'),
-      loader: 'worker'
-    },
-    {
-      test: /mapbox-gl.+\.js$/,
-      loader: 'transform/cacheable?brfs'
-    },
+
+
     {
       test: /\.styl$/,
       loader: 'style-loader!css-loader!stylus-loader'

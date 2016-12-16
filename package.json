@@ -19,13 +19,8 @@
   },
   "homepage": "https://github.com/eltonjuan/boston#readme",
   "dependencies": {
-    "babel-polyfill": "^6.16.0",
-    "deck.gl": "^3.1.0",
-    "luma.gl": "^2.10.3",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "react-map-gl": "^1.7.2",
-    "webgl-debug": "^1.0.2"
+    "react-dom": "^15.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

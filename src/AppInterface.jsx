@@ -1,11 +1,13 @@
+import './AppInterface.styl';
+
 import React from 'react';
 
 class AppInterface extends React.Component {
 
   render() {
     return (
-      <div>
-        AYY
+      <div className="AppInterface">
+        <span className="title">TBF Gentrification Data Visualization Demo</span>
       </div>
     );
   }

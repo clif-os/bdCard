@@ -1,10 +1,16 @@
 /* global mapboxgl, fetch, document */
-
-// import 'object.observe';
 global.turf = require('turf');
 import './Map.styl';
+import {
+  geojsonEmpty,
+} from './utils/geojsonUtils.jsx'
+import {
+  generateChoroplethFillStyle
+} from './utils/mapboxUtils.jsx'
+
+
 export default class Map {
-  constructor(geojsons, mapStyle) {
+  constructor(geojsons, mapStyle, fields) {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: mapStyle,
@@ -13,15 +19,26 @@ export default class Map {
       zoom: 1
     });
     this.map.boxZoom.disable();
-    this.drawQueue = [];
-    this.geojson = geojsons.allYears;
+    // this.drawQueue = [];
+    this.geojsons = geojsons;
+    this.geojson = geojsons['1990'];
+    this.fillColorStyle = generateChoroplethFillStyle(geojsons.allYears, 'MedInc', 4);
     this.firstDraw = true;
     this.controlsLoaded = false;
     this.bindEvents();
     // tried to bind all events but didn't work for some reason
     this.map.on('style.load', () => {
-      this.drawLayers(this.geojson);
+      this.drawLayers(this.geojson, this.fillColorStyle);
+      this.map.on('mousemove', this.onMouseMove.bind(this));
     });
+  }
+
+  switchYear(){
+
+  }
+
+  switchField(){
+
   }
 
   bindEvents() {
@@ -33,14 +50,22 @@ export default class Map {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: ['polygon-fills']
     });
+    if (features.length) {
+      const geoid = features[0].properties.GEOID;
+      this.map.getCanvas().style.cursor = 'pointer'
+      this.map.getSource('hover').setData(window.geojsonLookup[geoid]);
+    } else {
+      this.map.getCanvas().style.cursor = ''
+      this.map.getSource('hover').setData(geojsonEmpty);
+    }
   }
 
   onMapClicked(e) {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: ['polygon-fills']
     });
-    console.log("SINGLE CLICK")
-    console.log(features)
+    console.log("ZOOM LEVEL: " + this.map.getZoom());
+    console.log(features[0])
   }
 
   onMapDoubleClicked(e) {
@@ -61,7 +86,7 @@ export default class Map {
     this.controlsLoaded = true;
   }
 
-  drawLayers(geojson) {
+  drawLayers(geojson, fillStyle) {
     if (this.firstDraw) {
       const bbox = turf.bbox(geojson);
       this.map.fitBounds(bbox, {
@@ -79,10 +104,10 @@ export default class Map {
       type: 'fill',
       source: 'drawnFeatures',
       paint: {
-        'fill-color': "blue",
-        'fill-opacity': 0.3,
+        'fill-color': fillStyle,
+        'fill-opacity': 0.4
       }
-    });
+    }, 'admin-2-boundaries-dispute');
 
     this.map.addLayer({
       id: 'polygon-outlines',
@@ -91,24 +116,39 @@ export default class Map {
       paint: {
         'line-width': {
           'stops': [
-            [1, 1.5],
-            [2, 1.75],
-            [3, 2],
-            [4, 2.5],
-            [5, 3]
+            [10, 1.5],
+            [11, 1.75],
+            [12, 2],
+            [13, 2.5],
+            [14, 3]
           ]
         },
         'line-opacity': {
           'stops': [
-            [1, 0.8],
-            [2, 0.7],
-            [3, 0.6],
-            [4, 0.5]
+            [10, 0.6],
+            [11, 0.5],
+            [12, 0.4],
+            [13, 0.4]
           ]
         },
-        'line-color': "blue"
+        'line-color': fillStyle
       }
+    }, 'admin-2-boundaries-dispute');
+
+    this.map.addSource('hover', {
+      type: 'geojson',
+      data: geojsonEmpty
     });
+
+    this.map.addLayer({
+      id: 'polygon-hover',
+      type: 'fill',
+      source: 'hover',
+      paint: {
+        'fill-color': 'black',
+        'fill-opacity': 0.15,
+      }
+    }, 'admin-2-boundaries-dispute');
     this.firstDraw = false;
   }
 }

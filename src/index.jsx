@@ -21,6 +21,7 @@ const geojsons = {
   "allYears": ALLYEARS
 };
 
+const years = [1990, 2000, 2010, 2014];
 const fields = ["MedInc"];
 
 window.geojsonLookup = convertGeojsonToLookup(geojsons.allYears);
@@ -31,7 +32,7 @@ const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
 const m = new Map(geojsons, mapStyle, fields);
 
 render(
-  <AppInterface />,
+  <AppInterface years={years} />,
   document.getElementById('AppInterface')
 );
 

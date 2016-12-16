@@ -33,8 +33,9 @@ export default class Map {
     });
   }
 
-  switchYear(){
-
+  switchYear(e){
+    console.log(e.detail);
+    this.map.getSource('drawnFeatures').setData(this.geojsons[e.detail]);
   }
 
   switchField(){
@@ -44,6 +45,7 @@ export default class Map {
   bindEvents() {
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
+    document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
   }
 
   onMouseMove(e) {
@@ -65,7 +67,10 @@ export default class Map {
       layers: ['polygon-fills']
     });
     console.log("ZOOM LEVEL: " + this.map.getZoom());
-    console.log(features[0])
+    if (features.length) {
+      const geoid = features[0].properties.GEOID;
+      console.log(window.geojsonLookup[geoid]);
+    }
   }
 
   onMapDoubleClicked(e) {

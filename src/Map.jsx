@@ -10,7 +10,7 @@ import {
 
 
 export default class Map {
-  constructor(geojsons, geojsonTilesets, mapStyle, fields, years) {
+  constructor(geojsons, geojsonTilesets, mapStyle, fields, initialFillStyle, years) {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: mapStyle,
@@ -23,15 +23,21 @@ export default class Map {
     this.geojsons = geojsons;
     this.geojsonTilesets;
     this.activeYear = '1990';
-    this.fillColorStyle = generateChoroplethFillStyle(geojsons.allYears, 'MedInc', 4);
     this.firstDraw = true;
     this.controlsLoaded = false;
     this.bindEvents();
     // tried to bind all events but didn't work for some reason
+    console.log(initialFillStyle);
     this.map.on('style.load', () => {
-      this.drawLayers(geojsonTilesets, this.fillColorStyle, years);
+      this.drawLayers(geojsonTilesets, initialFillStyle, years);
       this.map.on('mousemove', this.onMouseMove.bind(this));
     });
+  }
+
+  bindEvents() {
+    this.map.on('click', this.onMapClicked.bind(this));
+    this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
+    document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
   }
 
   switchYear(e) {
@@ -45,14 +51,14 @@ export default class Map {
     }
   }
 
+  // sendLegendToReact(fillColorStyle){
+  //   window.legend = fillColorStyle
+  //   const evt = new CustomEvent('LOAD_FIELD');
+  //   document.dispatchEvent(evt);
+  // }
+
   switchField() {
 
-  }
-
-  bindEvents() {
-    this.map.on('click', this.onMapClicked.bind(this));
-    this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
-    document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
   }
 
   onMouseMove(e) {
@@ -106,7 +112,6 @@ export default class Map {
         padding: '20'
       });
     }
-    console.log(geojsonTilesets)
     years.forEach(year => {
       const yr = String(year);
       this.map.addSource(yr, {

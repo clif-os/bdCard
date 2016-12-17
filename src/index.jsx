@@ -12,7 +12,7 @@ import FOURTEEN from './data/TBF_TM_2014_norm.json'
 import ALLYEARS from './data/TBF_TM_all.json'
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 import {
-  generateChoroplethFillStyle
+  generateChoroplethStylers
 } from './utils/mapboxUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 
@@ -34,17 +34,19 @@ const geojsonTilesets = {
 
 const years = [1990, 2000, 2010, 2014];
 const fields = ["MedInc"];
-window.fillColorStyle = generateChoroplethFillStyle(geojsons.allYears, 'MedInc', 4);
+const stylers = generateChoroplethStylers(geojsons.allYears, 'MedInc', 5);
+const fillStyle = stylers.fillStyle;
+const legendFormat = stylers.legendFormat; 
 
 window.geojsonLookup = convertGeojsonToLookup(geojsons.allYears);
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
 const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
 
-const m = new Map(geojsons, geojsonTilesets, mapStyle, fields, window.fillColorStyle, years);
+const m = new Map(geojsons, geojsonTilesets, mapStyle, fields, fillStyle, years);
 
 render(
-  <AppInterface years={years} legend={window.fillColorStyle} />,
+  <AppInterface years={years} legend={legendFormat} />,
   document.getElementById('AppInterface')
 );
 

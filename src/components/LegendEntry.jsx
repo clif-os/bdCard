@@ -3,12 +3,13 @@ import './LegendEntry.styl';
 import { dollarFormatter } from '../utils/reactUtils.jsx'
 
 function LegendEntry(props) {
-  const value = dollarFormatter(props.value);
+  const min = dollarFormatter(props.valueMin);
+  const max = dollarFormatter(props.valueMax);
   const style = {
     color: props.color
   }
   return (
-    <div className="legendEntry"><span className="fa fa-square" style={style} /><span className="value">{value}</span></div>
+    <div className="legendEntry"><span className="fa fa-square" style={style} /><span className="value">${min} - {max}</span></div>
   );
 }
 

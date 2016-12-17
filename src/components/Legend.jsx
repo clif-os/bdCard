@@ -7,7 +7,7 @@ class Legend extends Component {
     super();
     this.state = {
       legendItems: props.legend.stops,
-      legendTitle: props.legend.property
+      legendTitle: props.legend.field
     }
   };
 
@@ -27,7 +27,7 @@ class Legend extends Component {
 
      const legendNodes = this.state.legendItems.map((legendEntry, i) => {
       return(
-        <LegendEntry key={i} color={legendEntry[1]} value={legendEntry[0]} />
+        <LegendEntry key={i} valueMin={legendEntry[0]} valueMax={legendEntry[1]} color={legendEntry[2]} />
       )
     });
 

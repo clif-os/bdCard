@@ -1,12 +1,17 @@
-.yearSwitchPane{
+.yearSwitchPane {
   position: absolute;
-  background-color: rgba(255,255,255,.8);
+  background-color: rgba(255, 255, 255, .8);
   border-radius: 4px;
   width: 400px;
   bottom: 10px;
   left: 10px;
-  pointer-events:auto;
-  .yearSwitchTitle{
+  pointer-events: auto;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.35);
+  }
+  .yearSwitchTitle {
     position: relative;
     top: 5px;
     left: 5px;

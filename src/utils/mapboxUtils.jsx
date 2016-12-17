@@ -26,8 +26,8 @@ import {
 } from './geojsonUtils.jsx'
 const generateStopArray = (minMax, stopCount) => {
   const difference = minMax[1] - minMax[0];
-  const stepRange = difference/stopCount;
-  const colors = ['red', 'orange', 'yellow', 'green']
+  const stepRange = Math.ceil(difference/stopCount);
+  const colors = ['red', 'orange', 'yellow', 'lightgreen', 'green']
   var steps = [];
   for (var i = 0; i < stopCount; i++) {
     const stepNum = minMax[0] + (i * stepRange)
@@ -36,14 +36,44 @@ const generateStopArray = (minMax, stopCount) => {
   }
   return steps
 }
-
-export const generateChoroplethFillStyle = (geojson, field, stopCount) => {
+const makeLegendStops = (colorStops, max) => {
+  var legendStops = [];
+  for (var i = 0; i < colorStops.length; i++){
+    var stop = [];
+    // push the min
+    stop.push(colorStops[i][0]);
+    // push the max
+    if (i === colorStops.length - 1){
+      stop.push(max);
+    } else {
+      stop.push(colorStops[i+1][0]);
+    }
+    // now push the color in
+    stop.push(colorStops[i][1])
+    legendStops.push(stop)
+  }
+  return legendStops;
+}
+export const generateChoroplethStylers = (geojson, field, stopCount) => {
   const minMax = findMinMaxForField(geojson, field);
   const colorStops = generateStopArray(minMax, stopCount);
 
   const fillStyle =  {
                 property: field,
+                type: 'interval',
                 stops: colorStops
               }
-  return fillStyle;
+  const legendStops = makeLegendStops(colorStops, minMax[1]);
+  const legendFormat = {
+    field: field,
+    stops: legendStops
+  }
+  const stylers = {
+    fillStyle: fillStyle,
+    legendFormat: legendFormat
+  }
+
+  console.log(stylers);
+
+  return stylers;
 }

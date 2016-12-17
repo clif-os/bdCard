@@ -31,7 +31,7 @@ class YearSlider extends Component {
     const max = steps[steps.length-1]
     return (
       <div className="year-slider">
-        <Slider marks={marks} min={min} max={max} step={null} tipFormatter={null} onAfterChange={this.handleYearSwitch} />
+        <Slider marks={marks} min={min} max={max} step={null} tipFormatter={null} onAfterChange={this.handleYearSwitch} pushable={true} />
       </div>
     );
   }

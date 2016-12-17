@@ -21,6 +21,14 @@ const geojsons = {
   "allYears": ALLYEARS
 };
 
+const geojsonTilesets = {
+  "1990": 'mapbox://chiefkleef.ciwsi0jvr00042zsajry2n8i5-76muo',
+  "2000": 'mapbox://chiefkleef.ciwsi1u70000a2zo0ju9mv8ua-7us1b',
+  "2010": 'mapbox://chiefkleef.ciwsi2t16000a2oqb38rrj4wp-17zg8',
+  "2014": 'mapbox://chiefkleef.ciwsi3t61000a2oqrgwq8qo96-4h7fn',
+  "allYears": 'mapbox://chiefkleef.ciwsgz6s0142u30s5egh3z1u0-20lot'
+};
+
 const years = [1990, 2000, 2010, 2014];
 const fields = ["MedInc"];
 
@@ -29,7 +37,7 @@ window.geojsonLookup = convertGeojsonToLookup(geojsons.allYears);
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
 const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
 
-const m = new Map(geojsons, mapStyle, fields);
+const m = new Map(geojsons, geojsonTilesets, mapStyle, fields, years);
 
 render(
   <AppInterface years={years} />,

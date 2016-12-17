@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import YearSlider from './YearSlider.jsx';
+import './YearSwitchPane.styl';
 
 class YearSwitchPane extends Component {
   constructor(props){
@@ -9,7 +10,7 @@ class YearSwitchPane extends Component {
   render() {
     return(
       <div className="yearSwitchPane">
-        <div className="yearSwitchTitle">Years</div>
+        <div className="yearSwitchTitle">Chose Year:</div>
         <YearSlider years={this.props.years}/>
       </div>
     )

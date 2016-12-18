@@ -33,7 +33,7 @@ const geojsonTilesets = {
 };
 
 const years = [1990, 2000, 2010, 2014];
-const fields = ["MedInc"];
+const fields = ["MedInc", "DMI", "MedRent", "DMR"];
 const stylers = generateChoroplethStylers(geojsons.allYears, 'MedInc', 5);
 const fillStyle = stylers.fillStyle;
 const legendFormat = stylers.legendFormat; 
@@ -46,7 +46,7 @@ const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
 const m = new Map(geojsons, geojsonTilesets, mapStyle, fields, fillStyle, years);
 
 render(
-  <AppInterface years={years} legend={legendFormat} />,
+  <AppInterface years={years} legend={legendFormat} fields={fields} />,
   document.getElementById('AppInterface')
 );
 

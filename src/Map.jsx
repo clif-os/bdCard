@@ -16,7 +16,11 @@ export default class Map {
       style: mapStyle,
       repaint: true,
       center: [0, 38],
-      zoom: 1
+      maxBounds: [
+        [-71.57730000000001, 42.09960000000001],
+        [-70.52729999999997, 42.61038972219174]
+        ],
+      zoom: 10.27
     });
     this.map.boxZoom.disable();
     // this.drawQueue = [];
@@ -25,6 +29,7 @@ export default class Map {
     this.activeYear = '1990';
     this.firstDraw = true;
     this.controlsLoaded = false;
+    this.addControls();
     this.bindEvents();
     // tried to bind all events but didn't work for some reason
     console.log(initialFillStyle);
@@ -49,6 +54,13 @@ export default class Map {
       this.map.setLayoutProperty('polygon-outlines-' + this.activeYear, 'visibility', 'none');
       this.activeYear = e.detail;
     }
+  }
+
+  zoomToDataExtent(){
+    const bbox = turf.bbox(this.geojsons['allYears']);
+      this.map.fitBounds(bbox, {
+        padding: '35'
+      });
   }
 
   // sendLegendToReact(fillColorStyle){
@@ -81,6 +93,7 @@ export default class Map {
       layers: ['polygon-hover']
     });
     console.log("ZOOM LEVEL: " + this.map.getZoom());
+    console.log(this.map.getBounds());
     if (features.length) {
       const geoid = features[0].properties.GEOID;
       console.log(window.geojsonLookup[geoid]);
@@ -98,20 +111,13 @@ export default class Map {
   addControls() {
     if (!this.controlsLoaded) {
       // ZOOM CONTROLS
-      this.map.addControl(new mapboxgl.Navigation({
-        position: 'top-right'
-      }));
+      var nav = new mapboxgl.NavigationControl();
+      this.map.addControl(nav, 'top-right');
     }
     this.controlsLoaded = true;
   }
 
   drawLayers(geojsonTilesets, fillStyle, years) {
-    if (this.firstDraw) {
-      const bbox = turf.bbox(this.geojsons['allYears']);
-      this.map.fitBounds(bbox, {
-        padding: '20'
-      });
-    }
     years.forEach(year => {
       const yr = String(year);
       this.map.addSource(yr, {
@@ -182,6 +188,9 @@ export default class Map {
         'fill-opacity': 0.15,
       }
     }, 'admin-2-boundaries-dispute');
+    if (this.firstDraw) {
+      this.zoomToDataExtent();
+    }
     this.firstDraw = false;
   }
 }

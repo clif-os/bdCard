@@ -111,8 +111,9 @@ export default class Map {
   addControls() {
     if (!this.controlsLoaded) {
       // ZOOM CONTROLS
-      var nav = new mapboxgl.NavigationControl();
-      this.map.addControl(nav, 'top-right');
+      this.map.addControl(new mapboxgl.NavigationControl({
+        position: 'top-right'
+      }));
     }
     this.controlsLoaded = true;
   }

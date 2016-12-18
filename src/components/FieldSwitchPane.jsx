@@ -5,22 +5,35 @@ import './FieldSwitchPane.styl';
 class FieldSwitchPane extends Component {
   constructor (props) {
     super();
+    var buttonStates = {};
+    props.fields.forEach((field, i) => {
+      console.log(i)
+      if (i === 0){
+        buttonStates[field] = true;
+      } else{
+        buttonStates[field] = false;
+      }
+    });
     this.state = {
-      fields: props.fields
-    }
+      fields: props.fields,
+      buttonStates: buttonStates
+    };
   };
 
   render() {
-    console.log(this.props.fields);
-
-    const fieldNodes = this.state.fields.map(field => {
-      <FieldSwitchButton field={field} />
+    const fieldNodes = this.state.fields.map((field, i) => {
+      // creating and passing in 'index' and 'length' in order to anticipate styling the first and last buttons differently 
+      const index = i + 1;
+      const active = this.state.buttonStates[field];
+      return(
+        <FieldSwitchButton key={i} index={index} field={field} length={this.props.fields.length} active={active} />
+      )
     })
-
+    console.log(fieldNodes);
     return(
       <div className="fieldSwitchPane">
         <div className="fieldSwitchTitle">Chose Field:</div>
-        {fieldNodes}
+        <div className="fieldNodes">{fieldNodes}</div>
         <div className="paneSpacerHorizontal" />
       </div>
     )

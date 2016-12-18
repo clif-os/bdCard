@@ -10,7 +10,7 @@ import {
 
 
 export default class Map {
-  constructor(geojsons, geojsonTilesets, mapStyle, fields, initialFillStyle, years) {
+  constructor(geojsons, geojsonTilesets, mapStyle, fields, fillStyles, years) {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: mapStyle,
@@ -19,22 +19,22 @@ export default class Map {
       maxBounds: [
         [-71.57730000000001, 42.09960000000001],
         [-70.52729999999997, 42.61038972219174]
-        ],
+      ],
       zoom: 10.27
     });
     this.map.boxZoom.disable();
     // this.drawQueue = [];
     this.geojsons = geojsons;
     this.geojsonTilesets;
-    this.activeYear = '1990';
+    this.activeYear = window.activeYear;
+    this.activeField = window.activeField;
     this.firstDraw = true;
     this.controlsLoaded = false;
     this.addControls();
     this.bindEvents();
     // tried to bind all events but didn't work for some reason
-    console.log(initialFillStyle);
     this.map.on('style.load', () => {
-      this.drawLayers(geojsonTilesets, initialFillStyle, years);
+      this.drawLayers(geojsonTilesets, fillStyles, years, fields);
       this.map.on('mousemove', this.onMouseMove.bind(this));
     });
   }
@@ -43,39 +43,43 @@ export default class Map {
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
     document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
+    document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
   }
 
   switchYear(e) {
     // switch out the layer visibilities unless the year selected is already selected
     if (this.activeYear !== e.detail) {
-      this.map.setLayoutProperty('polygon-fills-' + e.detail, 'visibility', 'visible');
-      this.map.setLayoutProperty('polygon-outlines-' + e.detail, 'visibility', 'visible');
-      this.map.setLayoutProperty('polygon-fills-' + this.activeYear, 'visibility', 'none');
-      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear, 'visibility', 'none');
+      this.map.setLayoutProperty('polygon-fills-' + e.detail + '-' + this.activeField , 'visibility', 'visible');
+      this.map.setLayoutProperty('polygon-outlines-' + e.detail + '-' + this.activeField, 'visibility', 'visible');
+      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
+      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
       this.activeYear = e.detail;
     }
   }
 
-  zoomToDataExtent(){
-    const bbox = turf.bbox(this.geojsons['allYears']);
-      this.map.fitBounds(bbox, {
-        padding: '35'
-      });
+  switchField(e) {
+    // switch out the layer visibilities unless the year selected is already selected
+    if (this.activeField !== e.detail) {
+      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + e.detail , 'visibility', 'visible');
+      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + e.detail, 'visibility', 'visible');
+      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
+      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
+      this.activeField = e.detail;
+    }
   }
 
-  // sendLegendToReact(fillColorStyle){
-  //   window.legend = fillColorStyle
-  //   const evt = new CustomEvent('LOAD_FIELD');
-  //   document.dispatchEvent(evt);
-  // }
-
-  switchField() {
-
+  zoomToDataExtent() {
+    const bbox = turf.bbox(this.geojsons['allYears']);
+    this.map.fitBounds(bbox, {
+      padding: '35'
+    });
   }
 
   onMouseMove(e) {
+    // needs to be modified so that queried outlines will also cause a hover effect:
+    // at high zooms outlines take up a larger amount of the drawspace and take away from the hover quality
     var features = this.map.queryRenderedFeatures(e.point, {
-      layers: ['polygon-fills-' + this.activeYear]
+      layers: ['polygon-fills-' + this.activeYear + '-' + this.activeField]
     });
     if (features.length) {
       const geoid = features[0].properties.GEOID;
@@ -118,61 +122,66 @@ export default class Map {
     this.controlsLoaded = true;
   }
 
-  drawLayers(geojsonTilesets, fillStyle, years) {
+  drawLayers(geojsonTilesets, fillStyles, years, fields) {
+    console.log(fillStyles);
     years.forEach(year => {
       const yr = String(year);
       this.map.addSource(yr, {
-        type: 'vector',
-        url: geojsonTilesets[yr]
+          type: 'vector',
+          url: geojsonTilesets[yr]
+        });
+      fields.forEach(field => {
+        var polyLayer = {
+          id: 'polygon-fills-' + yr + '-' + field,
+          type: 'fill',
+          source: yr,
+          'source-layer': `TBF_TM_${yr}_norm`,
+          layout: {
+            visibility: 'none'
+          },
+          paint: {
+            'fill-color': fillStyles[field],
+            'fill-opacity': 0.4
+          }
+        }
+
+        var lineLayer = {
+          id: 'polygon-outlines-' + yr + '-' + field,
+          type: 'line',
+          source: yr,
+          'source-layer': `TBF_TM_${yr}_norm`,
+          layout: {
+            visibility: 'none'
+          },
+          paint: {
+            'line-width': {
+              'stops': [
+                [10, .75],
+                [11, 1],
+                [12, 1.5],
+                [13, 1.75],
+                [14, 2]
+              ]
+            },
+            'line-opacity': {
+              'stops': [
+                [10, 0.75],
+                [11, 0.6],
+                [12, 0.5],
+                [13, 0.4]
+              ]
+            },
+            'line-color': fillStyles[field]
+          }
+        }
+        if (year === this.activeYear && field === this.activeField) {
+          polyLayer.layout.visibility = 'visible';
+          lineLayer.layout.visibility = 'visible';
+        }
+
+        this.map.addLayer(polyLayer, 'admin-2-boundaries-dispute');
+        this.map.addLayer(lineLayer, 'admin-2-boundaries-dispute');
       });
-
-      var polyLayer = {
-        id: 'polygon-fills-' + yr,
-        type: 'fill',
-        source: yr,
-        'source-layer': `TBF_TM_${yr}_norm`,
-        layout: {},
-        paint: {
-          'fill-color': fillStyle,
-          'fill-opacity': 0.4
-        }
-      }
-
-      var lineLayer = {
-        id: 'polygon-outlines-' + yr,
-        type: 'line',
-        source: yr,
-        'source-layer': `TBF_TM_${yr}_norm`,
-        layout: {},
-        paint: {
-          'line-width': {
-            'stops': [
-              [10, .75],
-              [11, 1],
-              [12, 1.5],
-              [13, 1.75],
-              [14, 2]
-            ]
-          },
-          'line-opacity': {
-            'stops': [
-              [10, 0.75],
-              [11, 0.6],
-              [12, 0.5],
-              [13, 0.4]
-            ]
-          },
-          'line-color': fillStyle
-        }
-      }
-
-      if (yr !== this.activeYear) {
-        polyLayer.layout.visibility = 'none';
-        lineLayer.layout.visibility = 'none';
-      }
-
-      this.map.addLayer(polyLayer, 'admin-2-boundaries-dispute');
-      this.map.addLayer(lineLayer, 'admin-2-boundaries-dispute');
     });
 
     this.map.addSource('hover', {

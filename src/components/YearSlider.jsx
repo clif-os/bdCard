@@ -20,6 +20,7 @@ class YearSlider extends Component {
 
   handleYearSwitch(e) {
     const yearChoice = String(e);
+    window.activeYear = yearChoice;
     const evt = new CustomEvent('YEAR_SWITCH', { detail: yearChoice });
     document.dispatchEvent(evt);
   }

@@ -5,23 +5,32 @@ import './Legend.styl';
 class Legend extends Component {
   constructor (props) {
     super();
+    const activeField = window.activeField
     this.state = {
-      legendItems: props.legend.stops,
-      legendTitle: props.legend.field
+      legendItems: props.legendFormats[activeField].stops,
+      legendTitle: props.legendFormats[activeField].field
     }
+    // this.loadField = this.loadField.bind(this);
   };
 
   compontDidMount(){
-    document.addEventListener('LOAD_FIELD', this.loadField().bind(this));
+    Object.observe(window.activeField, () => {
+      console.log("ATTEMPTING TO SET LEGEND");
+      this.setState({ 
+        legendItems: props.legendFormats[window.activeField].stops,
+        legendTitle: props.legendFormats[window.activeField].field 
+      });
+    });
   }
 
-  loadField(){
-    const legend = window.fillColorStyle   
-    this.setState({
-      legendItems: legend.stops,
-      legendTitle: legend.property
-    })
-  };
+  // loadField(){
+  //   console.log("LOADING FIELD INTO LEGEND");
+  //   const activeField = window.activeField
+  //   this.setState({
+  //     legendItems: props.legendFormats[activeField].stops,
+  //     legendTitle: props.legendFormats[activeField].field
+  //   })
+  // };
 
   render(){
 

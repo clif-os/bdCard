@@ -2,8 +2,7 @@ import React from 'react';
 import './FieldSwitchButton.styl';
 
 function FieldSwitchButton(props) {
-  const { field, index, length, active } = props
-  console.log(active);
+  const { field, index, length, active, onClick } = props
   let style;
   switch (index) {
     case 1:
@@ -25,19 +24,8 @@ function FieldSwitchButton(props) {
       }
       break;
   }
-  // switch (active) {
-  //   case true:
-  //     style.backgroundColor = 'rgb(75,75,75)';
-  //     style.color = 'white';
-  //     break;
-  //   case false:
-  //     style.color = 'rgb(0,0,0)';
-  //     break;
-  //   default:
-  //     break;
-  // }
   return (
-    <div className='fieldSwitchButton'  id={active} style={style}><span className="fieldSwitchText">{field}</span></div>
+    <div className='fieldSwitchButton'  id={active} style={style} data-field={field} onClick={onClick}><span className="fieldSwitchText">{field}</span></div>
   );
 }
 

@@ -12,6 +12,7 @@ class YearSwitchPane extends Component {
       <div className="yearSwitchPane">
         <div className="yearSwitchTitle">Chose Year:</div>
         <YearSlider years={this.props.years}/>
+        <div className="paneSpacerHorizontal" />
       </div>
     )
   }

@@ -10,8 +10,10 @@ class AppInterface extends React.Component {
     return (
       <div className="AppInterface">
         <span className="title">TBF Gentrification Data Visualization Demo</span>
-        <YearSwitchPane years={this.props.years} />
-        <FieldSwitchPane fields={this.props.fields} />
+        <div className="switchPanes">
+          <FieldSwitchPane fields={this.props.fields} />
+          <YearSwitchPane years={this.props.years} />
+        </div>
         <Legend legend={this.props.legend} />
       </div>
     );

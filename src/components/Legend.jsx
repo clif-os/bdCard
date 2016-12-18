@@ -10,27 +10,20 @@ class Legend extends Component {
       legendItems: props.legendFormats[activeField].stops,
       legendTitle: props.legendFormats[activeField].field
     }
-    // this.loadField = this.loadField.bind(this);
+    this.loadField = this.loadField.bind(this);
+    document.addEventListener('FIELD_SWITCH', this.loadField);
   };
 
   compontDidMount(){
-    Object.observe(window.activeField, () => {
-      console.log("ATTEMPTING TO SET LEGEND");
-      this.setState({ 
-        legendItems: props.legendFormats[window.activeField].stops,
-        legendTitle: props.legendFormats[window.activeField].field 
-      });
-    });
   }
 
-  // loadField(){
-  //   console.log("LOADING FIELD INTO LEGEND");
-  //   const activeField = window.activeField
-  //   this.setState({
-  //     legendItems: props.legendFormats[activeField].stops,
-  //     legendTitle: props.legendFormats[activeField].field
-  //   })
-  // };
+  loadField(){
+    const activeField = window.activeField
+    this.setState({
+      legendItems: this.props.legendFormats[activeField].stops,
+      legendTitle: this.props.legendFormats[activeField].field
+    })
+  };
 
   render(){
 

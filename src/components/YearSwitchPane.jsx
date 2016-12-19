@@ -10,7 +10,7 @@ class YearSwitchPane extends Component {
   render() {
     return(
       <div className="yearSwitchPane">
-        <div className="yearSwitchTitle">Chose Year:</div>
+        <div className="yearSwitchTitle">Choose Year:</div>
         <YearSlider years={this.props.years}/>
         <div className="paneSpacerHorizontal" />
       </div>

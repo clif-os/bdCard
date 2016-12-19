@@ -51,7 +51,7 @@ class FieldSwitchPane extends Component {
     });
     return(
       <div className="fieldSwitchPane">
-        <div className="fieldSwitchTitle">Chose Field:</div>
+        <div className="fieldSwitchTitle">Choose Field:</div>
         <div className="fieldNodes">{fieldNodes}</div>
         <div className="paneSpacerHorizontal" />
       </div>

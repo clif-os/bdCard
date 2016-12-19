@@ -107,6 +107,10 @@ export default class Map {
       window.selectedFeature = window.geojsonLookup[geoid];
       const evt = new CustomEvent('FEATURE_CLICKED');
       document.dispatchEvent(evt);
+    } else {
+      window.selectedFeature = {};
+      const evt = new CustomEvent('NONFEATURE_CLICKED');
+      document.dispatchEvent(evt);
     }
   }
 

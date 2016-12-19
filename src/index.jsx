@@ -36,9 +36,11 @@ const years = [1990, 2000, 2010, 2014];
 window.activeYear = years[0];
 const fields = ["MedInc", "DMI", "MedRent", "DMR"];
 window.activeField = fields[0];
-const stylers = generateChoroplethStylers(geojsons.allYears, fields, 5);
+const stylers = generateChoroplethStylers(geojsons.allYears, fields, 4);
 const fillStyles = stylers.fillStyles;
 const legendFormats = stylers.legendFormats; 
+
+window.selectedFeature = {};
 
 window.geojsonLookup = convertGeojsonToLookup(geojsons.allYears);
 
@@ -51,4 +53,3 @@ render(
   <AppInterface years={years} legendFormats={legendFormats} fields={fields} />,
   document.getElementById('AppInterface')
 );
-

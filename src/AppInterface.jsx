@@ -1,6 +1,7 @@
 import './AppInterface.styl';
 import YearSwitchPane from './components/YearSwitchPane.jsx'
 import FieldSwitchPane from './components/FieldSwitchPane.jsx'
+import SelectionPane from './components/selectionPane.jsx'
 import Legend from './components/Legend.jsx'
 import React from 'react';
 
@@ -10,6 +11,7 @@ class AppInterface extends React.Component {
     return (
       <div className="AppInterface">
         <span className="title">TBF Gentrification Data Visualization Demo</span>
+        <SelectionPane />
         <div className="switchPanes">
           <FieldSwitchPane fields={this.props.fields} />
           <YearSwitchPane years={this.props.years} />

@@ -76,10 +76,14 @@ export default class Map {
   }
 
   onMouseMove(e) {
-    // needs to be modified so that queried outlines will also cause a hover effect:
-    // at high zooms outlines take up a larger amount of the drawspace and take away from the hover quality
+    // queries fills and outlines because, at high zooms, outlines take up a 
+    // larger amount of the drawspace and will lag hover highlight otherwise
+    const fieldAndYear =  this.activeYear + '-' + this.activeField;
     var features = this.map.queryRenderedFeatures(e.point, {
-      layers: ['polygon-fills-' + this.activeYear + '-' + this.activeField]
+      layers: [
+        'polygon-fills-' + fieldAndYear,
+        'polygon-outlines-' + fieldAndYear
+       ]
     });
     if (features.length) {
       const geoid = features[0].properties.GEOID;
@@ -100,7 +104,9 @@ export default class Map {
     console.log(this.map.getBounds());
     if (features.length) {
       const geoid = features[0].properties.GEOID;
-      console.log(window.geojsonLookup[geoid]);
+      window.selectedFeature = window.geojsonLookup[geoid];
+      const evt = new CustomEvent('FEATURE_CLICKED');
+      document.dispatchEvent(evt);
     }
   }
 

@@ -1,3 +1,11 @@
+// export const propertiesToArrayOfArrays = properties => {
+//   console.log(properties);
+//   const propArray = Object.keys(properties).map(key => {
+//     return [key, properties[key]];
+//   });
+//   return propArray;
+// } 
+
 export const convertGeojsonToLookup = geojson => {
   var geojsonLookupByID = {}
   geojson.features.forEach(feature => {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import SelectionTable from './SelectionTable.jsx'; 
+import SelectionPaneContent from './SelectionPaneContent.jsx';
+import { VelocityTransitionGroup } from 'velocity-react';
 import './SelectionPane.styl';
 
 class selectionPane extends Component {
@@ -33,10 +34,18 @@ class selectionPane extends Component {
   render() {
     return(
       <div className="selectionPane">
+        <div className="paneSpacerHorizontal" />
+        <VelocityTransitionGroup
+            component="div"
+            enter={{ animation: 'slideDown', duration: 100 }}
+            leave={{ animation: 'slideUp', duration: 100 }}
+            >
         {(this.state.featureSelected
-          ? <SelectionTable selectedFeature={this.state.selectedFeature} />
+          ? <SelectionPaneContent selectedFeature={this.state.selectedFeature} />
           : null
         )}
+        </ VelocityTransitionGroup>
+        <div className="paneSpacerHorizontal" />
       </div>
     )
   }
@@ -45,3 +54,4 @@ class selectionPane extends Component {
 export default selectionPane;
 
 //<div className="paneSpacerHorizontal" />
+// selectedFeature={this.state.selectedFeature}

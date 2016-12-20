@@ -27,17 +27,17 @@ class Legend extends Component {
 
   render(){
 
-     const legendNodes = this.state.legendItems.map((legendEntry, i) => {
+     const legendEntryNodes = this.state.legendItems.map((legendEntry, i) => {
       return(
         <LegendEntry key={i} valueMin={legendEntry[0]} valueMax={legendEntry[1]} color={legendEntry[2]} />
-      )
+      );
     });
 
     return(
       <div className="legend">
         <span className="legendTitle">{this.state.legendTitle}</span>
         <div className="legendItems">
-        {legendNodes}
+        {legendEntryNodes}
         </div>
       </div>
     )

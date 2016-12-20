@@ -25,7 +25,8 @@
     "react": "^15.4.1",
     "react-d3-basic": "^1.6.11",
     "react-dom": "^15.4.1",
-    "turf": "^3.0.14"
+    "turf": "^3.0.14",
+    "velocity-react": "^1.1.11"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

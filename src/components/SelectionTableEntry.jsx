@@ -4,7 +4,7 @@ import { dollarFormatter } from '../utils/reactUtils.jsx'
 
 function SelectionTableEntry(props) {
   return (
-    <div className="selectionTableEntry">ASUH</div>
+    <div className="selectionTableEntry">{props.property} : {props.value}</div>
   );
 }
 

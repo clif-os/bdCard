@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
-import SelectionTableEntry from './SelectionTableEntry.jsx'; 
+import SelectionTableEntry from './SelectionTableEntry.jsx';
 import './SelectionTable.styl';
 
 class SelectionTable extends Component {
   constructor(props){
     super();
+    this.state = {
+      properties: props.selectedFeatureProperties
+    }
   }
 
   render() {
-    const tableEntryNodes = Object.keys(this.props.selectedFeature)
+    console.log(this.state.properties);
+    const selectionTableEntryNodes = Object.keys(this.state.properties).map((key, i) => {
+      return(
+        <SelectionTableEntry property={key} value={this.state.properties[key]} />
+      );
+    });
     return(
       <div className="selectionTable">
-        ASUH
+        {selectionTableEntryNodes}
       </div>
     )
   }

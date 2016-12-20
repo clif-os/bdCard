@@ -121,11 +121,11 @@ export default class Map {
   }
 
   onMapDoubleClicked(e) {
+    const fieldAndYear = this.activeYear + '-' + this.activeField;
     const features = this.map.queryRenderedFeatures(e.point, {
-      layers: ['polygon-fills-' + this.activeYear]
+      layers: ['polygon-fills-' + fieldAndYear]
     });
     console.log("DOUBLE CLICK")
-    console.log(features)
   }
 
   addControls() {

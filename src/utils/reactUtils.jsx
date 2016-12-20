@@ -10,5 +10,6 @@ export const dollarFormatter = num => {
   } else {
     fNum += '.00';
   }
+  fNum = '$' + fNum;
   return fNum;
 }

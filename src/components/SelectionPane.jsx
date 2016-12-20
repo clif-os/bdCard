@@ -8,7 +8,8 @@ class selectionPane extends Component {
     super();
     this.state = {
       selectedFeature: {},
-      featureSelected: false
+      featureSelected: false,
+      animationSpeed: 100
     }
     this.handleFeatureClick = this.handleFeatureClick.bind(this);
     document.addEventListener('FEATURE_CLICKED', this.handleFeatureClick);
@@ -20,15 +21,14 @@ class selectionPane extends Component {
     this.setState({
       selectedFeature: window.selectedFeature,
       featureSelected: true
-    })
-    console.log(this.state.selectedFeature);
+    });
   }
 
   handleNonFeatureClick(){
     this.setState({
       selectedFeature: {},
       featureSelected: false
-    })
+    });
   }
 
   render() {

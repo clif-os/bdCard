@@ -26,10 +26,10 @@ class Legend extends Component {
   };
 
   render(){
-
+     const unit = this.props.legendFormats[window.activeField].unit
      const legendEntryNodes = this.state.legendItems.map((legendEntry, i) => {
       return(
-        <LegendEntry key={i} valueMin={legendEntry[0]} valueMax={legendEntry[1]} color={legendEntry[2]} />
+        <LegendEntry key={i} valueMin={legendEntry[0]} valueMax={legendEntry[1]} color={legendEntry[2]} unit={unit}/>
       );
     });
 

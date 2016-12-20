@@ -35,8 +35,28 @@ const geojsonTilesets = {
 const years = [1990, 2000, 2010, 2014];
 window.activeYear = years[0];
 const fields = ["MedInc", "DMI", "MedRent", "DMR"];
+// reverse relates to whether the more intense color (or high color) is assciated with lower actual values
+// units are anticipated at the bottom levels in React, look to items like LegendItemEntry.jsx for examples
+const fieldProps = {
+  'MedInc': {
+    unit: 'dollar',
+    reverse: false
+  },
+  'DMI': {
+    unit: 'integer',
+    reverse: false
+  },
+  'MedRent': {
+    unit: 'dollar',
+    reverse: false
+  },
+  'DMR': {
+    unit: 'integer',
+    reverse: false
+  }
+}
 window.activeField = fields[0];
-const stylers = generateChoroplethStylers(geojsons.allYears, fields, 5);
+const stylers = generateChoroplethStylers(geojsons.allYears, fields, fieldProps, 5);
 const fillStyles = stylers.fillStyles;
 const legendFormats = stylers.legendFormats; 
 

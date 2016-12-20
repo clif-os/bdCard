@@ -5,21 +5,22 @@ import './SelectionTable.styl';
 class SelectionTable extends Component {
   constructor(props){
     super();
-    this.state = {
-      properties: props.selectedFeatureProperties
-    }
   }
 
   render() {
-    console.log(this.state.properties);
-    const selectionTableEntryNodes = Object.keys(this.state.properties).map((key, i) => {
+    const properties = this.props.selectedFeatureProperties
+    var index = 0
+    const selectionTableEntryNodes = Object.keys(properties).map((key, i) => {
+      index++;
       return(
-        <SelectionTableEntry property={key} value={this.state.properties[key]} />
+        <SelectionTableEntry key={i} index={index} property={key} value={properties[key]} />
       );
     });
     return(
-      <div className="selectionTable">
-        {selectionTableEntryNodes}
+      <div className="selectionTableContainer">
+        <table className="selectionTable">
+          {selectionTableEntryNodes}
+        </table>
       </div>
     )
   }

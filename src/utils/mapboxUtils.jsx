@@ -24,10 +24,13 @@ export var geojsonEmpty = {
 import {
   findMinMaxForField
 } from './geojsonUtils.jsx'
-const generateStopArray = (minMax, stopCount) => {
+const generateStopArray = (minMax, stopCount, reverse) => {
   const difference = minMax[1] - minMax[0];
   const stepRange = Math.ceil(difference / stopCount);
-  const colors = ['red', 'orange', 'yellow', 'lightgreen', 'green']
+  var colors = ['red', 'orange', 'yellow', 'lightgreen', 'green']
+  if (reverse) {
+    colors = colors.reverse();
+  }
   var steps = [];
   for (var i = 0; i < stopCount; i++) {
     const stepNum = minMax[0] + (i * stepRange)
@@ -54,14 +57,14 @@ const makeLegendStops = (colorStops, max) => {
   }
   return legendStops;
 }
-export const generateChoroplethStylers = (geojson, fields, stopCount) => {
+export const generateChoroplethStylers = (geojson, fields, fieldProps, stopCount) => {
   var stylers = {
     fillStyles: {},
     legendFormats: {}
   };
   fields.forEach(field => {
     const minMax = findMinMaxForField(geojson, field);
-    const colorStops = generateStopArray(minMax, stopCount);
+    const colorStops = generateStopArray(minMax, stopCount, fieldProps[field].reverse);
 
     const fillStyle = {
       property: field,
@@ -71,7 +74,8 @@ export const generateChoroplethStylers = (geojson, fields, stopCount) => {
     const legendStops = makeLegendStops(colorStops, minMax[1]);
     const legendFormat = {
       field: field,
-      stops: legendStops
+      stops: legendStops,
+      unit: fieldProps[field].unit
     }
     stylers.fillStyles[field] = fillStyle;
     stylers.legendFormats[field] = legendFormat;

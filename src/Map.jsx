@@ -49,7 +49,7 @@ export default class Map {
   switchYear(e) {
     // switch out the layer visibilities unless the year selected is already selected
     if (this.activeYear !== e.detail) {
-      this.map.setLayoutProperty('polygon-fills-' + e.detail + '-' + this.activeField , 'visibility', 'visible');
+      this.map.setLayoutProperty('polygon-fills-' + e.detail + '-' + this.activeField, 'visibility', 'visible');
       this.map.setLayoutProperty('polygon-outlines-' + e.detail + '-' + this.activeField, 'visibility', 'visible');
       this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
       this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
@@ -60,7 +60,7 @@ export default class Map {
   switchField(e) {
     // switch out the layer visibilities unless the year selected is already selected
     if (this.activeField !== e.detail) {
-      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + e.detail , 'visibility', 'visible');
+      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + e.detail, 'visibility', 'visible');
       this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + e.detail, 'visibility', 'visible');
       this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
       this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
@@ -78,12 +78,12 @@ export default class Map {
   onMouseMove(e) {
     // queries fills and outlines because, at high zooms, outlines take up a 
     // larger amount of the drawspace and will lag hover highlight otherwise
-    const fieldAndYear =  this.activeYear + '-' + this.activeField;
+    const fieldAndYear = this.activeYear + '-' + this.activeField;
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: [
         'polygon-fills-' + fieldAndYear,
         'polygon-outlines-' + fieldAndYear
-       ]
+      ]
     });
     if (features.length) {
       const geoid = features[0].properties.GEOID;
@@ -96,19 +96,25 @@ export default class Map {
   }
 
   onMapClicked(e) {
+    const fieldAndYear = this.activeYear + '-' + this.activeField;
     var features = this.map.queryRenderedFeatures(e.point, {
       //layers: ['polygon-fills-' + this.activeYear]
-      layers: ['polygon-hover']
+      layers: [
+        'polygon-fills-' + fieldAndYear,
+        'polygon-outlines-' + fieldAndYear
+      ]
     });
     console.log("ZOOM LEVEL: " + this.map.getZoom());
     console.log(this.map.getBounds());
     if (features.length) {
       const geoid = features[0].properties.GEOID;
+      this.map.getSource('selected').setData(window.geojsonLookup[geoid]);
       window.selectedFeature = window.geojsonLookup[geoid];
       const evt = new CustomEvent('FEATURE_CLICKED');
       document.dispatchEvent(evt);
     } else {
       window.selectedFeature = {};
+      this.map.getSource('selected').setData(geojsonEmpty);
       const evt = new CustomEvent('NONFEATURE_CLICKED');
       document.dispatchEvent(evt);
     }
@@ -137,9 +143,9 @@ export default class Map {
     years.forEach(year => {
       const yr = String(year);
       this.map.addSource(yr, {
-          type: 'vector',
-          url: geojsonTilesets[yr]
-        });
+        type: 'vector',
+        url: geojsonTilesets[yr]
+      });
       fields.forEach(field => {
         var polyLayer = {
           id: 'polygon-fills-' + yr + '-' + field,
@@ -198,16 +204,39 @@ export default class Map {
       type: 'geojson',
       data: geojsonEmpty
     });
-
     this.map.addLayer({
       id: 'polygon-hover',
       type: 'fill',
       source: 'hover',
       paint: {
         'fill-color': 'black',
-        'fill-opacity': 0.15,
+        'fill-opacity': 0.10,
       }
     }, 'admin-2-boundaries-dispute');
+
+    this.map.addSource('selected', {
+      type: 'geojson',
+      data: geojsonEmpty
+    });
+    this.map.addLayer({
+      id: 'polygon-selected',
+      type: 'line',
+      source: 'selected',
+      paint: {
+        'line-width': {
+          'stops': [
+            [10, 1.5],
+            [11, 2],
+            [12, 2.5],
+            [13, 2.5],
+            [14, 2.5]
+          ]
+        },
+        'line-color': '#15f4ee',
+        'line-opacity': 1,
+      }
+    }, 'admin-2-boundaries-dispute');
+
     if (this.firstDraw) {
       this.zoomToDataExtent();
     }

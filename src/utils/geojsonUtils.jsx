@@ -1,10 +1,20 @@
-// export const propertiesToArrayOfArrays = properties => {
-//   console.log(properties);
-//   const propArray = Object.keys(properties).map(key => {
-//     return [key, properties[key]];
-//   });
-//   return propArray;
-// } 
+export const filterInProperties = (properties, fieldsIn) => {
+  var newProperties = {};
+  fieldsIn.forEach(field => {
+    newProperties[field] = properties[field];
+  })
+  return newProperties;
+};
+export const filterOutProperties = (properties, fieldsOut) => {
+  var newProperties = {};
+  Object.keys(properties).forEach(property => {
+    if(! fieldsOut.indexOf('property') >= 0){
+      newProperties[property] = properties[property];
+    }
+  });
+  return newProperties;
+};
+
 
 export const convertGeojsonToLookup = geojson => {
   var geojsonLookupByID = {}

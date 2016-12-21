@@ -19,33 +19,36 @@ class SelectionGraphs extends Component {
     //     color: 'red'
     //   }
     // ];
-    const yDomain = createD3Range(data, this.props.fieldsToGraph[1], 0.1);
-    const xDomain = createD3Range(data, this.props.fieldsToGraph[0], 0.05);
-    var margins = {left: 45, right: 10, top: 10, bottom: 20},
-    width = 270,
-    height = 200,
-    x = d => {
-      return d.year;
+    const yDomain = createD3Range(data, 0, 'x', 0.1);
+    const xDomain = createD3Range(data, 0, 'y', 0.05);
+    const domain = {
+      x: xDomain,
+      y: yDomain
     }
-
+    console.log(domain);
+    var margins = {left: 45, right: 12, top: 10, bottom: 20},
+    width = 270,
+    height = 200
+    var xAccessor = d => {
+      return d.x;
+    }
     const xVals = findAllValsOfAxis(data, 'x')
-    console.log(xVals);
     var xAxisFormatter = (n) => {
-      console.log("IN X AXIS FORMATTER");
-      console.log(xVals)
       if (xVals.indexOf(n) >= 0) {
-        console.log(n);
         return n  
       } else {
         return ''
       }
-    },
+    }
+    var yAxisFormatter
     // by the time 'd' makes its way to the y-parser, it seems to be missing any other props and is simply the y-value
     // thus, you need only return 'd'
-    y = d => {
-      return d;
-    },
-    yRange = [(height - margins.top - margins.bottom), 0]
+    var yAccessor = d => {
+      return d.y;
+    }
+    var yAxisFormatter = n => {
+      return '$' + String(n) 
+    }
     const title = data[0].name
     console.log("LOADING DATA INTO CHART:");
     console.log(data);
@@ -53,11 +56,19 @@ class SelectionGraphs extends Component {
       <div className="selectionGraphs">
           <div className="chartTitleBar"><span className="chartTitle">{title}</span></div>
           <LineChart
+            axesColor={'#000'}
             data={data}
             width={width}
             height={height}
             margins={margins}
+            domain={domain}
+            xAxisClassname="xAxis"
+            xAccessor={xAccessor}
             xAxisFormatter={xAxisFormatter}
+            yAxisClassname="yAxis"
+            yAccessor={yAccessor}
+            yAxisFormatter={yAxisFormatter}
+            gridHorizontal={true}
             legend={false}
           />
       </div>

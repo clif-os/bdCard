@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './SelectionGraphs.styl';
 import { convertBostonPropsToReactD3Data, createD3Range, findAllValsOfAxis } from '../utils/d3Utils.jsx';
+import { numberWithCommas } from '../utils/generalUtils.jsx';
 var LineChart = require('react-d3').LineChart;
 
 class SelectionGraphs extends Component {
@@ -26,7 +27,7 @@ class SelectionGraphs extends Component {
       y: yDomain
     }
     console.log(domain);
-    var margins = {left: 45, right: 12, top: 10, bottom: 20},
+    var margins = {left: 50, right: 12, top: 10, bottom: 20},
     width = 270,
     height = 200
     var xAccessor = d => {
@@ -40,6 +41,9 @@ class SelectionGraphs extends Component {
         return ''
       }
     }
+    var onMouseOver = e => {
+      console.log(e)
+    }
     var yAxisFormatter
     // by the time 'd' makes its way to the y-parser, it seems to be missing any other props and is simply the y-value
     // thus, you need only return 'd'
@@ -47,7 +51,7 @@ class SelectionGraphs extends Component {
       return d.y;
     }
     var yAxisFormatter = n => {
-      return '$' + String(n) 
+      return '$' + String(numberWithCommas(n)) 
     }
     const title = data[0].name
     console.log("LOADING DATA INTO CHART:");
@@ -62,6 +66,7 @@ class SelectionGraphs extends Component {
             height={height}
             margins={margins}
             domain={domain}
+            onMouseOver={onMouseOver}
             xAxisClassname="xAxis"
             xAccessor={xAccessor}
             xAxisFormatter={xAxisFormatter}

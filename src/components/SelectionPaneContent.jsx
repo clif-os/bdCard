@@ -14,10 +14,10 @@ function SelectionPaneContent(props) {
   const tableFieldsOut = [
     "NAMELSAD"
   ];
-
+  
   const titleProperties = filterInProperties(props.selectedFeature.properties, titleFieldsIn);
   const tableProperties = filterOutProperties(props.selectedFeature.properties, tableFieldsOut);
-  const graphFields = ["MedInc"];
+  const graphFields = ["year", "MedInc"]; // x,y
   return (
     <div className="selectionPaneContent">
       <div className="selectionTitleBar"><span className="selectionTitle">{titleProperties["NAMELSAD"]}</span></div>

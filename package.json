@@ -23,6 +23,7 @@
     "rc-slider": "^5.4.0",
     "rc-slider-hostile-fork": "^5.3.7",
     "react": "^15.4.1",
+    "react-d3": "^0.4.0",
     "react-d3-basic": "^1.6.11",
     "react-dom": "^15.4.1",
     "turf": "^3.0.14",

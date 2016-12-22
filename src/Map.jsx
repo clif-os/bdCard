@@ -44,6 +44,7 @@ export default class Map {
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
     document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
     document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
+    document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
   }
 
   switchYear(e) {
@@ -70,6 +71,13 @@ export default class Map {
 
   zoomToDataExtent() {
     const bbox = turf.bbox(this.geojsons['allYears']);
+    this.map.fitBounds(bbox, {
+      padding: '35'
+    });
+  }
+
+  zoomToFeatureExtent(geoid) {
+    const bbox = turf.bbox(window.geojsonLookup[geoid]);
     this.map.fitBounds(bbox, {
       padding: '35'
     });
@@ -126,6 +134,10 @@ export default class Map {
       layers: ['polygon-fills-' + fieldAndYear]
     });
     console.log("DOUBLE CLICK")
+    if (features.length) {
+      const geoid = features[0].properties.GEOID;
+      this.zoomToFeatureExtent(geoid);
+    }
   }
 
   addControls() {

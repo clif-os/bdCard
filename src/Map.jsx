@@ -30,6 +30,10 @@ export default class Map {
     this.activeField = window.activeField;
     this.firstDraw = true;
     this.controlsLoaded = false;
+    this.hoverPopup = new mapboxgl.Popup({
+      closeButton: false,
+      closeOnClick: false
+    });
     this.addControls();
     this.bindEvents();
     // tried to bind all events but didn't work for some reason

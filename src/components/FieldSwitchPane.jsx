@@ -46,7 +46,7 @@ class FieldSwitchPane extends Component {
       const index = i + 1;
       const active = this.state.buttonStates[field];
       return(
-        <FieldSwitchButton key={i} index={index} field={field} length={this.props.fields.length} active={active} onClick={this.handleButtonClick} />
+        <FieldSwitchButton key={i} index={index} field={field} length={this.props.fields.length} active={active} onClick={this.handleButtonClick} dataTooltip={this.props.fieldLookups[field]}/>
       )
     });
     return(

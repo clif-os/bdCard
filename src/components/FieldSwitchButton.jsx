@@ -25,7 +25,7 @@ function FieldSwitchButton(props) {
       break;
   }
   return (
-    <div className='fieldSwitchButton'  id={active} style={style} data-field={field} onClick={onClick}><span className="fieldSwitchText">{field}</span></div>
+    <div className='fieldSwitchButton'  id={active} style={style} data-field={field} onClick={onClick} data-tooltip={props.dataTooltip}><span className="fieldSwitchText">{field}</span></div>
   );
 }
 

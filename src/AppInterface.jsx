@@ -14,7 +14,7 @@ class AppInterface extends React.Component {
         <MapboxButtons />
         <SelectionPane />
         <div className="switchPanes">
-          <FieldSwitchPane fields={this.props.fields} />
+          <FieldSwitchPane fields={this.props.fields} fieldLookups={this.props.fieldLookups}/>
           <YearSwitchPane years={this.props.years} />
         </div>
         <Legend legendFormats={this.props.legendFormats} />

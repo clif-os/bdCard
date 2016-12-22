@@ -35,6 +35,12 @@ const geojsonTilesets = {
 const years = [1990, 2000, 2010, 2014];
 window.activeYear = years[0];
 const fields = ["MedInc", "DMI", "MedRent", "DMR"];
+const fieldLookups = {
+  MedInc: "Median Income",
+  DMI: "Decile of Median Income",
+  MedRent: "Median Gross Rent",
+  DMR: "Decile of Median Gross Rent"
+}
 // reverse relates to whether the more intense color (or high color) is assciated with lower actual values
 // units are anticipated at the bottom levels in React, look to items like LegendItemEntry.jsx for examples
 const fieldProps = {
@@ -70,6 +76,6 @@ const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
 const m = new Map(geojsons, geojsonTilesets, mapStyle, fields, fillStyles, years);
 
 render(
-  <AppInterface years={years} legendFormats={legendFormats} fields={fields} />,
+  <AppInterface years={years} legendFormats={legendFormats} fields={fields} fieldLookups={fieldLookups}/>,
   document.getElementById('AppInterface')
 );

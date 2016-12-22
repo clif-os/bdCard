@@ -27,7 +27,8 @@ import {
 const generateStopArray = (minMax, stopCount, reverse) => {
   const difference = minMax[1] - minMax[0];
   const stepRange = Math.ceil(difference / stopCount);
-  var colors = ['red', 'orange', 'yellow', 'lightgreen', 'green']
+  var colors = ['red', 'orange', 'yellow', 'lightgreen', 'green'];
+  // var colors = ['#7fcdbb','#41b6c4','#1d91c0','#225ea8','#0c2c84']
   if (reverse) {
     colors = colors.reverse();
   }

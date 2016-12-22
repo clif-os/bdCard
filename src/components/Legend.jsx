@@ -35,7 +35,7 @@ class Legend extends Component {
 
     return(
       <div className="legend">
-        <span className="legendTitle">{this.state.legendTitle}</span>
+        <span className="legendTitle">{this.props.fieldLookups[this.state.legendTitle]}</span>
         <div className="legendItems">
         {legendEntryNodes}
         </div>

@@ -17,7 +17,7 @@ class AppInterface extends React.Component {
           <FieldSwitchPane fields={this.props.fields} fieldLookups={this.props.fieldLookups}/>
           <YearSwitchPane years={this.props.years} />
         </div>
-        <Legend legendFormats={this.props.legendFormats} />
+        <Legend legendFormats={this.props.legendFormats} fieldLookups={this.props.fieldLookups} />
       </div>
     );
   }

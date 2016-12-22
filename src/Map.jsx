@@ -101,7 +101,7 @@ export default class Map {
   zoomToFeatureExtentByGeoID(geoid) {
     const bbox = turf.bbox(window.geojsonLookup[geoid]);
     this.map.fitBounds(bbox, {
-      padding: '50'
+      padding: '100'
     });
   }
 
@@ -109,7 +109,7 @@ export default class Map {
     const geoid = window.selectedFeature.properties.GEOID
     const bbox = turf.bbox(window.geojsonLookup[geoid]);
     this.map.fitBounds(bbox, {
-      padding: '50'
+      padding: '100'
     });
   }
 

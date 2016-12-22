@@ -4,7 +4,7 @@ import './SelectionPaneZoom.styl'
 function SelectionPaneZoom(props) {
   const geoid = props.feature.properties.GEOID
   return (
-    <div className="selectionPaneZoom" onClick={props.onClick}><span className="fa fa-arrows-alt" /></div>
+    <div className="selectionPaneZoom" onClick={props.onClick} data-tooltip="Zoom To Feature"><span className="fa fa-arrows-alt" /></div>
   );
 }
 

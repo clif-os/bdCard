@@ -45,6 +45,7 @@ export default class Map {
     document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
     document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
     document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
+    document.addEventListener('ZOOM_TO_FEATURE', this.zoomToFeatureExtentByWindow.bind(this));
   }
 
   switchYear(e) {
@@ -76,10 +77,35 @@ export default class Map {
     });
   }
 
-  zoomToFeatureExtent(geoid) {
+  // zoomToFeatureExtent(geoid) {
+  //   console.log("ATTEMPTING ZOOM")
+  //   console.log(geoid)
+  //   if (geoid){
+  //     const bbox = turf.bbox(window.geojsonLookup[geoid]);
+  //     this.map.fitBounds(bbox, {
+  //       padding: '50'
+  //     });  
+  //   } else {
+  //     console.log("NO GEOID PROVIDED< ZOOMING TO WINDOW FEATURE")
+  //     wGeoid = window.selectedFeature.properties.GEOID
+  //     const bbox = turf.bbox(window.geojsonLookup[geoid]);
+  //     this.map.fitBounds(bbox, {
+  //       padding: '50'
+  //     });
+  //   }
+  // }
+  zoomToFeatureExtentByGeoID(geoid) {
     const bbox = turf.bbox(window.geojsonLookup[geoid]);
     this.map.fitBounds(bbox, {
-      padding: '35'
+      padding: '50'
+    });
+  }
+
+  zoomToFeatureExtentByWindow() {
+    const geoid = window.selectedFeature.properties.GEOID
+    const bbox = turf.bbox(window.geojsonLookup[geoid]);
+    this.map.fitBounds(bbox, {
+      padding: '50'
     });
   }
 
@@ -136,7 +162,7 @@ export default class Map {
     console.log("DOUBLE CLICK")
     if (features.length) {
       const geoid = features[0].properties.GEOID;
-      this.zoomToFeatureExtent(geoid);
+      this.zoomToFeatureExtentByGeoID(geoid);
     }
   }
 

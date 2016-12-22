@@ -1,12 +1,17 @@
 import React from 'react';
+import SelectionPaneZoom from './SelectionPaneZoom.jsx';
 import SelectionTable from './SelectionTable.jsx';
 import SelectionGraphs from './SelectionGraphs.jsx';
 import { filterInProperties, filterOutProperties } from '../utils/geojsonUtils.jsx';
 import './SelectionPaneContent.styl'
 
 function SelectionPaneContent(props) {
-
   console.log("RENDERING SELECTION PANE");
+
+  const handleSelectionPaneZoom = () => {
+    const evt = new CustomEvent("ZOOM_TO_FEATURE");
+    document.dispatchEvent(evt)
+  } 
 
   const titleFieldsIn = [
     "NAMELSAD"
@@ -24,7 +29,7 @@ function SelectionPaneContent(props) {
   const yFields = ["MedInc", "DMI", "MedRent", "DMR"];
   return (
     <div className="selectionPaneContent">
-      <div className="selectionTitleBar"><span className="selectionTitle">{titleProperties["NAMELSAD"]}</span></div>
+      <div className="selectionTitleBar"><span className="selectionTitle">{titleProperties["NAMELSAD"]}</span><SelectionPaneZoom onClick={handleSelectionPaneZoom} feature={props.selectedFeature} /></div>
       <div className="paneSpacerHorizontal" />
       <SelectionTable selectedFeatureProperties={tableProperties}/>
       <div className="paneSpacerHorizontal" />

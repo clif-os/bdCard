@@ -5,10 +5,6 @@ import {render} from 'react-dom';
 // import {store} from './state/store';
 import AppInterface from './AppInterface.jsx';
 import Map from './Map.jsx';
-import NINETY from './data/TBF_TM_1990_norm.json'
-import THOUSAND from './data/TBF_TM_2000_norm.json'
-import TEN from './data/TBF_TM_2010_norm.json'
-import FOURTEEN from './data/TBF_TM_2014_norm.json'
 import ALLYEARS from './data/TBF_TM_all.json'
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 import {
@@ -17,10 +13,6 @@ import {
 global.mapboxgl = require('mapbox-gl');
 
 const geojsons = {
-  "1990": NINETY,
-  "2000": THOUSAND,
-  "2010": TEN,
-  "2014":FOURTEEN,
   "allYears": ALLYEARS
 };
 

@@ -6,7 +6,7 @@ import { filterInProperties, filterOutProperties } from '../utils/geojsonUtils.j
 import './SelectionPaneContent.styl'
 
 function SelectionPaneContent(props) {
-  console.log("RENDERING SELECTION PANE");
+  // console.log("RENDERING SELECTION PANE");
 
   const handleSelectionPaneZoom = () => {
     const evt = new CustomEvent("ZOOM_TO_FEATURE");

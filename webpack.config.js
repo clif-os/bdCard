@@ -9,10 +9,9 @@ module.exports = {
     vendor: ['react', 'mapbox-gl', 'turf', 'react-dom']
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: ['', '.js', '.jsx'],
     alias: {
       'webworkify': 'webworkify-webpack',
-      'leaflet.css': path.resolve('./node_modules/leaflet/dist/leaflet.css'),
       'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
     },
     modules: ['node_modules', 'src']

@@ -19,8 +19,12 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
     - user should also be able to stack `SFVs` into a `Selection Filter Variable Stack`: 
       - up to 3 per stack
       - ex: a user should be able to create a two-variable stacked filter to look only at tracts that are low-income AND low-rent as of 2000 AND whatever
-  - 
-
+  - **Double Stacking selections for a pass/fail data visualization:**
+    - as well as the option of using a simple/single `Data Visualization Variable`, users will be granted the ability to cause a binary pass/fail (red/green) visualization based of secondary selection
+    - this could be done by taking the exact same logic from the `Selection Filter Variable Stacks`:
+      - in essence this is like a doubling up of the `SFVS` stacks where the first `SFVS` causes the normal greying out and subselection and the second `SFVS` causes a visualization of its results within that subselection
+      - for the user, the first `SVFS` would go on as normal // but the second would be some sort of special option/alternative in the Field selection area -- but perhaps with a very familiar UX to the one in the selection area
+    - the data visualization `SVFS` will have a limit of 2 `SFVs` per stack whereas the normal `SVFS` will have 3 per stack (im inferring the 2-limit from the specs in Harvard but perhaps three would still be fine)
 
 ### Key Project Terms:
 > - `Selection Filter Variable`: variable used to define the subselection of tracts

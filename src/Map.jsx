@@ -142,8 +142,8 @@ export default class Map {
         'polygon-outlines-' + fieldAndYear
       ]
     });
-    console.log("ZOOM LEVEL: " + this.map.getZoom());
-    console.log(this.map.getBounds());
+    // console.log("ZOOM LEVEL: " + this.map.getZoom());
+    // console.log(this.map.getBounds());
     if (features.length) {
       const geoid = features[0].properties.GEOID;
       this.map.getSource('selected').setData(window.geojsonLookup[geoid]);
@@ -163,7 +163,7 @@ export default class Map {
     const features = this.map.queryRenderedFeatures(e.point, {
       layers: ['polygon-fills-' + fieldAndYear]
     });
-    console.log("DOUBLE CLICK")
+    // console.log("DOUBLE CLICK")
     if (features.length) {
       const geoid = features[0].properties.GEOID;
       this.zoomToFeatureExtentByGeoID(geoid);
@@ -181,7 +181,7 @@ export default class Map {
   }
 
   drawLayers(geojsonTilesets, fillStyles, years, fields) {
-    console.log(fillStyles);
+    // console.log(fillStyles);
     years.forEach(year => {
       const yr = String(year);
       this.map.addSource(yr, {

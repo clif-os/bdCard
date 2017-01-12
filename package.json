@@ -5,7 +5,9 @@
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --hot --inline"
+    "dev": "webpack-dev-server --hot --inline --config \"webpack.config.dev.js\"",
+    "heroku-postbuild": "webpack --progress",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/eltonjuan/boston#readme",
   "dependencies": {
+    "express": "^4.14.0",
     "mapbox-gl": "^0.28.0",
     "rc-slider": "^5.4.0",
     "rc-slider-hostile-fork": "^5.3.7",
@@ -27,7 +30,9 @@
     "react-d3-basic": "^1.6.11",
     "react-dom": "^15.4.1",
     "turf": "^3.0.14",
-    "velocity-react": "^1.1.11"
+    "velocity-react": "^1.1.11",
+    "webpack": "^1.14.0"
+
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
@@ -43,7 +48,6 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.4.0",
     "transform-loader": "^0.2.3",
-    "webpack": "^1.14.0",
     "webpack-dev-server": "^1.16.2",
     "webworkify-webpack-dropin": "^1.1.9"
   }

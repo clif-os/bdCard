@@ -1,12 +1,12 @@
-var path = require('path');
+const path = require('path');
 const webpack = require('webpack');
-
-
+const pkg = require('./package.json');
 module.exports = {
   context: __dirname,
+  devtool: 'cheap-module-source-map',
   entry: {
     bundle: './src/index.jsx',
-    vendor: ['react', 'mapbox-gl', 'turf', 'react-dom']
+    vendor: ['react', 'mapbox-gl', 'turf', 'velocity-react']
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -16,6 +16,18 @@ module.exports = {
     },
     modules: ['node_modules', 'src']
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ],
   output: {
     path: path.join(__dirname, 'src/'),
     publicPath: 'src/', // relative path for github pages

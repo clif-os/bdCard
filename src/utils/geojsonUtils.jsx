@@ -36,7 +36,7 @@ export var geojsonEmpty = {
 };
 
 export const findMinMaxForField = (geojson, field) => {
-  console.log(geojson, field);
+  // console.log(geojson, field);
   var minMax = [null, null];
   geojson.features.forEach(feature => {
     var relFields = []

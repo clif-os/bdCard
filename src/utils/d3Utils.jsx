@@ -9,7 +9,7 @@ export const findAllValsOfAxis = (data, axis) => {
 export const convertBostonPropsToReactD3Data = (props, yField) => {
   //it is a good idea to filter the props prior to input, but the function is checking to make sure the desired
   // field matches what is in the props
-  console.log("STARTING CONVERSION TO D3 ARRAY");
+  // console.log("STARTING CONVERSION TO D3 ARRAY");
   var d3Data = [{
     name: yField,
     values: []

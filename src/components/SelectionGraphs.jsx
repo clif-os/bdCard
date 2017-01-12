@@ -49,7 +49,7 @@ class SelectionGraphs extends Component {
       yAxisFormatter: yAxisFormatter
     }
     const title = data[0].name
-    console.log("LOADING DATA INTO CHART:");
+    // console.log("LOADING DATA INTO CHART:");
     return(
       <div className="selectionGraphs">
           <div className="chartTitleBar"><span className="chartTitle">{title}</span></div>

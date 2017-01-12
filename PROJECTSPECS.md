@@ -23,10 +23,10 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
 
 
 ### Key Project Terms:
-`Selection Filter Variable`: variable used to define the subselection of tracts
-`Selection Filter Variable Range`: selected range of values defined by the user and returned for the `SFV` (this is intrinsic to an `SFV`, with the default being the whole range)
-`Selection Filter Variable Stack`: when multiple `SFVs` and their associated ranges are used to define a tract subselection together
-`Data Visualization Variable`: variables used to render the data visualizations
+> `Selection Filter Variable`: variable used to define the subselection of tracts
+> `Selection Filter Variable Range`: selected range of values defined by the user and returned for the `SFV` (this is intrinsic to an `SFV`, with the default being the whole range)
+> `Selection Filter Variable Stack`: when multiple `SFVs` and their associated ranges are used to define a tract subselection together
+> `Data Visualization Variable`: variables used to render the data visualizations
 
 ### Variables:
 - Income:

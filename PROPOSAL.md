@@ -2,17 +2,20 @@
 ## Joint Center for Housing Studies, Harvard University
 
 ### Project Description:
-**Webmapping application visualizing socioeconomic data across tracts of the Boston Metro Area:**
+- **Webmapping application visualizing socioeconomic data across tracts of the Boston Metro Area:**
   - As many as 50 variables varying across 4 years
   - User-defined tract selections
   - Double stacking selections for a pass/fail data visualization
+- **Web Analytics:**
+  - web traffic assesments
+  - etc etc
 
 ### Timeline:
 - **Overview:**
-  - Start date: immediately
-  - Deliverable first major draft: mid February
-  - Site visit: late February
-  - Completion: late March
+  - _Start date:_ immediately
+  - _Deliverable first major draft:_ mid February
+  - _Site visit:_ late February
+  - _Completion:_ late March
 - **Recurring Items:**
   - Weekly demo deliverable, available every Monday
   - Weekly meeting

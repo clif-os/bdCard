@@ -7,12 +7,9 @@ Thank you for your interest in partnering with _Mimio LLC_ for your website appl
 
 Thanks again for the opportunity to earn your business!
 
-Michael Amos
-
-Cofounder, Mimio LLC
-
-(443) 254-7042
-
+Michael Amos<br>
+Cofounder, Mimio LLC<br>
+(443) 254-7042<br>
 mamos@mimio.io
 
 

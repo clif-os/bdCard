@@ -25,6 +25,8 @@ _The Joint Center for Housing Studies_ requires a full web application built to 
 
 _Mimio LLC_ is uniquely qualified to build the the desired application, due to our in-house web development experience, Geographic Information System expertise, and our past experience building web applications -- especiailly webmapping applications.
 
+***
+
 ### Project Structure
 - **Development of web application visualizing socioeconomic data across tracts of the Boston Metro Area:**
   - Visualization of as many as 50 variables varying across 4 years

@@ -38,6 +38,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
   - web traffic assesments
   - etc etc
 - **Cross-browser optimization**
+- [FLESH THIS OUT MORE]
 
 ## Execution Timeline
 - **Overview:**

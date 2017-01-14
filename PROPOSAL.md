@@ -1,8 +1,30 @@
 # Boston Neighborhood Mapping Project Proposal
 ## Joint Center for Housing Studies, Harvard University
 
+### Introduction
+
+Thank you for your interest in partnering with _Mimio LLC_ for your website application project. We are excited to offer you our exceptional service, attention to detail, and expert web application construction. [FLESH OUT MORE]
+
+Thanks again for the opportunity to earn your business!
+
+Michael Amos
+Cofounder, Mimio LLC
+(443) 254-7042
+mamos@mimio.io
+
+Clifton Campbell
+Cofounder, Mimio LLC
+(518) 727-8082
+clif@mimio.io
+
+**Executive Summary:**
+
+_The Joint Center for Housing Studies_ requires a full web application built to visualize socioeconomic data across tracts of the Boston Metro Area. This application will allow users to interact with a complex dataset in an easy-to-use and performant user interface.
+
+_Mimio LLC_ is uniquely qualified to build the the desired application, due to our in-house web development experience, Geographic Information System expertise, and our past experience building web applications -- especiailly webmapping applications.
+
 ### Project Structure
-- **Development of webmapping application visualizing socioeconomic data across tracts of the Boston Metro Area:**
+- **Development of web application visualizing socioeconomic data across tracts of the Boston Metro Area:**
   - Visualization of as many as 50 variables varying across 4 years
   - User-defined tract selections
   - Double stacking selections for a pass/fail data visualization

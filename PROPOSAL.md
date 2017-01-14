@@ -8,14 +8,22 @@ Thank you for your interest in partnering with _Mimio LLC_ for your website appl
 Thanks again for the opportunity to earn your business!
 
 Michael Amos
+
 Cofounder, Mimio LLC
+
 (443) 254-7042
+
 mamos@mimio.io
 
+
 Clifton Campbell
+
 Cofounder, Mimio LLC
+
 (518) 727-8082
+
 clif@mimio.io
+
 
 **Executive Summary:**
 

@@ -1,7 +1,7 @@
 # Boston Neighborhood Mapping Project Proposal
-## Joint Center for Housing Studies, Harvard University
+### _The Joint Center for Housing Studies, Harvard University_
 
-### Introduction
+## Introduction
 
 Thank you for your interest in partnering with _Mimio LLC_ for your website application project. We are excited to offer you our exceptional service, attention to detail, and expert web application construction. [FLESH OUT MORE]
 
@@ -27,7 +27,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
 
 ***
 
-### Project Structure
+## Project Structure
 - **Development of web application visualizing socioeconomic data across tracts of the Boston Metro Area:**
   - Visualization of as many as 50 variables varying across 4 years
   - User-defined tract selections
@@ -39,7 +39,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
   - etc etc
 - **Cross-browser optimization**
 
-### Execution Timeline
+## Execution Timeline
 - **Overview:**
   - _Start date:_ immediately
   - _Deliverable first major draft:_ mid February
@@ -49,7 +49,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
   - Weekly demo deliverable, available every Monday
   - Weekly meeting
 
-### Project Costs
+## Project Costs
 - **$30,000 base cost split into the following payments:**
   - 25% up front ($7,500)
   - 25% on delivery of first major draft in mid February ($7,500)
@@ -64,7 +64,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
 
 ***
 
-### Terms of Agreement
+## Terms of Agreement
 
 
 **Authorization:**

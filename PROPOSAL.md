@@ -1,7 +1,7 @@
 # Boston Neighborhood Mapping Project Proposal
 ## Joint Center for Housing Studies, Harvard University
 
-### Project Description
+### Project Structure
 - **Development of webmapping application visualizing socioeconomic data across tracts of the Boston Metro Area:**
   - Visualization of as many as 50 variables varying across 4 years
   - User-defined tract selections
@@ -13,7 +13,7 @@
   - etc etc
 - **Cross-browser optimization**
 
-### Timeline
+### Execution Timeline
 - **Overview:**
   - _Start date:_ immediately
   - _Deliverable first major draft:_ mid February
@@ -23,7 +23,7 @@
   - Weekly demo deliverable, available every Monday
   - Weekly meeting
 
-### Cost
+### Project Costs
 - **$30,000 base cost split into the following payments:**
   - 25% up front ($7,500)
   - 25% on delivery of first major draft in mid February ($7,500)

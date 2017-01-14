@@ -13,12 +13,9 @@ Cofounder, Mimio LLC<br>
 mamos@mimio.io
 
 
-Clifton Campbell
-
-Cofounder, Mimio LLC
-
-(518) 727-8082
-
+Clifton Campbell<br>
+Cofounder, Mimio LLC<br>
+(518) 727-8082<br>
 clif@mimio.io
 
 

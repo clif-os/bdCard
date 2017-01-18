@@ -188,7 +188,7 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
 - Family Type:  
   - Share of households that are non-family / with children / married-couple families (3 variables)
   
-  ***
+***
 
 ## ADDENDUM B: Site Visit Cost Estimate
 

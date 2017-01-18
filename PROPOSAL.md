@@ -59,15 +59,9 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - 25% paid front ($7,500)
   - 25% paid upon delivery of first major draft by approximately mid February ($7,500)*
   - 50% paid upon completion of project in late March ($15,000)
-  
-- **$3240* estimated for site visit costs:**
-  - Estimate is summarized in Addendum B
-  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3240 estimate
-  - Paid as soon as site visit dates are finalized in order to minimize trip costs
-   
-'*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free
 
-- **Stipulations:**
+- **Base cost stipulations:**
+  - * A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free
   - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
   - At over 600 hours completed building agreed upon project structure, work will be handled at $50/hour, payed biweekly
   - Minor additions to project structure (work taking less than 3 hours) will be done free of charge
@@ -75,6 +69,13 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - After final delivery, additional work will be delivered at a rate of $50/hour, payed biweekly
   - All hourly rates will be tracked exactly by _Mimio LLC_ using an industry time tracking tool and reported back to the The Joint Center for Housing Studies in a formal document
 
+- **$3240* estimated for site visit costs:**
+  - Estimate is summarized in Addendum B
+  - Paid as soon as site visit dates are finalized in order to minimize trip costs
+  
+- **Site visit cost stipulations:**
+  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3240 estimate
+ 
 ***
 
 ## Terms of Agreement

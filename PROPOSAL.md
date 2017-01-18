@@ -1,6 +1,8 @@
 # Boston Neighborhood Mapping Project Proposal
 ### _The Joint Center for Housing Studies, Harvard University_
 
+***
+
 ## Introduction
 
 Thank you for your interest in partnering with _Mimio LLC_ for your website application project. We are excited to offer you our exceptional service, attention to detail, and expert web application construction.

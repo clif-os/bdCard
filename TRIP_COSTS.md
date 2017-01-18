@@ -1,17 +1,19 @@
-assuming a full 5 business days of work, flying in on a Sunday and returning on a Saturday (6 nights of lodging):
+## ADDENDUM B: Site Visit Cost Estimate
 
-- _flights:_
-  - maximum $1200 roundtrip for the two of us
-  - https://www.google.com/flights/#search;f=PDX;t=BOS;d=2017-02-27;r=2017-03-05;q=flights+to+boston
+The following cost estimate is based upon a full 5 business days of work and a total of 6 travelling days where the two members of _Mimio LLC_ fly in to Boston on a Sunday from Portland and fly back to Portland from Boston the following Saturday.
 
-- _ground travel:_
-  - $25 per person per day of travel = $300
+- **[Item A] Flights: $1,200**
+    - roundtrip for both members
+    - https://www.google.com/flights/#search;f=PDX;t=BOS;d=2017-02-27;r=2017-03-05;q=flights+to+boston
 
-- _lodging:_
-  - $125 per person per night for 6 nights = $1500
-  - http://bit.ly/2k0Kp1E
-
-- _food:_
-  - $65 per day (2 people x 6 days) = $780
-  
-  *total=* 3780
+- **[Item B] Ground Travel: $300**
+    - $25 per person for each day of travel
+    
+- **[Item C] Lodging: $1200**
+    - $100 per person for each night
+    - http://bit.ly/2k0Kp1E
+    
+- **[Item D] Food: $780**
+    - $65 per person for each day of travel
+    
+- **ESTIMATED TOTAL: $3480**

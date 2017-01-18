@@ -190,7 +190,7 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
   
   ***
 
-## ADDENDUM B: Trip Estimates
+## ADDENDUM B: Site Visit Cost Estimate
 
 The following cost estimate is based upon a full 5 business days of work and a total of 6 travelling days where the two members of _Mimio LLC_ fly in to Boston on a Sunday from Portland and fly back to Portland from Boston the following Saturday.
 

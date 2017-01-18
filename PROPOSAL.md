@@ -62,7 +62,7 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   
 - **$3,780* estiamted for site visit costs:**
   - Estimate is summarized in Addendum B
-  - For all items dilineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3780 estimate
+  - * For all items dilineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3780 estimate
   - Paid as soon as site visit dates are finalized in order to minimize trip costs
    
 '*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions resonably error free

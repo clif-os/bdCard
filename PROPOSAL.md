@@ -115,7 +115,7 @@ _Mimio LLC_ guarantees that all aspects of design, construction of, and full cod
 
 **Open Sourcing:**
 
-If at any point after the completion of the application _The Joint Center for Housing Studies_ desires to move the application code to Open Source, Mimio LLC will comply. Work put into open sourcing the project will likely be considered a major addition to the project structure, billed according to the Project Costs section of this agreement.
+If at any point throughout the construction of the application _The Joint Center for Housing Studies_ desires to move the application code to Open Source, _Mimio LLC_ will comply. Work put into open sourcing the project will likely be considered a major addition to the project structure, billed according to the Project Costs section of this agreement.
 
 **Sole Agreement:**
 

@@ -1,4 +1,4 @@
-# Boston Neighborhood Mapping Project
+# Boston Neighborhood Mapping Project Structure
 
 ### Requirements:
 categorical map of data across tracts of the Boston Metro Area (BMA):

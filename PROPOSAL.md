@@ -114,6 +114,7 @@ _Joint Center for Housing Studies_ represents to _Mimio LLC_ and unconditionally
 _Mimio LLC_ guarantees that all aspects of design, construction of, and full code composing the project will be disclosed to _The Joint Center for Housing Studies_ upon completion. Copyrights and ownership of the application will be the sole property of _The Joint Center for Housing Studies_. _Mimio LLC_ retains the right to reuse signature _Mimio LLC_ web framework and user interface strategies for projects in the future. _Mimio LLC_ also retains the right to display graphics and other design elements of the application as examples of its work in its portfolio.
 
 **Open Sourcing:**
+
 If at any point after the completion of the application _The Joint Center for Housing Studies_ desires to move the application code to Open Source, Mimio LLC will comply. Work put into open sourcing the project will likely be considered a major addition to the project structure, billed according to the Project Costs section of this agreement.
 
 **Sole Agreement:**

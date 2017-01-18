@@ -56,10 +56,15 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
 
 ## Project Costs
 - **$30,000 base cost split into the following payments:**
-  - 25% up front ($7,500)
-  - 25% on delivery of first major draft by approximately mid February ($7,500)*
-  - 50% upon completion of project in late March ($15,000)
-
+  - 25% paid front ($7,500)
+  - 25% paid upon delivery of first major draft by approximately mid February ($7,500)*
+  - 50% paid upon completion of project in late March ($15,000)
+  
+ - **$3,780* estiamted for site visit costs:**
+   - Estimate is summarized in Addendum B
+   - For all items dilineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3780 estimate
+   - Paid as soon as site visit dates are finalized in order to minimize trip costs
+   
 '*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions resonably error free
 
 - **Stipulations:**
@@ -105,7 +110,10 @@ _Joint Center for Housing Studies_ represents to _Mimio LLC_ and unconditionally
 
 **Copyright to Project:**
 
-_Mimio LLC_ guarantees that all aspects of design, construction of, and full code composing the project will be disclosed to _The Joint Center for Housing Studies_ upon completion. Copyrights and ownership of the application will be the sole property of _The Joint Center for Housing Studies_. _Mimio LLC_ retains the right to reuse signature _Mimio LLC_ web framework and user interface strategies for projects in the future. _Mimio LLC_ also retains the right to display graphics and other design elements of the application as examples of its work in its portfolio. If at any point after the completion of the application _The Joint Center for Housing Studies_ desires to move the application code to Open Source, Mimio LLC will comply (work put into open sourcing the project will likely be considered a major addition to the project structure, billed according to the Project Costs section of this agreement).
+_Mimio LLC_ guarantees that all aspects of design, construction of, and full code composing the project will be disclosed to _The Joint Center for Housing Studies_ upon completion. Copyrights and ownership of the application will be the sole property of _The Joint Center for Housing Studies_. _Mimio LLC_ retains the right to reuse signature _Mimio LLC_ web framework and user interface strategies for projects in the future. _Mimio LLC_ also retains the right to display graphics and other design elements of the application as examples of its work in its portfolio.
+
+**Open Sourcing:**
+If at any point after the completion of the application _The Joint Center for Housing Studies_ desires to move the application code to Open Source, Mimio LLC will comply. Work put into open sourcing the project will likely be considered a major addition to the project structure, billed according to the Project Costs section of this agreement.
 
 **Sole Agreement:**
 
@@ -179,4 +187,21 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
   - Share of households headed by young adults aged 25-34
 - Family Type:  
   - Share of households that are non-family / with children / married-couple families (3 variables)
+  
+  ***
 
+## ADDENDUM B: Trip Estimates
+
+The following cost estimate is based upon a full 5 business days of work and a total of 6 travelling days where the two members of _Mimio LLC_ fly in to Boston on a Sunday from Portland and fly back to Portland from Boston the following Saturday.
+
+- **Item A: Flights**
+    - $1,200 (roundtrip for both members)
+
+- **Item B: Ground Travel**
+    - $300 ($25 per person for each day of travel)
+    
+- **Item C: Lodging**
+    - $1500 ($125 per person for each night)
+    
+- **Item D: Food**
+    - $780 ($65 per person for each day of travel)

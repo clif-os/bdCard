@@ -201,8 +201,8 @@ The following cost estimate is based upon a full 5 business days of work and a t
 - **[Item B] Ground Travel: $300**
     - $25 per person for each day of travel
     
-- **[Item C] Lodging: $960**
-    - $80 per person for each night
+- **[Item C] Lodging: $1200**
+    - $100 per person for each night
     
 - **[Item D] Food: $780**
     - $65 per person for each day of travel

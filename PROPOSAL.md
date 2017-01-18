@@ -47,14 +47,16 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
   - _Completion:_ late March
 - **Recurring Items:**
   - _Deliverable demos:_ weekly, available every Monday
-  - _General meetings:_ Weekly, flexible day
+  - _General meetings:_ weekly, flexible day
 
 ## Project Costs
 - **$30,000 base cost split into the following payments:**
   - 25% up front ($7,500)
   - 25% on delivery of first major draft by approximately mid February ($7,500)*
   - 50% upon completion of project in late March ($15,000)
-* A first major draft shall be considered a version of the application which meets all items defined by the Project Structure and also functions resonably error free
+
+'*' A first major draft shall be considered a version of the application which meets all items defined by the Project Structure and also functions resonably error free
+
 - **Stipulations:**
   - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
   - At over 600 hours completed building agreed upon project structure, work will be handled at $50/hour, payed biweekly

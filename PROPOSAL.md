@@ -60,10 +60,10 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - 25% paid upon delivery of first major draft by approximately mid February ($7,500)*
   - 50% paid upon completion of project in late March ($15,000)
   
- - **$3,780* estiamted for site visit costs:**
-   - Estimate is summarized in Addendum B
-   - For all items dilineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3780 estimate
-   - Paid as soon as site visit dates are finalized in order to minimize trip costs
+- **$3,780* estiamted for site visit costs:**
+  - Estimate is summarized in Addendum B
+  - For all items dilineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3780 estimate
+  - Paid as soon as site visit dates are finalized in order to minimize trip costs
    
 '*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions resonably error free
 
@@ -194,14 +194,14 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
 
 The following cost estimate is based upon a full 5 business days of work and a total of 6 travelling days where the two members of _Mimio LLC_ fly in to Boston on a Sunday from Portland and fly back to Portland from Boston the following Saturday.
 
-- **Item A: Flights**
-    - $1,200 (roundtrip for both members)
+- **[Item A] Flights: $1,200**
+    - roundtrip for both members
 
-- **Item B: Ground Travel**
-    - $300 ($25 per person for each day of travel)
+- **[Item B] Ground Travel: $300**
+    - $25 per person for each day of travel
     
-- **Item C: Lodging**
-    - $1500 ($125 per person for each night)
+- **[Item C] Lodging: $1500**
+    - $125 per person for each night
     
-- **Item D: Food**
-    - $780 ($65 per person for each day of travel)
+- **[Item D] Food: $780**
+    - $65 per person for each day of travel

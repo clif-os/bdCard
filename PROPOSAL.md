@@ -60,7 +60,7 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - 25% on delivery of first major draft by approximately mid February ($7,500)*
   - 50% upon completion of project in late March ($15,000)
 
-'*' A first major draft shall be considered a version of the application which meets all items defined by the Project Structure and also functions resonably error free
+'*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions resonably error free
 
 - **Stipulations:**
   - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties

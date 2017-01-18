@@ -69,12 +69,12 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - After final delivery, additional work will be delivered at a rate of $50/hour, payed biweekly
   - All hourly rates will be tracked exactly by _Mimio LLC_ using an industry time tracking tool and reported back to the The Joint Center for Housing Studies in a formal document
 
-- **$3240* estimated for site visit costs:**
+- **$3480* estimated for site visit costs:**
   - Estimate is summarized in Addendum B
   - Paid as soon as site visit dates are finalized in order to minimize trip costs
   
 - **Site visit cost stipulations:**
-  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3240 estimate
+  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3480 estimate
  
 ***
 
@@ -207,4 +207,4 @@ The following cost estimate is based upon a full 5 business days of work and a t
 - **[Item D] Food: $780**
     - $65 per person for each day of travel
     
-- **ESTIMATED TOTAL: $3240**
+- **ESTIMATED TOTAL: $3480**

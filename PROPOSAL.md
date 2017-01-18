@@ -23,7 +23,7 @@ clif@mimio.io
 
 _The Joint Center for Housing Studies_ requires a full web application built to visualize socioeconomic data across tracts of the Boston Metro Area. This application will allow users to interact with a complex dataset in an easy-to-use and performant user interface.
 
-_Mimio LLC_ is uniquely qualified to build the the desired application, due to our in-house web development experience, Geographic Information System expertise, and our past experience building web applications -- especiailly webmapping applications.
+_Mimio LLC_ is uniquely qualified to build the desired application, due to our in-house web development experience, Geographic Information System expertise, and our past experience building web applications -- especially webmapping applications.
 
 ***
 
@@ -38,7 +38,7 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - In general, an attractive and highly functional User Interface for interacting with data
   - Utilization of modern web frameworks and webmapping tools, including Mapbox Graphics Library 
 - **Web Analytics:**
-  - web traffic assesments
+  - web traffic assessments
   - [ETC ETC]
 - **Cross-browser optimization**
 - [FLESH THIS OUT MORE]
@@ -60,12 +60,12 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - 25% paid upon delivery of first major draft by approximately mid February ($7,500)*
   - 50% paid upon completion of project in late March ($15,000)
   
-- **$3,780* estiamted for site visit costs:**
+- **$3240* estimated for site visit costs:**
   - Estimate is summarized in Addendum B
-  - * For all items dilineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3780 estimate
+  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3240 estimate
   - Paid as soon as site visit dates are finalized in order to minimize trip costs
    
-'*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions resonably error free
+'*' A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free
 
 - **Stipulations:**
   - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
@@ -200,8 +200,10 @@ The following cost estimate is based upon a full 5 business days of work and a t
 - **[Item B] Ground Travel: $300**
     - $25 per person for each day of travel
     
-- **[Item C] Lodging: $1500**
-    - $125 per person for each night
+- **[Item C] Lodging: $960**
+    - $80 per person for each night
     
 - **[Item D] Food: $780**
     - $65 per person for each day of travel
+    
+- **ESTIMATED TOTAL: $3240**

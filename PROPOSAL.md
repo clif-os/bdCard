@@ -3,9 +3,7 @@
 
 ## Introduction
 
-Thank you for your interest in partnering with _Mimio LLC_ for your website application project. We are excited to offer you our exceptional service, attention to detail, and expert web application construction. [FLESH OUT MORE]
-
-Thanks again for the opportunity to earn your business!
+Thank you for your interest in partnering with _Mimio LLC_ for your website application project. We are excited to offer you our exceptional service, attention to detail, and expert web application construction.
 
 Michael Amos<br>
 Cofounder, Mimio LLC<br>
@@ -36,7 +34,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
   - Utilization of modern web frameworks and webmapping tools, including Mapbox Graphics Library 
 - **Web Analytics:**
   - web traffic assesments
-  - etc etc
+  - [ETC ETC]
 - **Cross-browser optimization**
 - [FLESH THIS OUT MORE]
 
@@ -44,24 +42,26 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
 - **Overview:**
   - _Start date:_ immediately
   - _Deliverable first major draft:_ mid February
+  - _Review of first major draft:_ after delivery date mid-late February
   - _Site visit:_ late February
   - _Completion:_ late March
 - **Recurring Items:**
-  - Weekly demo deliverable, available every Monday
-  - Weekly meeting
+  - _Deliverable demos:_ weekly, available every Monday
+  - _General meetings:_ Weekly, flexible day
 
 ## Project Costs
 - **$30,000 base cost split into the following payments:**
   - 25% up front ($7,500)
-  - 25% on delivery of first major draft in mid February ($7,500)
+  - 25% on delivery of first major draft by approximately mid February ($7,500)*
   - 50% upon completion of project in late March ($15,000)
+* A first major draft shall be considered a version of the application which meets all items defined by the Project Structure and also functions resonably error free
 - **Stipulations:**
-  - if at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
-  - at over 600 hours completed building agreed upon project structure, work will be handled at $50/hour, payed biweekly
-  - minor additions to project structure (work taking less than 3 hours) will be done free of charge
-  - any major additions to the project structure (defined as work taking more than 3 hours) will be handled separately at a rate of $50/hour
-  - after final delivery, additional work will be delivered at a rate of $50/hour, payed biweekly
-  - all hourly rates will be tracked exactly by _Mimio LLC_ using an industry time tracking tool and reported back to the The Joint Center for Housing Studies in a formal document
+  - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
+  - At over 600 hours completed building agreed upon project structure, work will be handled at $50/hour, payed biweekly
+  - Minor additions to project structure (work taking less than 3 hours) will be done free of charge
+  - Any major additions to the project structure (defined as work taking more than 3 hours) will be handled separately at a rate of $50/hour
+  - After final delivery, additional work will be delivered at a rate of $50/hour, payed biweekly
+  - All hourly rates will be tracked exactly by _Mimio LLC_ using an industry time tracking tool and reported back to the The Joint Center for Housing Studies in a formal document
 
 ***
 
@@ -70,7 +70,7 @@ _Mimio LLC_ is uniquely qualified to build the the desired application, due to o
 
 **Authorization:**
 
-_The Joint Center for Housing Studies_ is engaging _Mimio LLC_ as an [SENDER.COMPANY.TYPE] contractor for the specific project outlined below:
+_The Joint Center for Housing Studies_ is engaging _Mimio LLC_ as a Limited Liability Company for the specific project outlined below:
 - "Boston Neighborhood Mapping Project"
 
 **Completion:**
@@ -96,13 +96,13 @@ If any provision of this agreement shall be unlawful, void, or for any reason un
 
 _Joint Center for Housing Studies_ represents to _Mimio LLC_ and unconditionally guarantees that any elements furnished to _Mimio LLC_ for inclusion in the project are owned by _The Joint Center for Housing Studies_, or that _The Joint Center for Housing Studies_ has permission from the rightful owner to use each of these elements, and will hold harmless, protect, and defend _Mimio LLC_ and its subcontractors from any claim or suit arising from the use of such elements furnished by _The Joint Center for Housing Studies_.
 
-**Copyright to Project:** [MAKE CHANGES TO GUARANTEE WE GET TO KEEP OUR SIGNATURE USER INTERFACE AND WEBSITE/APP CONSTRUCTION STRATEGIES]
+**Copyright to Project:**
 
-_Mimio LLC_ guarantees that all aspects of design and construction of the project will be disclosed to _The Joint Center for Housing Studies_ upon completion, and full code, copyrights and ownership will be the sole property of _The Joint Center for Housing Studies_. _Mimio LLC_ retains the right to display graphics and other design elements as examples of its work in its portfolio.
+_Mimio LLC_ guarantees that all aspects of design, construction of, and full code composing the project will be disclosed to _The Joint Center for Housing Studies_ upon completion. With the exception of signature _Mimio LLC_ web framework and user interface strategies, copyrights and ownership of the application will be the sole property of _The Joint Center for Housing Studies_. _Mimio LLC_ also retains the right to display graphics and other design elements as examples of its work in its portfolio.
 
 **Sole Agreement:**
 
-The agreement contained in this Contract constitutes the sole agreement between _Mimio LLC_ and _The Joint Center for Housing Studies_ regarding this project. Any additional work not specified in this contract must be authorized by a written change order. All prices specified in this contract will be honored for three (3) months after both parties sign this contract. Continued services after that time will require a new agreement.
+The agreement contained in this Contract constitutes the sole agreement between _Mimio LLC_ and _The Joint Center for Housing Studies_ regarding this project. Any additional work not specified in this contract must be authorized by a written change order. All prices specified in this contract will be honored for three (3) months and two (2) weeks after both parties sign this contract. Continued services after that time will require a new agreement.
 
 **Initial Payment & Refund Policy**
 

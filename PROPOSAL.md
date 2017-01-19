@@ -46,7 +46,7 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
 ## Execution Timeline
 - **Overview:**
   - _Start date:_ immediately
-  - _Deliverable first major draft:_ mid February
+  - _Deliverable first major draft:_ mid-late February
   - _Review of first major draft:_ after delivery date mid-late February
   - _Site visit:_ late February
   - _Completion:_ late March
@@ -56,8 +56,8 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
 
 ## Project Costs
 - **$30,000 base cost split into the following payments:**
-  - 25% paid front ($7,500)
-  - 25% paid upon delivery of first major draft by approximately mid February ($7,500)*
+  - 25% paid up front ($7,500)
+  - 25% paid upon delivery of first major draft by approximately mid-late February ($7,500)*
   - 50% paid upon completion of project in late March ($15,000)
 
 - **Base cost stipulations:**
@@ -74,7 +74,7 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
   - Paid as soon as site visit dates are finalized in order to minimize trip costs
   
 - **Site visit cost stipulations:**
-  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the $3480 estimate
+  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the estimate
  
 ***
 

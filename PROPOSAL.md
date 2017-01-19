@@ -29,7 +29,7 @@ _Mimio LLC_ is uniquely qualified to build the desired application, due to our i
 
 ## General Project Structure
 
-_Full Project Structure attached as Addendum A at end of document. Reference to "Project Structure" will always regard the full project structure_
+_Full Project Structure attached as Addendum A at end of document._
 
 - **Development of web application visualizing socioeconomic data across tracts of the Boston Metro Area:**
   - Visualization of as many as 50 variables varying across 4 years
@@ -63,11 +63,13 @@ _Full Project Structure attached as Addendum A at end of document. Reference to 
 - **Base cost stipulations:**
   - * A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free
   - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
-  - At over 600 hours completed building agreed upon project structure, work will be handled at $50/hour, payed biweekly
-  - Minor additions to project structure (work taking less than 3 hours) will be done free of charge
-  - Any major additions to the project structure (defined as work taking more than 3 hours) will be handled separately at a rate of $50/hour
-  - After final delivery, additional work will be delivered at a rate of $50/hour, payed biweekly
-  - All hourly rates will be tracked exactly by _Mimio LLC_ using an industry time tracking tool and reported back to the The Joint Center for Housing Studies in a formal document
+  - At over 600 hours completed building agreed upon project structure, work will be handled hourly
+  - Minor additions to the project structure (defined as work taking less than 3 hours) negotiated prior to the final delivery will be delivered free of charge
+  - Major additions to the project structure (defined as work taking more than 3 hours) negotiated prior to the final delivery will be handled hourly
+  - Any additions to the project structure negotiated after the final delivery will be handled hourly
+  - All hourly charges will be:
+    - paid at $50/hour biweekly
+    - tracked exactly by _Mimio LLC_ using an industry time tracking tool and reported back to the The Joint Center for Housing Studies in a formal document biweekly
 
 - **$3480* estimated for site visit costs:**
   - Estimate is summarized in Addendum B
@@ -123,7 +125,7 @@ The agreement contained in this Contract constitutes the sole agreement between 
 
 **Initial Payment & Refund Policy**
 
-This agreement begins with an initial payment indicated in the pricing table above. If _The Joint Center for Housing Studies_ halts work and applies for a refund within 4 days, work completed shall be billed at the hourly rate of $50/hour, and deducted from the initial payment, the balance of which shall be returned to _The Joint Center for Housing Studies_. If, at the time of the request for refund, work has been completed beyond the amount covered by the initial payment, _The Joint Center for Housing Studies_ shall be liable to pay for all work completed at the hourly rate stated above. No portion of this initial payment will be refunded unless requested within 4 days of signing this contract.
+This agreement begins with an initial payment indicated in the pricing table above. If _The Joint Center for Housing Studies_ halts work and applies for a refund within 4 days, work completed shall be billed at $50 per hour, and deducted from the initial payment, the balance of which shall be returned to _The Joint Center for Housing Studies_. If, at the time of the request for refund, work has been completed beyond the amount covered by the initial payment, _The Joint Center for Housing Studies_ shall be liable to pay for all work completed at the hourly rate stated above. No portion of this initial payment will be refunded unless requested within 4 days of signing this contract.
 
 **Acceptance:**
 

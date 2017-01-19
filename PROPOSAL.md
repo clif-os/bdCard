@@ -62,10 +62,9 @@ _Full Project Structure attached as Addendum A at end of document._
 
 - **Base cost stipulations:**
   - * A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free
-  - If at over 600 hours completed building agreed upon project structure and the project has a significant number of hours remaining to be completed, the project completion date may be renegotiated to a reasonable point determined by both parties
-  - At over 600 hours completed building agreed upon project structure, work will be handled hourly
   - Minor additions to the project structure (defined as work taking less than 3 hours) negotiated prior to the final delivery will be delivered free of charge
   - Major additions to the project structure (defined as work taking more than 3 hours) negotiated prior to the final delivery will be handled hourly
+  - After 600 hours of work completed by _Mimio LLC_, the project completion date may be renegotiated by both parties if determined necessary; all work logged after the 600-hour threshold will be handled separately from the base costs and paid hourly
   - Any additions to the project structure negotiated after the final delivery will be handled hourly
   - All hourly charges will be:
     - paid at $50/hour biweekly

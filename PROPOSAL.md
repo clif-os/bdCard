@@ -38,10 +38,11 @@ _Full Project Structure attached as Addendum A at end of document._
   - In general, an attractive and highly functional User Interface for interacting with data
   - Utilization of modern web frameworks and webmapping tools, including Mapbox Graphics Library 
 - **Web Analytics:**
-  - web traffic assessments
-  - [ETC ETC]
-- **Cross-browser optimization**
-- [FLESH THIS OUT MORE]
+  - Instrumenting critical paths of the application with analytics code, allowing JCHS to gain key insights
+  about who is using the map and how they interact with its features.
+- **Optimization**
+  - Ensure that the map functions well across all major browsers, devices.
+  - Map will remain performant regardless of complexity
 
 ## Execution Timeline
 - **Overview:**
@@ -50,9 +51,10 @@ _Full Project Structure attached as Addendum A at end of document._
   - _Review of first major draft:_ after delivery date mid-late February
   - _Site visit:_ late February
   - _Completion:_ late March
-- **Recurring Items:**
-  - _Deliverable demos:_ weekly, available every Monday
-  - _General meetings:_ weekly, flexible day
+- **Additional Details**
+  - We will be completing work in two-week sprints as defined by the Agile methodology of software development
+  - Following each two-week sprint we will perform a demo, allowing us to review the work completed in the 
+  previous sprint, as well as continuously integrate feedback. 
 
 ## Project Costs
 - **$30,000 base cost split into the following payments:**
@@ -61,7 +63,7 @@ _Full Project Structure attached as Addendum A at end of document._
   - 50% paid upon completion of project in late March ($15,000)
 
 - **Base cost stipulations:**
-  - * A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free
+  - A first major draft shall be considered the first version of the application which meets all items defined by the Project Structure and also functions reasonably error free _[See: Addendum A]_
   - Minor additions to the project structure (defined as work taking less than 3 hours) negotiated prior to the final delivery will be delivered free of charge
   - Major additions to the project structure (defined as work taking more than 3 hours) negotiated prior to the final delivery will be handled hourly
   - After 600 hours of work completed by _Mimio LLC_, the project completion date may be renegotiated by both parties if determined necessary; all work logged after the 600-hour threshold will be handled separately from the base costs and paid hourly
@@ -75,7 +77,7 @@ _Full Project Structure attached as Addendum A at end of document._
   - Paid as soon as site visit dates are finalized in order to minimize trip costs
   
 - **Site visit cost stipulations:**
-  - * For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the estimate
+  - For all items delineated in the site visit costs, _The Joint Center for Housing Studies_ may substitute a working option of their own and deduct the relevant cost from the estimate _[See: Addendum B]_
  
 ***
 

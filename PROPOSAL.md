@@ -168,6 +168,11 @@ categorical map of data across tracts of the Boston Metro Area (BMA):
       - in essence this is like a doubling up of the `SFVS` stacks where the first `SFVS` causes the normal greying out and subselection and the second `SFVS` causes a visualization of its results within that subselection
       - for the user, the first `SVFS` would go on as normal // but the second would be some sort of special option/alternative in the Field selection area -- but perhaps with a very familiar UX to the one in the selection area
     - the data visualization `SVFS` will have a limit of 2 `SFVs` per stack whereas the normal `SVFS` will have 3 per stack
+  - **Web Analytics:**
+    - Instrumenting critical paths of the application with analytics code, allowing JCHS to gain key insights about who is using the map and how they interact with its features.
+  - **Optimization:**
+    - Ensure that the map functions well across all major browsers, devices.
+    - Map will remain performant regardless of complexity
 
 ### Key Project Terms:
 > - `Selection Filter Variable`: variable used to define the subselection of tracts

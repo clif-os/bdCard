@@ -60,5 +60,10 @@ module.exports = {
       loader: 'url-loader?mimetype=image/png'
     }
     ]
+  },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 };

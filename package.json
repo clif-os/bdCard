@@ -22,17 +22,16 @@
   "homepage": "https://github.com/eltonjuan/boston#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "file-system": "^2.2.2",
+    "fs": "0.0.1-security",
     "mapbox-gl": "^0.28.0",
-    "rc-slider": "^5.4.0",
-    "rc-slider-hostile-fork": "^5.3.7",
+    "net": "^1.0.2",
     "react": "^15.4.1",
-    "react-d3": "^0.4.0",
-    "react-d3-basic": "^1.6.11",
     "react-dom": "^15.4.1",
+    "tls": "0.0.1",
     "turf": "^3.0.14",
     "velocity-react": "^1.1.11",
     "webpack": "^1.14.0"
-
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

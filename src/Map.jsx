@@ -2,15 +2,11 @@
 global.turf = require('turf');
 import './Map.styl';
 import {
-  geojsonEmpty,
+  geojsonEmpty
 } from './utils/geojsonUtils.jsx'
-import {
-  generateChoroplethFillStyle
-} from './utils/mapboxUtils.jsx'
-
 
 export default class Map {
-  constructor(geojsons, geojsonTilesets, mapStyle, fields, fillStyles, years) {
+  constructor(geojsonTilesets, mapStyle) {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: mapStyle,
@@ -23,22 +19,14 @@ export default class Map {
       zoom: 10.27
     });
     this.map.boxZoom.disable();
-    // this.drawQueue = [];
-    this.geojsons = geojsons;
     this.geojsonTilesets;
-    this.activeYear = window.activeYear;
-    this.activeField = window.activeField;
     this.firstDraw = true;
     this.controlsLoaded = false;
-    this.hoverPopup = new mapboxgl.Popup({
-      closeButton: false,
-      closeOnClick: false
-    });
     this.addControls();
     this.bindEvents();
     // tried to bind all events but didn't work for some reason
     this.map.on('style.load', () => {
-      this.drawLayers(geojsonTilesets, fillStyles, years, fields);
+      this.drawLayers(geojsonTilesets);
       this.map.on('mousemove', this.onMouseMove.bind(this));
     });
   }
@@ -46,128 +34,10 @@ export default class Map {
   bindEvents() {
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
-    document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
-    document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
-    document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
-    document.addEventListener('ZOOM_TO_FEATURE', this.zoomToFeatureExtentByWindow.bind(this));
-  }
-
-  switchYear(e) {
-    // switch out the layer visibilities unless the year selected is already selected
-    if (this.activeYear !== e.detail) {
-      this.map.setLayoutProperty('polygon-fills-' + e.detail + '-' + this.activeField, 'visibility', 'visible');
-      this.map.setLayoutProperty('polygon-outlines-' + e.detail + '-' + this.activeField, 'visibility', 'visible');
-      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
-      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
-      this.activeYear = e.detail;
-    }
-  }
-
-  switchField(e) {
-    // switch out the layer visibilities unless the year selected is already selected
-    if (this.activeField !== e.detail) {
-      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + e.detail, 'visibility', 'visible');
-      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + e.detail, 'visibility', 'visible');
-      this.map.setLayoutProperty('polygon-fills-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
-      this.map.setLayoutProperty('polygon-outlines-' + this.activeYear + '-' + this.activeField, 'visibility', 'none');
-      this.activeField = e.detail;
-    }
-  }
-
-  zoomToDataExtent() {
-    const bbox = turf.bbox(this.geojsons['allYears']);
-    this.map.fitBounds(bbox, {
-      padding: '35'
-    });
-  }
-
-  // zoomToFeatureExtent(geoid) {
-  //   console.log("ATTEMPTING ZOOM")
-  //   console.log(geoid)
-  //   if (geoid){
-  //     const bbox = turf.bbox(window.geojsonLookup[geoid]);
-  //     this.map.fitBounds(bbox, {
-  //       padding: '50'
-  //     });  
-  //   } else {
-  //     console.log("NO GEOID PROVIDED< ZOOMING TO WINDOW FEATURE")
-  //     wGeoid = window.selectedFeature.properties.GEOID
-  //     const bbox = turf.bbox(window.geojsonLookup[geoid]);
-  //     this.map.fitBounds(bbox, {
-  //       padding: '50'
-  //     });
-  //   }
-  // }
-  zoomToFeatureExtentByGeoID(geoid) {
-    const bbox = turf.bbox(window.geojsonLookup[geoid]);
-    this.map.fitBounds(bbox, {
-      padding: '100'
-    });
-  }
-
-  zoomToFeatureExtentByWindow() {
-    const geoid = window.selectedFeature.properties.GEOID
-    const bbox = turf.bbox(window.geojsonLookup[geoid]);
-    this.map.fitBounds(bbox, {
-      padding: '100'
-    });
-  }
-
-  onMouseMove(e) {
-    // queries fills and outlines because, at high zooms, outlines take up a 
-    // larger amount of the drawspace and will lag hover highlight otherwise
-    const fieldAndYear = this.activeYear + '-' + this.activeField;
-    var features = this.map.queryRenderedFeatures(e.point, {
-      layers: [
-        'polygon-fills-' + fieldAndYear,
-        'polygon-outlines-' + fieldAndYear
-      ]
-    });
-    if (features.length) {
-      const geoid = features[0].properties.GEOID;
-      this.map.getCanvas().style.cursor = 'pointer'
-      this.map.getSource('hover').setData(window.geojsonLookup[geoid]);
-    } else {
-      this.map.getCanvas().style.cursor = ''
-      this.map.getSource('hover').setData(geojsonEmpty);
-    }
-  }
-
-  onMapClicked(e) {
-    const fieldAndYear = this.activeYear + '-' + this.activeField;
-    var features = this.map.queryRenderedFeatures(e.point, {
-      //layers: ['polygon-fills-' + this.activeYear]
-      layers: [
-        'polygon-fills-' + fieldAndYear,
-        'polygon-outlines-' + fieldAndYear
-      ]
-    });
-    // console.log("ZOOM LEVEL: " + this.map.getZoom());
-    // console.log(this.map.getBounds());
-    if (features.length) {
-      const geoid = features[0].properties.GEOID;
-      this.map.getSource('selected').setData(window.geojsonLookup[geoid]);
-      window.selectedFeature = window.geojsonLookup[geoid];
-      const evt = new CustomEvent('FEATURE_CLICKED');
-      document.dispatchEvent(evt);
-    } else {
-      window.selectedFeature = {};
-      this.map.getSource('selected').setData(geojsonEmpty);
-      const evt = new CustomEvent('NONFEATURE_CLICKED');
-      document.dispatchEvent(evt);
-    }
-  }
-
-  onMapDoubleClicked(e) {
-    const fieldAndYear = this.activeYear + '-' + this.activeField;
-    const features = this.map.queryRenderedFeatures(e.point, {
-      layers: ['polygon-fills-' + fieldAndYear]
-    });
-    // console.log("DOUBLE CLICK")
-    if (features.length) {
-      const geoid = features[0].properties.GEOID;
-      this.zoomToFeatureExtentByGeoID(geoid);
-    }
+    // document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
+    // document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
+    // document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
+    // document.addEventListener('ZOOM_TO_FEATURE', this.zoomToFeatureExtentByWindow.bind(this));
   }
 
   addControls() {
@@ -180,68 +50,127 @@ export default class Map {
     this.controlsLoaded = true;
   }
 
-  drawLayers(geojsonTilesets, fillStyles, years, fields) {
-    // console.log(fillStyles);
-    years.forEach(year => {
-      const yr = String(year);
-      this.map.addSource(yr, {
+  zoomToDataExtent() {
+    const bbox = turf.bbox(window.geojson);
+    this.map.fitBounds(bbox, {
+      padding: '35'
+    });
+  }
+
+  zoomToFeatureExtentByGeoID(geoid) {
+    const bbox = turf.bbox(window.geojsonLookup[geoid]);
+    this.map.fitBounds(bbox, {
+      padding: '100'
+    });
+  }
+
+  onMouseMove(e) {
+    // queries fills and outlines because, at high zooms, outlines take up a 
+    // larger amount of the drawspace and will lag hover highlight otherwise
+    var features = this.map.queryRenderedFeatures(e.point, {
+      layers: window.drawnLayers
+    });
+    if (features.length) {
+      const geoid = features[0].properties.GEOID;
+      this.map.getCanvas().style.cursor = 'pointer'
+      this.map.getSource('hover').setData(window.geojsonLookup[geoid]);
+    } else {
+      this.map.getCanvas().style.cursor = '';
+      this.map.getSource('hover').setData(geojsonEmpty);
+    }
+  }
+
+  onMapClicked(e) {
+    var features = this.map.queryRenderedFeatures(e.point, {
+      layers: window.drawnLayers
+    });
+    // console.log("ZOOM LEVEL: " + this.map.getZoom());
+    // console.log(this.map.getBounds());
+    if (features.length) {
+      const geoid = features[0].properties.GEOID;
+      this.map.getSource('selected').setData(window.geojsonLookup[geoid]);
+      window.selectedFeature = window.geojsonLookup[geoid];
+      console.log('SELECTED FEATURE:', selectedFeature)
+      // const evt = new CustomEvent('FEATURE_CLICKED');
+      // document.dispatchEvent(evt);
+    } else {
+      window.selectedFeature = {};
+      this.map.getSource('selected').setData(geojsonEmpty);
+      console.log('NO FEATURES SELECTED')
+      // const evt = new CustomEvent('NONFEATURE_CLICKED');
+      // document.dispatchEvent(evt);
+    }
+  }
+
+  onMapDoubleClicked(e) {
+    const features = this.map.queryRenderedFeatures(e.point, {
+      layers: window.drawnLayers
+    });
+    // console.log("DOUBLE CLICK")
+    if (features.length) {
+      const geoid = features[0].properties.GEOID;
+      this.zoomToFeatureExtentByGeoID(geoid);
+    }
+  }
+
+  drawLayers(geojsonTilesets) {
+    // add all tilesets
+    window.drawnLayers = []
+    geojsonTilesets.forEach(tileset => {
+      this.map.addSource(tileset.name, {
         type: 'vector',
-        url: geojsonTilesets[yr]
+        url: tileset.sourceUrl
       });
-      fields.forEach(field => {
-        var polyLayer = {
-          id: 'polygon-fills-' + yr + '-' + field,
-          type: 'fill',
-          source: yr,
-          'source-layer': `TBF_TM_${yr}_norm`,
-          layout: {
-            visibility: 'none'
+      var polyLayer = {
+        id: tileset.name + '-fills',
+        type: 'fill',
+        source: tileset.name,
+        'source-layer': tileset.sourceLayer,
+        layout: {
+          // visibility: 'none'
+        },
+        paint: {
+          'fill-color': 'tomato',
+          'fill-opacity': 0.5
+        }
+      }
+      var lineLayer = {
+        id: tileset.name + '-outlines',
+        type: 'line',
+        source: tileset.name,
+        'source-layer': tileset.sourceLayer,
+        layout: {
+          // visibility: 'none'
+        },
+        paint: {
+          'line-width': {
+            'stops': [
+              [10, .75],
+              [11, 1],
+              [12, 1.5],
+              [13, 1.75],
+              [14, 2]
+            ]
           },
-          paint: {
-            'fill-color': fillStyles[field],
-            'fill-opacity': 0.4
-          }
-        }
-
-        var lineLayer = {
-          id: 'polygon-outlines-' + yr + '-' + field,
-          type: 'line',
-          source: yr,
-          'source-layer': `TBF_TM_${yr}_norm`,
-          layout: {
-            visibility: 'none'
+          'line-opacity': {
+            'stops': [
+              [10, 0.75],
+              [11, 0.6],
+              [12, 0.5],
+              [13, 0.4]
+            ]
           },
-          paint: {
-            'line-width': {
-              'stops': [
-                [10, .75],
-                [11, 1],
-                [12, 1.5],
-                [13, 1.75],
-                [14, 2]
-              ]
-            },
-            'line-opacity': {
-              'stops': [
-                [10, 0.75],
-                [11, 0.6],
-                [12, 0.5],
-                [13, 0.4]
-              ]
-            },
-            'line-color': fillStyles[field]
-          }
+          'line-color': 'tomato'
         }
-        if (year === this.activeYear && field === this.activeField) {
-          polyLayer.layout.visibility = 'visible';
-          lineLayer.layout.visibility = 'visible';
-        }
-
-        this.map.addLayer(polyLayer, 'admin-2-boundaries-dispute');
-        this.map.addLayer(lineLayer, 'admin-2-boundaries-dispute');
-      });
+      }
+      // active layers need to be known for querying purposes
+      window.drawnLayers.push(tileset.name + '-fills', tileset.name + '-outlines')
+      // second variable is the layer in the mapbox style you'd like the layers to be drawn directly above of
+      this.map.addLayer(polyLayer, 'admin-2-boundaries-dispute');
+      this.map.addLayer(lineLayer, 'admin-2-boundaries-dispute');
     });
 
+    // add a dedicated source and layer to collect the currently hovered feature at all times
     this.map.addSource('hover', {
       type: 'geojson',
       data: geojsonEmpty
@@ -252,10 +181,11 @@ export default class Map {
       source: 'hover',
       paint: {
         'fill-color': 'black',
-        'fill-opacity': 0.10,
+        'fill-opacity': 0.10
       }
     }, 'admin-2-boundaries-dispute');
 
+    // add a dedicated source and layer to collect the currently selected feature at all times
     this.map.addSource('selected', {
       type: 'geojson',
       data: geojsonEmpty
@@ -279,9 +209,11 @@ export default class Map {
       }
     }, 'admin-2-boundaries-dispute');
 
+    // this feature can be nice for zooming to the data on load
     if (this.firstDraw) {
       this.zoomToDataExtent();
     }
+
     this.firstDraw = false;
   }
 }

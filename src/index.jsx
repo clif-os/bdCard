@@ -1,74 +1,40 @@
 import './index.styl';
 import React from 'react';
-import {render} from 'react-dom';
-// import {Provider} from 'react-redux';
-// import {store} from './state/store';
+import {
+  render
+} from 'react-dom';
 import AppInterface from './AppInterface.jsx';
 import Map from './Map.jsx';
-import ALLYEARS from './data/TBF_TM_all.json'
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
-import {
-  generateChoroplethStylers
-} from './utils/mapboxUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
+// import local data for now, later this should be pulled from the tilesets group from online using the mapbox dataset API
+import localDataExample from './data/localDataExample.json'
 
-const geojsons = {
-  "allYears": ALLYEARS
-};
-
-const geojsonTilesets = {
-  "1990": 'mapbox://chiefkleef.ciwsi0jvr00042zsajry2n8i5-76muo',
-  "2000": 'mapbox://chiefkleef.ciwsi1u70000a2zo0ju9mv8ua-7us1b',
-  "2010": 'mapbox://chiefkleef.ciwsi2t16000a2oqb38rrj4wp-17zg8',
-  "2014": 'mapbox://chiefkleef.ciwsi3t61000a2oqrgwq8qo96-4h7fn',
-  "allYears": 'mapbox://chiefkleef.ciwsgz6s0142u30s5egh3z1u0-20lot'
-};
-
-const years = [1990, 2000, 2010, 2014];
-window.activeYear = years[0];
-const fields = ["MedInc", "DMI", "MedRent", "DMR"];
-const fieldLookups = {
-  MedInc: "Median Income",
-  DMI: "Decile of Median Income",
-  MedRent: "Median Gross Rent",
-  DMR: "Decile of Median Gross Rent"
-}
-// reverse relates to whether the more intense color (or high color) is assciated with lower actual values
-// units are anticipated at the bottom levels in React, look to items like LegendItemEntry.jsx for examples
-const fieldProps = {
-  'MedInc': {
-    unit: 'dollar',
-    reverse: false
+const geojsonTilesets = [{
+    name: 'title1',
+    sourceUrl: 'mapbox://chiefkleef.ciwsi0jvr00042zsajry2n8i5-76muo',
+    sourceLayer: 'TBF_TM_1990_norm'
   },
-  'DMI': {
-    unit: 'integer',
-    reverse: false
-  },
-  'MedRent': {
-    unit: 'dollar',
-    reverse: false
-  },
-  'DMR': {
-    unit: 'integer',
-    reverse: false
+  {
+    name: 'title2',
+    sourceUrl: 'mapbox://chiefkleef.ciwsgz6s0142u30s5egh3z1u0-20lot',
+    sourceLayer: 'TBF_TM_all'
   }
-}
-window.activeField = fields[0];
-const stylers = generateChoroplethStylers(geojsons.allYears, fields, fieldProps, 5);
-const fillStyles = stylers.fillStyles;
-const legendFormats = stylers.legendFormats; 
+  //etc
+];
 
+// for selections, it can often be useful to make a lookup tranformation of the geojsons at hand
+// in order to perform rapid lookups --> things like selections and even zooms
+window.geojsonLookup = convertGeojsonToLookup(localDataExample);
+window.geojson = localDataExample;
+// empty window object for making selections
 window.selectedFeature = {};
 
-window.geojsonLookup = convertGeojsonToLookup(geojsons.allYears);
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
-const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o";
-// const mapStyle="mapbox://styles/camp-amos/cirmc9juf002hg1nboacfr7u9";
+// const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"; //light style
+const mapStyle = "mapbox://styles/camp-amos/cirmc9juf002hg1nboacfr7u9"; // dark style
 
-const m = new Map(geojsons, geojsonTilesets, mapStyle, fields, fillStyles, years);
-
-render(
-  <AppInterface years={years} legendFormats={legendFormats} fields={fields} fieldLookups={fieldLookups}/>,
+const m = new Map(geojsonTilesets, mapStyle);
+render( <AppInterface / > ,
   document.getElementById('AppInterface')
 );

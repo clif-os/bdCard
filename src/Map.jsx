@@ -7,6 +7,7 @@ import {
 
 export default class Map {
   constructor(geojsonTilesets, mapStyle) {
+    //// instantiate map ////
     this.map = new mapboxgl.Map({
       container: 'map',
       style: mapStyle,
@@ -31,14 +32,7 @@ export default class Map {
     });
   }
 
-  bindEvents() {
-    this.map.on('click', this.onMapClicked.bind(this));
-    this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
-    // document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
-    // document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
-    // document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
-    // document.addEventListener('ZOOM_TO_FEATURE', this.zoomToFeatureExtentByWindow.bind(this));
-  }
+  ///////// ADD CONTROLS /////////
 
   addControls() {
     if (!this.controlsLoaded) {
@@ -50,19 +44,22 @@ export default class Map {
     this.controlsLoaded = true;
   }
 
-  zoomToDataExtent() {
-    const bbox = turf.bbox(window.geojson);
-    this.map.fitBounds(bbox, {
-      padding: '35'
-    });
+  ///////// BIND EVENTS /////////
+
+  bindEvents() {
+    this.map.on('click', this.onMapClicked.bind(this));
+    this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
+    // document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
+    // document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
+    // document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
+    // document.addEventListener('ZOOM_TO_FEATURE', this.zoomToFeatureExtentByWindow.bind(this));
   }
 
-  zoomToFeatureExtentByGeoID(geoid) {
-    const bbox = turf.bbox(window.geojsonLookup[geoid]);
-    this.map.fitBounds(bbox, {
-      padding: '100'
-    });
-  }
+  ///////// CUSTOM MAPBOX CONTROL HANDLERS /////////
+
+
+
+  ///////// INTERNAL MAP EVENT HANDLERS /////////
 
   onMouseMove(e) {
     // queries fills and outlines because, at high zooms, outlines take up a 
@@ -112,6 +109,24 @@ export default class Map {
       this.zoomToFeatureExtentByGeoID(geoid);
     }
   }
+
+  ///////// MAJOR UTILS /////////
+
+  zoomToDataExtent() {
+    const bbox = turf.bbox(window.geojson);
+    this.map.fitBounds(bbox, {
+      padding: '35'
+    });
+  }
+
+  zoomToFeatureExtentByGeoID(geoid) {
+    const bbox = turf.bbox(window.geojsonLookup[geoid]);
+    this.map.fitBounds(bbox, {
+      padding: '100'
+    });
+  }
+
+  ///////// DRAWING AND UNDRAWING /////////
 
   drawLayers(geojsonTilesets) {
     // add all tilesets

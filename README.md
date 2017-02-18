@@ -1,2 +1,1 @@
-duplicating via this guide:
-https://geekforum.wordpress.com/2015/02/25/move-git-repository-to-new-server/
+This is a simple starting point for a Mapbox App with a vanilla Map.jsx and a React User Interface Overlay.

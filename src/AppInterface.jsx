@@ -1,6 +1,7 @@
 import './AppInterface.styl';
 import React from 'react';
 import MainLoadingPane from './components/loadingPanes/MainLoadingPane.jsx';
+import Sidebar from './components/sidebar/Sidebar.jsx';
 
 import { VelocityTransitionGroup } from 'velocity-react';
 
@@ -32,6 +33,7 @@ class AppInterface extends React.Component {
               : (<MainLoadingPane />) 
             }
         </VelocityTransitionGroup>
+        <Sidebar />
       </div>
     );
   }

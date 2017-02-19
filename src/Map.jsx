@@ -39,6 +39,10 @@ export default class Map {
     if (!this.controlsLoaded) {
       // ZOOM CONTROLS
       this.map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+      // var geocoder = new mapboxgl.MapboxGeocoder({
+      //   accessToken: mapboxgl.accessToken
+      // });
+      // this.map.addControl(geocoder);
     }
     this.controlsLoaded = true;
   }

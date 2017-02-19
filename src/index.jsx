@@ -8,7 +8,7 @@ import Map from './Map.jsx';
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 // import local data for now, later this should be pulled from the tilesets group from online using the mapbox dataset API
-import localDataExample from './data/localDataExample.json'
+import gj from './data/boston_data_4326_clean.json'
 
 const geojsonTilesets = [{
     name: 'title1',

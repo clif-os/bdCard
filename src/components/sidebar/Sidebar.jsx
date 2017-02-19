@@ -20,7 +20,6 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    console.log('uhhhh')
     return (
       <div className="sidebar">
         <NavBar handleClick={this.handleNavBarClick}/>
@@ -32,7 +31,6 @@ class Sidebar extends React.Component {
   renderActivePane(){
     switch(this.state.activePane){
       case'home':
-        console.log('home')
         return <HomePane />;
       case 'analysis':
         return <AnalysisPane/>;

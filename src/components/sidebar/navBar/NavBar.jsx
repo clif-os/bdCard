@@ -12,15 +12,16 @@ class NavBar extends React.Component {
   }
 
   handleClick(id){
-    console.log('settting activeButtonId to ' + id);
-    this.setState({
-      activeButtonId: id
-    });
-    if (id === 'navButtonHome'){
-      this.props.handleClick('home');
-    } else if (id === 'navButtonSliders'){
-      this.props.handleClick('analysis');
-    };
+    if (id !== this.state.activeButtonId){
+      this.setState({
+        activeButtonId: id
+      });
+      if (id === 'navButtonHome'){
+        this.props.handleClick('home');
+      } else if (id === 'navButtonSliders'){
+        this.props.handleClick('analysis');
+      };
+    }
   }
 
   render() {

@@ -1,4 +1,5 @@
 .navBarButton{
+  position: relative;
   height: 36px;
   width: 36px;
   text-align: center;
@@ -8,7 +9,47 @@
 }
 .navBarButton-active{
   color: white;
+  .hoverBox{
+    background-color: rgba(255,255,255,0);
+  }
+  .activeBar{
+    height: 100%;
+  }
 }
 .navBarButton-inactive{
-  color: rgba(255,255,255,.8)
+  color: rgba(255,255,255,.8);
+  .hoverBox{
+    background-color: rgba(255,255,255,0);
+    &:hover{
+      background-color: rgba(255,255,255,.15);
+    }
+  }
+  .activeBar{
+    height: 0%
+  }
+}
+.hoverBox{
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  width: calc(100% - 8px);
+  border-radius: 4px;
+  transition-duration: .2s
+}
+.activeBarContainer{
+  position: absolute;
+  top: 2px;
+  right: 0px;
+  height: calc(100% - 4px);
+  width: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+.activeBar{
+  width: 100%
+  border-radius: 2px;
+  background-color: #FFB74D;
+  transition-duration: .2s;
 }

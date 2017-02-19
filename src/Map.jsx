@@ -17,7 +17,8 @@ export default class Map {
         [-71.57730000000001, 42.09960000000001],
         [-70.52729999999997, 42.61038972219174]
       ],
-      zoom: 10.27
+      zoom: 10.27,
+      attributionControl: false
     });
     this.map.boxZoom.disable();
     this.geojsonTilesets;
@@ -37,9 +38,7 @@ export default class Map {
   addControls() {
     if (!this.controlsLoaded) {
       // ZOOM CONTROLS
-      this.map.addControl(new mapboxgl.NavigationControl({
-        position: 'top-right'
-      }));
+      this.map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     }
     this.controlsLoaded = true;
   }
@@ -47,12 +46,10 @@ export default class Map {
   ///////// BIND EVENTS /////////
 
   bindEvents() {
+    //// internal map event handlers ////
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
-    // document.addEventListener('YEAR_SWITCH', this.switchYear.bind(this));
-    // document.addEventListener('FIELD_SWITCH', this.switchField.bind(this));
-    // document.addEventListener('RESET_BOUNDS', this.zoomToDataExtent.bind(this));
-    // document.addEventListener('ZOOM_TO_FEATURE', this.zoomToFeatureExtentByWindow.bind(this));
+    this.map.on('load', this.onMapLoaded.bind(this));
   }
 
   ///////// CUSTOM MAPBOX CONTROL HANDLERS /////////
@@ -231,4 +228,19 @@ export default class Map {
 
     this.firstDraw = false;
   }
+
+  ///////// MISCELANEOUS UTILS /////////
+  consoleLogMapInfo() {
+    console.log("ZOOM LEVEL: " + this.map.getZoom());
+    console.log("CENTER: " + this.map.getCenter());
+    console.log("BOUNDS: " + this.map.getBounds());
+  }
+
+  ///////// COMMUNICATE MAP LOADED /////////
+  onMapLoaded() {
+    const evt = new CustomEvent('MAP_LOADED')
+    document.dispatchEvent(evt);
+    this.mapLoaded = true
+  }
+
 }

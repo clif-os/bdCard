@@ -1,1 +1,3 @@
-This is a simple starting point for a Mapbox App with a vanilla Map.jsx and a React User Interface Overlay.
+# Boston Neighborhood Mapping Project
+Web application for viewing and interacting with gentrification data in the greater boston area.
+- see project structure for application requirements

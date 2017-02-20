@@ -33,7 +33,7 @@ const geojsonTilesets = [{
 window.geojsonLookup = convertGeojsonToLookup(gj);
 window.geojson = gj;
 // empty window object for making selections
-window.selectedFeature = {};
+window.selectedFeature = null;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
 const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"; //light style

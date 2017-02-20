@@ -3,16 +3,15 @@ import './NavBarButton.styl'
 
 function NavBarButton(props) {
   const classNameNavBarButton = 'navBarButton navBarButton-' + (props.active ? 'active' : 'inactive');
-  const classNameActiveBar = 'activeBar activeBar-' + (props.active ? 'active' : 'inactive');
   const onClick = () => {
     props.handleClick(props.id);
   };
   return (
-    <div className={classNameNavBarButton} onClick={onClick}>
+    <div className={classNameNavBarButton} id={props.id} onClick={onClick} data-tip={props.title}>
       <span className={props.icon} />
       <div className='hoverBox' />
       <div className='activeBarContainer'>
-        <div className={classNameActiveBar}/>
+        <div className='activeBar'/>
       </div>
     </div>
   );

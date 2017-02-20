@@ -5,6 +5,7 @@ export const filterInProperties = (properties, fieldsIn) => {
   })
   return newProperties;
 };
+
 export const filterOutProperties = (properties, fieldsOut) => {
   var newProperties = {};
   Object.keys(properties).forEach(property => {
@@ -24,7 +25,7 @@ export const convertGeojsonToLookup = geojson => {
   return geojsonLookupByID
 }
 
-export var geojsonEmpty = {
+export var geojsonNull = {
   type: 'FeatureCollection',
   features: [{
     type: 'Feature',

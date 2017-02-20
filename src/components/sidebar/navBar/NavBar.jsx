@@ -1,6 +1,7 @@
 import './NavBar.styl';
 import React from 'react';
 import NavBarButton from './NavBarButton.jsx';
+import ReactTooltip from 'react-tooltip';
 
 class NavBar extends React.Component {
   constructor(props){
@@ -27,8 +28,9 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="navBar">
-        <NavBarButton id='navButtonHome' icon='fa fa-home' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonHome'} />
-        <NavBarButton id='navButtonSliders' icon='fa fa-sliders' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonSliders'} />
+        <NavBarButton id='navButtonHome' title='Home' icon='fa fa-home' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonHome'} />
+        <NavBarButton id='navButtonSliders' title='Analysis' icon='fa fa-sliders' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonSliders'} />
+        <ReactTooltip type='info' effect='solid' className='navBarTooltips'/>
       </div>
     );
   }

@@ -1,9 +1,8 @@
 /* global mapboxgl, fetch, document */
 global.turf = require('turf');
 import './Map.styl';
-import {
-  geojsonEmpty
-} from './utils/geojsonUtils.jsx'
+import { geojsonNull } from './utils/geojsonUtils.jsx'
+import { buildPopupHTMLFromFeature } from './utils/mapboxUtils.jsx';
 
 export default class Map {
   constructor(geojsonTilesets, mapStyle) {
@@ -26,11 +25,10 @@ export default class Map {
     this.controlsLoaded = false;
     this.addControls();
     this.bindEvents();
-    // tried to bind all events but didn't work for some reason
     this.map.on('style.load', () => {
       this.drawLayers(geojsonTilesets);
-      this.map.on('mousemove', this.onMouseMove.bind(this));
     });
+    this.popups = [];
   }
 
   ///////// ADD CONTROLS /////////
@@ -51,6 +49,7 @@ export default class Map {
 
   bindEvents() {
     //// internal map event handlers ////
+    this.map.on('mousemove', this.onMouseMove.bind(this));
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
     this.map.on('load', this.onMapLoaded.bind(this));
@@ -69,12 +68,10 @@ export default class Map {
       layers: window.drawnLayers
     });
     if (features.length) {
-      const geoid = features[0].properties.GEOID;
-      this.map.getCanvas().style.cursor = 'pointer'
-      this.map.getSource('hover').setData(window.geojsonLookup[geoid]);
+      const id = features[0].properties.GEOID;
+      this.hoverFeature(id);
     } else {
-      this.map.getCanvas().style.cursor = '';
-      this.map.getSource('hover').setData(geojsonEmpty);
+      this.unhoverFeature();
     }
   }
 
@@ -85,18 +82,10 @@ export default class Map {
     // console.log("ZOOM LEVEL: " + this.map.getZoom());
     // console.log(this.map.getBounds());
     if (features.length) {
-      const geoid = features[0].properties.GEOID;
-      this.map.getSource('selected').setData(window.geojsonLookup[geoid]);
-      window.selectedFeature = window.geojsonLookup[geoid];
-      console.log('SELECTED FEATURE:', selectedFeature)
-      // const evt = new CustomEvent('FEATURE_CLICKED');
-      // document.dispatchEvent(evt);
+      const id = features[0].properties.GEOID;
+      this.selectFeature(id, e);
     } else {
-      window.selectedFeature = {};
-      this.map.getSource('selected').setData(geojsonEmpty);
-      console.log('NO FEATURES SELECTED')
-      // const evt = new CustomEvent('NONFEATURE_CLICKED');
-      // document.dispatchEvent(evt);
+      this.deselectFeature();
     }
   }
 
@@ -106,8 +95,8 @@ export default class Map {
     });
     // console.log("DOUBLE CLICK")
     if (features.length) {
-      const geoid = features[0].properties.GEOID;
-      this.zoomToFeatureExtentByGeoID(geoid);
+      const id = features[0].properties.GEOID;
+      this.zoomToFeatureExtentById(id);
     }
   }
 
@@ -120,11 +109,53 @@ export default class Map {
     });
   }
 
-  zoomToFeatureExtentByGeoID(geoid) {
-    const bbox = turf.bbox(window.geojsonLookup[geoid]);
+  zoomToFeatureExtentById(id) {
+    const bbox = turf.bbox(window.geojsonLookup[id]);
     this.map.fitBounds(bbox, {
       padding: '100'
     });
+  }
+
+  hoverFeature(id){
+    this.map.getCanvas().style.cursor = 'pointer'
+    this.map.getSource('hover').setData(window.geojsonLookup[id]);
+  }
+
+  unhoverFeature(id){
+    this.map.getCanvas().style.cursor = '';
+    this.map.getSource('hover').setData(geojsonNull);
+  }
+
+  selectFeature(id, e){
+    this.map.getSource('selected').setData(window.geojsonLookup[id]);
+    window.selectedFeature = window.geojsonLookup[id];
+    console.log('SELECTED FEATURE:', selectedFeature);
+    this.addSelectionPopup(window.selectedFeature, e);
+  }
+
+  addSelectionPopup(feature, e) {
+    const html = buildPopupHTMLFromFeature(feature);
+    if (this.popups.length > 0) {
+      this.removeAllSelectionPopups()
+    };
+    const selectionPopup = new mapboxgl.Popup()
+      .setLngLat(e.lngLat)
+      .setHTML(html)
+      .addTo(this.map);
+    this.popups.push(selectionPopup)
+  }
+
+  removeAllSelectionPopups() {
+    this.popups.forEach(popup => {
+      popup.remove();
+    })
+  }
+
+  deselectFeature() {
+    if (window.selectedFeature !== null) {
+      window.selectedFeature = null;
+      this.map.getSource('selected').setData(geojsonNull);
+    }
   }
 
   ///////// DRAWING AND UNDRAWING /////////
@@ -189,7 +220,7 @@ export default class Map {
     // add a dedicated source and layer to collect the currently hovered feature at all times
     this.map.addSource('hover', {
       type: 'geojson',
-      data: geojsonEmpty
+      data: geojsonNull
     });
     this.map.addLayer({
       id: 'polygon-hover',
@@ -204,7 +235,7 @@ export default class Map {
     // add a dedicated source and layer to collect the currently selected feature at all times
     this.map.addSource('selected', {
       type: 'geojson',
-      data: geojsonEmpty
+      data: geojsonNull
     });
     this.map.addLayer({
       id: 'polygon-selected',

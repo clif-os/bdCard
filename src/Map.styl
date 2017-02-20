@@ -4,21 +4,22 @@
   left: 336px;
   width: calc(100vw - 336px);
 }
-
 .mapboxgl-popup-content {
-  height: 140px;
   padding: 5px;
+  .mapboxgl-popup-close-button{
+    z-index: 100;
+  }
   .selection {
     position: relative;
-    height: 30px;
+    display: block;
     .selectionTitle {
       margin-left: 3px;
       position: relative;
       vertical-align: middle;
       line-height: 30px;
-      font-weight: 525;
+      font-weight: 575;
       font-size: 10pt;
-      color: rgb(20, 20, 20);
+      color: rgb(10, 10, 10);
     }
     .tableContainer{
       height: 100px;
@@ -30,9 +31,11 @@
           padding: 2px;
           height: 25px;
           .span-property{
-            color: rgb(20,20,20);
+            font-weight: 400;
+            color: rgb(10,10,10);
           }
           .span-value{
+            font-weight: 200;
             color: rgb(35,35,35);
           }
         }

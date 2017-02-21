@@ -1,0 +1,47 @@
+.header{
+  border-bottom: 2px solid #0A83C9;
+  height: 27px;
+  .header-title{
+    font-size: 14pt;
+    font-weight: 600;
+    color: #0A83C9;
+    line-height: 27px;
+    .fa-filter{
+      margin-left: 10px;
+    }
+    .addFilterButton{
+      height: 22.5px;
+      width: 22.5px;
+      border-radius: 100%;
+      float: right;
+      background-color: #0A83C9;
+      box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      line-height: 22.5px;
+      margin-bottom: 3px;
+      cursor: pointer;
+      transition-duration: .2s;
+      .fa-plus{
+        margin-left: 0px;
+        float: none;
+        color: white;
+        font-size: 12pt;
+      }
+      &:hover{
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+.filtersContainer{
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.addFilterTooltip{
+  padding: 4px!important;
+  font-size: 11pt!important;
+  font-weight: 300;
+  // background-color: rgba(10,131,201, .9)!important;
+}

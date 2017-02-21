@@ -30,7 +30,7 @@ class NavBar extends React.Component {
       <div className="navBar">
         <NavBarButton id='navButtonHome' title='Home' icon='fa fa-home' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonHome'} />
         <NavBarButton id='navButtonSliders' title='Analysis' icon='fa fa-sliders' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonSliders'} />
-        <ReactTooltip type='info' effect='solid' className='navBarTooltips'/>
+        <ReactTooltip id='navBarTooltip' type='info' effect='solid' className='navBarTooltip' offset="{'left': 5}"/>
       </div>
     );
   }

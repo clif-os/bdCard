@@ -7,7 +7,7 @@ function NavBarButton(props) {
     props.handleClick(props.id);
   };
   return (
-    <div className={classNameNavBarButton} id={props.id} onClick={onClick} data-tip={props.title}>
+    <div className={classNameNavBarButton} id={props.id} onClick={onClick} data-tip={props.title} data-for='navBarTooltip'>
       <span className={props.icon} />
       <div className='hoverBox' />
       <div className='activeBarContainer'>

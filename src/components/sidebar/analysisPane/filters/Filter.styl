@@ -1,0 +1,52 @@
+.filter{
+  height: 100px;
+  width: 260px;
+  margin-top: 5px;
+  background-color: #F7F7F7;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  .filterSection{
+    width: 100%;
+    height: calc(100% / 3);
+    border: 1px solid rgba(255,0,0,.3);
+    padding: 2px;
+    .filterSection-title{
+      display: inline-block;
+      position: relative;
+      top: 15%;
+    }
+  }
+  .titleAndControls{
+    .titleInput{
+      background-color: rgba(255,255,255,0);
+      border: none;
+      border-bottom: 1px solid rgb(150,150,150);
+      height: 100%;
+      color: rgb(20,20,20);
+      padding: 3px;
+    }
+    .onOffSlider{
+      float: right;
+      margin-right: 10px;
+    }
+    .removeFilterButton{
+      height: 100%;
+      line-height: 100%;
+      text-align: center;
+      float: right;
+      .fa-trash{
+        font-size: 13.5pt;
+        color: rgb(20,20,20);
+        transition-duration: .1s;
+        top: 19%;
+        position: relative;
+        margin-right: 4px;
+        cursor: pointer;
+      }
+      &:hover{
+        .fa-trash{
+          color: tomato;
+        }
+      }
+    }
+  }
+}

@@ -36,7 +36,8 @@ window.geojson = gj;
 window.selectedFeature = null;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2FtcC1hbW9zIiwiYSI6ImNpcjg0cTJvMzAweThnZG5rY2Znazhnc2kifQ.jLCXm1LQmHyDC2RaFTBJNA';
-const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"; //light style
+const mapStyle = 'mapbox://styles/mapbox/outdoors-v9' //outdoors style
+// const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"; //light style
 // const mapStyle = "mapbox://styles/camp-amos/cirmc9juf002hg1nboacfr7u9"; // dark style
 
 const m = new Map(geojsonTilesets, mapStyle);

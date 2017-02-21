@@ -1,18 +1,23 @@
 .filter{
-  height: 100px;
-  width: 260px;
+  height: 108px;
+  width: 95%;
   margin-top: 5px;
   background-color: #F7F7F7;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
   .filterSection{
     width: 100%;
-    height: calc(100% / 3);
-    border: 1px solid rgba(255,0,0,.3);
+    height: 33px;
+    border: 1px solid rgba(255,0,0,.1);
     padding: 2px;
     .filterSection-title{
-      display: inline-block;
+      display: block;
       position: relative;
-      top: 15%;
+      top: 50%;
+      float: left;
+      color: rgb(20,20,20)
+      font-weight: 550;
+      margin-top: -10px;
+      margin-right: 2.5px;
     }
   }
   .titleAndControls{
@@ -23,6 +28,7 @@
       height: 100%;
       color: rgb(20,20,20);
       padding: 3px;
+      width: 60%;
     }
     .onOffSlider{
       float: right;
@@ -35,7 +41,7 @@
       float: right;
       .fa-trash{
         font-size: 13.5pt;
-        color: rgb(20,20,20);
+        color: rgb(40,40,40);
         transition-duration: .1s;
         top: 19%;
         position: relative;
@@ -47,6 +53,25 @@
           color: tomato;
         }
       }
+    }
+  }
+  .fieldSelector{
+    height: 42px;
+    .select{
+      // height: 80%;
+      display: block;
+      float: left;
+      // float: left;
+      // max-height: 100px;
+      // overflow-y: scroll;
+    }
+    .select-field{
+      width: calc(100% - 37px - 70px - 12.5px);
+      margin-left: 5px;
+    }
+    .select-year{
+      width: 70px;
+      margin-left: 5px;
     }
   }
 }

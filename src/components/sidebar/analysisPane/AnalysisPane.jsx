@@ -1,4 +1,5 @@
 import './AnalysisPane.styl';
+import 'react-select/dist/react-select.css';
 import React from 'react';
 import FiltersSection from './filters/FiltersSection.jsx';
 

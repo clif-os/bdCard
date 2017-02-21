@@ -4,6 +4,7 @@ import ReactTooltip from 'react-tooltip';
 import OnOffSlider from '../commonComponents/OnOffSlider.jsx';
 import Select from 'react-select';
 
+// COMPONENT MEMORY
 const memory = {
   titleValues: {
 
@@ -35,6 +36,10 @@ class Filter extends React.Component {
     this.handleYearSelection = this.handleYearSelection.bind(this);
   }
 
+  componentDidUpdate(){
+    console.log(memory);
+  }
+
   handleTitleChange(e){
     memory.titleValues[this.props.id] = e.target.value;
     this.setState({
@@ -49,8 +54,11 @@ class Filter extends React.Component {
     });
   }
 
-  handleRemoveFilter(){
-    console.log('handling remove filter');
+  handleRemoveFilter(e){
+    // SCRAPE FILTER ID FROM REMOVE FILTER BUTTON ID
+    const filterId = e.target.id.slice(e.target.id.indexOf('-') + 1);
+    console.log(filterId);
+    this.props.handleRemoveFilter(filterId);
   }
 
   handleFieldSelection(val){
@@ -69,11 +77,11 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <div className="filter">
+      <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
           <input type='text' className='titleInput' value={this.state.titleValue} onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
           <div className='removeFilterButton'>
-            <span className='fa fa-trash' onClick={this.handleRemoveFilter} />
+            <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>
           <OnOffSlider active={this.state.onOffValue} handleFilterOnOff={this.handleFilterOnOff} />
         </div>

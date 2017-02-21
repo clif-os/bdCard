@@ -7,7 +7,7 @@
   .filterSection{
     width: 100%;
     height: 33px;
-    border: 1px solid rgba(255,0,0,.1);
+    // border: 1px solid rgba(255,0,0,.1);
     padding: 2px;
     .filterSection-title{
       display: block;
@@ -17,6 +17,7 @@
       color: rgb(20,20,20)
       font-weight: 550;
       margin-top: -10px;
+      margin-left: 2.5px;
       margin-right: 2.5px;
     }
   }
@@ -24,11 +25,15 @@
     .titleInput{
       background-color: rgba(255,255,255,0);
       border: none;
-      border-bottom: 1px solid rgb(150,150,150);
+      border-bottom: 1px solid rgb(200,200,200);
       height: 100%;
       color: rgb(20,20,20);
       padding: 3px;
       width: 60%;
+      font-style: italic;
+      &:focus{
+        border-bottom: 1px solid rgb(150,150,150);
+      }
     }
     .onOffSlider{
       float: right;
@@ -41,7 +46,7 @@
       float: right;
       .fa-trash{
         font-size: 13.5pt;
-        color: rgb(40,40,40);
+        color: rgb(80,80,80);
         transition-duration: .1s;
         top: 19%;
         position: relative;
@@ -66,7 +71,7 @@
       // overflow-y: scroll;
     }
     .select-field{
-      width: calc(100% - 37px - 70px - 12.5px);
+      width: calc(100% - 37px - 70px - 18px);
       margin-left: 5px;
     }
     .select-year{

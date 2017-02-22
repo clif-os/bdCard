@@ -3,31 +3,34 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import OnOffSlider from '../commonComponents/OnOffSlider.jsx';
 import Select from 'react-select';
+const Slider = require('rc-slider');
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Range = createSliderWithTooltip(Slider.Range);
+import 'rc-slider/assets/index.css';
 
 // COMPONENT MEMORY
-const memory = {
-  titleValues: {
-
-  },
-  onOffValues: {
-
-  },
-  fieldValues: {
-
-  },
-  yearValues: {
-
-  }
-}
+const memory = {}
 
 class Filter extends React.Component {
   constructor(props){
     super();
-    this.state = {
-      titleValue: memory.titleValues[props.id] !== undefined ? memory.titleValues[props.id] : '',
-      onOffValue: memory.onOffValues[props.id] !== undefined ? memory.onOffValues[props.id] : true,
-      fieldValue: memory.fieldValues[props.id] !== undefined ? memory.fieldValues[props.id] : props.fields[0].value,
-      yearValue: memory.yearValues[props.id] !== undefined ? memory.yearValues[props.id] : props.years[0].value
+    console.log('incoming props to the filter component ', props.id);
+    console.log()
+    if (memory[props.id] !== undefined){
+      console.log('incoming filter id exists in memory state as: ', memory[props.id]);
+      this.state = memory[props.id]
+    } else {
+      console.log('incoming filter id does not exist in memory, setting to default memory state');
+      var defaultMemory = {
+        titleValue: '',
+        onOffValue: true,
+        fieldValue: props.fields[0].value,
+        yearValue: props.years[0].value
+      }
+      // SET THE MEMORY
+      memory[props.id] = defaultMemory;
+      // SET THE COMPONENT STATE
+      this.state = defaultMemory;
     }
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleFilterOnOff = this.handleFilterOnOff.bind(this);
@@ -36,21 +39,41 @@ class Filter extends React.Component {
     this.handleYearSelection = this.handleYearSelection.bind(this);
   }
 
+  componentDidMount(){
+    console.log('componentDidMount');
+    this.props.updateFilterSettingsMemory(this.props.id, this.state);
+  }
+
   componentDidUpdate(){
-    console.log(memory);
+    console.log('updating filter memory');
+    this.props.updateFilterSettingsMemory(this.props.id, this.state);
   }
 
   handleTitleChange(e){
-    memory.titleValues[this.props.id] = e.target.value;
+    memory[this.props.id].titleValue = e.target.value;
     this.setState({
-      titleValue: e.target.value 
+      titleValue: e.target.value
     });
   }
 
-  handleFilterOnOff(){
-    memory.onOffValues[this.props.id] = !this.state.onOffValue;
+  handleFilterOnOff(ref){
+    memory[this.props.id].onOffValue = !memory[this.props.id].onOffValue
     this.setState({
-      onOffValue: !this.onOffValue
+      onOffValue: memory[this.props.id].onOffValue
+    });
+  }
+
+  handleFieldSelection(val){
+    memory[this.props.id].fieldValue = val
+    this.setState({
+      fieldValue: val
+    });
+  }
+
+  handleYearSelection(val){
+    memory[this.props.id].yearValue = val
+    this.setState({
+      yearValue: val
     });
   }
 
@@ -61,36 +84,22 @@ class Filter extends React.Component {
     this.props.handleRemoveFilter(filterId);
   }
 
-  handleFieldSelection(val){
-    memory.fieldValues[this.props.id] = val;
-    this.setState({
-      fieldValue: val
-    });
-  }
-
-  handleYearSelection(val){
-    memory.yearValues[this.props.id] = val;
-    this.setState({
-      yearValue: val
-    });
-  }
-
   render() {
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
-          <input type='text' className='titleInput' value={this.state.titleValue} onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
+          <input type='text' className='titleInput' value={memory[this.props.id].titleValue} onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
           <div className='removeFilterButton'>
             <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>
-          <OnOffSlider active={this.state.onOffValue} handleFilterOnOff={this.handleFilterOnOff} />
+          <OnOffSlider active={memory[this.props.id].onOffValue} handleFilterOnOff={this.handleFilterOnOff} />
         </div>
         <div className='fieldSelector filterSection'>
           <span className='filterSection-title'>Field:</span>
           <Select
             className='select-field select'
             name="Select Field"
-            value={this.state.fieldValue}
+            value={memory[this.props.id].fieldValue}
             options={this.props.fields}
             onChange={this.handleFieldSelection}
             clearable={false}
@@ -98,7 +107,7 @@ class Filter extends React.Component {
           <Select
             className='select-year select'
             name="Select Year"
-            value={this.state.yearValue}
+            value={memory[this.props.id].yearValue}
             options={this.props.years}
             onChange={this.handleYearSelection}
             clearable={false}
@@ -106,6 +115,9 @@ class Filter extends React.Component {
         </div>
         <div className='rangeSelector filterSection'>
           <span className='filterSection-title'>Range:</span>
+          <div className='sliderContainer'>
+            <Range className='slider' />
+          </div>
         </div>
       </div>
     );

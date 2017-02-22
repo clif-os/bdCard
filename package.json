@@ -26,6 +26,7 @@
     "fs": "0.0.1-security",
     "mapbox-gl": "^0.28.0",
     "net": "^1.0.2",
+    "rc-slider": "^6.1.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-select": "^1.0.0-rc.3",

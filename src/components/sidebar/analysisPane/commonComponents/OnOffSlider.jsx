@@ -1,31 +1,18 @@
 import React from 'react';
 import './OnOffSlider.styl'
+import { guid } from '../../../../utils/generalUtils.jsx';
 
-class OnOffSlider extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      on: props.active !== undefined ? props.active : true
-    }
-    this.handleClick = this.handleClick.bind(this);
+function OnOffSlider (props) {
+  const handleClick = () => {
+    props.handleFilterOnOff();
   }
-
-  handleClick(){
-    this.setState({
-      on: !this.state.on
-    });
-    this.props.handleFilterOnOff();
-  }
-
-  render() {
-    return (
-      <div className={'onOffSlider onOffSlider-' + (this.state.on ? 'on' : 'off')}>
-        <div className='slidingContainer' onClick={this.handleClick}>
-          <div className='slidingBead'/>
-        </div>
+  return (
+    <div className={'onOffSlider onOffSlider-' + (props.active ? 'on' : 'off')}>
+      <div className='slidingContainer' onClick={handleClick}>
+        <div className='slidingBead'/>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default OnOffSlider;

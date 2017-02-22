@@ -1,6 +1,7 @@
 import './FiltersSection.styl';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
+import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 
@@ -17,43 +18,46 @@ const fakeYears=[
 ];
 
 // COMPONENT MEMORY
-const memory = {
-  filterIds: []
+var memory = {
+  filterSettings: {}
 }
 
 class FiltersSection extends React.Component {
   constructor(props){
     super();
+    
     this.state = {
-      activeFilterIds: memory.filterIds
+      filterIds: Object.keys(memory.filterSettings)
     }
     this.handleAddFilter = this.handleAddFilter.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.spinAddFilterButton = this.spinAddFilterButton.bind(this);
+    this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
   }
   
   componentDidUpdate(){
-    memory.filterIds = this.state.activeFilterIds;
   }
 
   handleAddFilter(){
-    var activeFilterIds = this.state.activeFilterIds;
-    if (this.state.activeFilterIds.length < 3){
+    var filterIds = this.state.filterIds;
+    if (this.state.filterIds.length < 3){
       // ADD A NEW FILTER TO THE STATE'S LIST
       const newFilterId = guid();
-      activeFilterIds.push(newFilterId);
+      filterIds.push(newFilterId);
       this.setState({
-        activeFilterIds: activeFilterIds
+        filterIds: filterIds,
+        activeFilters: {}
       });
       this.spinAddFilterButton('right');
     }
   }
 
   handleRemoveFilter(filterId){
-    var activeFilterIds = this.state.activeFilterIds;
-    activeFilterIds.splice(activeFilterIds.indexOf(filterId), 1);
+    var filterIds = this.state.filterIds;
+    filterIds.splice(filterIds.indexOf(filterId), 1);
+    delete memory.filterSettings[filterId];
     this.setState({
-      activeFilterIds: activeFilterIds
+      filterIds: filterIds
     });
     this.spinAddFilterButton('left');
   }
@@ -75,13 +79,18 @@ class FiltersSection extends React.Component {
     }
   }
 
+  updateFilterSettingsMemory(filterId, filterState){
+    memory.filterSettings[filterId] = filterState;
+    console.log('memory:', memory);
+  }
+
   render() {
     return (
       <div className="filtersSection section">
         <div className='header'>
           <span className='header-title'>
             Filters<span className='fa fa-filter'/>
-            <div className={'addFilterButton addFilterButton-' + (this.state.activeFilterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
+            <div className={'addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
               <div className='faPlusRotator' ref='faPlusRotator'>
                 <span className='fa fa-plus'/>
               </div>
@@ -89,7 +98,11 @@ class FiltersSection extends React.Component {
           </span>
         </div>
         <div className='filtersContainer'>
-          {this.renderFilterNodes(this.state.activeFilterIds)}
+          {this.renderFilterNodes(this.state.filterIds)}
+          {this.state.filterIds.length === 0
+            ? <div className='noFiltersMessage-container'><span className='noFiltersMessage'>No Filters Active</span></div>
+            : null
+          }
         </div>
       </div>
     );
@@ -97,8 +110,9 @@ class FiltersSection extends React.Component {
 
   renderFilterNodes(filterIds){
     const filterNodes = filterIds.map((filterId, i) => {
+      console.log('filter nodes rendering: ', filterId)
       return(
-        <Filter key={i} id={filterId} fields={fakeFields} years={fakeYears} handleRemoveFilter={this.handleRemoveFilter} />
+        <Filter key={i} id={filterId} ref={filterId} fields={fakeFields} years={fakeYears} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} />
       )
     });
     return filterNodes;

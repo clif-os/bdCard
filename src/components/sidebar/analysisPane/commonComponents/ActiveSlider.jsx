@@ -1,13 +1,13 @@
 import React from 'react';
-import './OnOffSlider.styl'
+import './ActiveSlider.styl'
 import { guid } from '../../../../utils/generalUtils.jsx';
 
-function OnOffSlider (props) {
+function ActiveSlider (props) {
   const handleClick = () => {
-    props.handleFilterOnOff();
+    props.handleFilterActiveToggle();
   }
   return (
-    <div className={'onOffSlider onOffSlider-' + (props.active ? 'on' : 'off')}>
+    <div className={'activeSlider activeSlider-' + props.active}>
       <div className='slidingContainer' onClick={handleClick}>
         <div className='slidingBead'/>
       </div>
@@ -15,4 +15,4 @@ function OnOffSlider (props) {
   );
 }
 
-export default OnOffSlider;
+export default ActiveSlider;

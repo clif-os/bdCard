@@ -1,12 +1,14 @@
 import './Filter.styl';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
-import OnOffSlider from '../commonComponents/OnOffSlider.jsx';
+import ActiveSlider from '../commonComponents/ActiveSlider.jsx';
 import Select from 'react-select';
 const Slider = require('rc-slider');
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 import 'rc-slider/assets/index.css';
+
+import { validateTitle } from './filterValidators.jsx'
 
 // COMPONENT MEMORY
 const memory = {}
@@ -23,9 +25,10 @@ class Filter extends React.Component {
       console.log('incoming filter id does not exist in memory, setting to default memory state');
       var defaultMemory = {
         titleValue: '',
-        onOffValue: true,
+        filterActive: true,
         fieldValue: props.fields[0].value,
-        yearValue: props.years[0].value
+        yearValue: props.years[0].value,
+        filterValid: false
       }
       // SET THE MEMORY
       memory[props.id] = defaultMemory;
@@ -33,7 +36,7 @@ class Filter extends React.Component {
       this.state = defaultMemory;
     }
     this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleFilterOnOff = this.handleFilterOnOff.bind(this);
+    this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
     this.handleYearSelection = this.handleYearSelection.bind(this);
@@ -50,16 +53,18 @@ class Filter extends React.Component {
   }
 
   handleTitleChange(e){
-    memory[this.props.id].titleValue = e.target.value;
+    const title = e.target.value
+    memory[this.props.id].titleValue = title;
     this.setState({
-      titleValue: e.target.value
+      titleValue: title,
+      filterValid: validateTitle(title)
     });
   }
 
-  handleFilterOnOff(ref){
-    memory[this.props.id].onOffValue = !memory[this.props.id].onOffValue
+  handleFilterActiveToggle(ref){
+    memory[this.props.id].filterActive = !memory[this.props.id].filterActive
     this.setState({
-      onOffValue: memory[this.props.id].onOffValue
+      filterActive: memory[this.props.id].filterActive
     });
   }
 
@@ -92,7 +97,7 @@ class Filter extends React.Component {
           <div className='removeFilterButton'>
             <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>
-          <OnOffSlider active={memory[this.props.id].onOffValue} handleFilterOnOff={this.handleFilterOnOff} />
+          <ActiveSlider active={memory[this.props.id].filterActive} handleFilterActiveToggle={this.handleFilterActiveToggle} />
         </div>
         <div className='fieldSelector filterSection'>
           <span className='filterSection-title'>Field:</span>

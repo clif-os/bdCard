@@ -124,7 +124,7 @@ class Filter extends React.Component {
             <Range className='slider' />
           </div>
         </div>
-        <div className={'validationBar validationBar-' + this.state.filterValid} />
+        <div className={'validationBar validationBar-' + (this.state.filterValid && this.state.filterActive)} />
       </div>
     );
   }

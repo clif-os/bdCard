@@ -110,9 +110,10 @@ class FiltersSection extends React.Component {
 
   renderFilterNodes(filterIds){
     const filterNodes = filterIds.map((filterId, i) => {
-      console.log('filter nodes rendering: ', filterId)
+      // eventually once debugging is completed, renderOrder should be used to be the placeholder for the filter titles
+      const renderOrder = i + 1
       return(
-        <Filter key={i} id={filterId} ref={filterId} fields={fakeFields} years={fakeYears} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} />
+        <Filter key={i} id={filterId} ref={filterId} fields={fakeFields} years={fakeYears} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} />
       )
     });
     return filterNodes;

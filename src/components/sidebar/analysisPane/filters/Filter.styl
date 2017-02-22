@@ -1,9 +1,18 @@
 .filter{
   height: 108px;
-  width: 95%;
+  position: relative;
+  width: calc(95% + 4px);
+  padding-right: 4px;
   margin-top: 5px;
-  background-color: #F7F7F7;
+  background-color: rgb(250,250,250);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  border-top: .5px solid rgb(200,200,200);
+  border-left: .5px solid rgb(200,200,200);
+  transition-duration: .08s;
+  transition-timing-function: linear;
+  &:hover{
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  }
   .filterSection{
     width: 100%;
     height: 33px;
@@ -99,5 +108,19 @@
         }
       }
     }
+  }
+  .validationBar{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 4px;
+    height: 100%;
+    opacity: .7;
+  }
+  .validationBar-true{
+    background-color: #81C784;
+  }
+  .validationBar-false{
+    background-color: tomato;
   }
 }

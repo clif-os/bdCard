@@ -4,12 +4,9 @@ import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
+import { convertPropsMetadataToDrodownObject } from './utils.jsx';
 
-// TEMP DATA
-const fakeFields= [];
-for (var i = 1; i < 52; i++){
-  fakeFields.push({value: 'longoptionnameasuh-' + i, label: 'Long Option Name Asuh ' + i});
-}
+// TMEP DATA
 const fakeYears=[
   {value: '1990', label: '1990'},
   {value: '2000', label: '2000'},
@@ -17,7 +14,7 @@ const fakeYears=[
   {value: '2014', label: '2014'}
 ];
 
-// COMPONENT MEMORY
+// FILTER MEMORY
 var memory = {
   filterSettings: {}
 }
@@ -25,7 +22,7 @@ var memory = {
 class FiltersSection extends React.Component {
   constructor(props){
     super();
-    
+    this.fields = convertPropsMetadataToDrodownObject(props.propsMd);
     this.state = {
       filterIds: Object.keys(memory.filterSettings)
     }
@@ -44,6 +41,7 @@ class FiltersSection extends React.Component {
       // ADD A NEW FILTER TO THE STATE'S LIST
       const newFilterId = guid();
       filterIds.push(newFilterId);
+      // memory.filterSettings[newFilterId] = defaultFilterSetting;
       this.setState({
         filterIds: filterIds,
         activeFilters: {}
@@ -81,7 +79,7 @@ class FiltersSection extends React.Component {
 
   updateFilterSettingsMemory(filterId, filterState){
     memory.filterSettings[filterId] = filterState;
-    console.log('memory:', memory);
+    console.log('UPDATED MEMORY:', memory);
   }
 
   render() {
@@ -112,8 +110,10 @@ class FiltersSection extends React.Component {
     const filterNodes = filterIds.map((filterId, i) => {
       // eventually once debugging is completed, renderOrder should be used to be the placeholder for the filter titles
       const renderOrder = i + 1
+      console.log("RENDERING: ", filterId);
+      console.log(memory.filterSettings[filterId])
       return(
-        <Filter key={i} id={filterId} ref={filterId} fields={fakeFields} years={fakeYears} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} />
+        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={this.fields} years={fakeYears} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} />
       )
     });
     return filterNodes;

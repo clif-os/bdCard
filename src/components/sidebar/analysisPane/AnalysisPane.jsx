@@ -11,7 +11,7 @@ class AnalysisPane extends React.Component {
   render() {
     return (
       <div className="analysisPane sidebarPane">
-        <FiltersSection />
+        <FiltersSection propsMd={this.props.propsMd} />
         
       </div>
     );

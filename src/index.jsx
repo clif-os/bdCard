@@ -11,21 +11,18 @@ import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 // import local data for now, later this should be pulled from the tilesets group from online using the mapbox dataset API
 // import gj from './data/boston_data_4326_clean.json'
-import gj from './data/boston_data_TEMP.json'
+// import gj from './data/boston_data_TEMP.json'
+import gj from './data/jchs-boston.json';
+import gjPropsMetadata from './data/boston_props_metadata.json';
 
 
 
-const geojsonTilesets = [{
-    name: 'title1',
-    sourceUrl: 'mapbox://chiefkleef.ciwsi0jvr00042zsajry2n8i5-76muo',
-    sourceLayer: 'TBF_TM_1990_norm'
-  },
+const geojsonTilesets = [
   {
-    name: 'title2',
-    sourceUrl: 'mapbox://chiefkleef.ciwsgz6s0142u30s5egh3z1u0-20lot',
-    sourceLayer: 'TBF_TM_all'
+    name: 'jchsBoston',
+    sourceUrl: 'mapbox://mimio.375tendc',
+    sourceLayer: 'jchs-boston-ba9eig'
   }
-  //etc
 ];
 
 // for selections, it can often be useful to make a lookup tranformation of the geojsons at hand
@@ -41,6 +38,6 @@ const mapStyle = 'mapbox://styles/mapbox/outdoors-v9' //outdoors style
 // const mapStyle = "mapbox://styles/camp-amos/cirmc9juf002hg1nboacfr7u9"; // dark style
 
 const m = new Map(geojsonTilesets, mapStyle);
-render( <AppInterface / > ,
+render( <AppInterface propsMd={gjPropsMetadata} / > ,
   document.getElementById('AppInterface')
 );

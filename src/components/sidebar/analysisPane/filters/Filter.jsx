@@ -10,51 +10,38 @@ import 'rc-slider/assets/index.css';
 
 import { validateTitle } from './filterValidators.jsx'
 
-// COMPONENT MEMORY
-const memory = {}
-
 class Filter extends React.Component {
   constructor(props){
     super();
-    console.log('incoming props to the filter component ', props.id);
-    console.log()
-    if (memory[props.id] !== undefined){
-      console.log('incoming filter id exists in memory state as: ', memory[props.id]);
-      this.state = memory[props.id]
+    const defaultFilterSetting = {
+      titleValue: '',
+      filterActive: true,
+      fieldValue: props.fields[0].value,
+      filterValid: false
+    }
+    if (props.memory === undefined){
+      this.state = defaultFilterSetting;  
     } else {
-      console.log('incoming filter id does not exist in memory, setting to default memory state');
-      var defaultMemory = {
-        titleValue: '',
-        filterActive: true,
-        fieldValue: props.fields[0].value,
-        yearValue: props.years[0].value,
-        filterValid: false
-      }
-      // SET THE MEMORY
-      memory[props.id] = defaultMemory;
-      // SET THE COMPONENT STATE
-      this.state = defaultMemory;
+      this.state = props.memory;  
     }
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
-    this.handleYearSelection = this.handleYearSelection.bind(this);
   }
 
   componentDidMount(){
-    console.log('componentDidMount');
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
   }
 
   componentDidUpdate(){
-    console.log('updating filter memory');
+    console.log('NEW FILTER STATE: ');
+    console.log(this.state);
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
   }
 
   handleTitleChange(e){
     const title = e.target.value
-    memory[this.props.id].titleValue = title;
     this.setState({
       titleValue: title,
       filterValid: validateTitle(title)
@@ -62,23 +49,14 @@ class Filter extends React.Component {
   }
 
   handleFilterActiveToggle(ref){
-    memory[this.props.id].filterActive = !memory[this.props.id].filterActive
     this.setState({
-      filterActive: memory[this.props.id].filterActive
+      filterActive: !this.state.filterActive
     });
   }
 
   handleFieldSelection(val){
-    memory[this.props.id].fieldValue = val
     this.setState({
       fieldValue: val
-    });
-  }
-
-  handleYearSelection(val){
-    memory[this.props.id].yearValue = val
-    this.setState({
-      yearValue: val
     });
   }
 
@@ -93,28 +71,20 @@ class Filter extends React.Component {
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
-          <input type='text' className='titleInput' value={memory[this.props.id].titleValue} onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
+          <input type='text' className='titleInput' value={this.state.titleValue} onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
           <div className='removeFilterButton'>
             <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>
-          <ActiveSlider active={memory[this.props.id].filterActive} handleFilterActiveToggle={this.handleFilterActiveToggle} />
+          <ActiveSlider active={this.state.filterActive} handleFilterActiveToggle={this.handleFilterActiveToggle} />
         </div>
         <div className='fieldSelector filterSection'>
           <span className='filterSection-title'>Field:</span>
           <Select
             className='select-field select'
             name="Select Field"
-            value={memory[this.props.id].fieldValue}
+            value={this.state.fieldValue}
             options={this.props.fields}
             onChange={this.handleFieldSelection}
-            clearable={false}
-          />
-          <Select
-            className='select-year select'
-            name="Select Year"
-            value={memory[this.props.id].yearValue}
-            options={this.props.years}
-            onChange={this.handleYearSelection}
             clearable={false}
           />
         </div>

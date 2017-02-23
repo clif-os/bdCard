@@ -33,7 +33,7 @@ class Sidebar extends React.Component {
       case'home':
         return <HomePane />;
       case 'analysis':
-        return <AnalysisPane/>;
+        return <AnalysisPane propsMd={this.props.propsMd} />;
       default:
         return <HomePane />;
     }

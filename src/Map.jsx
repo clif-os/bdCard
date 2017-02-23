@@ -16,7 +16,7 @@ export default class Map {
         [-71.57730000000001, 42.09960000000001],
         [-70.52729999999997, 42.61038972219174]
       ],
-      zoom: 10.27,
+      zoom: 10.00,
       attributionControl: false
     });
     this.map.boxZoom.disable();
@@ -84,8 +84,7 @@ export default class Map {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: window.drawnLayers
     });
-    // console.log("ZOOM LEVEL: " + this.map.getZoom());
-    // console.log(this.map.getBounds());
+    this.consoleLogMapInfo();
     if (features.length) {
       const id = features[0].properties.GEOID;
       this.selectFeature(id, e);

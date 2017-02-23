@@ -33,7 +33,7 @@ class AppInterface extends React.Component {
               : (<MainLoadingPane />) 
             }
         </VelocityTransitionGroup>
-        <Sidebar />
+        <Sidebar propsMd={this.props.propsMd} />
       </div>
     );
   }

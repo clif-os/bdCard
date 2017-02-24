@@ -7,11 +7,8 @@ import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
 const Range = Slider.Range;
 
-import { isSubRange, validateRangeInputValue } from './filterValidators.jsx'
-
-function dollarFormatter(v) {
-  return '$' + v;
-}
+import { isSubRange, validateRangeInputValue } from './filterValidators.jsx';
+import { dollarFormatter, stripDollarFormat } from '../../../../utils/generalUtils.jsx';
 
 class Filter extends React.Component {
   constructor(props){
@@ -56,6 +53,7 @@ class Filter extends React.Component {
     this.handleRangeInputFocus = this.handleRangeInputFocus.bind(this);
     this.handleRangeInputBlur = this.handleRangeInputBlur.bind(this);
     this.handleRangeInputChange = this.handleRangeInputChange.bind(this);
+    this.handleRangeInputKeydown = this.handleRangeInputKeydown.bind(this);
   }
 
   componentDidMount(){
@@ -63,10 +61,21 @@ class Filter extends React.Component {
   }
 
   componentDidUpdate(){
-    console.log('NEW FILTER STATE: ');
-    console.log(this.state);
+    // console.log('NEW FILTER STATE: ');
+    // console.log(this.state);
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
   }
+
+  //// REMOVE FILTER HANDLER
+
+  handleRemoveFilter(e){
+    // scrape filter ID from the remove filter button id
+    // this is probably not necessary anymore, was doing this during troubleshooting of a different issue
+    const filterId = e.target.id.slice(e.target.id.indexOf('-') + 1);
+    this.props.handleRemoveFilter(filterId);
+  }
+
+  //// FILTER TITLE INPUT HANDLERS
 
   handleTitleChange(e){
     const title = e.target.value
@@ -75,11 +84,15 @@ class Filter extends React.Component {
     });
   }
 
+  //// FIELD ACTIVE TOGGLER HANDLERS
+
   handleFilterActiveToggle(ref){
     this.setState({
       filterActive: !this.state.filterActive
     });
   }
+
+  //// FIELD SELECTION HANDLERS
 
   handleFieldSelection(val){
     this.setState({
@@ -87,14 +100,14 @@ class Filter extends React.Component {
     });
   }
 
-  handleRemoveFilter(e){
-    // SCRAPE FILTER ID FROM REMOVE FILTER BUTTON ID
-    const filterId = e.target.id.slice(e.target.id.indexOf('-') + 1);
-    console.log(filterId);
-    this.props.handleRemoveFilter(filterId);
-  }
+  //// SLIDER HANDLERS
 
   handleSliderChange(selectedRange){
+    if (this.state.rangeMinInputActive){
+      document.getElementsByClassName('rangeInput-min')[0].blur();
+    } else  if (this.state.rangeMaxInputActive) {
+      document.getElementsByClassName('rangeInput-max')[0].blur();
+    }
     this.setState({
       selectedRange: selectedRange
     });
@@ -106,6 +119,8 @@ class Filter extends React.Component {
       filterValid: isSubRange(this.state.range, selectedRange)
     });
   }
+
+  //// RANGE INPUT HANDLERS
 
   handleRangeInputFocus(e){
     const className = e.target.className;
@@ -120,22 +135,21 @@ class Filter extends React.Component {
         rangeMaxInputActive: true
       });
     }
-    //on blur sync back up and perform validation...
   }
 
   handleRangeInputBlur(e){
     const className = e.target.className;
     var selectedRange = this.state.selectedRange;
-    const rangeInputValue = this.state.rangeInputValue;
+    const rangeInputValue = stripDollarFormat(this.state.rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
-      selectedRange[0] = validateRangeInputValue(rangeInputValue, 'minimum', this.state.range) ? parseInt(rangeInputValue) : selectedRange[0];
+      selectedRange[0] = validateRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
       this.setState({
         selectedRange: selectedRange,
         rangeMinInputActive: false,
         filterValid: isSubRange(this.state.range, selectedRange)
       });
     } else if (className.indexOf('rangeInput-max') > -1){
-      selectedRange[1] = validateRangeInputValue(rangeInputValue, 'maximum', this.state.range) ? parseInt(rangeInputValue) : selectedRange[1];
+      selectedRange[1] = validateRangeInputValue(rangeInputValue, 'maximum', this.state.range , selectedRange);
       this.setState({
         selectedRange: selectedRange,
         rangeMaxInputActive: false,
@@ -144,21 +158,28 @@ class Filter extends React.Component {
     }
   }
 
+  handleRangeInputKeydown(e){
+    if (e.key === 'Enter'){
+      e.target.blur();
+    }
+  }
+
   handleRangeInputChange(e){
+    const newVal = stripDollarFormat(e.target.value);
     this.setState({
-      rangeInputValue: e.target.value
+      rangeInputValue: newVal
     });
   } 
 
+  //// RENDERING
+
   render() {
-    console.log('rangeMinInputActive:', this.state.rangeMinInputActive);
-    console.log('rangeMaxInputActive:', this.state.rangeMaxInputActive);
-    console.log('RANGE:', this.state.range);
     console.log('SELECTED RANGE:', this.state.selectedRange);
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
-          <input type='text' className='titleInput' value={this.state.titleValue} onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
+          <input type='text' className='titleInput' value={this.state.titleValue} 
+                 onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
           <div className='removeFilterButton'>
             <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>
@@ -181,22 +202,32 @@ class Filter extends React.Component {
             <div className='rangeInputContainer'>
               <div className='rangeInputSubCont-min rangeInputSubCont'>
                 <input className='rangeInput-min rangeInput' type="text" 
-                       value={this.state.rangeMinInputActive ? this.state.rangeInputValue : this.state.selectedRange[0]} 
+                       value={this.state.rangeMinInputActive
+                                ? this.state.rangeInputValue
+                                : dollarFormatter(this.state.selectedRange[0])
+                              } 
                        onFocus={this.handleRangeInputFocus} 
                        onBlur={this.handleRangeInputBlur}
-                       onChange={this.handleRangeInputChange}/>
+                       onChange={this.handleRangeInputChange}
+                       onKeyDown={this.handleRangeInputKeydown} />
                 <span className='rangeInputLabel rangeInputLabel-min'>min</span>
               </div>
               <div className='rangeInputSubCont-max rangeInputSubCont'>
                 <span className='rangeInputLabel rangeInputLabel-max'>max</span>
                 <input className='rangeInput-max rangeInput' type="text" 
-                       value={this.state.rangeMaxInputActive ? this.state.rangeInputValue : this.state.selectedRange[1]} 
+                       value={this.state.rangeMaxInputActive
+                                ? this.state.rangeInputValue
+                                : dollarFormatter(this.state.selectedRange[1])
+                              } 
                        onFocus={this.handleRangeInputFocus} 
                        onBlur={this.handleRangeInputBlur}
-                       onChange={this.handleRangeInputChange}/>
+                       onChange={this.handleRangeInputChange}
+                       onKeyDown={this.handleRangeInputKeydown} />
               </div>
             </div>
-            <Range className='slider' defaultValue={this.state.selectedRange} min={this.state.range[0]} max={this.state.range[1]} onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} tipFormatter={dollarFormatter} />
+            <Range className='slider' value={this.state.selectedRange} 
+                   min={this.state.range[0]} max={this.state.range[1]}
+                   onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
           </div>
         </div>
         <div className={'validationBar validationBar-' + (this.state.filterValid && this.state.filterActive)} />

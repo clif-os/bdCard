@@ -79,7 +79,7 @@ class FiltersSection extends React.Component {
 
   updateFilterSettingsMemory(filterId, filterState){
     memory.filterSettings[filterId] = filterState;
-    console.log('UPDATED MEMORY:', memory);
+    // console.log('UPDATED MEMORY:', memory);
   }
 
   render() {
@@ -110,8 +110,6 @@ class FiltersSection extends React.Component {
     const filterNodes = filterIds.map((filterId, i) => {
       // eventually once debugging is completed, renderOrder should be used to be the placeholder for the filter titles
       const renderOrder = i + 1
-      console.log("RENDERING: ", filterId);
-      console.log(memory.filterSettings[filterId])
       return(
         <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={this.fields} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} propsMd={this.props.propsMd} />
       )

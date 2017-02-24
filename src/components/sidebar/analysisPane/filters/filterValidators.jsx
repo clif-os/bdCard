@@ -11,22 +11,34 @@ export const isSubRange = (range, selectedRange) => {
   }
 }
 
-export const validateRangeInputValue = (input, rangeClass, range) => {
+export const validateRangeInputValue = (input, rangeClass, range, selectedRange) => {
   if (isNaN(input)){
-    return false;
+    if (rangeClass === 'minimum'){
+      return selectedRange[0];
+    } else if (rangeClass === 'maximum'){
+      return selectedRange[1];
+    }
   } else {
     var inp = parseInt(input);
     if (rangeClass === 'minimum'){
-      if (inp >= range[0]){
-        return true;
-      } else {
-        return false;
+      if (inp >= range[0] && inp <= selectedRange[1]){
+        return inp;
+      } 
+      if (inp < range[0]) {
+        return range[0];
+      } 
+      if (inp > selectedRange[1]){
+        return selectedRange[1];
       }
     } else if (rangeClass === 'maximum'){
-      if (inp <= range[1]){
-        return true;
-      } else {
-        return false;
+      if (inp <= range[1] && inp >= selectedRange[0]){
+        return inp;
+      }
+      if (inp > range[1]){
+        return range[1];
+      }
+      if (inp < selectedRange[0]){
+        return selectedRange[0];
       }
     }
   }

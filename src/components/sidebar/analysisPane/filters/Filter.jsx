@@ -3,24 +3,40 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import ActiveSlider from '../commonComponents/ActiveSlider.jsx';
 import Select from 'react-select';
-const Slider = require('rc-slider');
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Range = createSliderWithTooltip(Slider.Range);
 import 'rc-slider/assets/index.css';
+const Slider = require('rc-slider');
+const Range = Slider.Range;
 
-import { validateTitle } from './filterValidators.jsx'
+import { validateRange } from './filterValidators.jsx'
+
+function dollarFormatter(v) {
+  return '$' + v;
+}
 
 class Filter extends React.Component {
   constructor(props){
     super();
+    const defaultRange = [
+          props.propsMd[props.fields[0].value].range.min,
+          props.propsMd[props.fields[0].value].range.max
+      ]
     const defaultFilterSetting = {
       titleValue: '',
       filterActive: true,
       fieldValue: props.fields[0].value,
-      filterValid: false
+      filterValid: false,
+      range: defaultRange,
+      selectedRange: defaultRange,
+      units: props.propsMd[props.fields[0].value].units
     }
     if (props.memory === undefined){
-      this.state = defaultFilterSetting;  
+      this.state = defaultFilterSetting;
+      // potentially going to be using this to allow an editing session of the value
+      this.state.rangeMinInputActive = false;
+      this.state.rangeMaxInputActive = false;
+      // range input value state used to set the value of the input during an editing session
+      // -- before and after editing, the value of the input is determined by the sliders
+      this.state.rangeInputValue = '';
     } else {
       this.state = props.memory;  
     }
@@ -28,6 +44,10 @@ class Filter extends React.Component {
     this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
+    this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.handleSliderAfterChange = this.handleSliderAfterChange.bind(this);
+    this.handleRangeInputFocus = this.handleRangeInputFocus.bind(this);
+    this.handleRangeInputChange = this.handleRangeInputChange.bind(this);
   }
 
   componentDidMount(){
@@ -43,8 +63,7 @@ class Filter extends React.Component {
   handleTitleChange(e){
     const title = e.target.value
     this.setState({
-      titleValue: title,
-      filterValid: validateTitle(title)
+      titleValue: title
     });
   }
 
@@ -67,7 +86,62 @@ class Filter extends React.Component {
     this.props.handleRemoveFilter(filterId);
   }
 
+  handleSliderChange(selectedRange){
+    this.setState({
+      selectedRange: selectedRange
+    });
+  }
+
+  handleSliderAfterChange(selectedRange){
+    this.setState({
+      selectedRange: selectedRange,
+      filterValid: validateRange(this.state.range, selectedRange)
+    });
+  }
+
+  handleRangeInputFocus(e){
+    const className = e.target.className;
+    if (className.indexOf('rangeInput-min') > -1){
+      this.setState({
+        rangeInputValue: this.state.selectedRange[0],
+        rangeMinInputActive: true
+      });
+    } else if (className.indexOf('rangeInput-max') > -1){
+      this.setState({
+        rangeInputValue: this.state.selectedRange[1],
+        rangeMaxInputActive: true
+      });
+    }
+    //on blur sync back up and perform validation...
+  }
+
+  handleRangeInputBlur(e){
+    const className = e.target.className;
+    if (className.indexOf('rangeInput-min') > -1){
+      var selectedRange = this.state.selectedRange;
+      selectedRange[0] = this.state.rangeInputValue;
+      this.setState({
+        selectedRange: selectedRange,
+        rangeMinInputActive: false
+      });
+    } else if (className.indexOf('rangeInput-max') > -1){
+      var selectedRange = this.state.selectedRange;
+      selectedRange[1] = this.state.rangeInputValue;
+      this.setState({
+        selectedRange: selectedRange,
+        rangeMaxInputActive: false
+      });
+    }
+  }
+
+  handleRangeInputChange(e){
+    this.setState({
+      rangeInputValue: e.target.value
+    });
+  } 
+
   render() {
+    console.log('RANGE:', this.state.range);
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
@@ -91,7 +165,23 @@ class Filter extends React.Component {
         <div className='rangeSelector filterSection'>
           <span className='filterSection-title'>Range:</span>
           <div className='sliderContainer'>
-            <Range className='slider' />
+            <div className='rangeInputContainer'>
+              <div className='rangeInputSubCont-min rangeInputSubCont'>
+                <input className='rangeInput-min rangeInput' type="text" 
+                       value={this.state.rangeMinInputActive ? this.state.rangeInputValue : this.state.selectedRange[0]} 
+                       onFocus={this.handleRangeInputFocus} 
+                       onChange={this.handleRangeInputChange}/>
+                <span className='rangeInputLabel rangeInputLabel-min'>min</span>
+              </div>
+              <div className='rangeInputSubCont-max rangeInputSubCont'>
+                <span className='rangeInputLabel rangeInputLabel-max'>max</span>
+                <input className='rangeInput-max rangeInput' type="text" 
+                       value={this.state.rangeMaxInputActive ? this.state.rangeInputValue : this.state.selectedRange[1]} 
+                       onFocus={this.handleRangeInputFocus} 
+                       onChange={this.handleRangeInputChange}/>
+              </div>
+            </div>
+            <Range className='slider' defaultValue={this.state.selectedRange} min={this.state.range[0]} max={this.state.range[1]} onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} tipFormatter={dollarFormatter} />
           </div>
         </div>
         <div className={'validationBar validationBar-' + (this.state.filterValid && this.state.filterActive)} />

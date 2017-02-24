@@ -113,7 +113,7 @@ class FiltersSection extends React.Component {
       console.log("RENDERING: ", filterId);
       console.log(memory.filterSettings[filterId])
       return(
-        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={this.fields} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} />
+        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={this.fields} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} propsMd={this.props.propsMd} />
       )
     });
     return filterNodes;

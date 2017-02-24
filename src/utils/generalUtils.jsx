@@ -1,15 +1,27 @@
-export const stripDollarFormat = numishString => {
-  const stripped = numishString.toString().replace(',', '').replace('$', '');
-  return stripped;
-}
-
 export const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export const  dollarFormatter = (v) => {
+export const  dollarFormatter = v => {
   var fNum = numberWithCommas(v);
   return '$' + fNum;
+}
+
+export const dollarUnformatter = numishString => {
+  const stripped = numishString.toString().replace(',', '').replace('$', '');
+  return stripped;
+}
+
+export const percentFormatter = v => {
+  return v.toString() + '%';
+}
+
+export const percentUnformatter = numishString => {
+  const stripped = numishString.toString().replace('%', '')
+}
+
+export const returnVal = val => {
+  return val;
 }
 
 // export const dollarFormatter = num => {

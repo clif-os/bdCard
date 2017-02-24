@@ -8,33 +8,62 @@ const Slider = require('rc-slider');
 const Range = Slider.Range;
 
 import { isSubRange, validateRangeInputValue } from './filterValidators.jsx';
-import { dollarFormatter, stripDollarFormat } from '../../../../utils/generalUtils.jsx';
+import { dollarFormatter, dollarUnformatter, 
+         percentFormatter, percentUnformatter, returnVal } from '../../../../utils/generalUtils.jsx';
+
+//// IMPORTANT NOTES
+// 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
+
+//// TODO:
+// The percent values are formatted inconsistently in the data
 
 class Filter extends React.Component {
   constructor(props){
     super();
-    // const defaultRange = [
-    //       props.propsMd[props.fields[0].value].range.min,
-    //       props.propsMd[props.fields[0].value].range.max
-    //   ]
+    //// CREATE THE DEFAULT STATE
+    // DETERMINE UNITS AND FORMATTERS
+    // REFACTOR EVENTUALLY TO ITS OWN UTIL... should just take in the lookupMD and a field value and return min/max/ 2 formatters
+    const defaultFieldVal = props.fields[0].value
+    const units = props.propsMd[defaultFieldVal].units;
+    console.log(units);
+    let min = props.propsMd[defaultFieldVal].range.min;
+    let max = props.propsMd[defaultFieldVal].range.max;
+    let unitFormatter, unitUnformatter;
+    if (units === 'usd'){
+      min = Math.floor(min);
+      max = Math.ceil(max);
+      unitFormatter = dollarFormatter;
+      unitUnformatter = dollarUnformatter;
+    } else if (units === 'decile' || units === 'number'){
+      min = Math.floor(min);
+      max = Math.ceil(max);
+      unitFormatter = returnVal;
+      unitUnformatter = returnVal;
+    } else if (units === 'percent'){
+      // the percent data is formatted inconsistently (sometimes as a share of 1, others as a regular percent of 100)
+      // later on the data should be tranformed to have  a consistent percent format\
+      if (min < 1 && max <= 1){
+        min = min * 100;
+        max = max * 100;
+      }
+      unitFormatter = percentFormatter;
+      unitUnformatter = percentUnformatter;
+    }
+    // SET THE DEFAULT STATE
     const defaultFilterSetting = {
       titleValue: '',
       filterActive: true,
-      fieldValue: props.fields[0].value,
+      fieldValue: defaultFieldVal,
       filterValid: false,
-      range: [
-          props.propsMd[props.fields[0].value].range.min,
-          props.propsMd[props.fields[0].value].range.max
-      ],
-      selectedRange: [
-          props.propsMd[props.fields[0].value].range.min,
-          props.propsMd[props.fields[0].value].range.max
-      ],
-      units: props.propsMd[props.fields[0].value].units
+      range: [min, max],
+      selectedRange: [min, max],
+      units: units,
+      unitFormatter: unitFormatter,
+      unitUnformatter: unitUnformatter
     }
+    //// LOAD STATE FROM MEMORY
     if (props.memory === undefined){
       this.state = defaultFilterSetting;
-      // potentially going to be using this to allow an editing session of the value
       this.state.rangeMinInputActive = false;
       this.state.rangeMaxInputActive = false;
       // range input value state used to set the value of the input during an editing session
@@ -43,7 +72,7 @@ class Filter extends React.Component {
     } else {
       this.state = props.memory;  
     }
-    
+    //// HANDLER BINDINGS
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
@@ -95,8 +124,44 @@ class Filter extends React.Component {
   //// FIELD SELECTION HANDLERS
 
   handleFieldSelection(val){
+    const units = this.props.propsMd[val.value].units;
+    console.log(units);
+    let min = this.props.propsMd[val.value].range.min;
+    let max = this.props.propsMd[val.value].range.max;
+    let unitFormatter, unitUnformatter;
+    if (units === 'usd'){
+      min = Math.floor(min);
+      max = Math.ceil(max);
+      unitFormatter = dollarFormatter;
+      unitUnformatter = dollarUnformatter;
+    } else if (units === 'decile' || units === 'number'){
+      min = Math.floor(min);
+      max = Math.ceil(max);
+      unitFormatter = returnVal;
+      unitUnformatter = returnVal;
+    } else if (units === 'percent'){
+      // the percent data is formatted inconsistently (sometimes as a share of 1, others as a regular percent of 100)
+      // later on the data should be tranformed to have  a consistent percent format\
+      if (min < 1 && max <= 1){
+        console.log('handling as a percent of 1');
+        min = Math.floor(min * 100);
+        max = Math.ceil(max * 100);
+      } else {
+        console.log('handling as a percent of 100');
+        min = Math.floor(min);
+        max = Math.ceil(max);
+      }
+      unitFormatter = percentFormatter;
+      unitUnformatter = percentUnformatter;
+    }
     this.setState({
-      fieldValue: val
+      fieldValue: val,
+      range: [min, max],
+      selectedRange: [min, max],
+      units: units,
+      unitFormatter: unitFormatter,
+      unitUnformatter: unitUnformatter,
+      filterValid: false
     });
   }
 
@@ -140,7 +205,7 @@ class Filter extends React.Component {
   handleRangeInputBlur(e){
     const className = e.target.className;
     var selectedRange = this.state.selectedRange;
-    const rangeInputValue = stripDollarFormat(this.state.rangeInputValue);
+    const rangeInputValue = this.state.unitUnformatter(this.state.rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
       selectedRange[0] = validateRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
       this.setState({
@@ -165,7 +230,7 @@ class Filter extends React.Component {
   }
 
   handleRangeInputChange(e){
-    const newVal = stripDollarFormat(e.target.value);
+    const newVal = this.state.unitUnformatter(e.target.value);
     this.setState({
       rangeInputValue: newVal
     });
@@ -174,7 +239,6 @@ class Filter extends React.Component {
   //// RENDERING
 
   render() {
-    console.log('SELECTED RANGE:', this.state.selectedRange);
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
@@ -204,7 +268,7 @@ class Filter extends React.Component {
                 <input className='rangeInput-min rangeInput' type="text" 
                        value={this.state.rangeMinInputActive
                                 ? this.state.rangeInputValue
-                                : dollarFormatter(this.state.selectedRange[0])
+                                : this.state.unitFormatter(this.state.selectedRange[0])
                               } 
                        onFocus={this.handleRangeInputFocus} 
                        onBlur={this.handleRangeInputBlur}
@@ -217,7 +281,7 @@ class Filter extends React.Component {
                 <input className='rangeInput-max rangeInput' type="text" 
                        value={this.state.rangeMaxInputActive
                                 ? this.state.rangeInputValue
-                                : dollarFormatter(this.state.selectedRange[1])
+                                : this.state.unitFormatter(this.state.selectedRange[1])
                               } 
                        onFocus={this.handleRangeInputFocus} 
                        onBlur={this.handleRangeInputBlur}

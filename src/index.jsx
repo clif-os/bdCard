@@ -20,8 +20,8 @@ import gjPropsMetadata from './data/boston_props_metadata.json';
 const geojsonTilesets = [
   {
     name: 'jchsBoston',
-    sourceUrl: 'mapbox://mimio.375tendc',
-    sourceLayer: 'jchs-boston-ba9eig'
+    sourceUrl: 'mapbox://mimio.3psqk33y',
+    sourceLayer: 'boston'
   }
 ];
 

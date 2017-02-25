@@ -4,19 +4,15 @@ import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
-import { convertPropsMetadataToDrodownObject } from './utils.jsx';
-
-// TMEP DATA
-const fakeYears=[
-  {value: '1990', label: '1990'},
-  {value: '2000', label: '2000'},
-  {value: '2010', label: '2010'},
-  {value: '2014', label: '2014'}
-];
+import { convertPropsMetadataToDrodownObject,
+         isMemoryChangeAFilterDataEvent,
+         constructFilterEventData,
+         filterEventsAreDifferent } from './utils.jsx';
 
 // FILTER MEMORY
 var memory = {
-  filterSettings: {}
+  filterSettings: {},
+  lastFilterEventData: null
 }
 
 class FiltersSection extends React.Component {
@@ -31,9 +27,6 @@ class FiltersSection extends React.Component {
     this.spinAddFilterButton = this.spinAddFilterButton.bind(this);
     this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
   }
-  
-  componentDidUpdate(){
-  }
 
   handleAddFilter(){
     var filterIds = this.state.filterIds;
@@ -43,8 +36,7 @@ class FiltersSection extends React.Component {
       filterIds.push(newFilterId);
       // memory.filterSettings[newFilterId] = defaultFilterSetting;
       this.setState({
-        filterIds: filterIds,
-        activeFilters: {}
+        filterIds: filterIds
       });
       this.spinAddFilterButton('right');
     }
@@ -58,6 +50,23 @@ class FiltersSection extends React.Component {
       filterIds: filterIds
     });
     this.spinAddFilterButton('left');
+  }
+
+  updateFilterSettingsMemory(filterId, filterState){
+    const lastMemory = memory.filterSettings[filterId];
+    memory.filterSettings[filterId] = filterState;
+    if ( isMemoryChangeAFilterDataEvent(filterState) ) {
+      const filterEventData = constructFilterEventData(memory.filterSettings);
+      if (memory.lastFilterEventData !== null){
+        console.log(filterEventsAreDifferent(memory.lastFilterEventData, filterEventData));
+        if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)){
+          console.log('SEND A FILTER EVENT');
+          console.log('SEND A FILTER EVENT PLEASE GOD');
+        }
+      }
+      memory.lastFilterEventData = filterEventData;
+    };
+    // console.log('UPDATED MEMORY:', memory);
   }
 
   spinAddFilterButton(dir){
@@ -75,11 +84,6 @@ class FiltersSection extends React.Component {
       const currentRotation = parseInt(currentRotationCSS.split('(')[1].slice(0,-1));
       this.refs.faPlusRotator.style.transform = `rotateZ(${currentRotation + incrementNum}deg)`;
     }
-  }
-
-  updateFilterSettingsMemory(filterId, filterState){
-    memory.filterSettings[filterId] = filterState;
-    // console.log('UPDATED MEMORY:', memory);
   }
 
   render() {

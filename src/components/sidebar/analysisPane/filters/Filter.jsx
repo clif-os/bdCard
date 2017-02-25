@@ -31,6 +31,7 @@ class Filter extends React.Component {
       filterActive: true,
       fieldValue: defaultFieldVal,
       filterValid: false,
+      freezeFilterValidity: false,
       range: [min, max],
       selectedRange: [min, max],
       units: units,
@@ -120,14 +121,16 @@ class Filter extends React.Component {
       document.getElementsByClassName('rangeInput-max')[0].blur();
     }
     this.setState({
-      selectedRange: selectedRange
+      selectedRange: selectedRange,
+      freezeFilterValidity: true
     });
   }
 
   handleSliderAfterChange(selectedRange){
     this.setState({
       selectedRange: selectedRange,
-      filterValid: isSubRange(this.state.range, selectedRange)
+      filterValid: isSubRange(this.state.range, selectedRange),
+      freezeFilterValidity: false
     });
   }
 
@@ -138,12 +141,14 @@ class Filter extends React.Component {
     if (className.indexOf('rangeInput-min') > -1){
       this.setState({
         rangeInputValue: this.state.selectedRange[0],
-        rangeMinInputActive: true
+        rangeMinInputActive: true,
+        freezeFilterValidity: true
       });
     } else if (className.indexOf('rangeInput-max') > -1){
       this.setState({
         rangeInputValue: this.state.selectedRange[1],
-        rangeMaxInputActive: true
+        rangeMaxInputActive: true,
+        freezeFilterValidity: true
       });
     }
   }
@@ -157,14 +162,16 @@ class Filter extends React.Component {
       this.setState({
         selectedRange: selectedRange,
         rangeMinInputActive: false,
-        filterValid: isSubRange(this.state.range, selectedRange)
+        filterValid: isSubRange(this.state.range, selectedRange),
+        freezeFilterValidity: false
       });
     } else if (className.indexOf('rangeInput-max') > -1){
       selectedRange[1] = validateRangeInputValue(rangeInputValue, 'maximum', this.state.range , selectedRange);
       this.setState({
         selectedRange: selectedRange,
         rangeMaxInputActive: false,
-        filterValid: isSubRange(this.state.range, selectedRange)
+        filterValid: isSubRange(this.state.range, selectedRange),
+        freezeFilterValidity: false
       });
     }
   }

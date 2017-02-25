@@ -55,13 +55,12 @@ class FiltersSection extends React.Component {
   updateFilterSettingsMemory(filterId, filterState){
     const lastMemory = memory.filterSettings[filterId];
     memory.filterSettings[filterId] = filterState;
+    // isMemoryChangeAFilterDataEvent is fucking failing on change of field yo;
     if ( isMemoryChangeAFilterDataEvent(filterState) ) {
       const filterEventData = constructFilterEventData(memory.filterSettings);
       if (memory.lastFilterEventData !== null){
-        console.log(filterEventsAreDifferent(memory.lastFilterEventData, filterEventData));
         if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)){
           console.log('SEND A FILTER EVENT');
-          console.log('SEND A FILTER EVENT PLEASE GOD');
         }
       }
       memory.lastFilterEventData = filterEventData;

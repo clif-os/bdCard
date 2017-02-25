@@ -101,6 +101,7 @@ class Filter extends React.Component {
   handleFieldSelection(val){
     var min, max, units, unitFormatter, unitUnformatter;
     ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(val.value, this.props.propsMd));
+    console.log('HANDLING A FIELD SELECTION');
     this.setState({
       fieldValue: val,
       range: [min, max],
@@ -108,13 +109,17 @@ class Filter extends React.Component {
       units: units,
       unitFormatter: unitFormatter,
       unitUnformatter: unitUnformatter,
-      filterValid: false
+      filterValid: false,
+      freezeFilterValidity: false
     });
   }
 
   //// SLIDER HANDLERS
-
+  // BUG :: handle slider change is being called on change of field but, after change is not
+  // thus, freezeFilterValidity is being left as true after field selections -- so far this is not affecting the process
+  // but later on it might
   handleSliderChange(selectedRange){
+    console.log('HANDLING A SLIDER CHANGE');
     if (this.state.rangeMinInputActive){
       document.getElementsByClassName('rangeInput-min')[0].blur();
     } else  if (this.state.rangeMaxInputActive) {
@@ -127,6 +132,7 @@ class Filter extends React.Component {
   }
 
   handleSliderAfterChange(selectedRange){
+    console.log('HANDLING A SLIDER AFTERCHANGE');
     this.setState({
       selectedRange: selectedRange,
       filterValid: isSubRange(this.state.range, selectedRange),

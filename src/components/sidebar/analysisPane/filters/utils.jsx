@@ -68,6 +68,8 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
 // }
 export const isMemoryChangeAFilterDataEvent = (nextMemory) => {
   // freezeFilterValidity is used onChange for the range in order to avoid spamming filter events
+  console.log('nextMemory.filterActive', nextMemory.filterActive);
+  console.log('nextMemory.freezeFilterValidity', nextMemory.freezeFilterValidity);
   if (!nextMemory.filterActive || nextMemory.freezeFilterValidity) {
     console.log('filter does not pass the primary criteria for a filter event');
     return false;
@@ -95,23 +97,15 @@ export const constructFilterEventData = (filterSettings) => {
 
 // currently unable to 'swap' in and out filters, so no need to check for that
 export const filterEventsAreDifferent = (last, next) => {
-  console.log('asking if filterEventsAreDifferent');
   let differenceExists
   if (last.length !== next.length) {
-    console.log('different length of filter events');
     return true;
   } else if (last.length === 0 && next.length === 0){
-    console.log('consecutive empty filter events');
     return false;
   } else {
     last.forEach(lastFiltSetting => {
-      console.log('--------------------')
-      console.log('--------------------')
       next.forEach(nextFiltSetting => {
         if (lastFiltSetting.key === nextFiltSetting.key){
-          console.log(lastFiltSetting)
-          console.log(nextFiltSetting)
-          console.log('--------------------')
           if (lastFiltSetting.field !== nextFiltSetting.field 
               || lastFiltSetting.range[0] !== nextFiltSetting.range[0]
               || lastFiltSetting.range[1] !== nextFiltSetting.range[1]){

@@ -66,23 +66,12 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
 //   rangeMaxInputActive: false,
 //   rangeInputValue: ''
 // }
-export const isMemoryChangeAFilterDataEvent = (nextMemory) => {
-  // freezeFilterValidity is used onChange for the range in order to avoid spamming filter events
-  console.log('nextMemory.filterActive', nextMemory.filterActive);
-  console.log('nextMemory.freezeFilterValidity', nextMemory.freezeFilterValidity);
-  if (!nextMemory.filterActive || nextMemory.freezeFilterValidity) {
-    console.log('filter does not pass the primary criteria for a filter event');
-    return false;
-  } else {
-    console.log('filter event DOES pass the primary criteria for a filter event');
-    return true;
-  }
-}
 
 export const constructFilterEventData = (filterSettings) => {
   return Object.keys(filterSettings).reduce((acc, key) => {
-    if (filterSettings[key].selectedRange[0] === filterSettings[key].range[0] 
-        && filterSettings[key].selectedRange[1] === filterSettings[key].range[1]){
+    if ((filterSettings[key].selectedRange[0] === filterSettings[key].range[0] 
+        && filterSettings[key].selectedRange[1] === filterSettings[key].range[1])
+        || !filterSettings[key].filterActive){
       return acc;
     } else{
       acc.push({

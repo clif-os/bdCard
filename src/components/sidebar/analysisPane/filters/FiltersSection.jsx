@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { convertPropsMetadataToDrodownObject,
-         isMemoryChangeAFilterDataEvent,
          constructFilterEventData,
          filterEventsAreDifferent } from './utils.jsx';
 
@@ -13,7 +12,7 @@ import { convertPropsMetadataToDrodownObject,
 var memory = {
   filterSettings: {},
   lastFilterEventData: null
-}
+};
 
 class FiltersSection extends React.Component {
   constructor(props){
@@ -43,9 +42,12 @@ class FiltersSection extends React.Component {
   }
 
   handleRemoveFilter(filterId){
-    var filterIds = this.state.filterIds;
+    var filterIds = [...this.state.filterIds];
     filterIds.splice(filterIds.indexOf(filterId), 1);
+    if (filterIds)
+    // if the removed filter is available in the lastFilterEventData -- it should be removed and filter event should be pushed through
     delete memory.filterSettings[filterId];
+    this.determineFilterEventFire();
     this.setState({
       filterIds: filterIds
     });
@@ -53,19 +55,21 @@ class FiltersSection extends React.Component {
   }
 
   updateFilterSettingsMemory(filterId, filterState){
-    const lastMemory = memory.filterSettings[filterId];
+    const lastMemory = Object.assign({}, memory.filterSettings[filterId]);
     memory.filterSettings[filterId] = filterState;
-    // isMemoryChangeAFilterDataEvent is fucking failing on change of field yo;
-    if ( isMemoryChangeAFilterDataEvent(filterState) ) {
-      const filterEventData = constructFilterEventData(memory.filterSettings);
-      if (memory.lastFilterEventData !== null){
-        if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)){
-          console.log('SEND A FILTER EVENT');
-        }
+    if ( !filterState.freezeFilterValidity ) {
+      this.determineFilterEventFire();
+    }
+  }
+
+  determineFilterEventFire(){
+    const filterEventData = constructFilterEventData(memory.filterSettings);
+    if (memory.lastFilterEventData !== null){
+      if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)){
+        console.log('FIRE FILTER EVENT: ', filterEventData);
       }
-      memory.lastFilterEventData = filterEventData;
-    };
-    // console.log('UPDATED MEMORY:', memory);
+    }
+    memory.lastFilterEventData = filterEventData;
   }
 
   spinAddFilterButton(dir){

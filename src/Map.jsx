@@ -11,12 +11,9 @@ export default class Map {
       container: 'map',
       style: mapStyle,
       repaint: true,
-      center: [0, 38],
-      maxBounds: [
-        [-71.57730000000001, 42.09960000000001],
-        [-70.52729999999997, 42.61038972219174]
-      ],
-      zoom: 10.00,
+      center: [-70.89185581741563, 42.36291931096801],
+      maxBounds: [[-72.25285616365288, 41.71585666269243], [-69.53085547116659, 43.003385944623716]],
+      zoom: 8.6,
       attributionControl: false
     });
     this.map.boxZoom.disable();

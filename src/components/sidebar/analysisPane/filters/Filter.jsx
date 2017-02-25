@@ -65,8 +65,6 @@ class Filter extends React.Component {
   }
 
   componentDidUpdate(){
-    // console.log('NEW FILTER STATE: ');
-    // console.log(this.state);
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
   }
 
@@ -101,7 +99,6 @@ class Filter extends React.Component {
   handleFieldSelection(val){
     var min, max, units, unitFormatter, unitUnformatter;
     ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(val.value, this.props.propsMd));
-    console.log('HANDLING A FIELD SELECTION');
     this.setState({
       fieldValue: val,
       range: [min, max],
@@ -119,7 +116,6 @@ class Filter extends React.Component {
   // thus, freezeFilterValidity is being left as true after field selections -- so far this is not affecting the process
   // but later on it might
   handleSliderChange(selectedRange){
-    console.log('HANDLING A SLIDER CHANGE');
     if (this.state.rangeMinInputActive){
       document.getElementsByClassName('rangeInput-min')[0].blur();
     } else  if (this.state.rangeMaxInputActive) {
@@ -132,7 +128,6 @@ class Filter extends React.Component {
   }
 
   handleSliderAfterChange(selectedRange){
-    console.log('HANDLING A SLIDER AFTERCHANGE');
     this.setState({
       selectedRange: selectedRange,
       filterValid: isSubRange(this.state.range, selectedRange),
@@ -161,7 +156,8 @@ class Filter extends React.Component {
 
   handleRangeInputBlur(e){
     const className = e.target.className;
-    var selectedRange = this.state.selectedRange;
+    // MAKE A COPY
+    var selectedRange = [...this.state.selectedRange];
     const rangeInputValue = this.state.unitUnformatter(this.state.rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
       selectedRange[0] = validateRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);

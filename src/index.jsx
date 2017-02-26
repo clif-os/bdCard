@@ -11,7 +11,7 @@ import { linePaintIn, fillPaintIn } from './mapbox/geojsonStyles.jsx';
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 import { dashboardListener } from './utils/geojsonFilter.jsx'
-import gj from './data/jchs-boston.json';
+import gj from './data/jchs-boston-norm.json';
 import gjPropsMetadata from './data/boston_props_metadata.json';
 
 

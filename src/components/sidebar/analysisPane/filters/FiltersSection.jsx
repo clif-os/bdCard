@@ -18,13 +18,17 @@ class FiltersSection extends React.Component {
   constructor(props){
     super();
     this.fields = convertPropsMetadataToDrodownObject(props.propsMd);
+    const defaultFeatureCount = window.geojson.features.length
     this.state = {
-      filterIds: Object.keys(memory.filterSettings)
+      filterIds: Object.keys(memory.filterSettings),
+      featureCountMessage: `Showing All ${defaultFeatureCount} Tracts`
     }
     this.handleAddFilter = this.handleAddFilter.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.spinAddFilterButton = this.spinAddFilterButton.bind(this);
     this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
+    this.updateFeatureCount = this.updateFeatureCount.bind(this);
+    document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
   }
 
   handleAddFilter(){
@@ -44,7 +48,6 @@ class FiltersSection extends React.Component {
   handleRemoveFilter(filterId){
     var filterIds = [...this.state.filterIds];
     filterIds.splice(filterIds.indexOf(filterId), 1);
-    if (filterIds)
     // if the removed filter is available in the lastFilterEventData -- it should be removed and filter event should be pushed through
     delete memory.filterSettings[filterId];
     this.determineFilterEventFire();
@@ -66,10 +69,25 @@ class FiltersSection extends React.Component {
     const filterEventData = constructFilterEventData(memory.filterSettings);
     if (memory.lastFilterEventData !== null){
       if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)){
-        console.log('FIRE FILTER EVENT: ', filterEventData);
+        const evt = new CustomEvent('FILTER', {'detail': filterEventData})
+        document.dispatchEvent(evt);
       }
     }
     memory.lastFilterEventData = filterEventData;
+  }
+
+  updateFeatureCount(e){
+    const subtotal = e.detail.numFeaturesInFilter;
+    const total = e.detail.numFeaturesTotal;
+    let message;
+    if (subtotal === total){
+      message = `Showing All ${total} Tracts`
+    } else if (subtotal < total) {
+      message = `Showing ${subtotal} of ${total} Tracts`
+    }
+    this.setState({
+      featureCountMessage: message
+    });
   }
 
   spinAddFilterButton(dir){
@@ -95,6 +113,7 @@ class FiltersSection extends React.Component {
         <div className='header'>
           <span className='header-title'>
             Filters<span className='fa fa-filter'/>
+            <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
             <div className={'addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
               <div className='faPlusRotator' ref='faPlusRotator'>
                 <span className='fa fa-plus'/>
@@ -115,10 +134,21 @@ class FiltersSection extends React.Component {
 
   renderFilterNodes(filterIds){
     const filterNodes = filterIds.map((filterId, i) => {
+      var fields = [...this.fields];
       // eventually once debugging is completed, renderOrder should be used to be the placeholder for the filter titles
-      const renderOrder = i + 1
+      const renderOrder = i + 1;
+      // this filters out any fields which are already selected by other filters so users are not able to select fields twice
+      if (filterIds.length > 1) {
+        Object.keys(memory.filterSettings).forEach(settingKey => {
+          if (filterId !== settingKey) {
+            const field = memory.filterSettings[settingKey].fieldValue;
+            console.log(field);
+            fields.splice(fields.indexOf(field), 1);
+          }
+        });
+      }
       return(
-        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={this.fields} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} propsMd={this.props.propsMd} />
+        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={fields} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} propsMd={this.props.propsMd} />
       )
     });
     return filterNodes;

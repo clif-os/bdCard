@@ -29,7 +29,7 @@ class Filter extends React.Component {
     const defaultFilterSetting = {
       titleValue: '',
       filterActive: true,
-      fieldValue: defaultFieldVal,
+      fieldValue: props.fields[0],
       filterValid: false,
       freezeFilterValidity: false,
       range: [min, max],

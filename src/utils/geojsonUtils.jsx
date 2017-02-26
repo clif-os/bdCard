@@ -36,6 +36,11 @@ export var geojsonNull = {
   }]
 };
 
+export const geojsonEmpty = {
+  type: 'FeatureCollection',
+  features: []
+};
+
 export const findMinMaxForField = (geojson, field) => {
   // console.log(geojson, field);
   var minMax = [null, null];

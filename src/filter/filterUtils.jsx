@@ -45,52 +45,33 @@ const generateGeojsonShells = num => {
   return shells;
 }
 
-
-// FIGURE OUT WHY THERE ARE VALUES LESS THAN THE MINIMUM DESCRIBED IN THE METADATA
 const splitGeojsonByRanges = (geojson, field, splitRanges) => {
   const geojsonShells = generateGeojsonShells(splitRanges.length);
-  var countedLength = 0;
-  var nonAssignedCount = 0
-  const tempSplitGeojson = geojson.features.reduce((acc, feature) => {
+  return geojson.features.reduce((acc, feature) => {
     const val = feature.properties[field];
-    var valAssigned = false;
+    var assigned = false;
     if (isNaN(val) || val === null){
-      countedLength++;
-      valAssigned = true;
+      // handle non numbers and nulls, push them to the final shell, which is for nulls
       acc[acc.length - 1].features.push(feature);
-      return acc;
+      assigned = true;
     } else if (val === splitRanges[splitRanges.length - 1][1]){
-      // handle the max value differently
-      acc[splitRanges.length - 1].features.push(feature)
-      countedLength++;
-      valAssigned = true;
-      return acc;
+      // handle the max value differently since most bins are >= min && < max (final bin is >=min && <=max in order to include the max)
+      acc[splitRanges.length - 1].features.push(feature);
+      assigned = true;
     } else{
       splitRanges.forEach((range, i) => {
         if (val >= range[0] && val < range[1]){
-          countedLength++;
-          valAssigned = true
           acc[i].features.push(feature);
-          return acc;
+          assigned = true;
         }
-        // trying to figure out why features are missing currently
       });
     }
-    if (!valAssigned){
-      console.log('val not assigned', val);
-      nonAssignedCount++
-    }
+    if (!assigned) console.error('val not assigned', val);
     return acc;
-  }, geojsonShells)
-  const incLength = geojson.features.length;
-  console.log('nonAssignedCount', nonAssignedCount);
-  console.log('countedLength', countedLength);
-  console.log('incLength', incLength);
-  return tempSplitGeojson;
+  }, geojsonShells);
 }
 
 const splitRangeByClasses = (range, classes) => {
-  console.log(range);
   const min = range.min;
   const max = range.max;
   const classLength = Math.round( (max - min) / classes );

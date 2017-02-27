@@ -44,7 +44,6 @@ const mapStyle = 'mapbox://styles/mapbox/streets-v9' // streets style
 // const mapStyle = 'mapbox://styles/mapbox/outdoors-v9' //outdoors style
 // const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"; //light style
 // const mapStyle = "mapbox://styles/camp-amos/cirmc9juf002hg1nboacfr7u9"; // dark style
-
 dashboardListener();
 const m = new Map(geojsons, mapStyle);
 render( <AppInterface propsMd={gjPropsMetadata} / > ,

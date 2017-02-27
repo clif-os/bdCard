@@ -73,15 +73,15 @@ const buildPaintPacks = (colorIdxs, colorScale) => {
 
 // all color arrays include a NULL color
 const greenRedColors = {
-  '1': '#a50026',
-  '2': '#d73027',
-  '3': '#f46d43',
-  '4': '#fdae61',
-  '5': '#fee08b',
-  '6': '#d9ef8b',
-  '7': '#a6d96a',
-  '8': '#66bd63',
-  '9': '#1a9850',
+  '1': '#006837',
+  '2': '#1a9850',
+  '3': '#66bd63',
+  '4': '#a6d96a',
+  '5': '#d9ef8b',
+  '6': '#fee08b',
+  '7': '#fdae61',
+  '8': '#f46d43',
+  '9': '#d73027',
   '10': '#a50026',
   null: '#000000'
 }
@@ -110,13 +110,13 @@ export const generatePaintArray = (classes, colorScheme) => {
     colorScale = greenRedColors;
     switch(classes){
       case 2:
-        colorIdxs = ['4', '7'];
+        colorIdxs = ['2', '9'];
         break;
       case 3:
-        colorIdxs = ['4', '7', '9'];
+        colorIdxs = ['2', '7', '9'];
         break;
       case 4:
-        colorIdxs = ['4', '6', '8', '10'];
+        colorIdxs = ['2', '6', '7', '9'];
         break;
       case 5:
         colorIdxs = ['2', '4', '6', '8', '10'];
@@ -178,7 +178,6 @@ export const generatePaintArray = (classes, colorScheme) => {
 }
 
 export const buildGeojsonLayerArray = (geojsons, paints, field) => {
-  console.log(paints);
   if (geojsons.length !== paints.length){
     console.error('incoming geojsons and paints to "buildGeojsonLayerArray" are different lengths, these should always be the same length')
   }
@@ -197,13 +196,3 @@ export const buildGeojsonLayerArray = (geojsons, paints, field) => {
   });
   return gjLayers;
 }
-
-//// END GOAL:
-// const geojsons = [
-//   {
-//     geojson: gj,
-//     name: 'inFilter',
-//     linePaint: linePaintIn,
-//     fillPaint: fillPaintIn
-//   }
-// ]

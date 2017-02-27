@@ -10,7 +10,7 @@ import Map from './mapbox/Map.jsx';
 import { linePaintIn, fillPaintIn } from './mapbox/geojsonLayerUtils.jsx';
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
-import { dashboardListener } from './utils/geojsonFilter.jsx'
+import { dashboardListener } from './filter/filter.jsx'
 import gj from './data/jchs-boston-norm.json';
 import gjPropsMetadata from './data/boston_props_metadata.json';
 

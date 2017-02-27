@@ -45,7 +45,7 @@ export const fillPaintOut = {
 
 const buildPaintPack = (color) => {
   return {
-    linePaintIn: {
+    linePaint: {
       'line-width': {
         'stops': [
           [10, .75],
@@ -55,12 +55,12 @@ const buildPaintPack = (color) => {
           [14, 2]
         ]
       },
-      'line-opacity': 0.4,
+      'line-opacity': 0.8,
       'line-color': color
     },
-    fillPaintIn: {
+    fillPaint: {
       'fill-color': color,
-      'fill-opacity': 0.3
+      'fill-opacity': 0.6
     }
   }
 }
@@ -71,6 +71,7 @@ const buildPaintPacks = (colorIdxs, colorScale) => {
   });
 }
 
+// all color arrays include a NULL color
 const greenRedColors = {
   '1': '#a50026',
   '2': '#d73027',
@@ -81,7 +82,8 @@ const greenRedColors = {
   '7': '#a6d96a',
   '8': '#66bd63',
   '9': '#1a9850',
-  '10': '#a50026'
+  '10': '#a50026',
+  null: '#000000'
 }
 
 const pinkScaleColors = {
@@ -94,7 +96,8 @@ const pinkScaleColors = {
   '7': '#e7298a',
   '8': '#ce1256',
   '9': '#980043',
-  '10': '#67001f'
+  '10': '#67001f',
+  'null': '#000000'
 }
 
 export const generatePaintArray = (classes, colorScheme) => {
@@ -167,8 +170,32 @@ export const generatePaintArray = (classes, colorScheme) => {
         break;
     }
   }
+  if (reverse) colorIdxs.reverse();
+  // push in null value to catch nulls
+  colorIdxs.push('null')
   var paintPacks = buildPaintPacks(colorIdxs, colorScale);
-  return reverse ? paintPacks.reverse() : paintPacks;
+  return paintPacks;
+}
+
+export const buildGeojsonLayerArray = (geojsons, paints, field) => {
+  console.log(paints);
+  if (geojsons.length !== paints.length){
+    console.error('incoming geojsons and paints to "buildGeojsonLayerArray" are different lengths, these should always be the same length')
+  }
+  var gjLayers = [];
+  // arbitrarily chosing to loop over geojsons, could also be paints
+  geojsons.forEach((gj, i) => {
+    const order = i + 1
+    gjLayers.push(
+      {
+        geojson: gj,
+        name: 'field-class' + order,
+        linePaint: paints[i].linePaint,
+        fillPaint: paints[i].fillPaint
+      }
+    )
+  });
+  return gjLayers;
 }
 
 //// END GOAL:

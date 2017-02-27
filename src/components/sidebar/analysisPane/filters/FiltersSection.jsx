@@ -1,12 +1,12 @@
 import './FiltersSection.styl';
 import React from 'react';
-import ReactTooltip from 'react-tooltip';
+// import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
-import { convertPropsMetadataToDrodownObject,
-         constructFilterEventData,
+import { constructFilterEventData,
          filterEventsAreDifferent } from './utils.jsx';
+import { convertPropsMetadataToDrodownObject } from '../utils.jsx';
 
 // FILTER MEMORY
 var memory = {
@@ -27,7 +27,6 @@ class FiltersSection extends React.Component {
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.spinAddFilterButton = this.spinAddFilterButton.bind(this);
     this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
-    this.updateFeatureCount = this.updateFeatureCount.bind(this);
     document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
   }
 

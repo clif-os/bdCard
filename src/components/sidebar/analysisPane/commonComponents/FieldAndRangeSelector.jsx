@@ -16,19 +16,14 @@ import { fieldUnitAndRangeHandler } from '../utils.jsx'
 class Filter extends React.Component {
   constructor(props){
     super();
-    //// CREATE THE DEFAULT STATE
     // DETERMINE UNITS AND FORMATTERS
     // consider removing the propsMD from the props and only including it in the utils;
     const defaultFieldVal = props.fields[0].value;
     var min, max, units, unitFormatter, unitUnformatter;
     ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
     // SET THE DEFAULT STATE
-    const defaultFilterSetting = {
-      titleValue: '',
-      filterActive: true,
+    this.state = {
       fieldValue: props.fields[0],
-      filterValid: false,
-      freezeFilterValidity: false,
       range: [min, max],
       selectedRange: [min, max],
       units: units,
@@ -38,16 +33,7 @@ class Filter extends React.Component {
       rangeMaxInputActive: false,
       rangeInputValue: ''
     }
-    //// LOAD STATE FROM MEMORY
-    if (props.memory === undefined){
-      this.state = defaultFilterSetting;
-    } else {
-      this.state = props.memory;  
-    }
     //// HANDLER BINDINGS
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
-    this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.handleSliderAfterChange = this.handleSliderAfterChange.bind(this);
@@ -192,15 +178,7 @@ class Filter extends React.Component {
 
   render() {
     return (
-      <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
-        <div className='titleAndControls filterSection'>
-          <input type='text' className='titleInput' value={this.state.titleValue} 
-                 onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
-          <div className='removeFilterButton'>
-            <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
-          </div>
-          <ActiveSlider active={this.state.filterActive} handleActiveToggle={this.handleFilterActiveToggle} />
-        </div>
+      <div className="fieldUnitAndRangeSelector" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='fieldSelector filterSection'>
           <span className='filterSection-title'>Field:</span>
           <Select
@@ -246,9 +224,9 @@ class Filter extends React.Component {
                    onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
           </div>
         </div>
-        <div className={'validationBar validationBar-' + (this.state.filterValid && this.state.filterActive)} />
       </div>
     );
   }
 }
- export default Filter;
+
+ export default FieldAndRangeSelector;

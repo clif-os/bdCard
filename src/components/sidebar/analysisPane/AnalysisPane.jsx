@@ -2,6 +2,7 @@ import './AnalysisPane.styl';
 import 'react-select/dist/react-select.css';
 import React from 'react';
 import FiltersSection from './filters/FiltersSection.jsx';
+import VisualizationSection from './visualization/VisualizationSection.jsx';
 
 class AnalysisPane extends React.Component {
   constructor(props){
@@ -12,7 +13,7 @@ class AnalysisPane extends React.Component {
     return (
       <div className="analysisPane sidebarPane">
         <FiltersSection propsMd={this.props.propsMd} />
-        
+        <VisualizationSection propsMd={this.props.propsMd} />
       </div>
     );
   }

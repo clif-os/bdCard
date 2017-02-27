@@ -4,7 +4,7 @@ import { guid } from '../../../../utils/generalUtils.jsx';
 
 function ActiveSlider (props) {
   const handleClick = () => {
-    props.handleFilterActiveToggle();
+    props.handleActiveToggle();
   }
   return (
     <div className={'activeSlider activeSlider-' + props.active}>

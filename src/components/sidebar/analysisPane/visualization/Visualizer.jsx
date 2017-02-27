@@ -7,8 +7,7 @@ import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
 const Range = Slider.Range;
 
-import { isSubRange, validateRangeInputValue } from '../utils.jsx';
-import { fieldUnitAndRangeHandler } from '../utils.jsx'
+import { isSubRange, validateRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
@@ -27,8 +26,8 @@ const classes = [
 const palettes = [
   {value: 'green to red', label: 'Green to Red'},
   {value: 'red to green', label: 'Red to Green'},
-  {value: 'pink to blue', label: 'Pink to Blue'},
-  {value: 'blue to pink', label: 'Blue to Pink'}
+  {value: 'increasing pink', label: 'Increasing Pink'},
+  {value: 'decreasing pink', label: 'Decreasing Pink'}
 ]
 
 class Visualizer extends React.Component {

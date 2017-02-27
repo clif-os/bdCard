@@ -7,8 +7,7 @@ import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
 const Range = Slider.Range;
 
-import { isSubRange, validateRangeInputValue } from '../utils.jsx';
-import { fieldUnitAndRangeHandler } from '../utils.jsx'
+import { isSubRange, validateRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly

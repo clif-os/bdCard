@@ -1,8 +1,13 @@
-import { linePaintIn, fillPaintIn, linePaintOut, fillPaintOut } from '../mapbox/geojsonStyles.jsx';
+import { linePaintIn, fillPaintIn, linePaintOut, fillPaintOut,
+         generatePaintArray } from '../mapbox/geojsonLayerUtils.jsx';
 
-const actions = ['FILTER'];
+const actions = ['FILTER', 'VISUALIZE'];
 
 var _geojson;
+// geojson of features within filter criteria
+var _geojsonIn;
+// geojson of features outside filter criteria
+var _geojsonOut;
 
 export const dashboardListener = () => {
   actions.forEach(action => {
@@ -47,17 +52,17 @@ const actionHandler = e => {
     case 'FILTER':
       _geojson = window.geojson;
       const splitGeojson = splitGeojsonByCriteria(geojson, e.detail);
-      console.log(e.detail);
-      console.log(splitGeojson);
+      _geojsonIn = splitGeojson.geojsonIn
+      _geojsonOut = splitGeojson.geojsonOut
       const geojsons = [
         {
-          geojson: splitGeojson.geojsonIn,
+          geojson: _geojsonIn,
           name: 'inFilter',
           linePaint: linePaintIn,
           fillPaint: fillPaintIn
         },
         {
-          geojson: splitGeojson.geojsonOut,
+          geojson: _geojsonOut,
           name: 'outFilter',
           linePaint: linePaintOut,
           fillPaint: fillPaintOut
@@ -74,6 +79,10 @@ const actionHandler = e => {
                                   );
       document.dispatchEvent(evt2);
       window.activeFeatureCount = activeFeatureCount
+      break;
+    case 'VISUALIZE':
+      const paintArray = generatePaintArray(e.detail.classes, e.detail.palette);
+      console.log(paintArray);
       break;
     default:
       break;

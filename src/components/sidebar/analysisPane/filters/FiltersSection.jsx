@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { constructFilterEventData,
-         filterEventsAreDifferent } from './utils.jsx';
-import { convertPropsMetadataToDrodownObject } from '../utils.jsx';
+         filterEventsAreDifferent } from './filterUtils.jsx';
+import { convertPropsMetadataToDrodownObject } from '../analysisUtils.jsx';
 
 // FILTER MEMORY
 

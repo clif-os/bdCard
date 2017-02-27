@@ -7,7 +7,7 @@ require('velocity-animate');
 require('velocity-animate/velocity.ui');
 import AppInterface from './AppInterface.jsx';
 import Map from './mapbox/Map.jsx';
-import { linePaintIn, fillPaintIn } from './mapbox/geojsonStyles.jsx';
+import { linePaintIn, fillPaintIn } from './mapbox/geojsonLayerUtils.jsx';
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 import { dashboardListener } from './utils/geojsonFilter.jsx'

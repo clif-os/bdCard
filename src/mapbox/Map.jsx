@@ -6,7 +6,7 @@ import {
 } from '../utils/geojsonUtils.jsx'
 import {
   buildPopupHTMLFromFeature
-} from '../utils/mapboxUtils.jsx';
+} from './generalMapboxUtils.jsx';
 
 export default class Map {
   constructor(geojsons, mapStyle) {

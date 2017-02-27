@@ -2,9 +2,11 @@ import './VisualizationSection.styl';
 import React from 'react';
 import Visualizer from './Visualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
-import { convertPropsMetadataToDrodownObject } from '../utils.jsx';
-import { constructVisEventData, visEventsAreDifferent } from './utils.jsx';
+import { convertPropsMetadataToDrodownObject } from '../analysisUtils.jsx';
+import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
 // eventually bring in constructVisEventData & visEventsAreDifferent
+
+// consider https://www.npmjs.com/package/react-color
 
 // VISUALIZER MEMORY
 var memory = {
@@ -29,13 +31,9 @@ class VisualizationSection extends React.Component {
 
   determineVisEventFire(){
     const visEventData = constructVisEventData(memory.visSetting);
-    console.log(visEventData);
-    if (memory.lastVisEventData !== null){
-      if (visEventsAreDifferent(memory.lastVisEventData, visEventData)){
-        console.log('HOLY FUCK BRAH THESE ARE DIFFERENT EVENTS');
-        const evt = new CustomEvent('VISUALIZE', {'detail': visEventData})
-        document.dispatchEvent(evt);
-      }
+    if (visEventsAreDifferent(memory.lastVisEventData, visEventData)){
+      const evt = new CustomEvent('VISUALIZE', {'detail': visEventData})
+      document.dispatchEvent(evt);
     }
     memory.lastVisEventData = visEventData;
   }

@@ -41,7 +41,6 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
       break;
   }
   // math floor and ceil are use to straddle either side of the smallest and largest values without truncating the range
-  console.log([min, max]);
   return {
     min: Math.floor(min),
     max: Math.ceil(max),

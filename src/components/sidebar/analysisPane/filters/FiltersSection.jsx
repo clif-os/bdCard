@@ -9,6 +9,7 @@ import { constructFilterEventData,
 import { convertPropsMetadataToDrodownObject } from '../utils.jsx';
 
 // FILTER MEMORY
+
 var memory = {
   filterSettings: {},
   lastFilterEventData: null
@@ -17,11 +18,11 @@ var memory = {
 class FiltersSection extends React.Component {
   constructor(props){
     super();
-    this.fields = convertPropsMetadataToDrodownObject(props.propsMd);
-    const defaultFeatureCount = window.geojson.features.length
+    this.fields = convertPropsMetadataToDrodownObject(props.propsMd);    
+    const activeFeatureCount = window.activeFeatureCount === undefined ? window.geojson.features.length : window.activeFeatureCount;
     this.state = {
       filterIds: Object.keys(memory.filterSettings),
-      featureCountMessage: `Showing All ${defaultFeatureCount} Tracts`
+      featureCountMessage: `Showing All ${activeFeatureCount} Tracts`
     }
     this.handleAddFilter = this.handleAddFilter.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
@@ -57,7 +58,6 @@ class FiltersSection extends React.Component {
   }
 
   updateFilterSettingsMemory(filterId, filterState){
-    const lastMemory = Object.assign({}, memory.filterSettings[filterId]);
     memory.filterSettings[filterId] = filterState;
     if ( !filterState.freezeFilterValidity ) {
       this.determineFilterEventFire();
@@ -141,7 +141,6 @@ class FiltersSection extends React.Component {
         Object.keys(memory.filterSettings).forEach(settingKey => {
           if (filterId !== settingKey) {
             const field = memory.filterSettings[settingKey].fieldValue;
-            console.log(field);
             fields.splice(fields.indexOf(field), 1);
           }
         });

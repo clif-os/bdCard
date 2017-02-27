@@ -37,41 +37,48 @@ class Visualizer extends React.Component {
     //// CREATE THE DEFAULT STATE
     // DETERMINE UNITS AND FORMATTERS
     // consider removing the propsMD from the props and only including it in the utils;
-    const defaultFieldVal = props.fields[0].value;
-    var min, max, units, unitFormatter, unitUnformatter;
-    ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
-    // SET THE DEFAULT STATE
-    const defaultVisSetting = {
-      titleValue: '',
-      visActive: true,
-      fieldValue: props.fields[0],
-      classNumValue: classes[2].value,
-      paletteValue: palettes[0].value,
-      visValid: false,
-      freezeVisValidity: false,
-      range: [min, max],
-      selectedRange: [min, max],
-      units: units,
-      unitFormatter: unitFormatter,
-      unitUnformatter: unitUnformatter,
-      rangeMinInputActive: false,
-      rangeMaxInputActive: false,
-      rangeInputValue: ''
-    }
+    
     //// LOAD STATE FROM MEMORY
     if (Object.keys(props.memory).length === 0){
+      const defaultFieldVal = props.fields[0].value;
+      var min, max, units, unitFormatter, unitUnformatter;
+      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
+      // SET THE DEFAULT STATE
+      const defaultVisSetting = {
+        titleValue: '',
+        visActive: true,
+        visValid: true,
+        freezeVisValidity: false,
+        fieldValue: props.fields[0],
+        classNumValue: classes[2].value,
+        paletteValue: palettes[0].value,
+        range: [min, max],
+        selectedRange: [min, max],
+        units: units,
+        unitFormatter: unitFormatter,
+        unitUnformatter: unitUnformatter,
+        rangeMinInputActive: false,
+        rangeMaxInputActive: false,
+        rangeInputValue: ''
+      }
       this.state = defaultVisSetting;
     } else {
       this.state = props.memory;  
     }
     // TEMP
     this.state.tempRangeSelectorActive = false
-    //// HANDLER BINDINGS
+    //// HANDLER BINDINGS ////
+    // general bindings
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleVisActiveToggle = this.handleVisActiveToggle.bind(this);
+
+    //class-based visualization bindings
     this.handleClassNumSelection = this.handleClassNumSelection.bind(this);
     this.handlePaletteSelection = this.handlePaletteSelection.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
+    
+    //pass-fail visualization bindings
+    // needs at least a second field selection binding, if not a third
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.handleSliderAfterChange = this.handleSliderAfterChange.bind(this);
     this.handleRangeInputFocus = this.handleRangeInputFocus.bind(this);

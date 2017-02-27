@@ -19,27 +19,28 @@ class Filter extends React.Component {
     //// CREATE THE DEFAULT STATE
     // DETERMINE UNITS AND FORMATTERS
     // consider removing the propsMD from the props and only including it in the utils;
-    const defaultFieldVal = props.fields[0].value;
-    var min, max, units, unitFormatter, unitUnformatter;
-    ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
-    // SET THE DEFAULT STATE
-    const defaultFilterSetting = {
-      titleValue: '',
-      filterActive: true,
-      fieldValue: props.fields[0],
-      filterValid: false,
-      freezeFilterValidity: false,
-      range: [min, max],
-      selectedRange: [min, max],
-      units: units,
-      unitFormatter: unitFormatter,
-      unitUnformatter: unitUnformatter,
-      rangeMinInputActive: false,
-      rangeMaxInputActive: false,
-      rangeInputValue: ''
-    }
+    
     //// LOAD STATE FROM MEMORY
     if (props.memory === undefined){
+      const defaultFieldVal = props.fields[0].value;
+      var min, max, units, unitFormatter, unitUnformatter;
+      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
+      // SET THE DEFAULT STATE
+      const defaultFilterSetting = {
+        titleValue: '',
+        filterActive: true,
+        fieldValue: props.fields[0],
+        filterValid: false,
+        freezeFilterValidity: false,
+        range: [min, max],
+        selectedRange: [min, max],
+        units: units,
+        unitFormatter: unitFormatter,
+        unitUnformatter: unitUnformatter,
+        rangeMinInputActive: false,
+        rangeMaxInputActive: false,
+        rangeInputValue: ''
+      }
       this.state = defaultFilterSetting;
     } else {
       this.state = props.memory;  

@@ -3,6 +3,7 @@ import React from 'react';
 import Visualizer from './Visualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { convertPropsMetadataToDrodownObject } from '../utils.jsx';
+import { constructVisEventData, visEventsAreDifferent } from './utils.jsx';
 // eventually bring in constructVisEventData & visEventsAreDifferent
 
 // VISUALIZER MEMORY
@@ -20,7 +21,6 @@ class VisualizationSection extends React.Component {
   }
 
   updateVisSettingMemory(visId, visState){
-    const lastMemory = Object.assign({}, memory.visSetting[visId]);
     memory.visSetting = visState;
     if ( !visState.freezeVisValidity ) {
       this.determineVisEventFire();
@@ -29,8 +29,10 @@ class VisualizationSection extends React.Component {
 
   determineVisEventFire(){
     const visEventData = constructVisEventData(memory.visSetting);
+    console.log(visEventData);
     if (memory.lastVisEventData !== null){
       if (visEventsAreDifferent(memory.lastVisEventData, visEventData)){
+        console.log('HOLY FUCK BRAH THESE ARE DIFFERENT EVENTS');
         const evt = new CustomEvent('VISUALIZE', {'detail': visEventData})
         document.dispatchEvent(evt);
       }

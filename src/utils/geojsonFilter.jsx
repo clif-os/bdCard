@@ -65,13 +65,15 @@ const actionHandler = e => {
       ];
       const evt1 = new CustomEvent('DRAW_NEW_GJ', {'detail': geojsons});
       document.dispatchEvent(evt1);
+      const activeFeatureCount = splitGeojson.geojsonIn.features.length;
       const evt2 = new CustomEvent('UPDATE_FILTER_SECTION', {'detail': {
-                                        numFeaturesInFilter: splitGeojson.geojsonIn.features.length,
+                                        numFeaturesInFilter: activeFeatureCount,
                                         numFeaturesTotal: _geojson.features.length
                                       }
                                     }
                                   );
       document.dispatchEvent(evt2);
+      window.activeFeatureCount = activeFeatureCount
       break;
     default:
       break;

@@ -30,18 +30,18 @@ export const splitGeojsonByCriteria = (geojson, criteria) => {
   });
 }
 
-const generateGeojsonShells = (splitRanges, field) => {
+const generateGeojsonShells = (splitRanges, field, unitFormatter) => {
   // unit converter needs to end up here
   var shells = [];
   splitRanges.forEach(range => {
-    console.log(range);
     shells.push({
       type: 'FeatureCollection',
       properties: {
         field: field,
         fieldDescription: gjPropsMetadata[field].description,
         range: range,
-        rangeDescription: `${range[0]} - ${range[1]}`
+        min: `${unitFormatter(range[0])}`,
+        max: `${unitFormatter(range[1])}`
       },
       features: []
     });
@@ -51,16 +51,17 @@ const generateGeojsonShells = (splitRanges, field) => {
     properties: {
       field: field,
       fieldDescription: gjPropsMetadata[field].description,
-      range: 'null values and non-numbers'
+      range: 'null values and non-numbers',
+      min: null,
+      max: null
     },
     features: []
   });
-  console.log(shells)
   return shells;
 }
 
-const splitGeojsonByRanges = (geojson, field, splitRanges) => {
-  const geojsonShells = generateGeojsonShells(splitRanges, field);
+const splitGeojsonByRanges = (geojson, field, splitRanges, unitFormatter) => {
+  const geojsonShells = generateGeojsonShells(splitRanges, field, unitFormatter);
   return geojson.features.reduce((acc, feature) => {
     const val = feature.properties[field];
     let assigned = false;
@@ -104,8 +105,8 @@ const splitRangeByClasses = (range, classes) => {
   return splitRanges;
 }
 
-export const splitGeojsonByFieldAndClasses = (geojson, field, classes) => {
+export const splitGeojsonByFieldAndClasses = (geojson, field, classes, unitFormatter) => {
   const range = gjPropsMetadata[field].range;
   const splitRanges = splitRangeByClasses(range, classes)
-  return splitGeojsonByRanges(geojson, field, splitRanges);
+  return splitGeojsonByRanges(geojson, field, splitRanges, unitFormatter);
 }

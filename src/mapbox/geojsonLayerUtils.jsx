@@ -179,9 +179,9 @@ export const generatePaintArray = (classes, colorScheme) => {
   return paintPacks;
 }
 
-export const buildGeojsonLayerArray = (gj, field, classes, palette) => {
+export const buildGeojsonLayerArray = (gj, field, classes, palette, unitFormatter) => {
   const paints = generatePaintArray(classes, palette);
-  const geojsons = splitGeojsonByFieldAndClasses(gj, field, classes);
+  const geojsons = splitGeojsonByFieldAndClasses(gj, field, classes, unitFormatter);
   if (geojsons.length !== paints.length){
     console.error('incoming geojsons and paints to "buildGeojsonLayerArray" are different lengths, these should always be the same length')
   }
@@ -189,10 +189,13 @@ export const buildGeojsonLayerArray = (gj, field, classes, palette) => {
   // arbitrarily chosing to loop over geojsons, could also be paints
   geojsons.forEach((gj, i) => {
     const order = i + 1
+    // currently, build geojsonLayerArray assumes that the incoming gjs meet the filter criteria,
+    // later on this might not be the case and should be added as a variable
     gjLayers.push(
       {
         geojson: gj,
         name: 'field-class' + order,
+        filterStatus: 'Meets Filter Criteria',
         linePaint: paints[i].linePaint,
         fillPaint: paints[i].fillPaint
       }

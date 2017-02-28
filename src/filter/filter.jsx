@@ -1,5 +1,7 @@
 import { linePaintIn, fillPaintIn, linePaintOut, fillPaintOut,
          generatePaintArray, buildGeojsonLayerArray } from '../mapbox/geojsonLayerUtils.jsx';
+import { convertGJLayersToLegendData } from '../components/legend/legendUtils.jsx';
+import {splitGeojsonByCriteria } from './filterUtils.jsx';
 
 const actions = ['FILTER', 'VISUALIZE'];
 
@@ -32,15 +34,13 @@ const actionHandler = e => {
           {
             geojson: _geojsonIn,
             name: 'inFilter',
-            description: 'Meet Filter Criteria',
+            filterStatus: 'Meets Filter Criteria',
             linePaint: linePaintIn,
             fillPaint: fillPaintIn
           }
         ];
       } else {
-        const paintArray = generatePaintArray(_visCriteria.classes, _visCriteria.palette);
-        const classifiedGJArray = splitGeojsonByFieldAndClasses(_geojsonIn, _visCriteria.field.value, _visCriteria.classes);
-        geojsonLayers = buildGeojsonLayerArray(classifiedGJArray, paintArray, _visCriteria.field.value);
+        geojsonLayers = buildGeojsonLayerArray(_geojsonIn,  _visCriteria.field.value, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
       }
       const evt2 = new CustomEvent('UPDATE_FILTER_SECTION', {'detail': {
                                         numFeaturesInFilter: _geojsonIn.features.length,
@@ -56,21 +56,24 @@ const actionHandler = e => {
         _geojsonIn = window.geojson;
       }
       _visCriteria = e.detail;
-      geojsonLayers = buildGeojsonLayerArray(_geojsonIn,  _visCriteria.field.value, _visCriteria.classes, _visCriteria.palette);
+      geojsonLayers = buildGeojsonLayerArray(_geojsonIn,  _visCriteria.field.value, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
       break;
     default:
       break;
   }
-  // push in the layers not caught by the filter
+  // push in the filtered-out layers
   geojsonLayers.push(
     {
       geojson: _geojsonOut,
       name: 'outFilter',
-      description: 'Do Not Meet Filter Criteria',
+      filterStatus: 'Does Not Meet Filter Criteria',
       linePaint: linePaintOut,
       fillPaint: fillPaintOut
     }
-  )
+  );
+  const legendDescription = _visCriteria === null ? 'NULL' : _visCriteria.field.label;
+  const legendData = convertGJLayersToLegendData(geojsonLayers, legendDescription);
+  console.log(legendData);
   const evt1 = new CustomEvent('DRAW_NEW_GJ', {'detail': geojsonLayers});
   document.dispatchEvent(evt1);
 }

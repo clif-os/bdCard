@@ -30,42 +30,56 @@ export const splitGeojsonByCriteria = (geojson, criteria) => {
   });
 }
 
-const generateGeojsonShells = num => {
+const generateGeojsonShells = (splitRanges, field) => {
+  // unit converter needs to end up here
   var shells = [];
-  // create an extra shell for null values
-  const numWithNull = num + 1
-  for (var i = 0; i < numWithNull; i++){
-    shells.push(
-      {
-        type: 'FeatureCollection',
-        features: []
-      }
-    );
-  }
+  splitRanges.forEach(range => {
+    console.log(range);
+    shells.push({
+      type: 'FeatureCollection',
+      properties: {
+        field: field,
+        fieldDescription: gjPropsMetadata[field].description,
+        range: range,
+        rangeDescription: `${range[0]} - ${range[1]}`
+      },
+      features: []
+    });
+  })
+  shells.push({
+    type: 'FeatureCollection',
+    properties: {
+      field: field,
+      fieldDescription: gjPropsMetadata[field].description,
+      range: 'null values and non-numbers'
+    },
+    features: []
+  });
+  console.log(shells)
   return shells;
 }
 
 const splitGeojsonByRanges = (geojson, field, splitRanges) => {
-  const geojsonShells = generateGeojsonShells(splitRanges.length);
+  const geojsonShells = generateGeojsonShells(splitRanges, field);
   return geojson.features.reduce((acc, feature) => {
     const val = feature.properties[field];
-    var assigned = false;
-    if (isNaN(val) || val === null){
+    let assigned = false;
+    if (isNaN(val) || val === null) {
       // handle non numbers and nulls, push them to the final shell, which is for nulls
       acc[acc.length - 1].features.push(feature);
       assigned = true;
-    } else if (val === splitRanges[splitRanges.length - 1][1]){
+    } else if (val === splitRanges[splitRanges.length - 1][1]) {
       // handle the max value differently since most bins are >= min && < max (final bin is >=min && <=max in order to include the max)
       acc[splitRanges.length - 1].features.push(feature);
       assigned = true;
-    } else{
+    } else {
       splitRanges.forEach((range, i) => {
-        if (val >= range[0] && val < range[1]){
+        if (val >= range[0] && val < range[1]) {
           acc[i].features.push(feature);
           assigned = true;
         }
       });
-    }
+    };
     if (!assigned) console.error('val not assigned', val);
     return acc;
   }, geojsonShells);
@@ -74,12 +88,12 @@ const splitGeojsonByRanges = (geojson, field, splitRanges) => {
 const splitRangeByClasses = (range, classes) => {
   const min = range.min;
   const max = range.max;
-  const classLength = Math.round( (max - min) / classes );
+  const classLength = Math.round((max - min) / classes);
   var minVal = min;
   var splitRanges = [];
-  for (var i = 0; i < classes; i++){
+  for (var i = 0; i < classes; i++) {
     let maxVal;
-    if (i === (classes - 1)){
+    if (i === (classes - 1)) {
       maxVal = max;
     } else {
       maxVal = minVal + classLength;

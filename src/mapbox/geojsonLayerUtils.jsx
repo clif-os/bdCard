@@ -43,6 +43,8 @@ export const fillPaintOut = {
 ////////////////////////////////
 // using: http://colorbrewer2.org/#type=sequential&scheme=PuRd&n=9
 
+import { splitGeojsonByCriteria, splitGeojsonByFieldAndClasses } from '../filter/filterUtils.jsx';
+
 const buildPaintPack = (color) => {
   return {
     linePaint: {
@@ -177,7 +179,9 @@ export const generatePaintArray = (classes, colorScheme) => {
   return paintPacks;
 }
 
-export const buildGeojsonLayerArray = (geojsons, paints, field) => {
+export const buildGeojsonLayerArray = (gj, field, classes, palette) => {
+  const paints = generatePaintArray(classes, palette);
+  const geojsons = splitGeojsonByFieldAndClasses(gj, field, classes);
   if (geojsons.length !== paints.length){
     console.error('incoming geojsons and paints to "buildGeojsonLayerArray" are different lengths, these should always be the same length')
   }

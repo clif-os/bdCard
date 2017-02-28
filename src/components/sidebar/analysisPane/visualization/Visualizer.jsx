@@ -26,8 +26,14 @@ const classes = [
 const palettes = [
   {value: 'green to red', label: 'Green to Red'},
   {value: 'red to green', label: 'Red to Green'},
+  {value: 'increasing green', label: 'Increasing Green'},
+  {value: 'decreasing green', label: 'Decreasing Green'},
+  {value: 'increasing red', label: 'Increasing Red'},
+  {value: 'decreasing red', label: 'Decreasing Red'},
   {value: 'increasing pink', label: 'Increasing Pink'},
-  {value: 'decreasing pink', label: 'Decreasing Pink'}
+  {value: 'decreasing pink', label: 'Decreasing Pink'},
+  {value: 'increasing blue', label: 'Increasing Blue'},
+  {value: 'decreasing blue', label: 'Decreasing Blue'}
 ]
 
 class Visualizer extends React.Component {

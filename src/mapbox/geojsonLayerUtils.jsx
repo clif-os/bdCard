@@ -85,7 +85,7 @@ const greenRedColors = {
   '8': '#f46d43',
   '9': '#d73027',
   '10': '#a50026',
-  null: '#000000'
+  'null': '#000000'
 }
 
 const pinkScaleColors = {
@@ -99,6 +99,48 @@ const pinkScaleColors = {
   '8': '#ce1256',
   '9': '#980043',
   '10': '#67001f',
+  'null': '#000000'
+}
+
+const greenScaleColors = {
+  '1': '#FFFFFF',
+  '2': '#f7fcf5',
+  '3': '#e5f5e0',
+  '4': '#c7e9c0',
+  '5': '#a1d99b',
+  '6': '#74c476',
+  '7': '#41ab5d',
+  '8': '#238b45',
+  '9': '#006d2c',
+  '10': '#00441b',
+  'null': '#000000'
+}
+
+const redScaleColors = {
+  '1': '#FFFFFF',
+  '2': '#fff5f0',
+  '3': '#fee0d2',
+  '4': '#fcbba1',
+  '5': '#fc9272',
+  '6': '#fb6a4a',
+  '7': '#ef3b2c',
+  '8': '#cb181d',
+  '9': '#a50f15',
+  '10': '#67000d',
+  'null': '#000000'
+}
+
+const blueScaleColors = {
+  '1': '#FFFFFF',
+  '2': '#f7fbff',
+  '3': '#deebf7',
+  '4': '#c6dbef',
+  '5': '#9ecae1',
+  '6': '#6baed6',
+  '7': '#4292c6',
+  '8': '#2171b5',
+  '9': '#08519c',
+  '10': '#08306b',
   'null': '#000000'
 }
 
@@ -139,9 +181,24 @@ export const generatePaintArray = (classes, colorScheme) => {
         colorIdxs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
         break;      
     }
-  } else if ((colorScheme.includes('increasing') || colorScheme.includes('decreasing')) && colorScheme.includes('pink')){
-    colorScale = pinkScaleColors;
+  } else if ((colorScheme.includes('increasing') || colorScheme.includes('decreasing'))){
     if (colorScheme.includes('decreasing')) reverse = true;
+    switch(colorScheme.split(' ')[1]){
+      case 'pink':
+        colorScale = pinkScaleColors;    
+        break;
+      case 'blue':
+        colorScale = blueScaleColors;
+        break;
+      case 'red':
+        colorScale = redScaleColors;
+        break;
+      case 'green':
+        colorScale = greenScaleColors;
+        break;
+      default:
+        break;
+    }
     switch(classes){
       case 2:
         colorIdxs = ['4', '7'];
@@ -171,7 +228,7 @@ export const generatePaintArray = (classes, colorScheme) => {
         colorIdxs = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
         break;
     }
-  }
+  } 
   if (reverse) colorIdxs.reverse();
   // push in null value to catch nulls
   colorIdxs.push('null')

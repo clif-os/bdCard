@@ -1,0 +1,41 @@
+.legendEntry{
+  height: 25px;
+  line-height: 25px;
+  position: relative;
+  width: 100%;
+  .legendEntry-colorSquare{
+    height: 15px;
+    width: 15px;
+    position: relative;
+    border-radius: 3px;
+    float: left;
+    margin-right: 8px;
+    top: 50%;
+    margin-top: -7.5px;
+    z-index: 200;
+    opacity: .8;
+    .legendEntry-colorSquare-inner{
+      position: absolute;
+      border-radius: 3px;
+      top: 10%
+      left: 10%
+      height: 80%;
+      width: 80%;
+      opacity: .5;
+      z-index: 202;
+    }
+    .legendEntry-colorSquare-innerBacksplash{
+      position: absolute;
+      border-radius: 3px;
+      top: 10%
+      left: 10%
+      height: 80%;
+      width: 80%;
+      background-color: white;
+      z-index: 201;
+    }
+  }
+  .legendEntry-title{
+    float: left;
+  }
+}

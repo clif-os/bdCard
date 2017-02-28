@@ -13,7 +13,7 @@ global.mapboxgl = require('mapbox-gl');
 import { dashboardListener } from './filter/filter.jsx'
 import gj from './data/jchs-boston-norm.json';
 import gjPropsMetadata from './data/boston_props_metadata.json';
-
+import { convertGJLayersToLegendData } from './components/legend/legendUtils.jsx';
 
 
 const geojsonTilesets = [
@@ -28,14 +28,17 @@ const geojsonTilesets = [
 // in order to perform rapid lookups --> things like selections and even zooms
 window.geojsonLookup = convertGeojsonToLookup(gj);
 window.geojson = gj;
-const geojsons = [
+const geojsonLayers = [
   {
     geojson: gj,
     name: 'inFilter',
+    filterStatus: 'Meets Filter Criteria',
     linePaint: linePaintIn,
     fillPaint: fillPaintIn
   }
 ]
+const legendDescription = 'NULL';
+const legendData = convertGJLayersToLegendData(geojsonLayers, legendDescription);
 // empty window object for making selections
 window.selectedFeature = null;
 
@@ -45,7 +48,7 @@ const mapStyle = 'mapbox://styles/mapbox/streets-v9' // streets style
 // const mapStyle="mapbox://styles/camp-amos/ciwn0ej5z00402pnxt5t42d4o"; //light style
 // const mapStyle = "mapbox://styles/camp-amos/cirmc9juf002hg1nboacfr7u9"; // dark style
 dashboardListener();
-const m = new Map(geojsons, mapStyle);
-render( <AppInterface propsMd={gjPropsMetadata} / > ,
+const m = new Map(geojsonLayers, mapStyle);
+render( <AppInterface propsMd={gjPropsMetadata} legendData={legendData}/> ,
   document.getElementById('AppInterface')
 );

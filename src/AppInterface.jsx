@@ -2,6 +2,7 @@ import './AppInterface.styl';
 import React from 'react';
 import MainLoadingPane from './components/loadingPanes/MainLoadingPane.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
+import Legend from './components/legend/Legend.jsx';
 
 import { VelocityTransitionGroup } from 'velocity-react';
 
@@ -34,6 +35,7 @@ class AppInterface extends React.Component {
             }
         </VelocityTransitionGroup>
         <Sidebar propsMd={this.props.propsMd} />
+        <Legend legendData={this.props.legendData} />
       </div>
     );
   }

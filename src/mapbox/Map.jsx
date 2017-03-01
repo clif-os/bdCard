@@ -62,7 +62,8 @@ export default class Map {
 
     //// Legend.jsx listeners ////
     document.addEventListener('HOVER_LAYER', this.hoverLayer.bind(this));
-    document.addEventListener('UNHOVER_LAYER', this.unhover.bind(this));
+    document.addEventListener('UNHOVER_LAYER', this.unhoverLayer.bind(this));
+    // document.addEventListener('SELECT_LAYER', this.selectLayer.bind(this));
 
     //// internal map event handlers ////
     this.map.on('mousemove', this.onMouseMove.bind(this));
@@ -114,6 +115,7 @@ export default class Map {
       const id = features[0].properties.GEOID;
       this.selectFeature(id, e);
     } else {
+      console.log('deselecting')
       this.deselectFeature();
     }
   }
@@ -154,9 +156,20 @@ export default class Map {
     const layerName = e.detail;
     this.geojsons.forEach(gj => {
       if (gj.name === layerName){
-        this.map.getSource('hover').setData(gj.geojson);
+        console.log('foundLayer');
+        this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .8);
+        // this.map.getSource('hover').setData(gj.geojson);
+      } else {
+        this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .2);
       }
-    })
+    });
+  }
+
+  unhoverLayer(e){
+    const layerName = e.detail;
+    this.geojsons.forEach(gj => {
+      this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .6);
+    });
   }
 
   unhover(id) {
@@ -169,6 +182,16 @@ export default class Map {
     window.selectedFeature = window.geojsonLookup[id];
     console.log('SELECTED FEATURE:', selectedFeature);
     this.addSelectionPopup(window.selectedFeature, e);
+  }
+
+  selectLayer(e){
+    const layerName = e.detail;
+    this.geojsons.forEach(gj => {
+      if (gj.name === layerName){
+        this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', 1);
+        // this.map.getSource('selected').setData(gj.geojson);
+      }
+    })
   }
 
   addSelectionPopup(feature, e) {

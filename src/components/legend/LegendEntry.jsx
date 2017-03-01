@@ -17,17 +17,29 @@ function LegendEntry(props) {
     colorSquareStyle.opacity = '0.3';
   }
   const handleMouseEnter = () => {
-    props.hoverLayer(props.layerName);
+    if (props.layerHasFeatures) props.hoverLayer(props.layerName);
+  }
+  const handleMouseLeave = () => {
+    if (props.layerHasFeatures) props.unhoverLayer(props.layerName);
+  }
+  const handleOnClick = () => {
+    if (props.layerHasFeatures) props.selectLayer(props.layerName);
   }
   return (
-    <div className='legendEntry' 
-         style={
-            props.layerHasFeatures 
-              ? null
-              : {opacity: '.5'}
-         }
+    <div className=
+          {'legendEntry legendEntry-' + (props.layerHasFeatures
+            ? 'active'
+            : 'inactive')
+          }
+         style=
+          {
+              props.layerHasFeatures 
+                ? null
+                : {opacity: '.5'}
+          }
          onMouseEnter={handleMouseEnter}
-         onMouseLeave={props.unhoverLayer}
+         onMouseLeave={handleMouseLeave}
+         onClick={handleOnClick}
     >
       <div className='legendEntry-colorSquare' style={colorSquareStyle}>
         <div className='legendEntry-colorSquare-inner' style={colorSquareStyle}/>

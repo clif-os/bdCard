@@ -3,7 +3,13 @@ export const numberWithCommas = (x) => {
 }
 
 export const  dollarFormatter = v => {
-  return '$' + numberWithCommas(v);
+  v = v.toString();
+  if (v.includes('.')){
+    v = v.split('.')
+    return '$' + numberWithCommas(v[0]) + '.' + v[1];
+  } else{
+    return '$' + numberWithCommas(v);
+  }
 }
 
 export const dollarUnformatter = numishString => {

@@ -60,6 +60,10 @@ export default class Map {
     //// geojsonFilter.jsx listeners ////
     document.addEventListener('DRAW_NEW_GJ', this.redrawMap.bind(this));
 
+    //// Legend.jsx listeners ////
+    document.addEventListener('HOVER_LAYER', this.hoverLayer.bind(this));
+    document.addEventListener('UNHOVER_LAYER', this.unhover.bind(this));
+
     //// internal map event handlers ////
     this.map.on('mousemove', this.onMouseMove.bind(this));
     this.map.on('click', this.onMapClicked.bind(this));
@@ -97,7 +101,7 @@ export default class Map {
       const id = features[0].properties.GEOID;
       this.hoverFeature(id);
     } else {
-      this.unhoverFeature();
+      this.unhover();
     }
   }
 
@@ -146,7 +150,16 @@ export default class Map {
     this.map.getSource('hover').setData(window.geojsonLookup[id]);
   }
 
-  unhoverFeature(id) {
+  hoverLayer(e){
+    const layerName = e.detail;
+    this.geojsons.forEach(gj => {
+      if (gj.name === layerName){
+        this.map.getSource('hover').setData(gj.geojson);
+      }
+    })
+  }
+
+  unhover(id) {
     this.map.getCanvas().style.cursor = '';
     this.map.getSource('hover').setData(geojsonNull);
   }
@@ -230,7 +243,8 @@ export default class Map {
     //#15f4ee esri neon blue
 
     window.drawnLayers = [];
-    window.sources = []
+    window.sources = [];
+    this.geojsons = geojsons;
     geojsons.forEach(geojson => {
       window.sources.push(geojson.name);
       this.map.addSource(geojson.name, {

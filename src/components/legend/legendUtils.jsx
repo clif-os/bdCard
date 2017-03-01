@@ -12,7 +12,9 @@ export const convertGJLayersToLegendData = (gjLayers, description) => {
         field: lyr.geojson.properties === undefined ? null : lyr.geojson.properties.field,
         range: lyr.geojson.properties === undefined ? null : lyr.geojson.properties.range,
         min: lyr.geojson.properties === undefined ? null : lyr.geojson.properties.min,
-        max: lyr.geojson.properties === undefined ? null : lyr.geojson.properties.max
+        max: lyr.geojson.properties === undefined ? null : lyr.geojson.properties.max,
+        layerHasFeatures: (lyr.geojson.features.length > 0),
+        layerName: lyr.name
       });
     }
     return acc;

@@ -16,8 +16,19 @@ function LegendEntry(props) {
   if (entryTitle === 'Does Not Meet Filter Criteria'){
     colorSquareStyle.opacity = '0.3';
   }
+  const handleMouseEnter = () => {
+    props.hoverLayer(props.layerName);
+  }
   return (
-    <div className='legendEntry'>
+    <div className='legendEntry' 
+         style={
+            props.layerHasFeatures 
+              ? null
+              : {opacity: '.5'}
+         }
+         onMouseEnter={handleMouseEnter}
+         onMouseLeave={props.unhoverLayer}
+    >
       <div className='legendEntry-colorSquare' style={colorSquareStyle}>
         <div className='legendEntry-colorSquare-inner' style={colorSquareStyle}/>
         <div className='legendEntry-colorSquare-innerBacksplash' />

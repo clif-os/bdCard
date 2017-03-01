@@ -12,13 +12,13 @@ export const linePaintIn = {
       [14, 2]
     ]
   },
-  'line-opacity': 0.4,
+  'line-opacity': 0.6,
   'line-color': defaultColor
 }
 
 export const fillPaintIn = {
   'fill-color': defaultColor,
-  'fill-opacity': 0.3
+  'fill-opacity': 0.4
 }
 
 export const linePaintOut = {

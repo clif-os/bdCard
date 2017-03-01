@@ -1,6 +1,7 @@
 import React from 'react';
 import './Legend.styl';
 import LegendEntry from './LegendEntry.jsx';
+var debounce = require('lodash.debounce');
 
 var memory = null
 
@@ -27,12 +28,12 @@ class Legend extends React.Component {
 
   hoverLayer(layerName){
     const hoverLayer = new CustomEvent('HOVER_LAYER', {detail: layerName})
-    document.dispatchEvent(hoverLayer);
+    debounce(document.dispatchEvent(hoverLayer)), 4000;
   }
   
   unhoverLayer(layerName){
     const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: layerName})
-    document.dispatchEvent(unhoverLayer);
+    debounce(document.dispatchEvent(unhoverLayer)), 4000;
   }
 
   selectLayer(layerName){

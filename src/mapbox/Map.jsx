@@ -73,6 +73,7 @@ export default class Map {
   }
 
   ///////// CUSTOM MAPBOX CONTROL HANDLERS /////////
+
   redrawMap(e) {
     const geojsons = e.detail;
     this.clearLayers();
@@ -154,21 +155,37 @@ export default class Map {
 
   hoverLayer(e){
     const layerName = e.detail;
+    this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .8);
+    this.map.setPaintProperty(layerName + '-lines-mimio', 'line-opacity', 1);
     this.geojsons.forEach(gj => {
-      if (gj.name === layerName){
-        console.log('foundLayer');
-        this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .8);
-        // this.map.getSource('hover').setData(gj.geojson);
-      } else {
-        this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .2);
-      }
+      if (gj.name !== layerName){
+        if (gj.name === 'inFilter'){
+          this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .3);
+          this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .4);
+        } else if (gj.name === 'outFilter') {
+          this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .05);
+          this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .1);
+        } else {
+          this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .3);
+          this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .6);
+        }
+        
+      } 
     });
   }
 
-  unhoverLayer(e){
-    const layerName = e.detail;
+  unhoverLayer(){
     this.geojsons.forEach(gj => {
-      this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .6);
+      if (gj.name === 'inFilter'){
+        this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .4);
+        this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .6);
+      } else if (gj.name === 'outFilter') {
+        this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .1);
+        this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .15);
+      } else {
+        this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .6);
+        this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .8);
+      }
     });
   }
 

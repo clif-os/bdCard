@@ -27,18 +27,18 @@ class Legend extends React.Component {
   }
 
   hoverLayer(layerName){
-    const hoverLayer = new CustomEvent('HOVER_LAYER', {detail: layerName})
-    debounce(document.dispatchEvent(hoverLayer)), 4000;
+    const hoverLayer = new CustomEvent('HOVER_LAYER', {detail: layerName});
+    document.dispatchEvent(hoverLayer);
   }
   
   unhoverLayer(layerName){
-    const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: layerName})
-    debounce(document.dispatchEvent(unhoverLayer)), 4000;
+    const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: layerName});
+    document.dispatchEvent(unhoverLayer);
   }
 
   selectLayer(layerName){
     console.log(layerName)
-    const selectLayer = new CustomEvent('SELECT_LAYER', {detail: layerName})
+    const selectLayer = new CustomEvent('SELECT_LAYER', {detail: layerName});
     document.dispatchEvent(selectLayer);
   }
   

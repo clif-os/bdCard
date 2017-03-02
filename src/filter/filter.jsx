@@ -71,10 +71,8 @@ const actionHandler = e => {
           linePaint: linePaintIn,
           fillPaint: fillPaintIn
         }];
-      console.log('attempting to unvisualize')
       break;
     case 'VISUALIZE':
-      console.log('attempting to visualize');
       if (_geojsonIn === undefined) {
         _geojsonIn = window.geojson;
       }

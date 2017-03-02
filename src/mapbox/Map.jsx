@@ -113,12 +113,11 @@ export default class Map {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: window.drawnLayers
     });
-    this.consoleLogMapInfo();
+    // this.consoleLogMapInfo();
     if (features.length) {
       const id = features[0].properties.GEOID;
       this.selectFeature(id, e);
     } else {
-      console.log('deselecting')
       this.deselectFeature();
     }
   }
@@ -221,7 +220,7 @@ export default class Map {
   selectFeature(id, e) {
     this.map.getSource('selected').setData(window.geojsonLookup[id]);
     window.selectedFeature = window.geojsonLookup[id];
-    console.log('SELECTED FEATURE:', selectedFeature);
+    // console.log('SELECTED FEATURE:', selectedFeature);
     this.addSelectionPopup(window.selectedFeature, e);
   }
 

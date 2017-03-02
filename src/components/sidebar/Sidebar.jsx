@@ -3,6 +3,7 @@ import './Sidebar.styl';
 import NavBar from './navBar/NavBar.jsx';
 import AnalysisPane from './analysisPane/AnalysisPane.jsx';
 import HomePane from './homePane/HomePane.jsx';
+import RandomPane1 from './randomPane1/RandomPane1.jsx';
 
 class Sidebar extends React.Component {
   constructor(props){
@@ -34,6 +35,8 @@ class Sidebar extends React.Component {
         return <HomePane />;
       case 'analysis':
         return <AnalysisPane propsMd={this.props.propsMd} />;
+      case 'settings':
+        return <RandomPane1 />;
       default:
         return <HomePane />;
     }

@@ -20,7 +20,7 @@ function LegendEntry(props) {
     if (props.layerHasFeatures) props.hoverLayer(props.layerName);
   }
   const handleMouseLeave = () => {
-    if (props.layerHasFeatures) props.unhoverLayer(props.layerName);
+    if (props.layerHasFeatures) props.unhoverLayer(props.layerName, props.color);
   }
   const handleOnClick = () => {
     if (props.layerHasFeatures) props.selectLayer(props.layerName);

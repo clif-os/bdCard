@@ -25,13 +25,13 @@ class Legend extends React.Component {
     memory = newState;
   }
 
-  hoverLayer(layerName){
+  hoverLayer(layerName, index){
     const hoverLayer = new CustomEvent('HOVER_LAYER', {detail: layerName});
     document.dispatchEvent(hoverLayer);
   }
   
-  unhoverLayer(layerName){
-    const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: layerName});
+  unhoverLayer(layerName, layerColor){
+    const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: {layerName: layerName, layerColor: layerColor}});
     document.dispatchEvent(unhoverLayer);
   }
 
@@ -71,11 +71,13 @@ class Legend extends React.Component {
 
   renderLegendEntryNodes(nodesData){
     const nodes = nodesData.map((nodeData, i) => {
+      const index = i + 1;
       return (
         <LegendEntry key={i} description={nodeData.description} min={nodeData.min} max={nodeData.max} color={nodeData.color}
                      range={nodeData.range} layerHasFeatures={nodeData.layerHasFeatures} layerName={nodeData.layerName}
                      hoverLayer={this.hoverLayer} unhoverLayer={this.unhoverLayer} 
-                     selectLayer={this.selectLayer} unselectLayer={this.unselectLayer} />
+                     selectLayer={this.selectLayer} unselectLayer={this.unselectLayer} 
+                     index={index} />
       )
     });
     return nodes;

@@ -9,7 +9,9 @@ class HomePane extends React.Component {
   render() {
     return (
       <div className="homePane sidebarPane">
-        HOME PANE
+        <div className='homeWatermark-container'>
+          <span className='fa fa-home' />
+        </div>
       </div>
     );
   }

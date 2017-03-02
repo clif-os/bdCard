@@ -152,11 +152,20 @@ export default class Map {
     this.map.getCanvas().style.cursor = 'pointer'
     this.map.getSource('hover').setData(window.geojsonLookup[id]);
   }
-
+  
+  // the hover and unhover layers probably need to be done more systematically with calculated transparency increases
+  // also the record of the previous transparency needs to be known in order to do this properly,
+  // otherwise unhover has no idea what to reset to
   hoverLayer(e){
     const layerName = e.detail;
-    this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .8);
-    this.map.setPaintProperty(layerName + '-lines-mimio', 'line-opacity', 1);
+    if (layerName === 'outFilter'){
+      // outfilter is fairly transparent and needs a less drastic transition
+      this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .4);
+      this.map.setPaintProperty(layerName + '-lines-mimio', 'line-opacity', .7);
+    } else {
+      this.map.setPaintProperty(layerName + '-fills-mimio', 'fill-opacity', .8);
+      this.map.setPaintProperty(layerName + '-lines-mimio', 'line-opacity', 1);
+    }
     this.geojsons.forEach(gj => {
       if (gj.name !== layerName){
         if (gj.name === 'inFilter'){

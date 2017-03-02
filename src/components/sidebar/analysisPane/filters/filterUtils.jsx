@@ -19,7 +19,7 @@ export const constructFilterEventData = (filterSettings) => {
         && filterSettings[key].selectedRange[1] === filterSettings[key].range[1])
         || !filterSettings[key].filterActive){
       return acc;
-    } else{
+    } else {
       acc.push({
         key: key,
         field: filterSettings[key].fieldValue,

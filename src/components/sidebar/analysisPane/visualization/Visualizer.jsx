@@ -24,8 +24,8 @@ const classes = [
   {value: 10, label: '10'},
 ]
 const palettes = [
-  {value: 'green to red', label: 'Green to Red'},
   {value: 'red to green', label: 'Red to Green'},
+  {value: 'green to red', label: 'Green to Red'},
   {value: 'increasing green', label: 'Increasing Green'},
   {value: 'decreasing green', label: 'Decreasing Green'},
   {value: 'increasing red', label: 'Increasing Red'},

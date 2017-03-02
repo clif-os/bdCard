@@ -1,7 +1,6 @@
 import React from 'react';
 import './Legend.styl';
 import LegendEntry from './LegendEntry.jsx';
-var debounce = require('lodash.debounce');
 
 var memory = null
 
@@ -37,7 +36,6 @@ class Legend extends React.Component {
   }
 
   selectLayer(layerName){
-    console.log(layerName)
     const selectLayer = new CustomEvent('SELECT_LAYER', {detail: layerName});
     document.dispatchEvent(selectLayer);
   }

@@ -13,7 +13,7 @@ import {
   splitGeojsonByCriteria
 } from './filterUtils.jsx';
 
-const actions = ['FILTER', 'VISUALIZE'];
+const actions = ['FILTER', 'VISUALIZE', 'UNVISUALIZE'];
 
 // all features
 var _geojson;
@@ -23,6 +23,8 @@ var _geojsonIn;
 var _geojsonOut = null;
 // last visCriteria
 var _visCriteria = null;
+var _filtCriteria = null;
+
 
 export const dashboardListener = () => {
   actions.forEach(action => {
@@ -36,7 +38,8 @@ const actionHandler = e => {
   switch (type) {
     case 'FILTER':
       _geojson = window.geojson;
-      const splitGeojson = splitGeojsonByCriteria(geojson, e.detail);
+      _filtCriteria = e.detail
+      const splitGeojson = splitGeojsonByCriteria(geojson, _filtCriteria);
       _geojsonIn = splitGeojson.geojsonIn
       _geojsonOut = splitGeojson.geojsonOut
       if (_visCriteria === null) {
@@ -59,7 +62,19 @@ const actionHandler = e => {
       document.dispatchEvent(updateCount);
       window.activeFeatureCount = _geojsonIn.features.length;
       break;
+    case 'UNVISUALIZE':
+      _visCriteria = null;
+      geojsonLayers = [{
+          geojson: _geojsonIn,
+          name: 'inFilter',
+          filterStatus: 'Meets Filter Criteria',
+          linePaint: linePaintIn,
+          fillPaint: fillPaintIn
+        }];
+      console.log('attempting to unvisualize')
+      break;
     case 'VISUALIZE':
+      console.log('attempting to visualize');
       if (_geojsonIn === undefined) {
         _geojsonIn = window.geojson;
       }

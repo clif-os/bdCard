@@ -3,7 +3,8 @@ export const constructVisEventData = visSetting => {
     field: visSetting.fieldValue,
     classes: visSetting.classNumValue,
     palette: visSetting.paletteValue,
-    unitFormatter: visSetting.unitFormatter
+    unitFormatter: visSetting.unitFormatter,
+    visActive: visSetting.visActive
   }
 }
 
@@ -13,7 +14,8 @@ export const visEventsAreDifferent = (last, next) => {
   }
   if (last.field !== next.field || 
       last.classes !== next.classes ||
-      last.palette !== next.palette) {
+      last.palette !== next.palette || 
+      last.visActive !== next.visActive ) {
     return true;
   } else {
     return false;

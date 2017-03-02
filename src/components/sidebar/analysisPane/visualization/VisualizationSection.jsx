@@ -24,6 +24,7 @@ class VisualizationSection extends React.Component {
 
   updateVisSettingMemory(visId, visState){
     memory.visSetting = visState;
+    console.log(memory.visSetting);
     if ( !visState.freezeVisValidity ) {
       this.determineVisEventFire();
     }
@@ -31,9 +32,13 @@ class VisualizationSection extends React.Component {
 
   determineVisEventFire(){
     const visEventData = constructVisEventData(memory.visSetting);
-    if (visEventsAreDifferent(memory.lastVisEventData, visEventData)){
-      const evt = new CustomEvent('VISUALIZE', {'detail': visEventData})
-      document.dispatchEvent(evt);
+    console.log(visEventData);
+    if (!memory.visSetting.visActive && (memory.visSetting.visActive !== memory.lastVisEventData.visActive)){
+      const unvisualize = new CustomEvent('UNVISUALIZE')
+      document.dispatchEvent(unvisualize);
+    } else if (visEventsAreDifferent(memory.lastVisEventData, visEventData) && memory.visSetting.visActive){
+      const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData})
+      document.dispatchEvent(visualize);
     }
     memory.lastVisEventData = visEventData;
   }

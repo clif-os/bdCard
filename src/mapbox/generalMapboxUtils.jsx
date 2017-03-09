@@ -42,7 +42,7 @@ export const buildPopupHTMLFromFeature = feature => {
   const html = 
   (`
     <div class="selection">
-      <span class="selectionTitle">Boston Neighborhood <span class="selectionSubtitle">(${props["NAMELSAD"]})</span></span>
+      <span class="selectionTitle">${props["NAME_1"]} <span class="selectionSubtitle">(${props["NAMELSAD"]})</span></span>
       <div class="tableContainer">
         <table>${tableRows}</table>
       </div>

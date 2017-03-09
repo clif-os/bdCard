@@ -51,7 +51,7 @@ class Visualizer extends React.Component {
       // SET THE DEFAULT STATE
       const defaultVisSetting = {
         titleValue: '',
-        visActive: true,
+        visActive: false,
         visValid: true,
         freezeVisValidity: false,
         fieldValue: props.fields[0],

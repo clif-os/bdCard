@@ -18,10 +18,7 @@ export default class Map {
       style: mapStyle,
       repaint: true,
       center: [-70.89185581741563, 42.36291931096801],
-      maxBounds: [
-        [-72.25285616365288, 41.71585666269243],
-        [-69.53085547116659, 43.003385944623716]
-      ],
+      maxBounds: [[-74.2073746412643, 40.949064517736076],[-67.36532786318315, 44.30691815250722]],
       zoom: 8.6,
       attributionControl: false
     });
@@ -59,6 +56,9 @@ export default class Map {
   ///////// BIND EVENTS /////////
 
   bindEvents() {
+    //// customMapboxControls (.jsx) listeners ////
+    document.addEventListener('ZOOM_TO_FULL_EXTENT', this.zoomToDataExtent.bind(this));
+    
     //// geojsonFilter.jsx listeners ////
     document.addEventListener('DRAW_NEW_GJ', this.redrawMap.bind(this));
 

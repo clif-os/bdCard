@@ -10,10 +10,17 @@ export const convertMapboxFeatureToGeoJSON = feature => {
   return geoJSONfeature;
 }
 
+import gjPropsMetadata from '../data/boston_props_metadata.json';
 export const buildPopupHTMLFromFeature = feature => {
   const props = feature.properties;
-  const tableRows = Object.keys(props).reduce((acc,val, i, arr) => {
+  const tableRows = Object.keys(props).reduce((acc, prop, i, arr) => {
     const key = i + 1;
+    let label;
+    if (gjPropsMetadata[prop] !== undefined){
+      label = gjPropsMetadata[prop].description;
+    } else {
+      label = prop;
+    }
     // every other row is dark, and give the final row a unique classname in order to remove its border
     const rowClass = key % 2 ? 'tr-light' : 'tr-dark';
     const rowId = key === arr.length ? 'tr-final' : `tr-${key}`;
@@ -21,10 +28,10 @@ export const buildPopupHTMLFromFeature = feature => {
     (`
       <tr class=${rowClass} id=${rowId}>
         <td class='td-property'>
-          <span class='span-property'>${val}</span>
+          <span class='span-property'>${label}</span>
         </td>
         <td class='td-value'>
-          <span class='span-value'>${props[val]}</span>
+          <span class='span-value'>${props[prop]}</span>
         </td>
       </tr>
     `);
@@ -35,7 +42,7 @@ export const buildPopupHTMLFromFeature = feature => {
   const html = 
   (`
     <div class="selection">
-      <span class="selectionTitle">${props["NAMELSAD"]}</span>
+      <span class="selectionTitle">Boston Neighborhood <span class="selectionSubtitle">(${props["NAMELSAD"]})</span></span>
       <div class="tableContainer">
         <table>${tableRows}</table>
       </div>

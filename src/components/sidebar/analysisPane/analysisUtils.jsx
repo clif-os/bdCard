@@ -1,11 +1,76 @@
 export const convertPropsMetadataToDrodownObject = (metadata) => {
-  return Object.keys(metadata).map(prop => {
-    return {
-      value: prop,
-      label: metadata[prop].description
+  const dropdownPropRegistry = {};
+  const yearDropdownLookups = {};
+  const fieldDropdowns = [];
+  Object.keys(metadata).forEach(prop => {
+    const description = metadata[prop].description;
+    const descWords = description.split(' ');
+    const fieldLabel = metadata[prop].descriptionShort;
+    const fieldValue = metadata[prop].descriptionKey;
+    let yearLabel, yearValue;
+    if (description.includes(' to ')){
+      // handle range of years
+      const index = descWords.indexOf('to');
+      const year1 = descWords[index-1];
+      const year2 = descWords[index+1];
+      yearLabel = year1 + '-' + year2;
+      yearValue = year1 + year2;
+    } else {
+      // handle single year
+      const index = descWords.indexOf('in');
+      yearLabel = descWords[index+1];
+      yearValue = yearLabel;
     }
-  })
+    dropdownPropRegistry[fieldValue + yearValue] = prop;
+    const yearDropdown = {
+      value: yearValue,
+      label: yearLabel
+    }
+    if (fieldValue in yearDropdownLookups){
+      yearDropdownLookups[fieldValue].push(yearDropdown);
+    } else {
+      yearDropdownLookups[fieldValue] = [yearDropdown];
+      fieldDropdowns.push(
+        { 
+          value: fieldValue,
+          label: fieldLabel
+        }
+      )
+    }
+    
+  });
+  return {
+    fieldDropdowns: fieldDropdowns,
+    yearLookups: yearDropdownLookups,
+    dropdownPropRegistry: dropdownPropRegistry
+  }
 }
+
+// this is used to create the submenus
+// housing income 
+// export const buildCategoricalPropsMDDropDownObjects = (metadata) => {
+//   var categories = [];
+//   const dDObjects = Object.keys(metadata).reduce((acc, prop) => {
+//     const dropdownItem = {
+//       value: prop,
+//       label: metadata[prop].description
+//     }
+//     const category = metadata[prop].category;
+//     category.forEach(category => {
+//       if (category in acc){
+//         acc[category].push(dropdownItem);
+//       } else {
+//         acc[category] = [dropdownItem];
+//         categories.push(category);
+//       }
+//     });
+//     return acc;
+//   }, {});
+//   return {
+//     categories: categories.sort(),
+//     dDObjects: dDObjects
+//   };
+// };
 
 import {
   dollarFormatter,

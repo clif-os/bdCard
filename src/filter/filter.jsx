@@ -83,6 +83,7 @@ const actionHandler = e => {
       break;
   }
   // push in the filtered-out layers
+  console.log(_geojsonOut);
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {
       geojsonLayers.push({

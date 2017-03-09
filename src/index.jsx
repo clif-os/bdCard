@@ -26,6 +26,7 @@ const geojsonTilesets = [
 
 // for selections, it can often be useful to make a lookup tranformation of the geojsons at hand
 // in order to perform rapid lookups --> things like selections and even zooms
+window.activeFields = {};
 window.geojsonLookup = convertGeojsonToLookup(gj);
 window.geojson = gj;
 const geojsonLayers = [

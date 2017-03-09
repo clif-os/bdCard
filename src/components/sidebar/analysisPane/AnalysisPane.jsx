@@ -13,9 +13,11 @@ class AnalysisPane extends React.Component {
     return (
       <div className="analysisPane sidebarPane">
         <FiltersSection propsMd={this.props.propsMd} />
-        <VisualizationSection propsMd={this.props.propsMd} />
+        
       </div>
     );
   }
 }
  export default AnalysisPane;
+
+ //<VisualizationSection propsMd={this.props.propsMd} />

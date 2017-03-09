@@ -4,7 +4,7 @@ import gjPropsMetadata from '../data/boston_props_metadata.json';
 const featureMeetsCriteria = (feature, criteria) => {
   var criteriaMet = true;
   criteria.forEach(crit => {
-    const value = feature.properties[crit.field.value];
+    const value = feature.properties[crit.field];
     if (value < crit.range[0] || value > crit.range[1]) {
       criteriaMet = false;
     }

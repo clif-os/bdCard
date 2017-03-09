@@ -21,14 +21,33 @@ class Filter extends React.Component {
     
     //// LOAD STATE FROM MEMORY
     if (props.memory === undefined){
-      const defaultFieldVal = props.fields[0].value;
+      const fieldOptions = props.dropdownData.fieldDropdowns;
+      this.yearLookups = props.dropdownData.yearLookups;
+      this.propRegistry = props.dropdownData.dropdownPropRegistry;
+      const defaultFieldVal = fieldOptions[0].value;
+      const defaultFieldLabel = fieldOptions[0].label;
+      const defaultYearOptions = this.yearLookups[defaultFieldVal];
+      const defaultYearVal = defaultYearOptions[0].value;
+      const defaultYearLabel = defaultYearOptions[0].label;
+      
+      const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
+
       var min, max, units, unitFormatter, unitUnformatter;
-      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
+      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd));
       // SET THE DEFAULT STATE
       const defaultFilterSetting = {
         titleValue: '',
         filterActive: true,
-        fieldValue: props.fields[0],
+
+        selectedProp: defaultSelectedProp,
+
+        fieldValue: defaultFieldVal,
+        fieldLabel: defaultFieldLabel,
+        fieldOptions: fieldOptions,
+        yearValue: defaultYearVal,
+        yearLabel: defaultYearLabel,
+        yearOptions: defaultYearOptions,
+
         filterValid: false,
         freezeFilterValidity: false,
         range: [min, max],
@@ -49,6 +68,7 @@ class Filter extends React.Component {
     this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
+    this.handleYearSelection = this.handleYearSelection.bind(this);
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.handleSliderAfterChange = this.handleSliderAfterChange.bind(this);
     this.handleRangeInputFocus = this.handleRangeInputFocus.bind(this);
@@ -94,10 +114,43 @@ class Filter extends React.Component {
   //// FIELD SELECTION HANDLERS
 
   handleFieldSelection(val){
-    var min, max, units, unitFormatter, unitUnformatter;
-    ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(val.value, this.props.propsMd));
+    const fieldVal = val.value;
+    const fieldLabel = val.label;
+    const defaultYearOptions = this.yearLookups[fieldVal];
+    const defaultYearVal = defaultYearOptions[0].value;
+    const defaultYearLabel = defaultYearOptions[0].label;
+    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    
     this.setState({
-      fieldValue: val,
+      selectedProp: defaultSelectedProp,
+      fieldValue: fieldVal,
+      fieldLabel: fieldLabel,
+      yearValue: defaultYearVal,
+      yearLabel: defaultYearLabel,
+      yearOptions: defaultYearOptions,
+
+      range: [min, max],
+      selectedRange: [min, max],
+      units: units,
+      unitFormatter: unitFormatter,
+      unitUnformatter: unitUnformatter,
+      filterValid: false,
+      freezeFilterValidity: false
+    });
+  }
+
+  handleYearSelection(val){
+    const yearVal = val.value;
+    const yearLabel = val.label;
+    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+
+    this.setState({
+      selectedProp: selectedProp,
+      yearValue: yearVal,
+      yearLabel: yearLabel,
+
       range: [min, max],
       selectedRange: [min, max],
       units: units,
@@ -207,8 +260,19 @@ class Filter extends React.Component {
             className='select-field select'
             name="Select Field"
             value={this.state.fieldValue}
-            options={this.props.fields}
+            options={this.state.fieldOptions}
             onChange={this.handleFieldSelection}
+            clearable={false}
+          />
+        </div>
+        <div className='yearSelector filterSection'>
+          <span className='filterSection-title'>Year:</span>
+          <Select
+            className='select-year select'
+            name="Select Year"
+            value={this.state.yearValue}
+            options={this.state.yearOptions}
+            onChange={this.handleYearSelection}
             clearable={false}
           />
         </div>

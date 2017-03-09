@@ -9,7 +9,6 @@ import { constructFilterEventData,
 import { convertPropsMetadataToDrodownObject } from '../analysisUtils.jsx';
 
 // FILTER MEMORY
-
 var memory = {
   filterSettings: {},
   lastFilterEventData: null
@@ -18,7 +17,8 @@ var memory = {
 class FiltersSection extends React.Component {
   constructor(props){
     super();
-    this.fields = convertPropsMetadataToDrodownObject(props.propsMd);    
+    this.dropdownData = convertPropsMetadataToDrodownObject(props.propsMd);
+    console.log(this.dropdownData);
     const activeFeatureCount = window.activeFeatureCount === undefined ? window.geojson.features.length : window.activeFeatureCount;
     this.state = {
       filterIds: Object.keys(memory.filterSettings),
@@ -57,11 +57,24 @@ class FiltersSection extends React.Component {
     this.spinAddFilterButton('left');
   }
 
+  updateActiveFields(){
+    window.activeFields = {}
+    Object.keys(memory.filterSettings).forEach(filterId => {
+      const fieldLabel = memory.filterSettings[filterId].fieldLabel;
+      const yearLabel = memory.filterSettings[filterId].yearLabel;
+      const propLabel = fieldLabel + ' ' + yearLabel;
+      const selectedProp = memory.filterSettings[filterId].selectedProp;
+      window.activeFields[selectedProp] = propLabel;
+    });
+    console.log(window.activeFields);
+  };
+
   updateFilterSettingsMemory(filterId, filterState){
     memory.filterSettings[filterId] = filterState;
     if ( !filterState.freezeFilterValidity ) {
       this.determineFilterEventFire();
     }
+    this.updateActiveFields();
   }
 
   determineFilterEventFire(){
@@ -133,20 +146,9 @@ class FiltersSection extends React.Component {
 
   renderFilterNodes(filterIds){
     const filterNodes = filterIds.map((filterId, i) => {
-      var fields = [...this.fields];
-      // eventually once debugging is completed, renderOrder should be used to be the placeholder for the filter titles
       const renderOrder = i + 1;
-      // this filters out any fields which are already selected by other filters so users are not able to select fields twice
-      if (filterIds.length > 1) {
-        Object.keys(memory.filterSettings).forEach(settingKey => {
-          if (filterId !== settingKey) {
-            const field = memory.filterSettings[settingKey].fieldValue;
-            fields.splice(fields.indexOf(field), 1);
-          }
-        });
-      }
       return(
-        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} fields={fields} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} propsMd={this.props.propsMd} />
+        <Filter key={filterId} id={filterId} memory={memory.filterSettings[filterId]} dropdownData={this.dropdownData} handleRemoveFilter={this.handleRemoveFilter} updateFilterSettingsMemory={this.updateFilterSettingsMemory} renderOrder={renderOrder} propsMd={this.props.propsMd} />
       )
     });
     return filterNodes;

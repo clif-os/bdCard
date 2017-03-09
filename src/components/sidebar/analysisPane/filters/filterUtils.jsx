@@ -22,7 +22,7 @@ export const constructFilterEventData = (filterSettings) => {
     } else {
       acc.push({
         key: key,
-        field: filterSettings[key].fieldValue,
+        field: filterSettings[key].selectedProp,
         range: filterSettings[key].selectedRange
       });
     }

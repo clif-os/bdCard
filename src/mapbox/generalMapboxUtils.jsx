@@ -10,16 +10,36 @@ export const convertMapboxFeatureToGeoJSON = feature => {
   return geoJSONfeature;
 }
 
+// these specifications need to be taken into account during the data processing eventuallty
+const skipProps = [
+  'OBJECTID', 'NAME', 'NAMELSAD', 'MTFCC', 'ALAND', 'AWATER', 'INTPTLAT', 'INTPTLON', 'Shape_Leng',
+  'Shape_Area', 'Geo_SUMLEV', 'Geo_FILEID', 'Geo_LOGRECNO'
+];
+const translations = {
+  NAME_1: 'City'
+};
+// important props to top the list:
+// income, rent, homeval, home ownership rate
+import { toTitleCase } from '../utils/generalUtils.jsx';
 import gjPropsMetadata from '../data/boston_props_metadata.json';
+// need an external key since props may be skipped
+var key = 0
 export const buildPopupHTMLFromFeature = feature => {
   const props = feature.properties;
   const tableRows = Object.keys(props).reduce((acc, prop, i, arr) => {
-    const key = i + 1;
+    if (skipProps.indexOf(prop) > -1){
+      return acc;
+    }
+    key ++;
     let label;
     if (gjPropsMetadata[prop] !== undefined){
       label = gjPropsMetadata[prop].description;
     } else {
-      label = prop;
+      if (prop in translations){
+        label = translations[prop];
+      } else {
+        label = prop;
+      }
     }
     // every other row is dark, and give the final row a unique classname in order to remove its border
     const rowClass = key % 2 ? 'tr-light' : 'tr-dark';
@@ -28,7 +48,7 @@ export const buildPopupHTMLFromFeature = feature => {
     (`
       <tr class=${rowClass} id=${rowId}>
         <td class='td-property'>
-          <span class='span-property'>${label}</span>
+          <span class='span-property'>${toTitleCase(label)}</span>
         </td>
         <td class='td-value'>
           <span class='span-value'>${props[prop]}</span>

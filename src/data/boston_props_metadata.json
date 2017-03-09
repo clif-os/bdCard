@@ -1,1 +1,1778 @@
-{"MedINC14":{"description":"Tract median income in 2014","units":"usd","range":{"min":12490,"max":226181},"category":"income","median":76347,"deciles":{"1":37525,"2":51092,"3":60095,"4":69357,"5":76324,"6":83648,"7":91700,"8":102292,"9":121127,"10":226181}},"MedINC10":{"description":"Tract median income in 2010","units":"usd","range":{"min":13026,"max":237515},"category":"income","median":77657,"deciles":{"1":41877,"2":52810,"3":61950,"4":69327.5,"5":77743.5,"6":84229.5,"7":92854.5,"8":103857,"9":122384.5,"10":237515}},"MedINC00":{"description":"Tract median income in 2000","units":"usd","range":{"min":14168,"max":222552.75},"category":"income","median":77651.5,"deciles":{"1":44794,"2":54826.900389999995,"3":63918.691405000005,"4":71742,"5":77690.75,"6":85490.11327999999,"7":92657.29688,"8":102334.8008,"9":124131.87890000001,"10":222552.75}},"MedINC90":{"description":"Tract median income in 1990","units":"usd","range":{"min":15437.00098,"max":188839.8594},"category":"income","median":74212.6875,"deciles":{"1":43986.552735000005,"2":53937.990235000005,"3":62016,"4":67037.31640499999,"5":74223.171875,"6":79644.5,"7":85283.94141,"8":94102.85156499999,"9":110835.4961,"10":188839.8594}},"dMedINC14":{"description":"Decile of tract median income in 2014","units":"decile","range":{"min":1,"max":10},"category":"income","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedINC10":{"description":"Decile of tract median income in 2010","units":"decile","range":{"min":1,"max":10},"category":"income","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedINC00":{"description":"Decile of tract median income in 2000","units":"decile","range":{"min":1,"max":10},"category":"income","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedINC90":{"description":"Decile of tract median income in 1990","units":"decile","range":{"min":1,"max":10},"category":"income","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"MedHOMVal14":{"description":"Tract median home value in 2014","units":"usd","range":{"min":83773,"max":1016663},"category":"housing","median":354307,"deciles":{"1":237645,"2":274600.5,"3":303423,"4":329601.5,"5":354357.5,"6":386331.5,"7":428370.5,"8":498723.5,"9":633634.5,"10":1016663}},"MedHOMVal10":{"description":"Tract median home value in 2010","units":"usd","range":{"min":105578,"max":1086197},"category":"housing","median":402870,"deciles":{"1":288820,"2":327597,"3":360726,"4":380495,"5":402653,"6":430894,"7":479012,"8":542229,"9":678112,"10":1086197}},"MedHOMVal00":{"description":"Tract median home value in 2000","units":"usd","range":{"min":13751,"max":1108093.25},"category":"housing","median":272819.1875,"deciles":{"1":183994.51565000002,"2":211710.07815000002,"3":232257.5547,"4":253532.5156,"5":272971.59375,"6":304032,"7":337311.17189999996,"8":393802,"9":498561.82814999996,"10":1108093.25}},"MedHOMVal90":{"description":"Tract median home value in 1990","units":"usd","range":{"min":149659,"max":878285.0625},"category":"housing","median":291462.17189999996,"deciles":{"1":219568.7422,"2":247349.96875,"3":262449.5625,"4":278855,"5":291239,"6":310209.79689999996,"7":332109.5313,"8":384750.51564999996,"9":487301.20314999996,"10":878285.0625}},"dMedHOMVal14":{"description":"Decile of tract median home value 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedHOMVal10":{"description":"Decile of tract median home value 2010","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedHOMVal00":{"description":"Decile of tract median home value 2000","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedHOMVal90":{"description":"Decile of tract median home value 1990","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1.5,"2":2,"3":3.5,"4":4,"5":5,"6":6.5,"7":7,"8":8.5,"9":9,"10":10}},"MedRNTVal14":{"description":"Tract median gross rent in 2014","units":"usd","range":{"min":294,"max":2034},"category":"housing","median":1224,"deciles":{"1":899.5,"2":1002,"3":1094.5,"4":1160.5,"5":1224,"6":1299,"7":1422,"8":1599.5,"9":1777.5,"10":2034}},"MedRENTVal10":{"description":"Tract median gross rent in 2010","units":"usd","range":{"min":314,"max":2173},"category":"housing","median":1213,"deciles":{"1":840.5,"2":985.5,"3":1069,"4":1154,"5":1213,"6":1283,"7":1403,"8":1536,"9":1767.5,"10":2173}},"MedRENTVal00":{"description":"Tract median gross rent in 2000","units":"usd","range":{"min":250,"max":2741.019287},"category":"housing","median":1051.996216,"deciles":{"1":788.6268921000001,"2":887.8573303000001,"3":942,"4":997.4902649,"5":1051.998108,"6":1124.4813235000001,"7":1202.0957640000001,"8":1306.6736455,"9":1525.873474,"10":2741.019287}},"MedRENTVal90":{"description":"Tract median gross rent in 1990","units":"usd","range":{"min":267.0049438,"max":1758.000122},"category":"housing","median":1136.01416,"deciles":{"1":868.1265869,"2":976,"3":1042,"4":1084.794983,"5":1136.0758664999998,"6":1193.041504,"7":1252,"8":1339.9190065,"9":1467.849182,"10":1758.000122}},"dMedRENTVal14":{"description":"Decile of  median gross rent in 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1.5,"2":2.5,"3":3,"4":4,"5":5,"6":6.5,"7":7.5,"8":8,"9":9,"10":10}},"dMedRENTVal10":{"description":"Decile of  median gross rent in 2010","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2,"3":3,"4":4.5,"5":5.5,"6":6,"7":7.5,"8":8.5,"9":9,"10":10}},"dMedRENTVal00":{"description":"Decile of  median gross rent in 2000","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dMedRENTVal90":{"description":"Decile of  median gross rent in 1990","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"OWNshprate14":{"description":"Tract ownership rate in 2014","units":"percent","range":{"min":0,"max":100},"category":"housing","median":63.3,"deciles":{"1":22.17,"2":34.195,"3":43.335,"4":53.504999999999995,"5":63.355,"6":71.945,"7":78.49000000000001,"8":84.18,"9":90.715,"10":100}},"OWNshprate10":{"description":"Tract ownership rate in 2010","units":"percent","range":{"min":0,"max":100},"category":"housing","median":65.56,"deciles":{"1":23.33,"2":37.22,"3":46.295,"4":56.61,"5":65.565,"6":73.28,"7":80.88,"8":86.125,"9":91.83,"10":100}},"OWNshprate00":{"description":"Tract ownership rate in 2000","units":"percent","range":{"min":0,"max":99.91},"category":"housing","median":62.75,"deciles":{"1":24.33,"2":34.015,"3":42.295,"4":52.445,"5":62.785,"6":71.965,"7":79.735,"8":84.36500000000001,"9":90.69,"10":99.91}},"OWNshprate90":{"description":"Tract ownership rate in 1990","units":"percent","range":{"min":0,"max":96.7},"category":"housing","median":61.2,"deciles":{"1":22.68,"2":32.84,"3":41.595,"4":49.8,"5":61.265,"6":69.15,"7":77.025,"8":82.67,"9":88.905,"10":96.7}},"shWHITET14":{"description":"Tract share of white in 2014","units":"percent","range":{"min":0,"max":100},"category":"race","median":80.57,"deciles":{"1":28.355,"2":52.395,"3":65.81,"4":75.14,"5":80.585,"6":85.885,"7":90.015,"8":92.945,"9":95.44999999999999,"10":100}},"shWHITE10":{"description":"Tract share of white in 2010","units":"percent","range":{"min":0,"max":100},"category":"race","median":83.88,"deciles":{"1":29.39,"2":55.14,"3":69.14,"4":77.485,"5":83.88499999999999,"6":88.48,"7":91.83,"8":94.185,"9":96.495,"10":100}},"shWHITE00":{"description":"Tract share of white in 2000","units":"percent","range":{"min":0,"max":98.64},"category":"race","median":89.28,"deciles":{"1":40.655,"2":63.02,"3":77.54,"4":83.995,"5":89.3,"6":92.66,"7":94.69,"8":96.1,"9":97.055,"10":98.64}},"shWHITE90":{"description":"Tract share of white in 1990","units":"percent","range":{"min":0,"max":99.44},"category":"race","median":94.17,"deciles":{"1":57.155,"2":79.59,"3":88.03999999999999,"4":91.83,"5":94.185,"6":95.72,"7":96.805,"8":97.615,"9":98.2,"10":99.44}},"shHISP14":{"description":"Tract share of Hisp in 2014","units":"percent","range":{"min":0,"max":95.79},"category":"race","median":4.45,"deciles":{"1":0.73,"2":1.49,"3":2.25,"4":3.105,"5":4.455,"6":6.135,"7":9.004999999999999,"8":14.58,"9":27.585,"10":95.79}},"shHISP10":{"description":"Tract share of Hisp in 2010","units":"percent","range":{"min":0,"max":100},"category":"race","median":3.57,"deciles":{"1":0.535,"2":1.07,"3":1.7149999999999999,"4":2.455,"5":3.57,"6":5.34,"7":8.15,"8":13.74,"9":24.855,"10":100}},"shHISP00":{"description":"Tract share of Hisp in 2000","units":"percent","range":{"min":0,"max":88.25},"category":"race","median":2.18,"deciles":{"1":0.755,"2":0.96,"3":1.2,"4":1.5550000000000002,"5":2.185,"6":3.25,"7":5.72,"8":9.975000000000001,"9":19.814999999999998,"10":88.25}},"shHISP90":{"description":"Tract share of Hisp in 1990","units":"percent","range":{"min":0,"max":81.01},"category":"race","median":1.65,"deciles":{"1":0.59,"2":0.79,"3":1,"4":1.22,"5":1.6549999999999998,"6":2.29,"7":3.725,"8":6.385,"9":14.24,"10":81.01}},"shBLCK14":{"description":"Tract share of Black in 2014","units":"percent","range":{"min":0,"max":89.84},"category":"race","median":2.25,"deciles":{"1":0,"2":0.365,"3":0.805,"4":1.46,"5":2.255,"6":3.4,"7":5.485,"8":8.825,"9":19.994999999999997,"10":89.84}},"shBLCK10":{"description":"Tract share of Black in 2010","units":"percent","range":{"min":0,"max":89.28},"category":"race","median":2.1,"deciles":{"1":0,"2":0.17,"3":0.685,"4":1.1549999999999998,"5":2.105,"6":3.035,"7":4.895,"8":9.155000000000001,"9":19.75,"10":89.28}},"shBLCK00":{"description":"Tract share of Black in 2000","units":"percent","range":{"min":0,"max":89.24},"category":"race","median":1.57,"deciles":{"1":0.3,"2":0.47,"3":0.695,"4":1.01,"5":1.57,"6":2.28,"7":3.675,"8":6.395,"9":16.009999999999998,"10":89.24}},"shBLCK90":{"description":"Tract share of Black in 1990","units":"percent","range":{"min":0,"max":92.37},"category":"race","median":1.28,"deciles":{"1":0.275,"2":0.44,"3":0.62,"4":0.85,"5":1.2850000000000001,"6":1.8450000000000002,"7":2.8099999999999996,"8":4.61,"9":11.12,"10":92.37}},"shASIAN14":{"description":"Tract share of AsOth in 2014","units":"percent","range":{"min":0,"max":74.36},"category":"race","median":0.93,"deciles":{"1":0,"2":0,"3":0.24,"4":0.51,"5":0.93,"6":1.66,"7":3.1399999999999997,"8":6.725,"9":14.725000000000001,"10":74.36}},"shASIAN10":{"description":"Tract share of AsOth in 2010","units":"percent","range":{"min":0,"max":100},"category":"race","median":0.97,"deciles":{"1":0,"2":0,"3":0.2,"4":0.49,"5":0.97,"6":1.71,"7":3.11,"8":6.359999999999999,"9":13.8,"10":100}},"shASIAN00":{"description":"Tract share of AsOth in 2000","units":"percent","range":{"min":0,"max":73.68},"category":"race","median":4.94,"deciles":{"1":1.475,"2":1.99,"3":2.6399999999999997,"4":3.645,"5":4.94,"6":6.21,"7":8.36,"8":11.559999999999999,"9":16.36,"10":73.68}},"shASIAN90":{"description":"Tract share of AsOth in 1990","units":"percent","range":{"min":0,"max":87.28},"category":"race","median":1.87,"deciles":{"1":0.655,"2":0.88,"3":1.13,"4":1.42,"5":1.87,"6":2.545,"7":3.5,"8":4.945,"9":7.9399999999999995,"10":87.28}},"POVrate14":{"description":"Poverty rate in 2014","units":"percent","range":{"min":0,"max":87.84194183},"category":"income","median":7.364897251,"deciles":{"1":2.2981950045,"2":3.417157054,"3":4.5353035925,"4":5.7666068075000005,"5":7.3696565625,"6":10.036188601500001,"7":13.832591535,"8":18.784125325,"9":27.17612362,"10":87.84194183}},"POVrate10":{"description":"Poverty rate in 2010","units":"percent","range":{"min":0,"max":86.328125},"category":"income","median":6.728058815,"deciles":{"1":1.809322715,"2":2.9392129185,"3":4.161943436,"4":5.3133645055,"5":6.743103266,"6":9.127539158000001,"7":12.049519065,"8":17.13252449,"9":25.35499573,"10":86.328125}},"POVrate00":{"description":"Poverty rate in 2000","units":"percent","range":{"min":0.000445528,"max":69.59247589},"category":"income","median":5.847579241,"deciles":{"1":2.275106907,"2":2.969837427,"3":3.735325575,"4":4.633024693,"5":5.843446732,"6":7.499490738,"7":10.15903187,"8":15.244874,"9":23.57825851,"10":69.59247589}},"POVrate90":{"description":"Poverty rate in 1990","units":"percent","range":{"min":0,"max":78.96551514},"category":"income","median":5.7102820869999995,"deciles":{"1":2.067690849,"2":2.914574623,"3":3.762176752,"4":4.732477188,"5":5.706922054,"6":7.300967693,"7":9.426681519,"8":13.56125355,"9":24.01682472,"10":78.96551514}},"shBACH14":{"description":"Share of Bachelors degree holders in 2014","units":"percent","range":{"min":1.408450723,"max":96.1795578},"category":"education","median":41.15485382,"deciles":{"1":16.73771858,"2":23.41356659,"3":30.03822136,"4":35.45454407,"5":41.18463707,"6":48.14393997,"7":56.577379225,"8":66.16893005,"9":76.566913605,"10":96.1795578}},"shBACH10":{"description":"Share of Bachelors degree holders in 2010","units":"percent","range":{"min":0,"max":100},"category":"education","median":39.535360335,"deciles":{"1":15.39928484,"2":22.744903565,"3":28.312333105,"4":33.617300035,"5":39.4736824,"6":45.424097065,"7":53.110019685,"8":63.46926117,"9":73.73249054,"10":100}},"shBACH00":{"description":"Share of Bachelors degree holders in 2000","units":"percent","range":{"min":3.28725338,"max":90.20694733},"category":"education","median":33.259485245,"deciles":{"1":12.25490189,"2":18.33046341,"3":23.46816826,"4":28.42282867,"5":33.25396347,"6":38.29809189,"7":45.92993927,"8":55.09735107,"9":67.08686066,"10":90.20694733}},"shBACH90":{"description":"Share of Bachelors degree holders in 1990","units":"percent","range":{"min":1.134521842,"max":84.51087189},"category":"education","median":25.870658874999997,"deciles":{"1":10.58890152,"2":14.73484612,"3":18.91147232,"4":22.0987339,"5":25.8696003,"6":30.05084419,"7":35.71165466,"8":44.35654831,"9":55.66619492,"10":84.51087189}},"totCBRENT14":{"description":"renter occupied units 2014","units":"number","range":{"min":0,"max":2839},"category":"housing","median":600,"deciles":{"1":135,"2":245,"3":357,"4":468.5,"5":600.5,"6":712,"7":848,"8":1056,"9":1369,"10":2839}},"totCBRENT10":{"description":"renter occupied units 2010","units":"number","range":{"min":0,"max":2836},"category":"housing","median":562,"deciles":{"1":106.5,"2":212,"3":308,"4":439,"5":563.5,"6":680,"7":808,"8":982,"9":1297,"10":2836}},"totCBRENT00":{"description":"renter occupied units 2000","units":"number","range":{"min":0,"max":2608},"category":"housing","median":574,"deciles":{"1":118.97821809999999,"2":224.76676945,"3":332.91592405,"4":447.21508789999996,"5":574.14959715,"6":698.97564695,"7":848.19747925,"8":1041.6038210000002,"9":1314.1187135,"10":2608}},"totCBRENT90":{"description":"renter occupied units 1990","units":"number","range":{"min":0,"max":2427.235596},"category":"housing","median":556.8699951,"deciles":{"1":121.832695,"2":213.6776047,"3":304.77720645,"4":428.81031795,"5":557.4349975499999,"6":689.7852478,"7":828.8026123,"8":1006.5493165,"9":1243.66394,"10":2427.235596}},"shCBRENT14":{"description":"Share cost-burdened renters in 2014","units":"percent","range":{"min":0,"max":94.41},"category":"housing","median":45.65,"deciles":{"1":27.7,"2":34.87,"3":39.035,"4":42.565,"5":45.655,"6":49.07,"7":52.795,"8":56.455,"9":62.395,"10":94.41}},"shCBRENT10":{"description":"Share cost-burdened renters in 2010","units":"percent","range":{"min":0,"max":100},"category":"housing","median":45.68,"deciles":{"1":24.630000000000003,"2":33.4,"3":38.355000000000004,"4":42.06,"5":45.68,"6":49.480000000000004,"7":53.504999999999995,"8":57.65,"9":64.535,"10":100}},"shCBRENT00":{"description":"Share cost-burdened renters in 2000","units":"percent","range":{"min":0,"max":96.43},"category":"housing","median":34.86,"deciles":{"1":23.02,"2":27.42,"3":30.405,"4":32.765,"5":34.875,"6":37.68,"7":39.82,"8":42.46,"9":45.785,"10":96.43}},"shCBRENT90":{"description":"Share cost-burdened renters in 1990","units":"percent","range":{"min":0,"max":100},"category":"housing","median":37.6,"deciles":{"1":25.77,"2":29.875,"3":32.75,"4":35.25,"5":37.620000000000005,"6":39.95,"7":42.269999999999996,"8":45.114999999999995,"9":51.11,"10":100}},"chMedINC1014":{"description":"Change in median income 2010 to 2014","units":"usd","range":{"min":-56829,"max":75471},"category":"income","median":-1477,"deciles":{"1":-15903.5,"2":-10637,"3":-7048,"4":-3856.5,"5":-1466,"6":1462,"7":4049,"8":6738.5,"9":12488,"10":75471}},"chMedINC0010":{"description":"Change in median income 2000 to 2010","units":"usd","range":{"min":-71842.75,"max":124614.9688},"category":"income","median":-1750,"deciles":{"1":-14868.05078,"2":-9895,"3":-6801.7578125,"4":-4464.042969,"5":-1734.5,"6":705.5371094,"7":3250.5,"8":7584.1132815,"9":13115.636719999999,"10":124614.9688}},"chMedINC9000":{"description":"Change in median income 1990 to 2000","units":"usd","range":{"min":-33208.14063,"max":53889.09375},"category":"income","median":4239.234375,"deciles":{"1":-6123.8027345,"2":-2512.105469,"3":153.40039065000002,"4":2430.734375,"5":4244.625,"6":6595,"7":9694.0859375,"8":13214.42578,"9":18898.5,"10":53889.09375}},"chMedINC0014":{"description":"Change in median income 2000 to 2014","units":"usd","range":{"min":-53162.14063,"max":67785.96875},"category":"income","median":-3970.886719,"deciles":{"1":-17590.64063,"2":-11756.36719,"3":-8807.152344,"4":-6173,"5":-3988.242188,"6":-1180,"7":1837.367188,"8":6013.5625,"9":13412,"10":67785.96875}},"chMedINC9014":{"description":"Change in median income 1990 to 2014","units":"usd","range":{"min":-42947.89063,"max":102640.2734},"category":"income","median":1513.5,"deciles":{"1":-15048.45313,"2":-9282.132813,"3":-5411,"4":-1694,"5":1509,"6":4931.65625,"7":9238.007813,"8":14454.99219,"9":22251.75781,"10":102640.2734}},"chHOMval1014":{"description":"Change in median home value 2010 to 2014","units":"usd","range":{"min":-405949,"max":408176},"category":"housing","median":-48875.5,"deciles":{"1":-93168,"2":-72587,"3":-63966.5,"4":-55944,"5":-48904,"6":-41844,"7":-32993,"8":-24000.5,"9":-4509.5,"10":408176}},"chHOMval0010":{"description":"Change in median home value 2000 to 2010","units":"usd","range":{"min":-180725,"max":720431},"category":"housing","median":126227.40625,"deciles":{"1":84467,"2":98308,"3":108573,"4":117557.2188,"5":126185.125,"6":135408,"7":146238.5625,"8":165530,"9":199240,"10":720431}},"chHOMval9000":{"description":"Change in median home value 1990 to 2000","units":"usd","range":{"min":-492941,"max":440882},"category":"housing","median":-17682.625,"deciles":{"1":-60496.585940000004,"2":-45726.046875,"3":-36119.726565000004,"4":-27671.27344,"5":-17866.53125,"6":-8150.421875,"7":4145.515625,"8":24689.28125,"9":57183.6875,"10":440882}},"chHOMval0014":{"description":"Change in median home value 2000 to 2014","units":"usd","range":{"min":-246434.9375,"max":546053},"category":"housing","median":76359.14063,"deciles":{"1":37786.015625,"2":48794.359375,"3":58265.10938,"4":67326.28125,"5":76377.08593999999,"6":86712.109375,"7":97657.0625,"8":114855,"9":146405.20315000002,"10":546053}},"chHOMval9014":{"description":"Change in median home value 1990 to 2014","units":"usd","range":{"min":-481177,"max":430102.0625},"category":"housing","median":59262,"deciles":{"1":-7406.59375,"2":12935.125,"3":29449.8125,"4":43798.257815000004,"5":59290.09375,"6":73737.6875,"7":95783.265625,"8":121551.25005,"9":176037,"10":430102.0625}},"chRENTval1014":{"description":"Change in median rent value 2010 to 2014","units":"usd","range":{"min":-1419,"max":1428},"category":"housing","median":21,"deciles":{"1":-185,"2":-112,"3":-58,"4":-19,"5":21,"6":50,"7":91,"8":156,"9":260,"10":1428}},"chRENTval0010":{"description":"Change in median rent value 2000 to 2010","units":"usd","range":{"min":-1337.064209,"max":1571},"category":"housing","median":142,"deciles":{"1":-119.57452395,"2":-11.888671875,"3":56.418395995,"4":99.999908445,"5":142.5098572,"6":183.1413574,"7":234.036438,"8":308.00012204999996,"9":419.06237795000004,"10":1571}},"chRENTval9000":{"description":"Change in median rent value 1990 to 2000","units":"usd","range":{"min":-1212.849121,"max":987.7647705},"category":"housing","median":-71,"deciles":{"1":-242.81134035000002,"2":-183.98144530000002,"3":-141.3439636,"4":-106,"5":-71,"6":-36.92211914,"7":1.3853759765,"8":74.92190552,"9":222.95144655000001,"10":987.7647705}},"chRENTval0014":{"description":"Change in median rent value 2000 to 2014","units":"usd","range":{"min":-2276.606445,"max":1295.397705},"category":"housing","median":166.8551636,"deciles":{"1":-84.97177124000001,"2":22.111694335,"3":66.582489015,"4":117.00006105,"5":166.739502,"6":208.4984436,"7":257.0101013,"8":329.99404905,"9":449.39270020000004,"10":1295.397705}},"chRENTval9014":{"description":"Change in median rent value 1990 to 2014","units":"usd","range":{"min":-1327.527954,"max":1519.328613},"category":"housing","median":87.82946777500001,"deciles":{"1":-166.3949585,"2":-65.47003174,"3":-8.390197753999999,"4":35.974975584999996,"5":87.63916016,"6":148.42663575,"7":215.1102295,"8":321,"9":530.6043396,"10":1519.328613}},"chOWNrate1014":{"description":"Change in tract ownership rate 2010 to 2014","units":"percent","range":{"min":-88.57,"max":18.07},"category":"housing","median":-1.59,"deciles":{"1":-9,"2":-6.335,"3":-4.51,"4":-3.08,"5":-1.59,"6":-0.335,"7":0.78,"8":2.44,"9":4.904999999999999,"10":18.07}},"chOWNrate0010":{"description":"Change in tract ownership rate 2000 to 2010","units":"percent","range":{"min":-35.79,"max":63.37},"category":"housing","median":1.74,"deciles":{"1":-4.57,"2":-2.125,"3":-0.515,"4":0.71,"5":1.745,"6":3.035,"7":4.695,"8":6.76,"9":9.98,"10":63.37}},"chOWNrate9000":{"description":"Change in tract ownership rate 1990 to 2000","units":"percent","range":{"min":-20.67,"max":62.56},"category":"housing","median":1.42,"deciles":{"1":-2.82,"2":-1.05,"3":0,"4":0.69,"5":1.42,"6":2.16,"7":2.82,"8":3.92,"9":6.074999999999999,"10":62.56}},"chOWNrate0014":{"description":"Change in tract ownership rate 2000 to 2014","units":"percent","range":{"min":-41.54,"max":55.67},"category":"housing","median":0.52,"deciles":{"1":-7.275,"2":-4.279999999999999,"3":-2.2199999999999998,"4":-0.785,"5":0.52,"6":1.705,"7":3.06,"8":4.84,"9":7.715,"10":55.67}},"chOWNrate9014":{"description":"Change in tract ownership rate 1990 to 2014","units":"percent","range":{"min":-39.36,"max":56.18},"category":"housing","median":1.93,"deciles":{"1":-7.295,"2":-3.79,"3":-1.42,"4":0.4,"5":1.95,"6":3.5599999999999996,"7":5.455,"8":7.62,"9":11.03,"10":56.18}},"chBACH1014":{"description":"Change in bachelors degree holders 2010 to 2014","units":"percent","range":{"min":-60,"max":21.00108337},"category":"education","median":1.895658493,"deciles":{"1":-4.8908429145,"2":-2.7317962645,"3":-0.772884369,"4":0.718276024,"5":1.8979711529999999,"6":3.1051189900000002,"7":4.2945947645,"8":6.0728054045,"9":8.673948288,"10":21.00108337}},"chBACH0010":{"description":"Change in bachelors degree holders 2000 to 2010","units":"percent","range":{"min":-30.18326187,"max":75.54314423},"category":"education","median":5.352100372,"deciles":{"1":-1.592122078,"2":0.7825962305,"3":2.7506780625,"4":4.1184406285,"5":5.3544564245,"6":6.628410339,"7":8.001724243,"8":10.315091129999999,"9":13.57205677,"10":75.54314423}},"chBACH9000":{"description":"Change in bachelors degree holders 1990 to 2000","units":"percent","range":{"min":-17.73223877,"max":27.43759537},"category":"education","median":6.3744363785000004,"deciles":{"1":-0.569698334,"2":1.727500916,"3":3.5104599,"4":5.17893219,"5":6.364768982,"6":7.703554153,"7":9.422878265,"8":11.65838623,"9":14.50727844,"10":27.43759537}},"chBACH0014":{"description":"Change in bachelors degree holders 2000 to 2014","units":"percent","range":{"min":-28.38605499,"max":58.95858765},"category":"education","median":6.9606323245,"deciles":{"1":-0.45178127300000004,"2":2.0326509475,"3":3.8781757355,"4":5.2636556625,"5":6.958015442,"6":8.5799970625,"7":10.224849705,"8":12.73602772,"9":16.441926955,"10":58.95858765}},"chBACH9014":{"description":"Change in bachelors degree holders 1990 to 2014","units":"percent","range":{"min":-15.98019409,"max":61.46312714},"category":"education","median":13.2566576,"deciles":{"1":3.1759138105,"2":6.283029556,"3":9.080500602499999,"4":11.356261255,"5":13.23346329,"6":15.504982945,"7":18.656481739999997,"8":21.610117915,"9":26.612785340000002,"10":61.46312714}},"chWHITE1014":{"description":"Change in tract share of white 2010 to 2014","units":"percent","range":{"min":-30.58,"max":39.77},"category":"race","median":-1.57,"deciles":{"1":-9.120000000000001,"2":-6.09,"3":-4.234999999999999,"4":-2.5999999999999996,"5":-1.56,"6":-0.7,"7":0.45999999999999996,"8":1.9649999999999999,"9":4.3149999999999995,"10":39.77}},"chWHITE0010":{"description":"Change in tract share of white 2000 to 2010","units":"percent","range":{"min":-58.85,"max":22.15},"category":"race","median":-3.16,"deciles":{"1":-14.33,"2":-9.495000000000001,"3":-6.485,"4":-4.345000000000001,"5":-3.14,"6":-2.0149999999999997,"7":-0.765,"8":0.315,"9":2.1100000000000003,"10":22.15}},"chWHITE9000":{"description":"Change in tract share of white 1990 to 2000","units":"percent","range":{"min":-50.21,"max":20.7},"category":"race","median":-3.3,"deciles":{"1":-18.705,"2":-11.34,"3":-7.1899999999999995,"4":-4.52,"5":-3.29,"6":-2.32,"7":-1.6,"8":-1.05,"9":-0.425,"10":20.7}},"chWHITE0014":{"description":"Change in tract share of white 2000 to 2014","units":"percent","range":{"min":-34.27,"max":47.55},"category":"race","median":-5.07,"deciles":{"1":-17.39,"2":-12.91,"3":-9.735,"4":-7.26,"5":-5.0600000000000005,"6":-3.325,"7":-1.8599999999999999,"8":-0.61,"9":1.04,"10":47.55}},"chWHITE9014":{"description":"Change in tract share of white 1990 to 2014","units":"percent","range":{"min":-74.39,"max":39.01},"category":"race","median":-8.97,"deciles":{"1":-34.295,"2":-22.605,"3":-15.995000000000001,"4":-11.925,"5":-8.955,"6":-6.265,"7":-4.289999999999999,"8":-2.65,"9":-0.395,"10":39.01}},"dchMedINC1014":{"description":"decile of change in tract median income 2010 to 2014","units":"decile","range":{"min":1,"max":10},"category":"income","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchMedINC0010":{"description":"decile of change in tract median income 2000 to 2010","units":"decile","range":{"min":1,"max":10},"category":"income","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchMedINC9000":{"description":"decile of change in tract median income 1990 to 2000","units":"decile","range":{"min":1,"max":10},"category":"income","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchMedINC0014":{"description":"decile of change in tract median income 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"income","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchMedINC9014":{"description":"decile of change in tract median income 1990 to 2014","units":"decile","range":{"min":1,"max":10},"category":"income","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchHOMval1014":{"description":"decile of tract change in home value 2010 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1.5,"2":2.5,"3":3,"4":4,"5":5,"6":6.5,"7":7.5,"8":8,"9":9,"10":10}},"dchHOMval0010":{"description":"decile of tract change in home value 2000 to 2010","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchHOMval9000":{"description":"decile of tract change in home value 1990 to 2000","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1.5,"2":2,"3":3.5,"4":4,"5":5,"6":6.5,"7":7,"8":8.5,"9":9,"10":10}},"dchHOMval0014":{"description":"decile of tract change in home value 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchHOMval9014":{"description":"decile of tract change in home value 1990 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5.5,"6":6.5,"7":7.5,"8":8.5,"9":9.5,"10":10}},"dchRNTval1014":{"description":"decile of change in tract rent value 2010 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchRNTval0010":{"description":"decile of change in tract rent value 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2,"3":3,"4":4.5,"5":5.5,"6":6,"7":7.5,"8":8.5,"9":9,"10":10}},"dchRNTval9000":{"description":"decile of change in tract rent value 1990 to 2000","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchRNTval0014":{"description":"decile of change in tract rent value 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1.5,"2":2.5,"3":3,"4":4,"5":5,"6":6.5,"7":7.5,"8":8,"9":9,"10":10}},"dchRNTval9014":{"description":"decile of change in tract rent value 1990 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1.5,"2":2.5,"3":3,"4":4,"5":5,"6":6.5,"7":7.5,"8":8,"9":9,"10":10}},"dchOWNsp1014":{"description":"decile of tract change in ownership 2010 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchOWNsp0010":{"description":"decile of tract change in ownership 2000 to 2010","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5.5,"6":6.5,"7":7.5,"8":8.5,"9":9.5,"10":10}},"dchOWNsp9000":{"description":"decile of tract change in ownership 1990 to 2000","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1.5,"2":2.5,"3":3.5,"4":4.5,"5":5.5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchOWNsp0014":{"description":"decile of tract change in ownership 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5.5,"6":6.5,"7":7.5,"8":8.5,"9":9.5,"10":10}},"dchOWNsp9014":{"description":"decile of tract change in ownership 1990 to 2014","units":"decile","range":{"min":1,"max":10},"category":"housing","median":5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5.5,"6":6.5,"7":7.5,"8":8.5,"9":9.5,"10":10}},"dchBACH1014":{"description":"decile of tract change in bachelors deg. shares 2010 to 2014","units":"decile","range":{"min":1,"max":10},"category":"education","median":5,"deciles":{"1":1,"2":2.5,"3":3.5,"4":4,"5":5.5,"6":6.5,"7":7,"8":8,"9":9.5,"10":10}},"dchBACH0010":{"description":"decile of tract change in bachelors deg. shares 2000 to 2010","units":"decile","range":{"min":1,"max":10},"category":"education","median":5,"deciles":{"1":1,"2":2.5,"3":3.5,"4":4,"5":5.5,"6":6.5,"7":7,"8":8,"9":9.5,"10":10}},"dchBACH9000":{"description":"decile of tract change in bachelors deg. shares 1990 to 2000","units":"decile","range":{"min":1,"max":10},"category":"education","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchBACH0014":{"description":"decile of tract change in bachelors deg. shares 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"education","median":5.5,"deciles":{"1":1,"2":2.5,"3":3,"4":4.5,"5":5,"6":6,"7":7.5,"8":8,"9":9.5,"10":10}},"dchBACH9014":{"description":"decile of tract change in bachelors deg. shares 1990 to 2014","units":"decile","range":{"min":1,"max":10},"category":"education","median":5.5,"deciles":{"1":1,"2":2.5,"3":3,"4":4.5,"5":5,"6":6,"7":7.5,"8":8,"9":9.5,"10":10}},"dchWHITE1014":{"description":"decile of change in tract white share 2010 to 2014","units":"decile","range":{"min":1,"max":10},"category":"race","median":5,"deciles":{"1":1,"2":2.5,"3":3.5,"4":4,"5":5.5,"6":6.5,"7":7,"8":8,"9":9.5,"10":10}},"dchWHITE0010":{"description":"decile of change in tract white share 2000 to 2010","units":"decile","range":{"min":1,"max":10},"category":"race","median":5,"deciles":{"1":1,"2":2.5,"3":3.5,"4":4,"5":5.5,"6":6.5,"7":7,"8":8,"9":9.5,"10":10}},"dchWHITE9000":{"description":"decile of change in tract white share 1990 to 2000","units":"decile","range":{"min":1,"max":10},"category":"race","median":5.5,"deciles":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10}},"dchWHITE0014":{"description":"decile of change in tract white share 2000 to 2014","units":"decile","range":{"min":1,"max":10},"category":"race","median":5.5,"deciles":{"1":1,"2":2.5,"3":3,"4":4.5,"5":5,"6":6,"7":7.5,"8":8,"9":9.5,"10":10}},"dchWHITE9014":{"description":"decile of change in tract white share 1990 to 2014","units":"decile","range":{"min":1,"max":10},"category":"race","median":5.5,"deciles":{"1":1,"2":2.5,"3":3,"4":4.5,"5":5,"6":6,"7":7.5,"8":8,"9":9.5,"10":10}}}
+{
+  "MedINC14": {
+    "description": "Tract median income in 2014",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": 12490,
+      "max": 226181
+    },
+    "category": ["income", "all"],
+    "median": 76347,
+    "deciles": {
+      "1": 37525,
+      "2": 51092,
+      "3": 60095,
+      "4": 69357,
+      "5": 76324,
+      "6": 83648,
+      "7": 91700,
+      "8": 102292,
+      "9": 121127,
+      "10": 226181
+    }
+  },
+  "MedINC10": {
+    "description": "Tract median income in 2010",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": 13026,
+      "max": 237515
+    },
+    "category": ["income", "all"],
+    "median": 77657,
+    "deciles": {
+      "1": 41877,
+      "2": 52810,
+      "3": 61950,
+      "4": 69327.5,
+      "5": 77743.5,
+      "6": 84229.5,
+      "7": 92854.5,
+      "8": 103857,
+      "9": 122384.5,
+      "10": 237515
+    }
+  },
+  "MedINC00": {
+    "description": "Tract median income in 2000",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": 14168,
+      "max": 222552.75
+    },
+    "category": ["income", "all"],
+    "median": 77651.5,
+    "deciles": {
+      "1": 44794,
+      "2": 54826.900389999995,
+      "3": 63918.691405000005,
+      "4": 71742,
+      "5": 77690.75,
+      "6": 85490.11327999999,
+      "7": 92657.29688,
+      "8": 102334.8008,
+      "9": 124131.87890000001,
+      "10": 222552.75
+    }
+  },
+  "MedINC90": {
+    "description": "Tract median income in 1990",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": 15437.00098,
+      "max": 188839.8594
+    },
+    "category": ["income", "all"],
+    "median": 74212.6875,
+    "deciles": {
+      "1": 43986.552735000005,
+      "2": 53937.990235000005,
+      "3": 62016,
+      "4": 67037.31640499999,
+      "5": 74223.171875,
+      "6": 79644.5,
+      "7": 85283.94141,
+      "8": 94102.85156499999,
+      "9": 110835.4961,
+      "10": 188839.8594
+    }
+  },
+  "MedHOMVal14": {
+    "description": "Tract median home value in 2014",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": 83773,
+      "max": 1016663
+    },
+    "category": ["home value", "all"],
+    "median": 354307,
+    "deciles": {
+      "1": 237645,
+      "2": 274600.5,
+      "3": 303423,
+      "4": 329601.5,
+      "5": 354357.5,
+      "6": 386331.5,
+      "7": 428370.5,
+      "8": 498723.5,
+      "9": 633634.5,
+      "10": 1016663
+    }
+  },
+  "MedHOMVal10": {
+    "description": "Tract median home value in 2010",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": 105578,
+      "max": 1086197
+    },
+    "category": ["home value", "all"],
+    "median": 402870,
+    "deciles": {
+      "1": 288820,
+      "2": 327597,
+      "3": 360726,
+      "4": 380495,
+      "5": 402653,
+      "6": 430894,
+      "7": 479012,
+      "8": 542229,
+      "9": 678112,
+      "10": 1086197
+    }
+  },
+  "MedHOMVal00": {
+    "description": "Tract median home value in 2000",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": 13751,
+      "max": 1108093.25
+    },
+    "category": ["home value", "all"],
+    "median": 272819.1875,
+    "deciles": {
+      "1": 183994.51565000002,
+      "2": 211710.07815000002,
+      "3": 232257.5547,
+      "4": 253532.5156,
+      "5": 272971.59375,
+      "6": 304032,
+      "7": 337311.17189999996,
+      "8": 393802,
+      "9": 498561.82814999996,
+      "10": 1108093.25
+    }
+  },
+  "MedHOMVal90": {
+    "description": "Tract median home value in 1990",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": 149659,
+      "max": 878285.0625
+    },
+    "category": ["home value", "all"],
+    "median": 291462.17189999996,
+    "deciles": {
+      "1": 219568.7422,
+      "2": 247349.96875,
+      "3": 262449.5625,
+      "4": 278855,
+      "5": 291239,
+      "6": 310209.79689999996,
+      "7": 332109.5313,
+      "8": 384750.51564999996,
+      "9": 487301.20314999996,
+      "10": 878285.0625
+    }
+  },
+  "MedRNTVal14": {
+    "description": "Tract median gross rent in 2014",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": 294,
+      "max": 2034
+    },
+    "category": ["rent", "all"],
+    "median": 1224,
+    "deciles": {
+      "1": 899.5,
+      "2": 1002,
+      "3": 1094.5,
+      "4": 1160.5,
+      "5": 1224,
+      "6": 1299,
+      "7": 1422,
+      "8": 1599.5,
+      "9": 1777.5,
+      "10": 2034
+    }
+  },
+  "MedRENTVal10": {
+    "description": "Tract median gross rent in 2010",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": 314,
+      "max": 2173
+    },
+    "category": ["rent", "all"],
+    "median": 1213,
+    "deciles": {
+      "1": 840.5,
+      "2": 985.5,
+      "3": 1069,
+      "4": 1154,
+      "5": 1213,
+      "6": 1283,
+      "7": 1403,
+      "8": 1536,
+      "9": 1767.5,
+      "10": 2173
+    }
+  },
+  "MedRENTVal00": {
+    "description": "Tract median gross rent in 2000",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": 250,
+      "max": 2741.019287
+    },
+    "category": ["rent", "all"],
+    "median": 1051.996216,
+    "deciles": {
+      "1": 788.6268921000001,
+      "2": 887.8573303000001,
+      "3": 942,
+      "4": 997.4902649,
+      "5": 1051.998108,
+      "6": 1124.4813235000001,
+      "7": 1202.0957640000001,
+      "8": 1306.6736455,
+      "9": 1525.873474,
+      "10": 2741.019287
+    }
+  },
+  "MedRENTVal90": {
+    "description": "Tract median gross rent in 1990",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": 267.0049438,
+      "max": 1758.000122
+    },
+    "category": ["rent", "all"],
+    "median": 1136.01416,
+    "deciles": {
+      "1": 868.1265869,
+      "2": 976,
+      "3": 1042,
+      "4": 1084.794983,
+      "5": 1136.0758664999998,
+      "6": 1193.041504,
+      "7": 1252,
+      "8": 1339.9190065,
+      "9": 1467.849182,
+      "10": 1758.000122
+    }
+  },
+  "OWNshprate14": {
+    "description": "Tract ownership rate in 2014",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 63.3,
+    "deciles": {
+      "1": 22.17,
+      "2": 34.195,
+      "3": 43.335,
+      "4": 53.504999999999995,
+      "5": 63.355,
+      "6": 71.945,
+      "7": 78.49000000000001,
+      "8": 84.18,
+      "9": 90.715,
+      "10": 100
+    }
+  },
+  "OWNshprate10": {
+    "description": "Tract ownership rate in 2010",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 65.56,
+    "deciles": {
+      "1": 23.33,
+      "2": 37.22,
+      "3": 46.295,
+      "4": 56.61,
+      "5": 65.565,
+      "6": 73.28,
+      "7": 80.88,
+      "8": 86.125,
+      "9": 91.83,
+      "10": 100
+    }
+  },
+  "OWNshprate00": {
+    "description": "Tract ownership rate in 2000",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 99.91
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 62.75,
+    "deciles": {
+      "1": 24.33,
+      "2": 34.015,
+      "3": 42.295,
+      "4": 52.445,
+      "5": 62.785,
+      "6": 71.965,
+      "7": 79.735,
+      "8": 84.36500000000001,
+      "9": 90.69,
+      "10": 99.91
+    }
+  },
+  "OWNshprate90": {
+    "description": "Tract ownership rate in 1990",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 96.7
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 61.2,
+    "deciles": {
+      "1": 22.68,
+      "2": 32.84,
+      "3": 41.595,
+      "4": 49.8,
+      "5": 61.265,
+      "6": 69.15,
+      "7": 77.025,
+      "8": 82.67,
+      "9": 88.905,
+      "10": 96.7
+    }
+  },
+  "shWHITET14": {
+    "description": "Tract share of white in 2014",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["race", "all"],
+    "median": 80.57,
+    "deciles": {
+      "1": 28.355,
+      "2": 52.395,
+      "3": 65.81,
+      "4": 75.14,
+      "5": 80.585,
+      "6": 85.885,
+      "7": 90.015,
+      "8": 92.945,
+      "9": 95.44999999999999,
+      "10": 100
+    }
+  },
+  "shWHITE10": {
+    "description": "Tract share of white in 2010",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["race", "all"],
+    "median": 83.88,
+    "deciles": {
+      "1": 29.39,
+      "2": 55.14,
+      "3": 69.14,
+      "4": 77.485,
+      "5": 83.88499999999999,
+      "6": 88.48,
+      "7": 91.83,
+      "8": 94.185,
+      "9": 96.495,
+      "10": 100
+    }
+  },
+  "shWHITE00": {
+    "description": "Tract share of white in 2000",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 98.64
+    },
+    "category": ["race", "all"],
+    "median": 89.28,
+    "deciles": {
+      "1": 40.655,
+      "2": 63.02,
+      "3": 77.54,
+      "4": 83.995,
+      "5": 89.3,
+      "6": 92.66,
+      "7": 94.69,
+      "8": 96.1,
+      "9": 97.055,
+      "10": 98.64
+    }
+  },
+  "shWHITE90": {
+    "description": "Tract share of white in 1990",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 99.44
+    },
+    "category": ["race", "all"],
+    "median": 94.17,
+    "deciles": {
+      "1": 57.155,
+      "2": 79.59,
+      "3": 88.03999999999999,
+      "4": 91.83,
+      "5": 94.185,
+      "6": 95.72,
+      "7": 96.805,
+      "8": 97.615,
+      "9": 98.2,
+      "10": 99.44
+    }
+  },
+  "shHISP14": {
+    "description": "Tract share of Hisp in 2014",
+    "descriptionShort": "race-Hispanic",
+    "descriptionKey": "raceHisp",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 95.79
+    },
+    "category": ["race", "all"],
+    "median": 4.45,
+    "deciles": {
+      "1": 0.73,
+      "2": 1.49,
+      "3": 2.25,
+      "4": 3.105,
+      "5": 4.455,
+      "6": 6.135,
+      "7": 9.004999999999999,
+      "8": 14.58,
+      "9": 27.585,
+      "10": 95.79
+    }
+  },
+  "shHISP10": {
+    "description": "Tract share of Hisp in 2010",
+    "descriptionShort": "race-Hispanic",
+    "descriptionKey": "raceHisp",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["race", "all"],
+    "median": 3.57,
+    "deciles": {
+      "1": 0.535,
+      "2": 1.07,
+      "3": 1.7149999999999999,
+      "4": 2.455,
+      "5": 3.57,
+      "6": 5.34,
+      "7": 8.15,
+      "8": 13.74,
+      "9": 24.855,
+      "10": 100
+    }
+  },
+  "shHISP00": {
+    "description": "Tract share of Hisp in 2000",
+    "descriptionShort": "race-Hispanic",
+    "descriptionKey": "raceHisp",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 88.25
+    },
+    "category": ["race", "all"],
+    "median": 2.18,
+    "deciles": {
+      "1": 0.755,
+      "2": 0.96,
+      "3": 1.2,
+      "4": 1.5550000000000002,
+      "5": 2.185,
+      "6": 3.25,
+      "7": 5.72,
+      "8": 9.975000000000001,
+      "9": 19.814999999999998,
+      "10": 88.25
+    }
+  },
+  "shHISP90": {
+    "description": "Tract share of Hisp in 1990",
+    "descriptionShort": "race-Hispanic",
+    "descriptionKey": "raceHisp",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 81.01
+    },
+    "category": ["race", "all"],
+    "median": 1.65,
+    "deciles": {
+      "1": 0.59,
+      "2": 0.79,
+      "3": 1,
+      "4": 1.22,
+      "5": 1.6549999999999998,
+      "6": 2.29,
+      "7": 3.725,
+      "8": 6.385,
+      "9": 14.24,
+      "10": 81.01
+    }
+  },
+  "shBLCK14": {
+    "description": "Tract share of Black in 2014",
+    "descriptionShort": "race-black",
+    "descriptionKey": "raceBlack",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 89.84
+    },
+    "category": ["race", "all"],
+    "median": 2.25,
+    "deciles": {
+      "1": 0,
+      "2": 0.365,
+      "3": 0.805,
+      "4": 1.46,
+      "5": 2.255,
+      "6": 3.4,
+      "7": 5.485,
+      "8": 8.825,
+      "9": 19.994999999999997,
+      "10": 89.84
+    }
+  },
+  "shBLCK10": {
+    "description": "Tract share of Black in 2010",
+    "descriptionShort": "race-black",
+    "descriptionKey": "raceBlack",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 89.28
+    },
+    "category": ["race", "all"],
+    "median": 2.1,
+    "deciles": {
+      "1": 0,
+      "2": 0.17,
+      "3": 0.685,
+      "4": 1.1549999999999998,
+      "5": 2.105,
+      "6": 3.035,
+      "7": 4.895,
+      "8": 9.155000000000001,
+      "9": 19.75,
+      "10": 89.28
+    }
+  },
+  "shBLCK00": {
+    "description": "Tract share of Black in 2000",
+    "descriptionShort": "race-black",
+    "descriptionKey": "raceBlack",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 89.24
+    },
+    "category": ["race", "all"],
+    "median": 1.57,
+    "deciles": {
+      "1": 0.3,
+      "2": 0.47,
+      "3": 0.695,
+      "4": 1.01,
+      "5": 1.57,
+      "6": 2.28,
+      "7": 3.675,
+      "8": 6.395,
+      "9": 16.009999999999998,
+      "10": 89.24
+    }
+  },
+  "shBLCK90": {
+    "description": "Tract share of Black in 1990",
+    "descriptionShort": "race-black",
+    "descriptionKey": "raceBlack",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 92.37
+    },
+    "category": ["race", "all"],
+    "median": 1.28,
+    "deciles": {
+      "1": 0.275,
+      "2": 0.44,
+      "3": 0.62,
+      "4": 0.85,
+      "5": 1.2850000000000001,
+      "6": 1.8450000000000002,
+      "7": 2.8099999999999996,
+      "8": 4.61,
+      "9": 11.12,
+      "10": 92.37
+    }
+  },
+  "shASIAN14": {
+    "description": "Tract share of AsOth in 2014",
+    "descriptionShort": "race-asian/other",
+    "descriptionKey": "raceAsOth",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 74.36
+    },
+    "category": ["race", "all"],
+    "median": 0.93,
+    "deciles": {
+      "1": 0,
+      "2": 0,
+      "3": 0.24,
+      "4": 0.51,
+      "5": 0.93,
+      "6": 1.66,
+      "7": 3.1399999999999997,
+      "8": 6.725,
+      "9": 14.725000000000001,
+      "10": 74.36
+    }
+  },
+  "shASIAN10": {
+    "description": "Tract share of AsOth in 2010",
+    "descriptionShort": "race-asian/other",
+    "descriptionKey": "raceAsOth",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["race", "all"],
+    "median": 0.97,
+    "deciles": {
+      "1": 0,
+      "2": 0,
+      "3": 0.2,
+      "4": 0.49,
+      "5": 0.97,
+      "6": 1.71,
+      "7": 3.11,
+      "8": 6.359999999999999,
+      "9": 13.8,
+      "10": 100
+    }
+  },
+  "shASIAN00": {
+    "description": "Tract share of AsOth in 2000",
+    "descriptionShort": "race-asian/other",
+    "descriptionKey": "raceAsOth",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 73.68
+    },
+    "category": ["race", "all"],
+    "median": 4.94,
+    "deciles": {
+      "1": 1.475,
+      "2": 1.99,
+      "3": 2.6399999999999997,
+      "4": 3.645,
+      "5": 4.94,
+      "6": 6.21,
+      "7": 8.36,
+      "8": 11.559999999999999,
+      "9": 16.36,
+      "10": 73.68
+    }
+  },
+  "shASIAN90": {
+    "description": "Tract share of AsOth in 1990",
+    "descriptionShort": "race-asian/other",
+    "descriptionKey": "raceAsOth",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 87.28
+    },
+    "category": ["race", "all"],
+    "median": 1.87,
+    "deciles": {
+      "1": 0.655,
+      "2": 0.88,
+      "3": 1.13,
+      "4": 1.42,
+      "5": 1.87,
+      "6": 2.545,
+      "7": 3.5,
+      "8": 4.945,
+      "9": 7.9399999999999995,
+      "10": 87.28
+    }
+  },
+  "POVrate14": {
+    "description": "Poverty rate in 2014",
+    "descriptionShort": "poverty rate",
+    "descriptionKey": "povRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 87.84194183
+    },
+    "category": ["income", "all"],
+    "median": 7.364897251,
+    "deciles": {
+      "1": 2.2981950045,
+      "2": 3.417157054,
+      "3": 4.5353035925,
+      "4": 5.7666068075000005,
+      "5": 7.3696565625,
+      "6": 10.036188601500001,
+      "7": 13.832591535,
+      "8": 18.784125325,
+      "9": 27.17612362,
+      "10": 87.84194183
+    }
+  },
+  "POVrate10": {
+    "description": "Poverty rate in 2010",
+    "descriptionShort": "poverty rate",
+    "descriptionKey": "povRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 86.328125
+    },
+    "category": ["income", "all"],
+    "median": 6.728058815,
+    "deciles": {
+      "1": 1.809322715,
+      "2": 2.9392129185,
+      "3": 4.161943436,
+      "4": 5.3133645055,
+      "5": 6.743103266,
+      "6": 9.127539158000001,
+      "7": 12.049519065,
+      "8": 17.13252449,
+      "9": 25.35499573,
+      "10": 86.328125
+    }
+  },
+  "POVrate00": {
+    "description": "Poverty rate in 2000",
+    "descriptionShort": "poverty rate",
+    "descriptionKey": "povRate",
+    "units": "percent",
+    "range": {
+      "min": 0.000445528,
+      "max": 69.59247589
+    },
+    "category": ["income", "all"],
+    "median": 5.847579241,
+    "deciles": {
+      "1": 2.275106907,
+      "2": 2.969837427,
+      "3": 3.735325575,
+      "4": 4.633024693,
+      "5": 5.843446732,
+      "6": 7.499490738,
+      "7": 10.15903187,
+      "8": 15.244874,
+      "9": 23.57825851,
+      "10": 69.59247589
+    }
+  },
+  "POVrate90": {
+    "description": "Poverty rate in 1990",
+    "descriptionShort": "poverty rate",
+    "descriptionKey": "povRate",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 78.96551514
+    },
+    "category": ["income", "all"],
+    "median": 5.7102820869999995,
+    "deciles": {
+      "1": 2.067690849,
+      "2": 2.914574623,
+      "3": 3.762176752,
+      "4": 4.732477188,
+      "5": 5.706922054,
+      "6": 7.300967693,
+      "7": 9.426681519,
+      "8": 13.56125355,
+      "9": 24.01682472,
+      "10": 78.96551514
+    }
+  },
+  "shBACH14": {
+    "description": "Share of Bachelors degree holders in 2014",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": 1.408450723,
+      "max": 96.1795578
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 41.15485382,
+    "deciles": {
+      "1": 16.73771858,
+      "2": 23.41356659,
+      "3": 30.03822136,
+      "4": 35.45454407,
+      "5": 41.18463707,
+      "6": 48.14393997,
+      "7": 56.577379225,
+      "8": 66.16893005,
+      "9": 76.566913605,
+      "10": 96.1795578
+    }
+  },
+  "shBACH10": {
+    "description": "Share of Bachelors degree holders in 2010",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 39.535360335,
+    "deciles": {
+      "1": 15.39928484,
+      "2": 22.744903565,
+      "3": 28.312333105,
+      "4": 33.617300035,
+      "5": 39.4736824,
+      "6": 45.424097065,
+      "7": 53.110019685,
+      "8": 63.46926117,
+      "9": 73.73249054,
+      "10": 100
+    }
+  },
+  "shBACH00": {
+    "description": "Share of Bachelors degree holders in 2000",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": 3.28725338,
+      "max": 90.20694733
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 33.259485245,
+    "deciles": {
+      "1": 12.25490189,
+      "2": 18.33046341,
+      "3": 23.46816826,
+      "4": 28.42282867,
+      "5": 33.25396347,
+      "6": 38.29809189,
+      "7": 45.92993927,
+      "8": 55.09735107,
+      "9": 67.08686066,
+      "10": 90.20694733
+    }
+  },
+  "shBACH90": {
+    "description": "Share of Bachelors degree holders in 1990",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": 1.134521842,
+      "max": 84.51087189
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 25.870658874999997,
+    "deciles": {
+      "1": 10.58890152,
+      "2": 14.73484612,
+      "3": 18.91147232,
+      "4": 22.0987339,
+      "5": 25.8696003,
+      "6": 30.05084419,
+      "7": 35.71165466,
+      "8": 44.35654831,
+      "9": 55.66619492,
+      "10": 84.51087189
+    }
+  },
+  "shCBRENT14": {
+    "description": "Share cost-burdened renters in 2014",
+    "descriptionShort": "cost burdens",
+    "descriptionKey": "costBurd",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 94.41
+    },
+    "category": ["cost burdens", "all"],
+    "median": 45.65,
+    "deciles": {
+      "1": 27.7,
+      "2": 34.87,
+      "3": 39.035,
+      "4": 42.565,
+      "5": 45.655,
+      "6": 49.07,
+      "7": 52.795,
+      "8": 56.455,
+      "9": 62.395,
+      "10": 94.41
+    }
+  },
+  "shCBRENT10": {
+    "description": "Share cost-burdened renters in 2010",
+    "descriptionShort": "cost burdens",
+    "descriptionKey": "costBurd",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["cost burdens", "all"],
+    "median": 45.68,
+    "deciles": {
+      "1": 24.630000000000003,
+      "2": 33.4,
+      "3": 38.355000000000004,
+      "4": 42.06,
+      "5": 45.68,
+      "6": 49.480000000000004,
+      "7": 53.504999999999995,
+      "8": 57.65,
+      "9": 64.535,
+      "10": 100
+    }
+  },
+  "shCBRENT00": {
+    "description": "Share cost-burdened renters in 2000",
+    "descriptionShort": "cost burdens",
+    "descriptionKey": "costBurd",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 96.43
+    },
+    "category": ["cost burdens", "all"],
+    "median": 34.86,
+    "deciles": {
+      "1": 23.02,
+      "2": 27.42,
+      "3": 30.405,
+      "4": 32.765,
+      "5": 34.875,
+      "6": 37.68,
+      "7": 39.82,
+      "8": 42.46,
+      "9": 45.785,
+      "10": 96.43
+    }
+  },
+  "shCBRENT90": {
+    "description": "Share cost-burdened renters in 1990",
+    "descriptionShort": "cost burdens",
+    "descriptionKey": "costBurd",
+    "units": "percent",
+    "range": {
+      "min": 0,
+      "max": 100
+    },
+    "category": ["cost burdens", "all"],
+    "median": 37.6,
+    "deciles": {
+      "1": 25.77,
+      "2": 29.875,
+      "3": 32.75,
+      "4": 35.25,
+      "5": 37.620000000000005,
+      "6": 39.95,
+      "7": 42.269999999999996,
+      "8": 45.114999999999995,
+      "9": 51.11,
+      "10": 100
+    }
+  },
+  "chMedINC1014": {
+    "description": "Change in median income 2010 to 2014",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": -56829,
+      "max": 75471
+    },
+    "category": ["income", "all"],
+    "median": -1477,
+    "deciles": {
+      "1": -15903.5,
+      "2": -10637,
+      "3": -7048,
+      "4": -3856.5,
+      "5": -1466,
+      "6": 1462,
+      "7": 4049,
+      "8": 6738.5,
+      "9": 12488,
+      "10": 75471
+    }
+  },
+  "chMedINC0010": {
+    "description": "Change in median income 2000 to 2010",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": -71842.75,
+      "max": 124614.9688
+    },
+    "category": ["income", "all"],
+    "median": -1750,
+    "deciles": {
+      "1": -14868.05078,
+      "2": -9895,
+      "3": -6801.7578125,
+      "4": -4464.042969,
+      "5": -1734.5,
+      "6": 705.5371094,
+      "7": 3250.5,
+      "8": 7584.1132815,
+      "9": 13115.636719999999,
+      "10": 124614.9688
+    }
+  },
+  "chMedINC9000": {
+    "description": "Change in median income 1990 to 2000",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": -33208.14063,
+      "max": 53889.09375
+    },
+    "category": ["income", "all"],
+    "median": 4239.234375,
+    "deciles": {
+      "1": -6123.8027345,
+      "2": -2512.105469,
+      "3": 153.40039065000002,
+      "4": 2430.734375,
+      "5": 4244.625,
+      "6": 6595,
+      "7": 9694.0859375,
+      "8": 13214.42578,
+      "9": 18898.5,
+      "10": 53889.09375
+    }
+  },
+  "chMedINC0014": {
+    "description": "Change in median income 2000 to 2014",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": -53162.14063,
+      "max": 67785.96875
+    },
+    "category": ["income", "all"],
+    "median": -3970.886719,
+    "deciles": {
+      "1": -17590.64063,
+      "2": -11756.36719,
+      "3": -8807.152344,
+      "4": -6173,
+      "5": -3988.242188,
+      "6": -1180,
+      "7": 1837.367188,
+      "8": 6013.5625,
+      "9": 13412,
+      "10": 67785.96875
+    }
+  },
+  "chMedINC9014": {
+    "description": "Change in median income 1990 to 2014",
+    "descriptionShort": "income",
+    "descriptionKey": "income",
+    "units": "usd",
+    "range": {
+      "min": -42947.89063,
+      "max": 102640.2734
+    },
+    "category": ["income", "all"],
+    "median": 1513.5,
+    "deciles": {
+      "1": -15048.45313,
+      "2": -9282.132813,
+      "3": -5411,
+      "4": -1694,
+      "5": 1509,
+      "6": 4931.65625,
+      "7": 9238.007813,
+      "8": 14454.99219,
+      "9": 22251.75781,
+      "10": 102640.2734
+    }
+  },
+  "chHOMval1014": {
+    "description": "Change in median home value 2010 to 2014",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": -405949,
+      "max": 408176
+    },
+    "category": ["home value", "all"],
+    "median": -48875.5,
+    "deciles": {
+      "1": -93168,
+      "2": -72587,
+      "3": -63966.5,
+      "4": -55944,
+      "5": -48904,
+      "6": -41844,
+      "7": -32993,
+      "8": -24000.5,
+      "9": -4509.5,
+      "10": 408176
+    }
+  },
+  "chHOMval0010": {
+    "description": "Change in median home value 2000 to 2010",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": -180725,
+      "max": 720431
+    },
+    "category": ["home value", "all"],
+    "median": 126227.40625,
+    "deciles": {
+      "1": 84467,
+      "2": 98308,
+      "3": 108573,
+      "4": 117557.2188,
+      "5": 126185.125,
+      "6": 135408,
+      "7": 146238.5625,
+      "8": 165530,
+      "9": 199240,
+      "10": 720431
+    }
+  },
+  "chHOMval9000": {
+    "description": "Change in median home value 1990 to 2000",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": -492941,
+      "max": 440882
+    },
+    "category": ["home value", "all"],
+    "median": -17682.625,
+    "deciles": {
+      "1": -60496.585940000004,
+      "2": -45726.046875,
+      "3": -36119.726565000004,
+      "4": -27671.27344,
+      "5": -17866.53125,
+      "6": -8150.421875,
+      "7": 4145.515625,
+      "8": 24689.28125,
+      "9": 57183.6875,
+      "10": 440882
+    }
+  },
+  "chHOMval0014": {
+    "description": "Change in median home value 2000 to 2014",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": -246434.9375,
+      "max": 546053
+    },
+    "category": ["home value", "all"],
+    "median": 76359.14063,
+    "deciles": {
+      "1": 37786.015625,
+      "2": 48794.359375,
+      "3": 58265.10938,
+      "4": 67326.28125,
+      "5": 76377.08593999999,
+      "6": 86712.109375,
+      "7": 97657.0625,
+      "8": 114855,
+      "9": 146405.20315000002,
+      "10": 546053
+    }
+  },
+  "chHOMval9014": {
+    "description": "Change in median home value 1990 to 2014",
+    "descriptionShort": "home value",
+    "descriptionKey": "homeVal",
+    "units": "usd",
+    "range": {
+      "min": -481177,
+      "max": 430102.0625
+    },
+    "category": ["home value", "all"],
+    "median": 59262,
+    "deciles": {
+      "1": -7406.59375,
+      "2": 12935.125,
+      "3": 29449.8125,
+      "4": 43798.257815000004,
+      "5": 59290.09375,
+      "6": 73737.6875,
+      "7": 95783.265625,
+      "8": 121551.25005,
+      "9": 176037,
+      "10": 430102.0625
+    }
+  },
+  "chRENTval1014": {
+    "description": "Change in median rent value 2010 to 2014",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": -1419,
+      "max": 1428
+    },
+    "category": ["rent", "all"],
+    "median": 21,
+    "deciles": {
+      "1": -185,
+      "2": -112,
+      "3": -58,
+      "4": -19,
+      "5": 21,
+      "6": 50,
+      "7": 91,
+      "8": 156,
+      "9": 260,
+      "10": 1428
+    }
+  },
+  "chRENTval0010": {
+    "description": "Change in median rent value 2000 to 2010",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": -1337.064209,
+      "max": 1571
+    },
+    "category": ["rent", "all"],
+    "median": 142,
+    "deciles": {
+      "1": -119.57452395,
+      "2": -11.888671875,
+      "3": 56.418395995,
+      "4": 99.999908445,
+      "5": 142.5098572,
+      "6": 183.1413574,
+      "7": 234.036438,
+      "8": 308.00012204999996,
+      "9": 419.06237795000004,
+      "10": 1571
+    }
+  },
+  "chRENTval9000": {
+    "description": "Change in median rent value 1990 to 2000",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": -1212.849121,
+      "max": 987.7647705
+    },
+    "category": ["rent", "all"],
+    "median": -71,
+    "deciles": {
+      "1": -242.81134035000002,
+      "2": -183.98144530000002,
+      "3": -141.3439636,
+      "4": -106,
+      "5": -71,
+      "6": -36.92211914,
+      "7": 1.3853759765,
+      "8": 74.92190552,
+      "9": 222.95144655000001,
+      "10": 987.7647705
+    }
+  },
+  "chRENTval0014": {
+    "description": "Change in median rent value 2000 to 2014",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": -2276.606445,
+      "max": 1295.397705
+    },
+    "category": ["rent", "all"],
+    "median": 166.8551636,
+    "deciles": {
+      "1": -84.97177124000001,
+      "2": 22.111694335,
+      "3": 66.582489015,
+      "4": 117.00006105,
+      "5": 166.739502,
+      "6": 208.4984436,
+      "7": 257.0101013,
+      "8": 329.99404905,
+      "9": 449.39270020000004,
+      "10": 1295.397705
+    }
+  },
+  "chRENTval9014": {
+    "description": "Change in median rent value 1990 to 2014",
+    "descriptionShort": "rent",
+    "descriptionKey": "rent",
+    "units": "usd",
+    "range": {
+      "min": -1327.527954,
+      "max": 1519.328613
+    },
+    "category": ["rent", "all"],
+    "median": 87.82946777500001,
+    "deciles": {
+      "1": -166.3949585,
+      "2": -65.47003174,
+      "3": -8.390197753999999,
+      "4": 35.974975584999996,
+      "5": 87.63916016,
+      "6": 148.42663575,
+      "7": 215.1102295,
+      "8": 321,
+      "9": 530.6043396,
+      "10": 1519.328613
+    }
+  },
+  "chOWNrate1014": {
+    "description": "Change in tract ownership rate 2010 to 2014",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": -88.57,
+      "max": 18.07
+    },
+    "category": ["homeownership rate", "all"],
+    "median": -1.59,
+    "deciles": {
+      "1": -9,
+      "2": -6.335,
+      "3": -4.51,
+      "4": -3.08,
+      "5": -1.59,
+      "6": -0.335,
+      "7": 0.78,
+      "8": 2.44,
+      "9": 4.904999999999999,
+      "10": 18.07
+    }
+  },
+  "chOWNrate0010": {
+    "description": "Change in tract ownership rate 2000 to 2010",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": -35.79,
+      "max": 63.37
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 1.74,
+    "deciles": {
+      "1": -4.57,
+      "2": -2.125,
+      "3": -0.515,
+      "4": 0.71,
+      "5": 1.745,
+      "6": 3.035,
+      "7": 4.695,
+      "8": 6.76,
+      "9": 9.98,
+      "10": 63.37
+    }
+  },
+  "chOWNrate9000": {
+    "description": "Change in tract ownership rate 1990 to 2000",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": -20.67,
+      "max": 62.56
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 1.42,
+    "deciles": {
+      "1": -2.82,
+      "2": -1.05,
+      "3": 0,
+      "4": 0.69,
+      "5": 1.42,
+      "6": 2.16,
+      "7": 2.82,
+      "8": 3.92,
+      "9": 6.074999999999999,
+      "10": 62.56
+    }
+  },
+  "chOWNrate0014": {
+    "description": "Change in tract ownership rate 2000 to 2014",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": -41.54,
+      "max": 55.67
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 0.52,
+    "deciles": {
+      "1": -7.275,
+      "2": -4.279999999999999,
+      "3": -2.2199999999999998,
+      "4": -0.785,
+      "5": 0.52,
+      "6": 1.705,
+      "7": 3.06,
+      "8": 4.84,
+      "9": 7.715,
+      "10": 55.67
+    }
+  },
+  "chOWNrate9014": {
+    "description": "Change in tract ownership rate 1990 to 2014",
+    "descriptionShort": "homeownership rate",
+    "descriptionKey": "homeOwnRate",
+    "units": "percent",
+    "range": {
+      "min": -39.36,
+      "max": 56.18
+    },
+    "category": ["homeownership rate", "all"],
+    "median": 1.93,
+    "deciles": {
+      "1": -7.295,
+      "2": -3.79,
+      "3": -1.42,
+      "4": 0.4,
+      "5": 1.95,
+      "6": 3.5599999999999996,
+      "7": 5.455,
+      "8": 7.62,
+      "9": 11.03,
+      "10": 56.18
+    }
+  },
+  "chBACH1014": {
+    "description": "Change in bachelors degree holders 2010 to 2014",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": -60,
+      "max": 21.00108337
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 1.895658493,
+    "deciles": {
+      "1": -4.8908429145,
+      "2": -2.7317962645,
+      "3": -0.772884369,
+      "4": 0.718276024,
+      "5": 1.8979711529999999,
+      "6": 3.1051189900000002,
+      "7": 4.2945947645,
+      "8": 6.0728054045,
+      "9": 8.673948288,
+      "10": 21.00108337
+    }
+  },
+  "chBACH0010": {
+    "description": "Change in bachelors degree holders 2000 to 2010",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": -30.18326187,
+      "max": 75.54314423
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 5.352100372,
+    "deciles": {
+      "1": -1.592122078,
+      "2": 0.7825962305,
+      "3": 2.7506780625,
+      "4": 4.1184406285,
+      "5": 5.3544564245,
+      "6": 6.628410339,
+      "7": 8.001724243,
+      "8": 10.315091129999999,
+      "9": 13.57205677,
+      "10": 75.54314423
+    }
+  },
+  "chBACH9000": {
+    "description": "Change in bachelors degree holders 1990 to 2000",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": -17.73223877,
+      "max": 27.43759537
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 6.3744363785000004,
+    "deciles": {
+      "1": -0.569698334,
+      "2": 1.727500916,
+      "3": 3.5104599,
+      "4": 5.17893219,
+      "5": 6.364768982,
+      "6": 7.703554153,
+      "7": 9.422878265,
+      "8": 11.65838623,
+      "9": 14.50727844,
+      "10": 27.43759537
+    }
+  },
+  "chBACH0014": {
+    "description": "Change in bachelors degree holders 2000 to 2014",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": -28.38605499,
+      "max": 58.95858765
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 6.9606323245,
+    "deciles": {
+      "1": -0.45178127300000004,
+      "2": 2.0326509475,
+      "3": 3.8781757355,
+      "4": 5.2636556625,
+      "5": 6.958015442,
+      "6": 8.5799970625,
+      "7": 10.224849705,
+      "8": 12.73602772,
+      "9": 16.441926955,
+      "10": 58.95858765
+    }
+  },
+  "chBACH9014": {
+    "description": "Change in bachelors degree holders 1990 to 2014",
+    "descriptionShort": "bachelor's degree",
+    "descriptionKey": "bachDeg",
+    "units": "percent",
+    "range": {
+      "min": -15.98019409,
+      "max": 61.46312714
+    },
+    "category": ["bachelor's degree", "all"],
+    "median": 13.2566576,
+    "deciles": {
+      "1": 3.1759138105,
+      "2": 6.283029556,
+      "3": 9.080500602499999,
+      "4": 11.356261255,
+      "5": 13.23346329,
+      "6": 15.504982945,
+      "7": 18.656481739999997,
+      "8": 21.610117915,
+      "9": 26.612785340000002,
+      "10": 61.46312714
+    }
+  },
+  "chWHITE1014": {
+    "description": "Change in tract share of white 2010 to 2014",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": -30.58,
+      "max": 39.77
+    },
+    "category": ["race", "all"],
+    "median": -1.57,
+    "deciles": {
+      "1": -9.120000000000001,
+      "2": -6.09,
+      "3": -4.234999999999999,
+      "4": -2.5999999999999996,
+      "5": -1.56,
+      "6": -0.7,
+      "7": 0.45999999999999996,
+      "8": 1.9649999999999999,
+      "9": 4.3149999999999995,
+      "10": 39.77
+    }
+  },
+  "chWHITE0010": {
+    "description": "Change in tract share of white 2000 to 2010",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": -58.85,
+      "max": 22.15
+    },
+    "category": ["race", "all"],
+    "median": -3.16,
+    "deciles": {
+      "1": -14.33,
+      "2": -9.495000000000001,
+      "3": -6.485,
+      "4": -4.345000000000001,
+      "5": -3.14,
+      "6": -2.0149999999999997,
+      "7": -0.765,
+      "8": 0.315,
+      "9": 2.1100000000000003,
+      "10": 22.15
+    }
+  },
+  "chWHITE9000": {
+    "description": "Change in tract share of white 1990 to 2000",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": -50.21,
+      "max": 20.7
+    },
+    "category": ["race", "all"],
+    "median": -3.3,
+    "deciles": {
+      "1": -18.705,
+      "2": -11.34,
+      "3": -7.1899999999999995,
+      "4": -4.52,
+      "5": -3.29,
+      "6": -2.32,
+      "7": -1.6,
+      "8": -1.05,
+      "9": -0.425,
+      "10": 20.7
+    }
+  },
+  "chWHITE0014": {
+    "description": "Change in tract share of white 2000 to 2014",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": -34.27,
+      "max": 47.55
+    },
+    "category": ["race", "all"],
+    "median": -5.07,
+    "deciles": {
+      "1": -17.39,
+      "2": -12.91,
+      "3": -9.735,
+      "4": -7.26,
+      "5": -5.0600000000000005,
+      "6": -3.325,
+      "7": -1.8599999999999999,
+      "8": -0.61,
+      "9": 1.04,
+      "10": 47.55
+    }
+  },
+  "chWHITE9014": {
+    "description": "Change in tract share of white 1990 to 2014",
+    "descriptionShort": "race-white",
+    "descriptionKey": "raceWhite",
+    "units": "percent",
+    "range": {
+      "min": -74.39,
+      "max": 39.01
+    },
+    "category": ["race", "all"],
+    "median": -8.97,
+    "deciles": {
+      "1": -34.295,
+      "2": -22.605,
+      "3": -15.995000000000001,
+      "4": -11.925,
+      "5": -8.955,
+      "6": -6.265,
+      "7": -4.289999999999999,
+      "8": -2.65,
+      "9": -0.395,
+      "10": 39.01
+    }
+  }
+}

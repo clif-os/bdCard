@@ -7,20 +7,9 @@ export const convertPropsMetadataToDrodownObject = (metadata) => {
     const descWords = description.split(' ');
     const fieldLabel = metadata[prop].descriptionShort;
     const fieldValue = metadata[prop].descriptionKey;
-    let yearLabel, yearValue;
-    if (description.includes(' to ')){
-      // handle range of years
-      const index = descWords.indexOf('to');
-      const year1 = descWords[index-1];
-      const year2 = descWords[index+1];
-      yearLabel = year1 + '-' + year2;
-      yearValue = year1 + year2;
-    } else {
-      // handle single year
-      const index = descWords.indexOf('in');
-      yearLabel = descWords[index+1];
-      yearValue = yearLabel;
-    }
+    const yearLabel = metadata[prop].year;
+    const yearValue = metadata[prop].yearKey
+    
     dropdownPropRegistry[fieldValue + yearValue] = prop;
     const yearDropdown = {
       value: yearValue,

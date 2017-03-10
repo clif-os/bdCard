@@ -11,22 +11,38 @@ import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
 // VISUALIZER MEMORY
 var memory = {
   visSetting: {},
-  lastVisEventData: null
+  lastVisEventData: null,
+  firstDraw: true
 };
 
 class VisualizationSection extends React.Component {
   constructor(props){
     super();
-    this.fields = convertPropsMetadataToDrodownObject(props.propsMd);
+    this.dropdownData = convertPropsMetadataToDrodownObject(props.propsMd);
     this.id = guid();
     this.updateVisSettingMemory = this.updateVisSettingMemory.bind(this);
   }
 
+  updateActiveFields(){
+    window.activeFields = {}
+    const fieldLabel = memory.visSetting.fieldLabel;
+    const yearLabel = memory.visSetting.yearLabel;
+    const propLabel = fieldLabel + ' ' + yearLabel;
+    const selectedProp = memory.visSetting.selectedProp;
+    window.activeFields[selectedProp] = propLabel;
+    console.log(window.activeFields);
+  };
+
   updateVisSettingMemory(visId, visState){
     memory.visSetting = visState;
+    if (memory.firstDraw){
+      memory.firstDraw = false;
+      return;
+    }
     if ( !visState.freezeVisValidity ) {
       this.determineVisEventFire();
     }
+    this.updateActiveFields();
   }
 
   determineVisEventFire(){
@@ -35,6 +51,7 @@ class VisualizationSection extends React.Component {
       const unvisualize = new CustomEvent('UNVISUALIZE')
       document.dispatchEvent(unvisualize);
     } else if (visEventsAreDifferent(memory.lastVisEventData, visEventData) && memory.visSetting.visActive){
+      console.log({visEventData})
       const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData})
       document.dispatchEvent(visualize);
     }
@@ -46,11 +63,11 @@ class VisualizationSection extends React.Component {
       <div className="visualizationSection section">
         <div className='header'>
           <span className='header-title'>
-            Visualization<span className='fa fa-paint-brush'/>
+            Visualization Settings<span className='fa fa-paint-brush'/>
           </span>
         </div>
         <div className='visContainer'>
-          <Visualizer id={this.id} memory={memory.visSetting} fields={this.fields} updateVisSettingMemory={this.updateVisSettingMemory} propsMd={this.props.propsMd} />
+          <Visualizer id={this.id} memory={memory.visSetting} dropdownData={this.dropdownData} updateVisSettingMemory={this.updateVisSettingMemory} propsMd={this.props.propsMd} />
         </div>
       </div>
     );

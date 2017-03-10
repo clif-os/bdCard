@@ -11,10 +11,12 @@ import { linePaintIn, fillPaintIn } from './mapbox/geojsonLayerUtils.jsx';
 import { convertGeojsonToLookup } from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 import { dashboardListener } from './filter/filter.jsx'
-import gj from './data/jchs-boston-norm.json';
-import gjPropsMetadata from './data/boston_props_metadata.json';
+import gj from './data/jchs-boston.json';
+import gjPropsMetadata from './data/jchs-boston-md.json';
 import { convertGJLayersToLegendData } from './components/legend/legendUtils.jsx';
 
+// for the default visEvent
+import { dollarFormatter} from './utils/generalUtils.jsx';
 
 const geojsonTilesets = [
   {
@@ -40,6 +42,13 @@ const geojsonLayers = [
 ]
 const legendDescription = 'NULL';
 const legendData = convertGJLayersToLegendData(geojsonLayers, legendDescription);
+window.defaultVisEvent = {
+      "field": "MedINC14",
+      "classes": 4,
+      "palette": "red to green",
+      "unitFormatter": dollarFormatter,
+      "visActive": true
+    }
 // empty window object for making selections
 window.selectedFeature = null;
 

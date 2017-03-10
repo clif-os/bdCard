@@ -51,7 +51,7 @@ const actionHandler = e => {
           fillPaint: fillPaintIn
         }];
       } else {
-        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field.value, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
+        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
       }
       const updateCount = new CustomEvent('UPDATE_FILTER_SECTION', {
         'detail': {
@@ -77,13 +77,12 @@ const actionHandler = e => {
         _geojsonIn = window.geojson;
       }
       _visCriteria = e.detail;
-      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field.value, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
+      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
       break;
     default:
       break;
   }
   // push in the filtered-out layers
-  console.log(_geojsonOut);
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {
       geojsonLayers.push({

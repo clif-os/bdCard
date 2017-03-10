@@ -1,6 +1,6 @@
 export const constructVisEventData = visSetting => {
   return {
-    field: visSetting.fieldValue,
+    field: visSetting.selectedProp,
     classes: visSetting.classNumValue,
     palette: visSetting.paletteValue,
     unitFormatter: visSetting.unitFormatter,

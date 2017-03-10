@@ -124,7 +124,7 @@ class FiltersSection extends React.Component {
       <div className="filtersSection section">
         <div className='header'>
           <span className='header-title'>
-            Filters<span className='fa fa-filter'/>
+            Filter Settings<span className='fa fa-filter'/>
             <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
             <div className={'addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
               <div className='faPlusRotator' ref='faPlusRotator'>

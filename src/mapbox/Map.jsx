@@ -355,7 +355,9 @@ export default class Map {
   onMapLoaded() {
     const evt = new CustomEvent('MAP_LOADED')
     document.dispatchEvent(evt);
-    this.mapLoaded = true
+    this.mapLoaded = true;
+    const visualize = new CustomEvent('VISUALIZE', {'detail': window.defaultVisEvent})
+    document.dispatchEvent(visualize);
   }
 
 }

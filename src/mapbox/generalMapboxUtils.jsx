@@ -21,7 +21,7 @@ const translations = {
 // important props to top the list:
 // income, rent, homeval, home ownership rate
 import { toTitleCase } from '../utils/generalUtils.jsx';
-import gjPropsMetadata from '../data/boston_props_metadata.json';
+import gjPropsMetadata from '../data/jchs-boston-md.json';
 // need an external key since props may be skipped
 var key = 0
 export const buildPopupHTMLFromFeature = feature => {

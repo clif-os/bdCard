@@ -1,7 +1,8 @@
 import React from 'react';
 import './Sidebar.styl';
 import NavBar from './navBar/NavBar.jsx';
-import AnalysisPane from './analysisPane/AnalysisPane.jsx';
+import FilterPane from './analysisPane/FilterPane.jsx';
+import VisualizationPane from './analysisPane/VisualizationPane.jsx';
 import HomePane from './homePane/HomePane.jsx';
 import RandomPane1 from './randomPane1/RandomPane1.jsx';
 
@@ -33,8 +34,10 @@ class Sidebar extends React.Component {
     switch(this.state.activePane){
       case'home':
         return <HomePane />;
-      case 'analysis':
-        return <AnalysisPane propsMd={this.props.propsMd} />;
+      case 'filter':
+        return <FilterPane propsMd={this.props.propsMd} />;
+      case 'visualize':
+        return <VisualizationPane propsMd={this.props.propsMd} />;
       case 'settings':
         return <RandomPane1 />;
       default:

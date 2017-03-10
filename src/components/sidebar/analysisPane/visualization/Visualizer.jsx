@@ -45,16 +45,35 @@ class Visualizer extends React.Component {
     
     //// LOAD STATE FROM MEMORY
     if (Object.keys(props.memory).length === 0){
-      const defaultFieldVal = props.fields[0].value;
+      const fieldOptions = props.dropdownData.fieldDropdowns;
+      this.yearLookups = props.dropdownData.yearLookups;
+      this.propRegistry = props.dropdownData.dropdownPropRegistry;
+      const defaultFieldVal = fieldOptions[0].value;
+      const defaultFieldLabel = fieldOptions[0].label;
+      const defaultYearOptions = this.yearLookups[defaultFieldVal];
+      const defaultYearVal = defaultYearOptions[0].value;
+      const defaultYearLabel = defaultYearOptions[0].label;
+
+      const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
+
       var min, max, units, unitFormatter, unitUnformatter;
-      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultFieldVal, props.propsMd));
+      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd));
       // SET THE DEFAULT STATE
       const defaultVisSetting = {
         titleValue: '',
         visActive: true,
         visValid: true,
         freezeVisValidity: false,
-        fieldValue: props.fields[0],
+
+        selectedProp: defaultSelectedProp,
+
+        fieldValue: defaultFieldVal,
+        fieldLabel: defaultFieldLabel,
+        fieldOptions: fieldOptions,
+        yearValue: defaultYearVal,
+        yearLabel: defaultYearLabel,
+        yearOptions: defaultYearOptions,
+
         classNumValue: classes[2].value,
         paletteValue: palettes[0].value,
         range: [min, max],
@@ -132,17 +151,65 @@ class Visualizer extends React.Component {
   }
 
   handleFieldSelection(val){
-    var min, max, units, unitFormatter, unitUnformatter;
-    ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(val.value, this.props.propsMd));
+    const fieldVal = val.value;
+    const fieldLabel = val.label;
+    const defaultYearOptions = this.yearLookups[fieldVal];
+    const defaultYearVal = defaultYearOptions[0].value;
+    const defaultYearLabel = defaultYearOptions[0].label;
+    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    
     this.setState({
-      fieldValue: val,
+      selectedProp: defaultSelectedProp,
+      fieldValue: fieldVal,
+      fieldLabel: fieldLabel,
+      yearValue: defaultYearVal,
+      yearLabel: defaultYearLabel,
+      yearOptions: defaultYearOptions,
+
       range: [min, max],
       selectedRange: [min, max],
       units: units,
       unitFormatter: unitFormatter,
       unitUnformatter: unitUnformatter,
-      visValid: false,
-      freezeVisValidity: false
+      filterValid: false,
+      freezeFilterValidity: false
+    });
+  }
+
+  // handleFieldSelection(val){
+  //   var min, max, units, unitFormatter, unitUnformatter;
+  //   ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(val.value, this.props.propsMd));
+  //   this.setState({
+  //     fieldValue: val,
+  //     range: [min, max],
+  //     selectedRange: [min, max],
+  //     units: units,
+  //     unitFormatter: unitFormatter,
+  //     unitUnformatter: unitUnformatter,
+  //     visValid: false,
+  //     freezeVisValidity: false
+  //   });
+  // }
+
+  handleYearSelection(val){
+    const yearVal = val.value;
+    const yearLabel = val.label;
+    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+
+    this.setState({
+      selectedProp: selectedProp,
+      yearValue: yearVal,
+      yearLabel: yearLabel,
+
+      range: [min, max],
+      selectedRange: [min, max],
+      units: units,
+      unitFormatter: unitFormatter,
+      unitUnformatter: unitUnformatter,
+      filterValid: false,
+      freezeFilterValidity: false
     });
   }
 
@@ -242,8 +309,19 @@ class Visualizer extends React.Component {
             className='select-field select'
             name="Select Field"
             value={this.state.fieldValue}
-            options={this.props.fields}
+            options={this.state.fieldOptions}
             onChange={this.handleFieldSelection}
+            clearable={false}
+          />
+        </div>
+        <div className='yearSelector visSection'>
+          <span className='visSection-title'>Year:</span>
+          <Select
+            className='select-year select'
+            name="Select Year"
+            value={this.state.yearValue}
+            options={this.state.yearOptions}
+            onChange={this.handleYearSelection}
             clearable={false}
           />
         </div>

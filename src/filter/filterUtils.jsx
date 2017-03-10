@@ -1,4 +1,4 @@
-import gjPropsMetadata from '../data/boston_props_metadata.json';
+import gjPropsMetadata from '../data/jchs-boston-md.json';
 
 // it might be best to change this to a looping method which can return immediately
 const featureMeetsCriteria = (feature, criteria) => {

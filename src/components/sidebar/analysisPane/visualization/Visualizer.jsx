@@ -46,20 +46,23 @@ class Visualizer extends React.Component {
     //// LOAD STATE FROM MEMORY
     if (Object.keys(props.memory).length === 0){
       const fieldOptions = props.dropdownData.fieldDropdowns;
-      this.yearLookups = props.dropdownData.yearLookups;
-      this.propRegistry = props.dropdownData.dropdownPropRegistry;
+      const yearLookups = Object.assign({}, props.dropdownData.yearLookups);
+      const propRegistry = props.dropdownData.dropdownPropRegistry;
       const defaultFieldVal = fieldOptions[0].value;
       const defaultFieldLabel = fieldOptions[0].label;
-      const defaultYearOptions = this.yearLookups[defaultFieldVal];
+      const defaultYearOptions = yearLookups[defaultFieldVal];
       const defaultYearVal = defaultYearOptions[0].value;
       const defaultYearLabel = defaultYearOptions[0].label;
 
-      const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
+      const defaultSelectedProp = propRegistry[defaultFieldVal + defaultYearVal];
 
       var min, max, units, unitFormatter, unitUnformatter;
       ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd));
       // SET THE DEFAULT STATE
       const defaultVisSetting = {
+        yearLookups: yearLookups,
+        propRegistry: propRegistry,
+        
         titleValue: '',
         visActive: true,
         visValid: true,
@@ -100,6 +103,7 @@ class Visualizer extends React.Component {
     this.handleClassNumSelection = this.handleClassNumSelection.bind(this);
     this.handlePaletteSelection = this.handlePaletteSelection.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
+    this.handleYearSelection = this.handleYearSelection.bind(this);
     
     //pass-fail visualization bindings
     // needs at least a second field selection binding, if not a third
@@ -153,10 +157,10 @@ class Visualizer extends React.Component {
   handleFieldSelection(val){
     const fieldVal = val.value;
     const fieldLabel = val.label;
-    const defaultYearOptions = this.yearLookups[fieldVal];
+    const defaultYearOptions = this.state.yearLookups[fieldVal];
     const defaultYearVal = defaultYearOptions[0].value;
     const defaultYearLabel = defaultYearOptions[0].label;
-    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    const defaultSelectedProp = this.state.propRegistry[fieldVal + defaultYearVal];
     const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     
     this.setState({
@@ -195,7 +199,7 @@ class Visualizer extends React.Component {
   handleYearSelection(val){
     const yearVal = val.value;
     const yearLabel = val.label;
-    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const selectedProp = this.state.propRegistry[this.state.fieldValue + yearVal];
     const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
 
     this.setState({

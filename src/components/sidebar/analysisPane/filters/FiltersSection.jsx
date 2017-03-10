@@ -17,8 +17,7 @@ var memory = {
 class FiltersSection extends React.Component {
   constructor(props){
     super();
-    this.dropdownData = convertPropsMetadataToDrodownObject(props.propsMd);
-    console.log(this.dropdownData);
+    this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     const activeFeatureCount = window.activeFeatureCount === undefined ? window.geojson.features.length : window.activeFeatureCount;
     this.state = {
       filterIds: Object.keys(memory.filterSettings),
@@ -29,6 +28,10 @@ class FiltersSection extends React.Component {
     this.spinAddFilterButton = this.spinAddFilterButton.bind(this);
     this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
     document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
   }
 
   handleAddFilter(){
@@ -66,7 +69,6 @@ class FiltersSection extends React.Component {
       const selectedProp = memory.filterSettings[filterId].selectedProp;
       window.activeFields[selectedProp] = propLabel;
     });
-    console.log(window.activeFields);
   };
 
   updateFilterSettingsMemory(filterId, filterState){

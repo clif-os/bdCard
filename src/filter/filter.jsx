@@ -13,6 +13,8 @@ import {
   splitGeojsonByCriteria
 } from './filterUtils.jsx';
 
+import gjPropsMetadata from '../data/jchs-boston-md.json';
+
 const actions = ['FILTER', 'VISUALIZE', 'UNVISUALIZE'];
 
 // all features
@@ -98,7 +100,7 @@ const actionHandler = e => {
     'detail': geojsonLayers
   });
   document.dispatchEvent(draw);
-  const legendDescription = _visCriteria === null ? 'NULL' : _visCriteria.field.label;
+  const legendDescription = _visCriteria === null ? 'NULL' : gjPropsMetadata[_visCriteria.field].description;
   const legendData = convertGJLayersToLegendData(geojsonLayers, legendDescription);
   const updateLegend = new CustomEvent('UPDATE_LEGEND', {
     'detail': legendData

@@ -10,6 +10,8 @@ import {
   isTooLightYIQ
 } from './generalMapboxUtils.jsx';
 
+
+
 export default class Map {
   constructor(geojsons, mapStyle) {
     //// instantiate map ////
@@ -22,6 +24,7 @@ export default class Map {
       zoom: 8.6,
       attributionControl: false
     });
+    this.defaultBounds = [[-72.01858426851405, 41.94303653564825], [-70.18527815507241, 42.846450867079625]];
     this.map.boxZoom.disable();
     this.geojsonTilesets;
     this.firstDraw = true;
@@ -58,6 +61,7 @@ export default class Map {
   bindEvents() {
     //// customMapboxControls (.jsx) listeners ////
     document.addEventListener('ZOOM_TO_FULL_EXTENT', this.zoomToDataExtent.bind(this));
+    document.addEventListener('ZOOM_TO_LAYER', this.zoomToLayer.bind(this));
     
     //// geojsonFilter.jsx listeners ////
     document.addEventListener('DRAW_NEW_GJ', this.redrawMap.bind(this));
@@ -113,7 +117,7 @@ export default class Map {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: window.drawnLayers
     });
-    // this.consoleLogMapInfo();
+    this.consoleLogMapInfo();
     if (features.length) {
       const id = features[0].properties.GEOID;
       this.selectFeature(id, e);
@@ -141,6 +145,21 @@ export default class Map {
       padding: '35'
     });
   }
+
+  zoomToLayer(e) {
+    this.geojsons.forEach(geojson => {
+      if (geojson.name === e.detail){
+        const bbox = turf.bbox(geojson.geojson);
+        this.map.fitBounds(bbox, {
+          padding: '35'
+        });
+      }
+    });
+  };
+
+  zoomToDefaultBounds(){
+    this.map.fitBounds(this.defaultBounds);
+  };
 
   zoomToFeatureExtentById(id) {
     const bbox = turf.bbox(window.geojsonLookup[id]);
@@ -338,7 +357,7 @@ export default class Map {
     if (this.firstDraw) {
       // MAYBE MOVE THIS UP HIGHER
       // this feature can be nice for zooming to the data on load
-      this.zoomToDataExtent();
+      this.zoomToDefaultBounds();
       this.firstDraw = false;
     }
 

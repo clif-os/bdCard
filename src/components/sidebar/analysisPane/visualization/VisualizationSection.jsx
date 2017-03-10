@@ -18,7 +18,7 @@ var memory = {
 class VisualizationSection extends React.Component {
   constructor(props){
     super();
-    this.dropdownData = convertPropsMetadataToDrodownObject(props.propsMd);
+    this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     this.id = guid();
     this.updateVisSettingMemory = this.updateVisSettingMemory.bind(this);
   }
@@ -30,7 +30,6 @@ class VisualizationSection extends React.Component {
     const propLabel = fieldLabel + ' ' + yearLabel;
     const selectedProp = memory.visSetting.selectedProp;
     window.activeFields[selectedProp] = propLabel;
-    console.log(window.activeFields);
   };
 
   updateVisSettingMemory(visId, visState){
@@ -51,7 +50,6 @@ class VisualizationSection extends React.Component {
       const unvisualize = new CustomEvent('UNVISUALIZE')
       document.dispatchEvent(unvisualize);
     } else if (visEventsAreDifferent(memory.lastVisEventData, visEventData) && memory.visSetting.visActive){
-      console.log({visEventData})
       const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData})
       document.dispatchEvent(visualize);
     }

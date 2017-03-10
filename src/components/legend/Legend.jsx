@@ -7,6 +7,7 @@ var memory = null
 class Legend extends React.Component {
   constructor(props){
     super();
+    
     memory === null 
       ? this.state = {
           title: props.legendData.description,
@@ -36,8 +37,10 @@ class Legend extends React.Component {
   }
 
   selectLayer(layerName){
-    const selectLayer = new CustomEvent('SELECT_LAYER', {detail: layerName});
-    document.dispatchEvent(selectLayer);
+    console.log('AQUI1')
+    const zoomToLayer = new CustomEvent('ZOOM_TO_LAYER', {detail: layerName});
+    document.dispatchEvent(zoomToLayer);
+    console.log('AQUI2')
   }
   
   // unselectLayer(){

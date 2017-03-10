@@ -22,20 +22,23 @@ class Filter extends React.Component {
     //// LOAD STATE FROM MEMORY
     if (props.memory === undefined){
       const fieldOptions = props.dropdownData.fieldDropdowns;
-      this.yearLookups = props.dropdownData.yearLookups;
-      this.propRegistry = props.dropdownData.dropdownPropRegistry;
+      const yearLookups = props.dropdownData.yearLookups;
+      const propRegistry = props.dropdownData.dropdownPropRegistry;
       const defaultFieldVal = fieldOptions[0].value;
       const defaultFieldLabel = fieldOptions[0].label;
-      const defaultYearOptions = this.yearLookups[defaultFieldVal];
+      const defaultYearOptions = yearLookups[defaultFieldVal];
       const defaultYearVal = defaultYearOptions[0].value;
       const defaultYearLabel = defaultYearOptions[0].label;
       
-      const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
+      const defaultSelectedProp = propRegistry[defaultFieldVal + defaultYearVal];
 
       var min, max, units, unitFormatter, unitUnformatter;
       ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd));
       // SET THE DEFAULT STATE
       const defaultFilterSetting = {
+        yearLookups: yearLookups,
+        propRegistry: propRegistry,
+
         titleValue: '',
         filterActive: true,
 
@@ -116,12 +119,13 @@ class Filter extends React.Component {
   handleFieldSelection(val){
     const fieldVal = val.value;
     const fieldLabel = val.label;
-    const defaultYearOptions = this.yearLookups[fieldVal];
+
+    const defaultYearOptions = this.state.yearLookups[fieldVal];
     const defaultYearVal = defaultYearOptions[0].value;
     const defaultYearLabel = defaultYearOptions[0].label;
-    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    const defaultSelectedProp = this.state.propRegistry[fieldVal + defaultYearVal];
     const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
-    
+
     this.setState({
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
@@ -143,7 +147,7 @@ class Filter extends React.Component {
   handleYearSelection(val){
     const yearVal = val.value;
     const yearLabel = val.label;
-    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const selectedProp = this.state.propRegistry[this.state.fieldValue + yearVal];
     const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
 
     this.setState({

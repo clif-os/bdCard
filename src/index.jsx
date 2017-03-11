@@ -30,7 +30,7 @@ let url;
 if (__DEV__) {
   url = 'http://localhost:3000/json';
 } else {
-  url = 'http://localhost:8080/json';
+  url = 'http://panettone.herokuapp.com/json';
 }
 
 fetch(url).then(res => res.json()).then(gj => {

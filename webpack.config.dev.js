@@ -1,7 +1,6 @@
 var path = require('path');
 const webpack = require('webpack');
 
-
 module.exports = {
   context: __dirname,
   entry: {
@@ -9,7 +8,9 @@ module.exports = {
     vendor: ['react', 'mapbox-gl', 'turf', 'react-dom']
   },
   resolve: {
-    extensions: ['', '.js'],
+    extensions: [
+      '', '.js'
+    ],
     alias: {
       'webworkify': 'webworkify-webpack',
       'leaflet.css': path.resolve('./node_modules/leaflet/dist/leaflet.css'),
@@ -17,6 +18,21 @@ module.exports = {
     },
     modules: ['node_modules', 'src']
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
+      },
+      '__DEV__': true
+    }),
+    new webpack
+      .optimize
+      .UglifyJsPlugin({
+        compress: {
+          warnings: false
+        }
+      })
+  ],
   output: {
     path: path.join(__dirname, 'src/'),
     publicPath: 'src/', // relative path for github pages
@@ -26,39 +42,34 @@ module.exports = {
     hotUpdateChunkFilename: '[hash]/js/[id].update.js'
   },
   module: {
-    loaders: [{
-      test: /\.jsx$/,
-      exclude: 'node_modules',
-      loader: 'babel',
-      query: {
-        presets: ['es2015', 'react', 'stage-0']
+    loaders: [
+      {
+        test: /\.jsx$/,
+        exclude: 'node_modules',
+        loader: 'babel',
+        query: {
+          presets: ['es2015', 'react', 'stage-0']
+        }
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader'
+      }, {
+        test: /\.js$/,
+        include: path.resolve(__dirname, 'node_modules/webworkify/index.js'),
+        loader: 'worker'
+      }, {
+        test: /mapbox-gl.+\.js$/,
+        loader: 'transform/cacheable?brfs'
+      }, {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader'
+      }, {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      }, {
+        test: '/\.(jpg|png)$/', //eslint-disable-line
+        loader: 'url-loader?mimetype=image/png'
       }
-    },
-    {
-      test: /\.json$/,
-      loader: 'json-loader'
-    },
-    {
-      test: /\.js$/,
-      include: path.resolve(__dirname, 'node_modules/webworkify/index.js'),
-      loader: 'worker'
-    },
-    {
-      test: /mapbox-gl.+\.js$/,
-      loader: 'transform/cacheable?brfs'
-    },
-    {
-      test: /\.styl$/,
-      loader: 'style-loader!css-loader!stylus-loader'
-    },
-    {
-      test: /\.css$/,
-      loader: 'style-loader!css-loader'
-    },
-    {
-      test: '/\.(jpg|png)$/', //eslint-disable-line
-      loader: 'url-loader?mimetype=image/png'
-    }
     ]
   },
   node: {

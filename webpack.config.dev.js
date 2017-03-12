@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
+  devtool: 'eval-cheap-module-source-map',
   entry: {
     bundle: './src/index.jsx',
     vendor: ['react', 'mapbox-gl', 'turf', 'react-dom']
@@ -13,7 +14,6 @@ module.exports = {
     ],
     alias: {
       'webworkify': 'webworkify-webpack',
-      'leaflet.css': path.resolve('./node_modules/leaflet/dist/leaflet.css'),
       'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
     },
     modules: ['node_modules', 'src']
@@ -24,14 +24,7 @@ module.exports = {
         NODE_ENV: JSON.stringify('development')
       },
       '__DEV__': true
-    }),
-    new webpack
-      .optimize
-      .UglifyJsPlugin({
-        compress: {
-          warnings: false
-        }
-      })
+    })
   ],
   output: {
     path: path.join(__dirname, 'src/'),

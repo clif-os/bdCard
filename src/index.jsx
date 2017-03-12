@@ -6,6 +6,7 @@ import {
 require('velocity-animate');
 require('velocity-animate/velocity.ui');
 import AppInterface from './AppInterface.jsx';
+import './components/loadingPanes/MainLoadingPane.styl';
 import Map from './mapbox/Map.jsx';
 import {
   linePaintIn,

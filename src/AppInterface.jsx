@@ -1,6 +1,5 @@
 import './AppInterface.styl';
 import React from 'react';
-import MainLoadingPane from './components/loadingPanes/MainLoadingPane.jsx';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Legend from './components/legend/Legend.jsx';
 import MBFullExtentButton from './components/customMapboxControls/MBFullExtentButton.jsx';
@@ -17,24 +16,16 @@ class AppInterface extends React.Component {
   }
 
   handleMapLoad(){
-    this.setState({
-      mapLoaded: true
-    });
+    const loadingPane = document.getElementById('mainLoadingPane');
+    loadingPane.style.opacity = '0';
+    window.setTimeout(() => {
+      loadingPane.style.display = 'none';
+    }, 500);
   }
 
   render() {
     return (
       <div className="AppInterface">
-        <VelocityTransitionGroup
-            className='velocityTransitionGroup'
-            enter={{animation: "transition.slideDownIn", duration: 500}}
-            leave={{animation: "transition.slideDownOut", duration: 500}}
-          >
-            {this.state.mapLoaded
-              ? null
-              : (<MainLoadingPane />) 
-            }
-        </VelocityTransitionGroup>
         <Sidebar propsMd={this.props.propsMd} />
         <Legend legendData={this.props.legendData} />
         <MBFullExtentButton />

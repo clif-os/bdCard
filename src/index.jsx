@@ -21,7 +21,7 @@ let url;
 if (__DEV__) {
   url = 'http://localhost:3000/json';
 } else {
-  url = 'http://panettone.herokuapp.com/json';
+  url = 'https://panettone.herokuapp.com/json';
 }
 
 fetch(url)

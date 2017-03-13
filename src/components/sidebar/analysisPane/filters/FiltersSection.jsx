@@ -117,7 +117,6 @@ class FiltersSection extends React.Component {
   }
 
   render() {
-    console.log('addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive'))
     return (
       <div className="filtersSection section">
         <div className='header'>
@@ -151,7 +150,7 @@ class FiltersSection extends React.Component {
             leave={{animation: "transition.slideRightOut", duration: 250}}
           >
             {this.state.showTips
-              ? <span className='addFilterMessage'>{(this.state.filterIds.length < 3 ? 'Add A Filter' : 'Maximum Filters ')}</span>
+              ? <span className='addFilterMessage'>{(this.state.filterIds.length < 3 ? 'Add A Filter' : '')}</span>
               : null
             }
           </VelocityTransitionGroup>

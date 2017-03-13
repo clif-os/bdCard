@@ -17,6 +17,7 @@ class Legend extends React.Component {
       : this.state = memory;
     document.addEventListener('UPDATE_LEGEND', this.updateLegend.bind(this));
     document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
+    this.updateFeatureCount = this.updateFeatureCount.bind(this);
   }
 
   componentWillUnmount() {
@@ -26,8 +27,7 @@ class Legend extends React.Component {
   updateLegend(e){
     const newState = {
       title: e.detail.description,
-      nodesData: e.detail.nodes,
-      featureCountMessage: this.state.featureCountMessage
+      nodesData: e.detail.nodes
     }
     this.setState(newState);
     memory = newState;
@@ -75,7 +75,6 @@ class Legend extends React.Component {
           
         </div>
         <div className='legend-content'>
-          <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
           <div className='legend-subtitleBar'>
             <span className='legend-subtitle'>
               {this.state.title === "NULL"
@@ -87,6 +86,10 @@ class Legend extends React.Component {
           <div className='legend-nodesContainer'>
             {this.renderLegendEntryNodes(this.state.nodesData)}
           </div>
+          
+        </div>
+        <div className="featureCountContainer">
+          <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
         </div>
       </div>
     );

@@ -149,8 +149,8 @@ class FiltersSection extends React.Component {
             enter={{animation: "transition.slideRightIn", duration: 250}}
             leave={{animation: "transition.slideRightOut", duration: 250}}
           >
-            {this.state.showTips
-              ? <span className='addFilterMessage'>{(this.state.filterIds.length < 3 ? 'Add A Filter' : '')}</span>
+            {this.state.showTips && (this.state.filterIds.length < 3)
+              ? <span className='addFilterMessage'>Add A Filter</span>
               : null
             }
           </VelocityTransitionGroup>

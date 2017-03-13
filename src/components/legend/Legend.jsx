@@ -89,7 +89,7 @@ class Legend extends React.Component {
           
         </div>
         <div className="featureCountContainer">
-          <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
+          <span className='featureCountMessage'>{this.state.featureCountMessage}</span>
         </div>
       </div>
     );

@@ -4,8 +4,6 @@ import Sidebar from './components/sidebar/Sidebar.jsx';
 import Legend from './components/legend/Legend.jsx';
 import MBFullExtentButton from './components/customMapboxControls/MBFullExtentButton.jsx';
 
-import { VelocityTransitionGroup } from 'velocity-react';
-
 class AppInterface extends React.Component {
   constructor(props){
     super();

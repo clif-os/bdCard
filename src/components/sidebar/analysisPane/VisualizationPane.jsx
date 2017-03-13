@@ -11,7 +11,7 @@ class VisualizationPane extends React.Component {
   render() {
     return (
       <div className="visualizationPane sidebarPane">
-        <VisualizationSection propsMd={this.props.propsMd} />        
+        <VisualizationSection propsMd={this.props.propsMd} /> 
       </div>
     );
   }

@@ -7,20 +7,27 @@ var memory = null
 class Legend extends React.Component {
   constructor(props){
     super();
-    
+    const activeFeatureCount = window.activeFeatureCount === undefined ? window.geojson.features.length : window.activeFeatureCount;
     memory === null 
       ? this.state = {
           title: props.legendData.description,
-          nodesData: props.legendData.nodes
+          nodesData: props.legendData.nodes,
+          featureCountMessage: `Showing All ${activeFeatureCount} Tracts`
         }
       : this.state = memory;
     document.addEventListener('UPDATE_LEGEND', this.updateLegend.bind(this));
+    document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
   }
 
   updateLegend(e){
     const newState = {
       title: e.detail.description,
-      nodesData: e.detail.nodes
+      nodesData: e.detail.nodes,
+      featureCountMessage: this.state.featureCountMessage
     }
     this.setState(newState);
     memory = newState;
@@ -37,16 +44,28 @@ class Legend extends React.Component {
   }
 
   selectLayer(layerName){
-    console.log('AQUI1')
     const zoomToLayer = new CustomEvent('ZOOM_TO_LAYER', {detail: layerName});
     document.dispatchEvent(zoomToLayer);
-    console.log('AQUI2')
   }
   
   // unselectLayer(){
   //   const unselectLayer = new CustomEvent('UNSELECT_LAYER')
   //   document.dispatchEvent(unselectLayer);
   // }
+
+  updateFeatureCount(e){
+    const subtotal = e.detail.numFeaturesInFilter;
+    const total = e.detail.numFeaturesTotal;
+    let message;
+    if (subtotal === total){
+      message = `Showing All ${total} Tracts`
+    } else if (subtotal < total) {
+      message = `Showing ${subtotal} of ${total} Tracts`
+    }
+    this.setState({
+      featureCountMessage: message
+    });
+  }
 
   render() {
     return (
@@ -56,6 +75,7 @@ class Legend extends React.Component {
           
         </div>
         <div className='legend-content'>
+          <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
           <div className='legend-subtitleBar'>
             <span className='legend-subtitle'>
               {this.state.title === "NULL"

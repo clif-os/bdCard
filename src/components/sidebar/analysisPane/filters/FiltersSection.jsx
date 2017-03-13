@@ -8,6 +8,8 @@ import { constructFilterEventData,
          filterEventsAreDifferent } from './filterUtils.jsx';
 import { convertPropsMetadataToDrodownObject } from '../analysisUtils.jsx';
 
+import { VelocityTransitionGroup } from 'velocity-react';
+
 // FILTER MEMORY
 var memory = {
   filterSettings: {},
@@ -18,20 +20,27 @@ class FiltersSection extends React.Component {
   constructor(props){
     super();
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
-    const activeFeatureCount = window.activeFeatureCount === undefined ? window.geojson.features.length : window.activeFeatureCount;
+    
     this.state = {
       filterIds: Object.keys(memory.filterSettings),
-      featureCountMessage: `Showing All ${activeFeatureCount} Tracts`
+      showingPane: false,
+      showTips: false
     }
     this.handleAddFilter = this.handleAddFilter.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.spinAddFilterButton = this.spinAddFilterButton.bind(this);
     this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
-    document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
+  componentDidMount(){
+    this.setState({
+      showingPane: true
+    });
+    window.setTimeout(() => {
+      this.setState({
+        showTips: true
+      })
+    }, 250)
   }
 
   handleAddFilter(){
@@ -90,20 +99,6 @@ class FiltersSection extends React.Component {
     memory.lastFilterEventData = filterEventData;
   }
 
-  updateFeatureCount(e){
-    const subtotal = e.detail.numFeaturesInFilter;
-    const total = e.detail.numFeaturesTotal;
-    let message;
-    if (subtotal === total){
-      message = `Showing All ${total} Tracts`
-    } else if (subtotal < total) {
-      message = `Showing ${subtotal} of ${total} Tracts`
-    }
-    this.setState({
-      featureCountMessage: message
-    });
-  }
-
   spinAddFilterButton(dir){
     let incrementNum
     if (dir === 'right'){
@@ -122,18 +117,44 @@ class FiltersSection extends React.Component {
   }
 
   render() {
+    console.log('addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive'))
     return (
       <div className="filtersSection section">
         <div className='header'>
-          <span className='header-title'>
-            Filter Settings<span className='fa fa-filter'/>
-            <span className='featureCountMessage'>({this.state.featureCountMessage})</span>
-            <div className={'addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
-              <div className='faPlusRotator' ref='faPlusRotator'>
-                <span className='fa fa-plus'/>
-              </div>
-            </div>
-          </span>
+          <VelocityTransitionGroup
+            className='velocityTransitionGroup'
+            enter={{animation: "transition.slideLeftIn", duration: 250}}
+            leave={{animation: "transition.slideLeftOut", duration: 250}}
+          >
+          {this.state.showingPane
+            ? <span className='header-title'>Filter Settings</span>
+            : null
+          }
+          </VelocityTransitionGroup>
+          <VelocityTransitionGroup
+            className='velocityTransitionGroup'
+            enter={{animation: "transition.slideRightIn", duration: 250}}
+            leave={{animation: "transition.slideRightOut", duration: 250}}
+          >
+          {this.state.showingPane
+            ? (<div className={'addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
+                  <div className='faPlusRotator' ref='faPlusRotator'>
+                    <span className='fa fa-plus'/>
+                  </div>
+                </div>)
+            : null
+          }
+          </VelocityTransitionGroup>
+          <VelocityTransitionGroup
+            className='velocityTransitionGroup'
+            enter={{animation: "transition.slideRightIn", duration: 250}}
+            leave={{animation: "transition.slideRightOut", duration: 250}}
+          >
+            {this.state.showTips
+              ? <span className='addFilterMessage'>{(this.state.filterIds.length < 3 ? 'Add A Filter' : 'Maximum Filters ')}</span>
+              : null
+            }
+          </VelocityTransitionGroup>
         </div>
         <div className='filtersContainer'>
           {this.renderFilterNodes(this.state.filterIds)}

@@ -67,7 +67,6 @@ class Filter extends React.Component {
       this.state = props.memory;  
     }
     //// HANDLER BINDINGS
-    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleFilterActiveToggle = this.handleFilterActiveToggle.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
@@ -95,15 +94,6 @@ class Filter extends React.Component {
     // this is probably not necessary anymore, was doing this during troubleshooting of a different issue
     const filterId = e.target.id.slice(e.target.id.indexOf('-') + 1);
     this.props.handleRemoveFilter(filterId);
-  }
-
-  //// FILTER TITLE INPUT HANDLERS
-
-  handleTitleChange(e){
-    const title = e.target.value
-    this.setState({
-      titleValue: title
-    });
   }
 
   //// FIELD ACTIVE TOGGLER HANDLERS
@@ -212,6 +202,7 @@ class Filter extends React.Component {
     const className = e.target.className;
     // MAKE A COPY
     var selectedRange = [...this.state.selectedRange];
+    console.log(this.state.rangeInputValue);
     const rangeInputValue = this.state.unitUnformatter(this.state.rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
       selectedRange[0] = validateRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
@@ -251,8 +242,6 @@ class Filter extends React.Component {
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
-          <input type='text' className='titleInput' value={this.state.titleValue} 
-                 onChange={this.handleTitleChange} placeholder={'Filter Title ' + this.props.id} />
           <div className='removeFilterButton'>
             <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>

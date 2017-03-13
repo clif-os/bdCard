@@ -36,9 +36,11 @@ class NavBar extends React.Component {
         <NavBarButton id='navButtonFilter' title='Filter Settings' icon='fa fa-filter' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonFilter'} />
         <NavBarButton id='navButtonPaint' title='Visualization Settings' icon='fa fa-paint-brush' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonPaint'} />
         <NavBarButton id='navButtonSettings' title='Settings' icon='fa fa-gear' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonSettings'} />
-        <ReactTooltip id='navBarTooltip' type='info' effect='solid' className='navBarTooltip' offset={{'left': 5}}/>
+        
       </div>
     );
   }
 }
  export default NavBar;
+
+ // <ReactTooltip id='navBarTooltip' type='info' effect='solid' className='navBarTooltip' offset={{'left': 5}}/>

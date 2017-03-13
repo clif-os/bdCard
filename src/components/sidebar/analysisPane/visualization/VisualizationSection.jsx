@@ -4,7 +4,7 @@ import Visualizer from './Visualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { convertPropsMetadataToDrodownObject } from '../analysisUtils.jsx';
 import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
-// eventually bring in constructVisEventData & visEventsAreDifferent
+import { VelocityTransitionGroup } from 'velocity-react';
 
 // consider https://www.npmjs.com/package/react-color
 
@@ -20,7 +20,16 @@ class VisualizationSection extends React.Component {
     super();
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     this.id = guid();
+    this.state = {
+      showingPane: false
+    }
     this.updateVisSettingMemory = this.updateVisSettingMemory.bind(this);
+  }
+
+  componentDidMount(){
+    this.setState({
+      showingPane: true
+    })
   }
 
   updateActiveFields(){
@@ -36,11 +45,12 @@ class VisualizationSection extends React.Component {
     memory.visSetting = visState;
     if (memory.firstDraw){
       memory.firstDraw = false;
+      memory.lastVisEventData = window.defaultVisEvent;
       return;
-    }
+    };
     if ( !visState.freezeVisValidity ) {
       this.determineVisEventFire();
-    }
+    };
     this.updateActiveFields();
   }
 
@@ -60,9 +70,16 @@ class VisualizationSection extends React.Component {
     return (
       <div className="visualizationSection section">
         <div className='header'>
-          <span className='header-title'>
-            Visualization Settings<span className='fa fa-paint-brush'/>
-          </span>
+          <VelocityTransitionGroup
+            className='velocityTransitionGroup'
+            enter={{animation: "transition.slideLeftIn", duration: 250}}
+            leave={{animation: "transition.slideLeftOut", duration: 250}}
+          >
+            {this.state.showingPane
+              ? <span className='header-title'>Visualization Settings</span>
+              : null
+            }
+          </VelocityTransitionGroup>
         </div>
         <div className='visContainer'>
           <Visualizer id={this.id} memory={memory.visSetting} dropdownData={this.dropdownData} updateVisSettingMemory={this.updateVisSettingMemory} propsMd={this.props.propsMd} />

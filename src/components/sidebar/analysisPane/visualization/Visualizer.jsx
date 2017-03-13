@@ -96,7 +96,6 @@ class Visualizer extends React.Component {
     this.state.tempRangeSelectorActive = false
     //// HANDLER BINDINGS ////
     // general bindings
-    this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleVisActiveToggle = this.handleVisActiveToggle.bind(this);
 
     //class-based visualization bindings
@@ -121,15 +120,6 @@ class Visualizer extends React.Component {
 
   componentDidUpdate(){
     this.props.updateVisSettingMemory(this.props.id, this.state);
-  }
-
-  //// VISUALIZER TITLE INPUT HANDLERS
-
-  handleTitleChange(e){
-    const title = e.target.value
-    this.setState({
-      titleValue: title
-    });
   }
 
   //// FIELD ACTIVE TOGGLER HANDLERS
@@ -180,21 +170,6 @@ class Visualizer extends React.Component {
       freezeFilterValidity: false
     });
   }
-
-  // handleFieldSelection(val){
-  //   var min, max, units, unitFormatter, unitUnformatter;
-  //   ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(val.value, this.props.propsMd));
-  //   this.setState({
-  //     fieldValue: val,
-  //     range: [min, max],
-  //     selectedRange: [min, max],
-  //     units: units,
-  //     unitFormatter: unitFormatter,
-  //     unitUnformatter: unitUnformatter,
-  //     visValid: false,
-  //     freezeVisValidity: false
-  //   });
-  // }
 
   handleYearSelection(val){
     const yearVal = val.value;
@@ -303,8 +278,6 @@ class Visualizer extends React.Component {
     return (
       <div className="visualizer" ref={'visualizer-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls visSection'>
-          <input type='text' className='titleInput' value={this.state.titleValue} 
-                 onChange={this.handleTitleChange} placeholder={'Visualizer Title ' + this.props.id} />
           <ActiveSlider active={this.state.visActive} handleActiveToggle={this.handleVisActiveToggle} />
         </div>
         <div className='fieldSelector visSection'>

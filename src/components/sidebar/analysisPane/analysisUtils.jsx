@@ -35,32 +35,6 @@ export const convertPropsMetadataToDrodownObject = (metadata) => {
   }
 }
 
-// this is used to create the submenus
-// housing income 
-// export const buildCategoricalPropsMDDropDownObjects = (metadata) => {
-//   var categories = [];
-//   const dDObjects = Object.keys(metadata).reduce((acc, prop) => {
-//     const dropdownItem = {
-//       value: prop,
-//       label: metadata[prop].description
-//     }
-//     const category = metadata[prop].category;
-//     category.forEach(category => {
-//       if (category in acc){
-//         acc[category].push(dropdownItem);
-//       } else {
-//         acc[category] = [dropdownItem];
-//         categories.push(category);
-//       }
-//     });
-//     return acc;
-//   }, {});
-//   return {
-//     categories: categories.sort(),
-//     dDObjects: dDObjects
-//   };
-// };
-
 import {
   dollarFormatter,
   dollarUnformatter,

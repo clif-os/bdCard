@@ -70,7 +70,7 @@ class FiltersSection extends React.Component {
   }
 
   updateActiveFields() {
-    window.activeFields = {}
+    window.activeFields = {};
     Object
       .keys(memory.filterSettings)
       .forEach(filterId => {

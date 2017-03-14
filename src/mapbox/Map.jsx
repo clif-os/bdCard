@@ -25,7 +25,7 @@ export default class Map {
       attributionControl: false
     });
     this.defaultBounds = [[-72.01858426851405, 41.94303653564825], [-70.18527815507241, 42.846450867079625]];
-    this.map.boxZoom.disable();
+    // this.map.boxZoom.disable();
     this.geojsonTilesets;
     this.firstDraw = true;
     this.controlsLoaded = false;

@@ -4,5 +4,5 @@ Web application for viewing and interacting with gentrification data in the grea
 
 
 TODO:
-- add filter data full extents
 - decimals are failing in range inputs
+- add unit formatter to popups

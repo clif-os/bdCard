@@ -1,23 +1,36 @@
-export const toTitleCase = str => {
-   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+const subwords = ['to', 'in', 'of'];
+export const toTitleCase = (str, avoidSubwords) => {
+  if (avoidSubwords === undefined){
+    avoidSubwords = true
+  };
+  return str.replace(/\w\S*/g, function (txt) {
+    return subwords.indexOf(txt) > -1
+      ? txt
+      : txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });
 }
 
 export const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return x
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export const  dollarFormatter = v => {
+export const dollarFormatter = v => {
   v = v.toString();
-  if (v.includes('.')){
+  if (v.includes('.')) {
     v = v.split('.')
     return '$' + numberWithCommas(v[0]) + '.' + v[1];
-  } else{
+  } else {
     return '$' + numberWithCommas(v);
   }
 }
 
 export const dollarUnformatter = numishString => {
-  return numishString.toString().replace(',', '').replace('$', '');
+  return numishString
+    .toString()
+    .replace(',', '')
+    .replace('$', '');
 }
 
 export const percentFormatter = v => {
@@ -25,7 +38,9 @@ export const percentFormatter = v => {
 }
 
 export const percentUnformatter = numishString => {
-  return numishString.toString().replace('%', '')
+  return numishString
+    .toString()
+    .replace('%', '')
 }
 
 export const returnVal = val => {
@@ -38,6 +53,5 @@ export const guid = () => {
       .toString(16)
       .substring(1);
   }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }

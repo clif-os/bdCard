@@ -1,6 +1,7 @@
 import React from 'react';
 import './Legend.styl';
 import LegendEntry from './LegendEntry.jsx';
+import { toTitleCase } from '../../utils/generalUtils.jsx'
 
 var memory = null
 
@@ -71,22 +72,18 @@ class Legend extends React.Component {
     return (
       <div className="legend">
         <div className='legend-titleBar'>
-          <span className='legend-title'>Legend<span className='fa fa-list-ul' /></span>
+          <span className='legend-title'>
+            {this.state.title === "NULL"
+              ? 'Legend'
+              : toTitleCase(this.state.title)
+            }
+          </span>
           
         </div>
         <div className='legend-content'>
-          <div className='legend-subtitleBar'>
-            <span className='legend-subtitle'>
-              {this.state.title === "NULL"
-                ? null
-                : this.state.title
-              }
-            </span>
-          </div>
           <div className='legend-nodesContainer'>
             {this.renderLegendEntryNodes(this.state.nodesData)}
           </div>
-          
         </div>
         <div className="featureCountContainer">
           <span className='featureCountMessage'>{this.state.featureCountMessage}</span>
@@ -110,3 +107,5 @@ class Legend extends React.Component {
   }
 }
  export default Legend;
+
+ //<span className='fa fa-list-ul' />

@@ -77,6 +77,8 @@ class Filter extends React.Component {
     this.handleRangeInputBlur = this.handleRangeInputBlur.bind(this);
     this.handleRangeInputChange = this.handleRangeInputChange.bind(this);
     this.handleRangeInputKeydown = this.handleRangeInputKeydown.bind(this);
+
+    // document.addEventListener('REDRAW_COMPLETE');
   }
 
   componentDidMount(){
@@ -94,6 +96,8 @@ class Filter extends React.Component {
   handleRemoveFilter(e){
     // scrape filter ID from the remove filter button id
     // this is probably not necessary anymore, was doing this during troubleshooting of a different issue
+    var style = document.getElementById(this.props.id).style;
+    style.visibility = 'hidden';
     const filterId = e.target.id.slice(e.target.id.indexOf('-') + 1);
     this.props.handleRemoveFilter(filterId);
   }

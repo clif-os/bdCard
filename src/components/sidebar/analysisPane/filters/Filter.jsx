@@ -80,6 +80,8 @@ class Filter extends React.Component {
   }
 
   componentDidMount(){
+    var style = document.getElementById(this.props.id).style;
+    style.right = '0px';
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
   }
 
@@ -242,10 +244,10 @@ class Filter extends React.Component {
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
+          <ActiveSlider active={this.state.filterActive} handleActiveToggle={this.handleFilterActiveToggle} />
           <div className='removeFilterButton'>
             <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
           </div>
-          <ActiveSlider active={this.state.filterActive} handleActiveToggle={this.handleFilterActiveToggle} />
         </div>
         <div className='fieldSelector filterSection'>
           <span className='filterSection-title'>Field:</span>

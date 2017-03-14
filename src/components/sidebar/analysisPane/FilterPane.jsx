@@ -11,7 +11,7 @@ class FilterPane extends React.Component {
   render() {
     return (
       <div className="filterPane sidebarPane">
-        <FiltersSection propsMd={this.props.propsMd} />
+        <FiltersSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} />
       </div>
     );
   }

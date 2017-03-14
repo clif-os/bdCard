@@ -115,6 +115,8 @@ class Visualizer extends React.Component {
   }
 
   componentDidMount(){
+    var style = document.getElementById(this.props.id).style;
+    style.right = '0px';
     this.props.updateVisSettingMemory(this.props.id, this.state);
   }
 

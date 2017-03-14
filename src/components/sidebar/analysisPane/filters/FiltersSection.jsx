@@ -40,7 +40,7 @@ class FiltersSection extends React.Component {
       this.setState({
         showTips: true
       })
-    }, 250)
+    }, this.props.transitionDuration)
   }
 
   handleAddFilter(){
@@ -122,8 +122,8 @@ class FiltersSection extends React.Component {
         <div className='header'>
           <VelocityTransitionGroup
             className='velocityTransitionGroup'
-            enter={{animation: "transition.slideLeftIn", duration: 250}}
-            leave={{animation: "transition.slideLeftOut", duration: 250}}
+            enter={{animation: "transition.slideLeftIn", duration: this.props.transitionDuration}}
+            leave={{animation: "transition.slideLeftOut", duration: this.props.transitionDuration}}
           >
           {this.state.showingPane
             ? <span className='header-title'>Filter Settings</span>
@@ -132,8 +132,8 @@ class FiltersSection extends React.Component {
           </VelocityTransitionGroup>
           <VelocityTransitionGroup
             className='velocityTransitionGroup'
-            enter={{animation: "transition.slideRightIn", duration: 250}}
-            leave={{animation: "transition.slideRightOut", duration: 250}}
+            enter={{animation: "transition.slideRightIn", duration: this.props.transitionDuration}}
+            leave={{animation: "transition.slideRightOut", duration: this.props.transitionDuration}}
           >
           {this.state.showingPane
             ? (<div className={'addFilterButton addFilterButton-' + (this.state.filterIds.length < 3 ? 'active' : 'inactive')} onClick={this.handleAddFilter}>
@@ -146,8 +146,8 @@ class FiltersSection extends React.Component {
           </VelocityTransitionGroup>
           <VelocityTransitionGroup
             className='velocityTransitionGroup'
-            enter={{animation: "transition.slideRightIn", duration: 250}}
-            leave={{animation: "transition.slideRightOut", duration: 250}}
+            enter={{animation: "transition.slideRightIn", duration: this.props.transitionDuration}}
+            leave={{animation: "transition.slideRightOut", duration: this.props.transitionDuration}}
           >
             {this.state.showTips && (this.state.filterIds.length < 3)
               ? <span className='addFilterMessage'>Add A Filter</span>

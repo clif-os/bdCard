@@ -1,15 +1,16 @@
 .filter {
-  height: 178px;
+  height: 155px;
   position: relative;
   width: calc(95% + 4px);
+  padding-top: 5px;
   padding-right: 4px;
   margin-top: 5px;
   background-color: rgb(250, 250, 250);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border-top: .5px solid rgb(200, 200, 200);
   border-left: .5px solid rgb(200, 200, 200);
-  transition-duration: .08s;
-  transition-timing-function: linear;
+  transition: right 0.25s ease, box-shadow 0.08s linear;
+  right: 100%;
   &:hover {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     background-color: rgb(252, 252, 252);
@@ -17,6 +18,7 @@
   .filterSection {
     width: 100%;
     height: 33px;
+    margin-left: 5px
     // border: 1px solid rgba(255,0,0,.1);
     padding: 2px;
     .filterSection-title {
@@ -36,23 +38,32 @@
     }
   }
   .titleAndControls {
-    margin-bottom: 5px;
+    float: right;
+    width: 70px;
+    height: 35px;
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap
+    position: relative;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
     .activeSlider {
-      float: right;
-      margin-right: 10px;
+      position: relative;
     }
     .removeFilterButton {
-      height: 100%;
-      line-height: 100%;
+      position: relative;
       text-align: center;
-      float: right;
+      height: 100%;
+      line-height: 180%;
+      width: 20px;
       .fa-trash {
         font-size: 13.5pt;
         color: rgb(80, 80, 80);
         transition-duration: .1s;
-        top: 19%;
         position: relative;
-        margin-right: 4px;
         cursor: pointer;
       }
       &:hover {
@@ -63,20 +74,25 @@
     }
   }
   .fieldSelector {
+    margin-top: 5px;
     height: 42px;
+    width: calc(100% - 80px);
+    float: left;
     .select {
-      display: block;
       float: right;
+      display: block;
       font-size: 11pt;
     }
     .select-field {
-      margin-right: 5px;
-      width: calc(100% - 37px - 18px);
+      float: right;
+      width: calc(100% - 55px);
       margin-left: 7px;
     }
   }
   .yearSelector {
     height: 42px;
+    width: 100%;
+    float: left;
     .select {
       display: block;
       float: right;
@@ -84,23 +100,25 @@
     }
     .select-year {
       float: right;
-      margin-right: 5px;
-      width: calc(100% - 37px - 18px);
+      margin-right: 15px;
+      width: calc(100% - 70px);
       margin-left: 7px;
     }
   }
   .rangeSelector {
     // length of Range title is 47.45
     height: 63px;
+    position: relative;
+    float: right
     .sliderContainer {
       height: 40px;
       position: relative;
       float: left;
       top: 50%;
-      margin-top: -20px;
-      margin-left: 10px;
+      margin-top: -22px;
+      margin-left: 15px;
       // margin-right: 10px;
-      width: calc(100% - 47.45px - 10px - 20px);
+      width: calc(100% - 47.45px - 10px - 25px);
       .slider {
         position: absolute;
         bottom: 0px;

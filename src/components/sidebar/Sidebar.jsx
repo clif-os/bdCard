@@ -31,13 +31,14 @@ class Sidebar extends React.Component {
   }
 
   renderActivePane(){
+    const transitionDuration = 250
     switch(this.state.activePane){
       case'home':
         return <HomePane />;
       case 'filter':
-        return <FilterPane propsMd={this.props.propsMd} />;
+        return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
       case 'visualize':
-        return <VisualizationPane propsMd={this.props.propsMd} />;
+        return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
       case 'settings':
         return <RandomPane1 />;
       default:

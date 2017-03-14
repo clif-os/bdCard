@@ -72,8 +72,8 @@ class VisualizationSection extends React.Component {
         <div className='header'>
           <VelocityTransitionGroup
             className='velocityTransitionGroup'
-            enter={{animation: "transition.slideLeftIn", duration: 250}}
-            leave={{animation: "transition.slideLeftOut", duration: 250}}
+            enter={{animation: "transition.slideLeftIn", duration: this.props.transitionDuration}}
+            leave={{animation: "transition.slideLeftOut", duration: this.props.transitionDuration}}
           >
             {this.state.showingPane
               ? <span className='header-title'>Visualization Settings</span>

@@ -121,6 +121,10 @@ export const validateRangeInputValue = (input, rangeClass, range, selectedRange)
 import {
   isEquivalent
 } from '../../../utils/generalUtils.jsx';
+const defaultFields = {
+  TractPopulation2010: "Tract Population 2010",
+  MedINC14: "Median Household Income 2014"
+}
 export const mergeAllActiveFields = () => {
   const oldActiveFields = Object.assign({}, window.activeFields);
   const activityObjects = [window.activeVisFields, window.activeFiltFields];
@@ -134,4 +138,7 @@ export const mergeAllActiveFields = () => {
     const deselect = new CustomEvent('DESELECT_FEATURE');
     document.dispatchEvent(deselect);
   }
+  Object.keys(defaultFields).forEach(field => {
+    window.activeFields[field] = defaultFields[field];
+  });
 }

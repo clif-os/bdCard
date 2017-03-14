@@ -77,7 +77,6 @@ class FiltersSection extends React.Component {
     const yearLabel = setting.yearLabel;
     return fieldLabel + ' ' + yearLabel;
     const selectedProp = setting.selectedProp;
-    console.log(selectedProp);
   };
 
   updateActiveFields(settings) {

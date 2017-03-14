@@ -64,12 +64,17 @@ export const buildPropTable = props => {
   }, ``);
   return `<table>${propTableRows}</table>`
 }
+import { numberWithCommas } from '../utils/generalUtils.jsx';
 export const buildPropDisplay = (propsToShow, props) => {
   const propRows = Object.keys(propsToShow).reduce((acc, prop) => {
     let label = propsToShow[prop];
     let value;
     if (gjPropsMetadata[prop] === undefined){
-      value = propsToShow[prop];
+      if (isNaN(props[prop])){
+        value = props[prop];
+      } else{
+        value = numberWithCommas(props[prop]);
+      }      
     } else{
       let { unitFormatter } = fieldUnitAndRangeHandler(prop, gjPropsMetadata);
       value = unitFormatter(props[prop]);

@@ -7,7 +7,7 @@ import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
 const Range = Slider.Range;
 
-import { isSubRange, validateRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
+import { isSubRange, validateAndNormalizeRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
@@ -210,8 +210,10 @@ class Filter extends React.Component {
     var selectedRange = [...this.state.selectedRange];
     console.log(this.state.rangeInputValue);
     const rangeInputValue = this.state.unitUnformatter(this.state.rangeInputValue);
+    console.log(rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
-      selectedRange[0] = validateRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
+      selectedRange[0] = validateAndNormalizeRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
+      console.log(selectedRange[0])
       this.setState({
         selectedRange: selectedRange,
         rangeMinInputActive: false,
@@ -219,7 +221,7 @@ class Filter extends React.Component {
         freezeFilterValidity: false
       });
     } else if (className.indexOf('rangeInput-max') > -1){
-      selectedRange[1] = validateRangeInputValue(rangeInputValue, 'maximum', this.state.range , selectedRange);
+      selectedRange[1] = validateAndNormalizeRangeInputValue(rangeInputValue, 'maximum', this.state.range , selectedRange);
       this.setState({
         selectedRange: selectedRange,
         rangeMaxInputActive: false,

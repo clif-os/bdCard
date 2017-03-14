@@ -86,7 +86,7 @@ export const isSubRange = (range, selectedRange) => {
   }
 }
 
-export const validateRangeInputValue = (input, rangeClass, range, selectedRange) => {
+export const validateAndNormalizeRangeInputValue = (input, rangeClass, range, selectedRange) => {
   if (isNaN(input)){
     if (rangeClass === 'minimum'){
       return selectedRange[0];
@@ -94,7 +94,7 @@ export const validateRangeInputValue = (input, rangeClass, range, selectedRange)
       return selectedRange[1];
     }
   } else {
-    var inp = parseInt(input);
+    var inp = Math.round(input);
     if (rangeClass === 'minimum'){
       if (inp >= range[0] && inp <= selectedRange[1]){
         return inp;

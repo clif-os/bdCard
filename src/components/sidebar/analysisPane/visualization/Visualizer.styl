@@ -1,9 +1,10 @@
 .visualizer {
-  // height: 171px;
+  height: 140px;
   position: relative;
   width: calc(95% + 4px);
   padding-right: 4px;
   margin-top: 5px;
+  padding-top: 8px;
   background-color: rgb(250, 250, 250);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border-top: .5px solid rgb(200, 200, 200);
@@ -34,35 +35,25 @@
       cursor: default;
     }
   }
-  .titleAndControls {
+  .titleAndControls-visualizer {
+    width: 45px;
     margin-bottom: 5px;
+    float: right;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap
+    position: relative;
+    flex-direction: row;
+    justify-content: space-around;
     .activeSlider {
-      float: right;
-      margin-right: 10px;
-    }
-    .removevisButton {
-      height: 100%;
-      line-height: 100%;
-      text-align: center;
-      float: right;
-      .fa-trash {
-        font-size: 13.5pt;
-        color: rgb(80, 80, 80);
-        transition-duration: .1s;
-        top: 19%;
-        position: relative;
-        margin-right: 4px;
-        cursor: pointer;
-      }
-      &:hover {
-        .fa-trash {
-          color: tomato;
-        }
-      }
+      margin-top: 10px;
+      margin-left: 10px;
+      position: relative;
     }
   }
   .fieldSelector {
     height: 42px;
+    width: calc(100% - 45px);
     .select {
       display: block;
       float: left;

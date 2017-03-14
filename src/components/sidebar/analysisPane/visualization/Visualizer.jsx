@@ -279,7 +279,7 @@ class Visualizer extends React.Component {
   render() {
     return (
       <div className="visualizer" ref={'visualizer-' + this.props.id} id={this.props.id}>
-        <div className='titleAndControls visSection'>
+        <div className='titleAndControls-visualizer visSection'>
           <ActiveSlider active={this.state.visActive} handleActiveToggle={this.handleVisActiveToggle} />
         </div>
         <div className='fieldSelector visSection'>

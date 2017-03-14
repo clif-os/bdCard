@@ -63,6 +63,9 @@ export default class Map {
     document.addEventListener('ZOOM_TO_FULL_EXTENT', this.zoomToDataExtent.bind(this));
     document.addEventListener('ZOOM_TO_LAYER', this.zoomToLayer.bind(this));
     
+    //// FilterSection.jsx and VisualizationSection.jsx listeners ////
+    document.addEventListener('DESELECT_FEATURE', this.deselectFeature.bind(this));
+
     //// geojsonFilter.jsx listeners ////
     document.addEventListener('DRAW_NEW_GJ', this.redrawMap.bind(this));
 
@@ -117,7 +120,7 @@ export default class Map {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: window.drawnLayers
     });
-    this.consoleLogMapInfo();
+    // this.consoleLogMapInfo();
     if (features.length) {
       const id = features[0].properties.GEOID;
       this.selectFeature(id, e);
@@ -275,8 +278,9 @@ export default class Map {
     if (window.selectedFeature !== null) {
       window.selectedFeature = null;
       this.map.getSource('selected').setData(geojsonNull);
-    }
-  }
+      this.removeAllSelectionPopups();
+    };
+  };
 
   ///////// DRAWING AND UNDRAWING /////////
 
@@ -375,7 +379,7 @@ export default class Map {
     const evt = new CustomEvent('MAP_LOADED')
     document.dispatchEvent(evt);
     this.mapLoaded = true;
-    const visualize = new CustomEvent('VISUALIZE', {'detail': window.defaultVisEvent})
+    const visualize = new CustomEvent('VISUALIZE', {'detail': window.defaultVisEvent});
     document.dispatchEvent(visualize);
   }
 

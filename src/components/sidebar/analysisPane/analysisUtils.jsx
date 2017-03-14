@@ -118,3 +118,20 @@ export const validateRangeInputValue = (input, rangeClass, range, selectedRange)
     }
   }
 }
+import {
+  isEquivalent
+} from '../../../utils/generalUtils.jsx';
+export const mergeAllActiveFields = () => {
+  const oldActiveFields = Object.assign({}, window.activeFields);
+  const activityObjects = [window.activeVisFields, window.activeFiltFields];
+  window.activeFields = activityObjects.reduce((acc, activityObject) => {
+    Object.keys(activityObject).forEach(field => {
+      acc[field] = activityObject[field];
+    });
+    return acc;
+  }, {});
+  if (! isEquivalent(oldActiveFields, window.activeFields)){
+    const deselect = new CustomEvent('DESELECT_FEATURE');
+    document.dispatchEvent(deselect);
+  }
+}

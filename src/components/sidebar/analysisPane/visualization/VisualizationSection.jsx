@@ -2,7 +2,7 @@ import './VisualizationSection.styl';
 import React from 'react';
 import Visualizer from './Visualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
-import { convertPropsMetadataToDrodownObject } from '../analysisUtils.jsx';
+import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
 import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
 import { VelocityTransitionGroup } from 'velocity-react';
 
@@ -32,17 +32,27 @@ class VisualizationSection extends React.Component {
     })
   }
 
-  updateActiveFields(){
-    window.activeFields = {}
-    const fieldLabel = memory.visSetting.fieldLabel;
-    const yearLabel = memory.visSetting.yearLabel;
-    const propLabel = fieldLabel + ' ' + yearLabel;
-    const selectedProp = memory.visSetting.selectedProp;
-    window.activeFields[selectedProp] = propLabel;
+  buildPropLabel(setting){
+    if (Object.keys(setting).length === 0){
+      return null;
+    }
+    const fieldLabel = setting.fieldLabel;
+    const yearLabel = setting.yearLabel;
+    return fieldLabel + ' ' + yearLabel;
+  };
+
+  updateActiveFields(setting){
+    // this will need to be refactored eventually;
+    window.activeVisFields = {};
+    const propLabel = this.buildPropLabel(setting);
+    const selectedProp = setting.selectedProp;
+    window.activeVisFields[selectedProp] = propLabel;
+    mergeAllActiveFields();
   };
 
   updateVisSettingMemory(visId, visState){
     memory.visSetting = visState;
+    this.updateActiveFields(memory.visSetting);
     if (memory.firstDraw){
       memory.firstDraw = false;
       memory.lastVisEventData = window.defaultVisEvent;
@@ -51,7 +61,7 @@ class VisualizationSection extends React.Component {
     if ( !visState.freezeVisValidity ) {
       this.determineVisEventFire();
     };
-    this.updateActiveFields();
+    
   }
 
   determineVisEventFire(){

@@ -21,29 +21,33 @@ const translations = {
 // important props to top the list:
 // income, rent, homeval, home ownership rate
 import { toTitleCase } from '../utils/generalUtils.jsx';
+import { fieldUnitAndRangeHandler } from '../components/sidebar/analysisPane/analysisUtils.jsx';
 import gjPropsMetadata from '../data/jchs-boston-md.json';
 // need an external key since props may be skipped
-var key = 0
-export const buildPopupHTMLFromFeature = feature => {
-  const props = feature.properties;
-  const tableRows = Object.keys(props).reduce((acc, prop, i, arr) => {
+export const buildPropTable = props => {
+  var key = 0
+  const propTableRows = Object.keys(props).reduce((acc, prop, i, arr) => {
     if (skipProps.indexOf(prop) > -1){
       return acc;
     }
     key ++;
     let label;
+    let value;
     if (gjPropsMetadata[prop] !== undefined){
       label = gjPropsMetadata[prop].description;
+      let { unitFormatter } = fieldUnitAndRangeHandler(prop, gjPropsMetadata);
+      value = unitFormatter(props[prop]);
     } else {
       if (prop in translations){
         label = translations[prop];
       } else {
         label = prop;
+        value = props[prop];
       }
     }
     // every other row is dark, and give the final row a unique classname in order to remove its border
     const rowClass = key % 2 ? 'tr-light' : 'tr-dark';
-    const rowId = key === arr.length ? 'tr-final' : `tr-${key}`;
+    const rowId = (i + 1) === arr.length ? 'tr-final' : `tr-${key}`;
     const row = 
     (`
       <tr class=${rowClass} id=${rowId}>
@@ -51,20 +55,49 @@ export const buildPopupHTMLFromFeature = feature => {
           <span class='span-property'>${toTitleCase(label)}</span>
         </td>
         <td class='td-value'>
-          <span class='span-value'>${props[prop]}</span>
+          <span class='span-value'>${value}</span>
         </td>
       </tr>
     `);
     acc += row;
     return acc;
   }, ``);
-  
+  return `<table>${propTableRows}</table>`
+}
+export const buildPropDisplay = (propsToShow, props) => {
+  const propRows = Object.keys(propsToShow).reduce((acc, prop) => {
+    let label = propsToShow[prop];
+    let value;
+    if (gjPropsMetadata[prop] === undefined){
+      value = propsToShow[prop];
+    } else{
+      let { unitFormatter } = fieldUnitAndRangeHandler(prop, gjPropsMetadata);
+      value = unitFormatter(props[prop]);
+    }
+    const row = (`
+      <div class="selectionProps-row">
+        <span class="propDisplay-label propDisplay-text">${label}</span>  |  <span class="propDisplay-value propDisplay-text">${value}</span>
+      </div>
+    `);
+    acc += row;
+    return acc;
+  }, ``);
+  return `<div class="selectionProps">${propRows}</div>`
+}
+export const buildPopupHTMLFromFeature = feature => {
+  const props = feature.properties;
+  const propDisplay = buildPropDisplay(window.activeFields, props);
+  const propTable = buildPropTable(props);
   const html = 
   (`
     <div class="selection">
       <span class="selectionTitle">${props["NAME_1"]} <span class="selectionSubtitle">(${props["NAMELSAD"]})</span></span>
+      <div class="selectionTitle-underline"></div>
+      <div class="propDisplayContainer" >
+        ${propDisplay}
+      </div>
       <div class="tableContainer">
-        <table>${tableRows}</table>
+        ${propTable}
       </div>
     </div>
   `)

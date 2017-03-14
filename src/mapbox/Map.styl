@@ -26,8 +26,34 @@
         color: rgb(100, 100, 100);
       }
     }
+    .selectionTitle-underline{
+      height: .5px;
+      width: calc(100% - 6px);
+      position: relative;
+      left: 3px;
+      background-color: rgb(100,100,100);
+    }
+    .propDisplayContainer{
+     padding: 6px;
+     .selectionProps{
+       width: 100%;
+      .selectionProps-row{
+        width: 100%;
+        .propDisplay-text{
+            
+        }
+        .propDisplay-label{
+          font-weight: bold;
+          color: rgb(90,90,90);
+        }
+        .propDisplay-value{
+
+        }
+      }
+     }
+    }
     .tableContainer{
-      height: 100px;
+      height: 75px;
       overflow-y: scroll;
       border: 1px solid rgb(220,220,220);
       tr{
@@ -37,8 +63,8 @@
           height: 25px;
           max-width: 130px;
           .span-property{
-            font-weight: 400;
-            color: rgb(10,10,10);
+            font-weight: 500;
+            color: rgb(50,50,50);
           }
           .span-value{
             font-weight: 200;

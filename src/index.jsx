@@ -50,7 +50,10 @@ fetch(url)
       "unitFormatter": dollarFormatter,
       "visActive": true
     }
-    window.activeFields = {};
+    // loading activeVisFields with a default value that is represented in a superficial visualization event from the Map.jsx
+    window.activeFields = {MedINC14:"Median Household Income 2014"};
+    window.activeVisFields = {MedINC14:"Median Household Income 2014"};
+    window.activeFiltFields = {};
     // empty window object for making selections
     window.selectedFeature = null;
 

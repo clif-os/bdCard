@@ -3,9 +3,9 @@ import React from 'react';
 // import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
-import {guid} from '../../../../utils/generalUtils.jsx';
-import {constructFilterEventData, filterEventsAreDifferent} from './filterUtils.jsx';
-import {convertPropsMetadataToDrodownObject} from '../analysisUtils.jsx';
+import { guid } from '../../../../utils/generalUtils.jsx';
+import { constructFilterEventData, filterEventsAreDifferent } from './filterUtils.jsx';
+import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
 
 import {VelocityTransitionGroup} from 'velocity-react';
 
@@ -69,25 +69,34 @@ class FiltersSection extends React.Component {
     this.spinAddFilterButton('left');
   }
 
-  updateActiveFields() {
-    window.activeFields = {};
-    Object
-      .keys(memory.filterSettings)
-      .forEach(filterId => {
-        const fieldLabel = memory.filterSettings[filterId].fieldLabel;
-        const yearLabel = memory.filterSettings[filterId].yearLabel;
-        const propLabel = fieldLabel + ' ' + yearLabel;
-        const selectedProp = memory.filterSettings[filterId].selectedProp;
-        window.activeFields[selectedProp] = propLabel;
-      });
+  buildPropLabel(setting){
+    if (Object.keys(setting).length === 0){
+      return null;
+    }
+    const fieldLabel = setting.fieldLabel;
+    const yearLabel = setting.yearLabel;
+    return fieldLabel + ' ' + yearLabel;
+    const selectedProp = setting.selectedProp;
+    console.log(selectedProp);
+  };
+
+  updateActiveFields(settings) {
+    window.activeFiltFields = {};
+    Object.keys(settings).forEach(settingId => {
+      const setting = settings[settingId];
+      const propLabel = this.buildPropLabel(setting);
+      const selectedProp = setting.selectedProp;
+      window.activeFiltFields[selectedProp] = propLabel;
+    });
+    mergeAllActiveFields();
   };
 
   updateFilterSettingsMemory(filterId, filterState) {
     memory.filterSettings[filterId] = filterState;
+    this.updateActiveFields(memory.filterSettings);
     if (!filterState.freezeFilterValidity) {
       this.determineFilterEventFire();
     }
-    this.updateActiveFields();
   }
 
   determineFilterEventFire() {
@@ -96,6 +105,8 @@ class FiltersSection extends React.Component {
       if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)) {
         const evt = new CustomEvent('FILTER', {'detail': filterEventData})
         document.dispatchEvent(evt);
+        const deselect = new CustomEvent('DESELECT_FEATURE');
+        document.dispatchEvent(deselect);
       }
     }
     memory.lastFilterEventData = filterEventData;

@@ -137,13 +137,13 @@ class Visualizer extends React.Component {
   handleClassNumSelection(val){
     this.setState({
       classNumValue: val.value
-    })
+    });
   }
 
   handlePaletteSelection(val){
     this.setState({
       paletteValue: val.value
-    })
+    });
   }
 
   handleFieldSelection(val){

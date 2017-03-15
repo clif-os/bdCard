@@ -134,11 +134,11 @@ export const mergeAllActiveFields = () => {
     });
     return acc;
   }, {});
+  Object.keys(defaultFields).forEach(field => {
+    window.activeFields[field] = defaultFields[field];
+  });
   if (! isEquivalent(oldActiveFields, window.activeFields)){
     const deselect = new CustomEvent('DESELECT_FEATURE');
     document.dispatchEvent(deselect);
   }
-  Object.keys(defaultFields).forEach(field => {
-    window.activeFields[field] = defaultFields[field];
-  });
 }

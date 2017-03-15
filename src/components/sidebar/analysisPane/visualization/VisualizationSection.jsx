@@ -70,6 +70,8 @@ class VisualizationSection extends React.Component {
       const unvisualize = new CustomEvent('UNVISUALIZE')
       document.dispatchEvent(unvisualize);
     } else if (visEventsAreDifferent(memory.lastVisEventData, visEventData) && memory.visSetting.visActive){
+      const deselect = new CustomEvent('DESELECT_FEATURE');
+      document.dispatchEvent(deselect);
       const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData})
       document.dispatchEvent(visualize);
     }

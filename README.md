@@ -4,5 +4,4 @@ Web application for viewing and interacting with gentrification data in the grea
 
 
 TODO:
-- decimals are failing in range inputs
-- add unit formatter to popups
+- add filter and visualization icons to the popup

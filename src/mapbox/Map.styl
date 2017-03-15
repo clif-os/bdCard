@@ -12,33 +12,49 @@
   .selection {
     position: relative;
     display: block;
-    .selectionTitle {
-      margin-left: 3px;
+    .selectionTitle-container{
+      width: 100%;
       position: relative;
-      vertical-align: middle;
-      line-height: 30px;
-      font-weight: 600;
-      font-size: 10pt;
-      color: rgb(10, 10, 10);
-      .selectionSubtitle {
-        font-weight: 200;
-        font-size: 7pt;
-        color: rgb(100, 100, 100);
+      .selectionTitle {
+        margin-left: 3px;
+        position: relative;
+        vertical-align: middle;
+        line-height: 20px;
+        font-weight: 600;
+        font-size: 10pt;
+        color: rgb(10, 10, 10);
+        .selectionSubtitle {
+          font-weight: 200;
+          font-size: 7pt;
+          color: rgb(100, 100, 100);
+        }
+      }
+      .fa-square{
+        margin-left: 5px;
       }
     }
     .selectionTitle-underline{
-      height: .5px;
+      height: 1px;
       width: calc(100% - 6px);
       position: relative;
       left: 3px;
       background-color: rgb(150,150,150);
+      margin-bottom: 10px;
     }
     .propDisplayContainer{
-     padding: 6px;
+     padding-top: 3px;
+     padding-left: 6px;
+     padding-bottom: 6px;
+     padding-right: 6px;
      .selectionProps{
        width: 100%;
       .selectionProps-row{
         width: 100%;
+        .propIcon{
+          margin-left: 6px;
+          // color: #236FA5;
+          color: rgb(90,90,90);
+        }
         .propDisplay-text{
             
         }

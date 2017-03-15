@@ -69,6 +69,13 @@ export const buildPropDisplay = (propsToShow, props) => {
   const propRows = Object.keys(propsToShow).reduce((acc, prop) => {
     let label = propsToShow[prop];
     let value;
+    let propType = ``;
+    if (prop in window.activeVisFields){
+      propType += `<span class="fa fa-paint-brush propIcon"></span>`
+    }
+    if (prop in window.activeFiltFields){
+      propType += `<span class="fa fa-filter propIcon"></span>`
+    }
     if (gjPropsMetadata[prop] === undefined){
       if (isNaN(props[prop])){
         value = props[prop];
@@ -81,7 +88,7 @@ export const buildPropDisplay = (propsToShow, props) => {
     }
     const row = (`
       <div class="selectionProps-row">
-        <span class="propDisplay-label propDisplay-text">${label}</span>  |  <span class="propDisplay-value propDisplay-text">${value}</span>
+        <span class="propDisplay-label propDisplay-text">${label}</span>  :  <span class="propDisplay-value propDisplay-text">${value}</span>${propType}
       </div>
     `);
     acc += row;
@@ -89,18 +96,27 @@ export const buildPropDisplay = (propsToShow, props) => {
   }, ``);
   return `<div class="selectionProps">${propRows}</div>`
 }
-export const buildPopupHTMLFromFeature = feature => {
+export const buildPopupHTMLFromFeature = (feature, selectionPaint) => {
   const props = feature.properties;
   const propDisplay = buildPropDisplay(window.activeFields, props);
   const propTable = buildPropTable(props);
+  const squareFill = ('fill-color' in selectionPaint) ? `${selectionPaint['fill-color']}` : `${selectionPaint['line-color']}`
+  // setting to 0.6 for now since the line and fill colors can be different;
+  const squareOpacity = 0.6
   const html = 
   (`
     <div class="selection">
-      <span class="selectionTitle">${props["NAME_1"]} <span class="selectionSubtitle">(${props["NAMELSAD"]})</span></span>
-      <div class="selectionTitle-underline"></div>
+      <div class='selectionTitle-container'>
+        <span class="selectionTitle">
+          ${props["NAME_1"]} 
+          <span class="selectionSubtitle">(${props["NAMELSAD"]})</span>
+          <span class='fa fa-square' style="color:${squareFill};opacity:${squareOpacity}"></span>
+        </span>
+      </div>
       <div class="propDisplayContainer" >
         ${propDisplay}
       </div>
+      <div class="selectionTitle-underline"></div>
       <div class="tableContainer">
         ${propTable}
       </div>

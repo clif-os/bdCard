@@ -115,15 +115,15 @@ export default class Map {
       this.unhover();
     }
   }
-
   onMapClicked(e) {
     var features = this.map.queryRenderedFeatures(e.point, {
       layers: window.drawnLayers
     });
     // this.consoleLogMapInfo();
     if (features.length) {
+      const selectionPaint = features[0].layer.paint
       const id = features[0].properties.GEOID;
-      this.selectFeature(id, e);
+      this.selectFeature(id, selectionPaint, e);
     } else {
       this.deselectFeature();
     }
@@ -239,11 +239,11 @@ export default class Map {
     this.map.getSource('hover').setData(geojsonNull);
   }
 
-  selectFeature(id, e) {
+  selectFeature(id, selectionPaint, e) {
     this.map.getSource('selected').setData(window.geojsonLookup[id]);
     window.selectedFeature = window.geojsonLookup[id];
     // console.log('SELECTED FEATURE:', selectedFeature);
-    this.addSelectionPopup(window.selectedFeature, e);
+    this.addSelectionPopup(window.selectedFeature, selectionPaint, e);
   }
 
   selectLayer(e) {
@@ -256,8 +256,8 @@ export default class Map {
     });
   }
 
-  addSelectionPopup(feature, e) {
-    const html = buildPopupHTMLFromFeature(feature);
+  addSelectionPopup(feature, selectionPaint, e) {
+    const html = buildPopupHTMLFromFeature(feature, selectionPaint);
     if (this.popups.length > 0) {
       this.removeAllSelectionPopups()
     };

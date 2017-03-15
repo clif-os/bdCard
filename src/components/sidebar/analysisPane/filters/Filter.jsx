@@ -306,6 +306,7 @@ class Filter extends React.Component {
             <Range className='slider' value={this.state.selectedRange} 
                    min={this.state.range[0]} max={this.state.range[1]}
                    onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
+            
           </div>
         </div>
         <div className={'validationBar validationBar-' + (this.state.filterValid && this.state.filterActive)} />

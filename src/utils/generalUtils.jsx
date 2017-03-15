@@ -57,9 +57,10 @@ export const guid = () => {
 }
 
 export const isEquivalent = (a, b) => {
+    console.log({a}, {b})
     // Create arrays of property names
-    var aProps = Object.getOwnPropertyNames(a);
-    var bProps = Object.getOwnPropertyNames(b);
+    var aProps = Object.keys(a);
+    var bProps = Object.keys(b);
     // If number of properties is different,
     // objects are not equivalent
     if (aProps.length != bProps.length) {

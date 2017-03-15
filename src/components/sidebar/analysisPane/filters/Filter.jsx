@@ -208,12 +208,9 @@ class Filter extends React.Component {
     const className = e.target.className;
     // MAKE A COPY
     var selectedRange = [...this.state.selectedRange];
-    console.log(this.state.rangeInputValue);
     const rangeInputValue = this.state.unitUnformatter(this.state.rangeInputValue);
-    console.log(rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
       selectedRange[0] = validateAndNormalizeRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
-      console.log(selectedRange[0])
       this.setState({
         selectedRange: selectedRange,
         rangeMinInputActive: false,

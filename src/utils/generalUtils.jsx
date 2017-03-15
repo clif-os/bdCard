@@ -57,7 +57,6 @@ export const guid = () => {
 }
 
 export const isEquivalent = (a, b) => {
-    console.log({a}, {b})
     // Create arrays of property names
     var aProps = Object.keys(a);
     var bProps = Object.keys(b);

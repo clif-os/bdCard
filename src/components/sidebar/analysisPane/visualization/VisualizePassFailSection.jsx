@@ -1,10 +1,9 @@
-import './VisualizationSection.styl';
+import './VisualizePassFailSection.styl';
 import React from 'react';
-import Visualizer from './Visualizer.jsx';
+import PassFailVisualizer from './PassFailVisualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
 import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
-import { VelocityTransitionGroup } from 'velocity-react';
 
 // consider https://www.npmjs.com/package/react-color
 
@@ -15,21 +14,20 @@ var memory = {
   firstDraw: true
 };
 
-class VisualizationSection extends React.Component {
+class VisualizePassFailSection extends React.Component {
   constructor(props){
     super();
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     this.id = guid();
-    this.state = {
-      showingPane: false
-    }
     this.updateVisSettingMemory = this.updateVisSettingMemory.bind(this);
   }
 
   componentDidMount(){
-    this.setState({
-      showingPane: true
-    })
+    if (this.props.visualizerSwitch){
+      const visEventData = constructVisEventData(memory.visSetting);
+      const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData});
+      document.dispatchEvent(visualize);
+    }
   }
 
   buildPropLabel(setting){
@@ -80,25 +78,13 @@ class VisualizationSection extends React.Component {
 
   render() {
     return (
-      <div className="visualizationSection section">
-        <div className='header'>
-          <VelocityTransitionGroup
-            className='velocityTransitionGroup'
-            enter={{animation: "transition.slideLeftIn", duration: this.props.transitionDuration}}
-            leave={{animation: "transition.slideLeftOut", duration: this.props.transitionDuration}}
-          >
-            {this.state.showingPane
-              ? <span className='header-title'>Visualization Settings</span>
-              : null
-            }
-          </VelocityTransitionGroup>
-        </div>
+      <div className="visualizePassFailSection section">
         <div className='visContainer'>
-          <Visualizer id={this.id} memory={memory.visSetting} dropdownData={this.dropdownData} updateVisSettingMemory={this.updateVisSettingMemory} propsMd={this.props.propsMd} />
+          <PassFailVisualizer id={this.id} memory={memory.visSetting} dropdownData={this.dropdownData} updateVisSettingMemory={this.updateVisSettingMemory} propsMd={this.props.propsMd} />
         </div>
       </div>
     );
   }
 }
 
- export default VisualizationSection;
+ export default VisualizePassFailSection;

@@ -1,4 +1,4 @@
-import './Visualizer.styl';
+import './PassFailVisualizer.styl';
 import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import ActiveSlider from '../commonComponents/ActiveSlider.jsx';
@@ -36,7 +36,7 @@ const palettes = [
   {value: 'decreasing blue', label: 'Decreasing Blue'}
 ]
 
-class Visualizer extends React.Component {
+class PassFailVisualizer extends React.Component {
   constructor(props){
     super();
     //// CREATE THE DEFAULT STATE
@@ -92,8 +92,6 @@ class Visualizer extends React.Component {
     } else {
       this.state = props.memory;  
     }
-    // TEMP
-    this.state.tempRangeSelectorActive = false
     //// HANDLER BINDINGS ////
     // general bindings
     this.handleVisActiveToggle = this.handleVisActiveToggle.bind(this);
@@ -278,7 +276,7 @@ class Visualizer extends React.Component {
 
   render() {
     return (
-      <div className="visualizer" ref={'visualizer-' + this.props.id} id={this.props.id}>
+      <div className="passFailVisualizer" ref={'visualizer-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls-visualizer visSection'>
           <ActiveSlider active={this.state.visActive} handleActiveToggle={this.handleVisActiveToggle} />
         </div>
@@ -324,47 +322,9 @@ class Visualizer extends React.Component {
           />
           <span className='visSection-title visSection-title-palette'>Palette:</span>
         </div>
-        {this.state.tempRangeSelectorActive
-          ? (<div className='rangeSelector visSection'>
-              <span className='visSection-title'>Range:</span>
-              <div className='sliderContainer'>
-                <div className='rangeInputContainer'>
-                  <div className='rangeInputSubCont-min rangeInputSubCont'>
-                    <input className='rangeInput-min rangeInput' type="text" 
-                          value={this.state.rangeMinInputActive
-                                    ? this.state.rangeInputValue
-                                    : this.state.unitFormatter(this.state.selectedRange[0])
-                                  } 
-                          onFocus={this.handleRangeInputFocus} 
-                          onBlur={this.handleRangeInputBlur}
-                          onChange={this.handleRangeInputChange}
-                          onKeyDown={this.handleRangeInputKeydown} />
-                    <span className='rangeInputLabel rangeInputLabel-min'>min</span>
-                  </div>
-                  <div className='rangeInputSubCont-max rangeInputSubCont'>
-                    <span className='rangeInputLabel rangeInputLabel-max'>max</span>
-                    <input className='rangeInput-max rangeInput' type="text" 
-                          value={this.state.rangeMaxInputActive
-                                    ? this.state.rangeInputValue
-                                    : this.state.unitFormatter(this.state.selectedRange[1])
-                                  } 
-                          onFocus={this.handleRangeInputFocus} 
-                          onBlur={this.handleRangeInputBlur}
-                          onChange={this.handleRangeInputChange}
-                          onKeyDown={this.handleRangeInputKeydown} />
-                  </div>
-                </div>
-                <Range className='slider' value={this.state.selectedRange} 
-                      min={this.state.range[0]} max={this.state.range[1]}
-                      onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
-              </div>
-            </div>)
-          : null        
-        }
-        
         <div className={'validationBar validationBar-' + (this.state.visValid && this.state.visActive)} />
       </div>
     );
   }
 }
- export default Visualizer;
+ export default PassFailVisualizer;

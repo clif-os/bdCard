@@ -25,7 +25,7 @@ class VisualizeClassesSection extends React.Component {
   componentDidMount(){
     if (this.props.visualizerSwitch){
       const visEventData = constructVisEventData(memory.visSetting);
-      const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData});
+      const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData});
       document.dispatchEvent(visualize);
     }
   }
@@ -70,7 +70,7 @@ class VisualizeClassesSection extends React.Component {
     } else if (visEventsAreDifferent(memory.lastVisEventData, visEventData) && memory.visSetting.visActive){
       const deselect = new CustomEvent('DESELECT_FEATURE');
       document.dispatchEvent(deselect);
-      const visualize = new CustomEvent('VISUALIZE', {'detail': visEventData})
+      const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData})
       document.dispatchEvent(visualize);
     }
     memory.lastVisEventData = visEventData;

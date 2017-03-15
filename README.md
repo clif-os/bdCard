@@ -4,3 +4,4 @@ Web application for viewing and interacting with gentrification data in the grea
 
 
 TODO:
+- fix the increase of opacity upon legend use

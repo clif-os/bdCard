@@ -40,6 +40,44 @@ export const fillPaintOut = {
   'fill-opacity': 0.1
 }
 
+export const linePaintInPF = {
+  'line-width': {
+    'stops': [
+      [10, .75],
+      [11, 1],
+      [12, 1.5],
+      [13, 1.75],
+      [14, 2]
+    ]
+  },
+  'line-opacity': 0.6,
+  'line-color': 'green'
+}
+
+export const fillPaintInPF = {
+  'fill-color': 'green',
+  'fill-opacity': 0.4
+}
+
+export const linePaintOutPF = {
+  'line-width': {
+    'stops': [
+      [10, .75],
+      [11, 1],
+      [12, 1.5],
+      [13, 1.75],
+      [14, 2]
+    ]
+  },
+  'line-opacity': .6,
+  'line-color': 'red'
+}
+
+export const fillPaintOutPF = {
+  'fill-color': 'red',
+  'fill-opacity': 0.4
+}
+
 ////////////////////////////////
 // using: http://colorbrewer2.org/#type=sequential&scheme=PuRd&n=9
 

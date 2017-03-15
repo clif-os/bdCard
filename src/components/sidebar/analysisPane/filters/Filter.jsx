@@ -24,8 +24,8 @@ class Filter extends React.Component {
       const fieldOptions = props.dropdownData.fieldDropdowns;
       const yearLookups = props.dropdownData.yearLookups;
       const propRegistry = props.dropdownData.dropdownPropRegistry;
-      const defaultFieldVal = fieldOptions[0].value;
-      const defaultFieldLabel = fieldOptions[0].label;
+      const defaultFieldVal = fieldOptions[props.defaultFieldIndex].value;
+      const defaultFieldLabel = fieldOptions[props.defaultFieldIndex].label;
       const defaultYearOptions = yearLookups[defaultFieldVal];
       const defaultYearVal = defaultYearOptions[0].value;
       const defaultYearLabel = defaultYearOptions[0].label;

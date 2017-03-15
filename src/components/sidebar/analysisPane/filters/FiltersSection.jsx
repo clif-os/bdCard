@@ -19,7 +19,6 @@ class FiltersSection extends React.Component {
   constructor(props) {
     super();
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
-
     this.state = {
       filterIds: Object.keys(memory.filterSettings),
       showingPane: false,
@@ -202,12 +201,38 @@ class FiltersSection extends React.Component {
   }
 
   renderFilterNodes(filterIds) {
+    //// this process ends up loading a defaultFieldIndex into the nodes so that duplicate fields aren't defaulted
+    let fieldLabels;
+    if (Object.keys(memory.filterSettings).length > 0){
+      fieldLabels = filterIds.reduce((acc, filterId) => {
+        if (memory.filterSettings[filterId] !== undefined){
+          acc.push(memory.filterSettings[filterId].fieldLabel);
+        };
+        return acc;
+      }, []);
+    };
+    let unselectedIndexes;
+    unselectedIndexes = this.dropdownData.fieldDropdowns.reduce((acc, fieldDropdown, i) => {
+      if (fieldLabels === undefined){
+        acc.push(i);
+        return acc;
+      }
+      if (fieldLabels.indexOf(fieldDropdown.label) > -1){
+        return acc;
+      } else {
+        acc.push(i);
+        return acc;
+      }
+    }, []);
+    ////
     const filterNodes = filterIds.map((filterId, i) => {
       const renderOrder = i + 1;
+      let defaultFieldIndex = unselectedIndexes[i];
       return (<Filter
         key={filterId}
         id={filterId}
         memory={memory.filterSettings[filterId]}
+        defaultFieldIndex={defaultFieldIndex}
         dropdownData={this.dropdownData}
         handleRemoveFilter={this.handleRemoveFilter}
         updateFilterSettingsMemory={this.updateFilterSettingsMemory}

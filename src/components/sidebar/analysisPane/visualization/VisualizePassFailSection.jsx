@@ -61,12 +61,12 @@ class VisualizePassFailSection extends React.Component {
   };
 
   updateActiveFields(settings) {
-    window.activeFiltFields = {};
+    window.activeVisFields = {};
     Object.keys(settings).forEach(settingId => {
       const setting = settings[settingId];
       const propLabel = this.buildPropLabel(setting);
       const selectedProp = setting.selectedProp;
-      window.activeFiltFields[selectedProp] = propLabel;
+      window.activeVisFields[selectedProp] = propLabel;
     });
     mergeAllActiveFields();
   };

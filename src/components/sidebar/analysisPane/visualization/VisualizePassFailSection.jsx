@@ -7,8 +7,6 @@ import { guid } from '../../../../utils/generalUtils.jsx';
 import { constructVisPassFailEventData, visPassFailEventsAreDifferent } from './visUtils.jsx';
 import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
 
-import {VelocityTransitionGroup} from 'velocity-react';
-
 // FILTER MEMORY
 var memory = {
   filterSettings: {},
@@ -40,7 +38,6 @@ class VisualizePassFailSection extends React.Component {
 
   componentDidMount(){
     if (this.props.visualizerSwitch){
-      console.log('visualizerSwitch = true and mounting')
       if (this.areSettingsInactive(memory.filterSettings)){
         const unvisualize = new CustomEvent('UNVISUALIZE')
         document.dispatchEvent(unvisualize);
@@ -96,7 +93,6 @@ class VisualizePassFailSection extends React.Component {
 
   determineFilterEventFire() {
     const filterEventData = constructVisPassFailEventData(memory.filterSettings);
-    console.log(memory.lastFilterEventData);
     if (this.areSettingsInactive(memory.filterSettings)){
       const unvisualize = new CustomEvent('UNVISUALIZE');
       document.dispatchEvent(unvisualize);

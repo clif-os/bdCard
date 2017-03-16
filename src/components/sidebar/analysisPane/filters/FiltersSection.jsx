@@ -105,6 +105,7 @@ class FiltersSection extends React.Component {
         document.dispatchEvent(evt);
         const deselect = new CustomEvent('DESELECT_FEATURE');
         document.dispatchEvent(deselect);
+        this.props.handleCountUpdate('filter', filterEventData.length);
       }
     }
     memory.lastFilterEventData = filterEventData;

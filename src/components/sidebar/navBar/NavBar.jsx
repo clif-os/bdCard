@@ -33,10 +33,9 @@ class NavBar extends React.Component {
     return (
       <div className="navBar">
         <NavBarButton id='navButtonHome' title='Home' icon='fa fa-home' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonHome'} />
-        <NavBarButton id='navButtonFilter' title='Filter Settings' icon='fa fa-filter' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonFilter'} />
+        <NavBarButton id='navButtonFilter' count={this.props.counts.filter} title='Filter Settings' icon='fa fa-filter' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonFilter'} />
         <NavBarButton id='navButtonPaint' title='Visualization Settings' icon='fa fa-paint-brush' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonPaint'} />
         <NavBarButton id='navButtonSettings' title='Settings' icon='fa fa-gear' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonSettings'} />
-        
       </div>
     );
   }

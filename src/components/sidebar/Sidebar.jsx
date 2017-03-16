@@ -10,9 +10,13 @@ class Sidebar extends React.Component {
   constructor(props){
     super();
     this.state = {
-      activePane: 'home'
+      activePane: 'home',
+      counts: {
+        filter: undefined
+      }
     }
     this.handleNavBarClick = this.handleNavBarClick.bind(this);
+    this.handleCountUpdate = this.handleCountUpdate.bind(this);
   }
 
   handleNavBarClick(paneId){
@@ -21,10 +25,18 @@ class Sidebar extends React.Component {
     });
   }
 
+  handleCountUpdate(componentName, count){
+    var newCounts = Object.assign({}, this.state.counts);
+    newCounts[componentName] = count;
+    this.setState({
+      counts: newCounts 
+    });
+  }
+
   render() {
     return (
       <div className="sidebar">
-        <NavBar handleClick={this.handleNavBarClick}/>
+        <NavBar handleClick={this.handleNavBarClick} counts={this.state.counts} />
         {this.renderActivePane()}
       </div>
     );
@@ -36,7 +48,7 @@ class Sidebar extends React.Component {
       case'home':
         return <HomePane />;
       case 'filter':
-        return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
+        return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} handleCountUpdate={this.handleCountUpdate} />;
       case 'visualize':
         return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
       case 'settings':

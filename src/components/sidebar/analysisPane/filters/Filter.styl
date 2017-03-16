@@ -1,5 +1,5 @@
 .filter {
-  height: 155px;
+  height: 163px;
   position: relative;
   width: calc(95% + 4px);
   padding-top: 5px;
@@ -119,6 +119,7 @@
       margin-left: 15px;
       // margin-right: 10px;
       width: calc(100% - 47.45px - 10px - 25px);
+      
       .slider {
         position: absolute;
         bottom: 0px;
@@ -127,7 +128,23 @@
           box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.6);
         }
         .rc-slider-track-1 {
-          background-color: #1B9AF7
+          background-color: #1B9AF7;
+        }
+        .rc-slider-mark-text {
+          margin-left: -43px;
+          color: rgba(17,99,158, .8);
+          margin-top: -7px;
+        }
+        .rc-slider-dot {
+          border-color: #C2C2C2;
+        }
+        .rc-slider-mark-text-active{
+          margin-left: -43px;
+          color: #11639E;
+          margin-top: -7px;
+        }
+        .rc-slider-dot-active{
+          border-color: #1B9AF7;
         }
       }
       .rangeInputContainer {

@@ -221,7 +221,7 @@ export default class Map {
         this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-color', layerColor);
         this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-color', layerColor);
       }
-      if (gj.name === 'inFilter') {
+      if (gj.name === 'inFilter' || gj.name === 'pass'  || gj.name === 'fail') {
         this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .4);
         this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .6);
       } else if (gj.name === 'outFilter') {

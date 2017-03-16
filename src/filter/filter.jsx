@@ -26,7 +26,8 @@ var _activeVisualizer = null
 var _visCriteria = null;
 var _passFailCriteria = null;
 var _filtCriteria = null;
-
+// general variables
+var _visualization = false;
 
 export const dashboardListener = () => {
   actions.forEach(action => {
@@ -39,12 +40,14 @@ const actionHandler = e => {
   let geojsonLayers;
   switch (type) {
     case 'FILTER':
+      console.log('filtering');
       _geojson = window.geojson;
-      _filtCriteria = e.detail
+      _filtCriteria = e.detail;
       const splitGeojson = splitGeojsonByCriteria(geojson, _filtCriteria);
       _geojsonIn = splitGeojson.geojsonIn
       _geojsonOut = splitGeojson.geojsonOut
-      if (_visCriteria === null && _passFailCriteria === null) {
+      if (! _visualization || (_visCriteria === null && _passFailCriteria === null)) {
+        console.log('normal filtering')
         geojsonLayers = [{
           geojson: _geojsonIn,
           name: 'inFilter',
@@ -53,6 +56,7 @@ const actionHandler = e => {
           fillPaint: fillPaintIn
         }];
       } else {
+        console.log('visualization filtering')
         if (_activeVisualizer === 'passFail'){
           const splitGeojsonPF = splitGeojsonByCriteria(_geojsonIn, _passFailCriteria);
           var _geojsonPass = splitGeojsonPF.geojsonIn
@@ -83,8 +87,11 @@ const actionHandler = e => {
       });
       document.dispatchEvent(updateCount);
       window.activeFeatureCount = _geojsonIn.features.length;
+      dispatchFilterEvents(geojsonLayers);
       break;
     case 'UNVISUALIZE':
+    // don't unvisualize twice in a row
+      if (! _visualization) break;
       _visCriteria = null;
       geojsonLayers = [{
           geojson: _geojsonIn,
@@ -93,6 +100,8 @@ const actionHandler = e => {
           linePaint: linePaintIn,
           fillPaint: fillPaintIn
         }];
+      dispatchFilterEvents(geojsonLayers);
+      _visualization = false;
       break;
     case 'VISUALIZE_CLASSES':
     _activeVisualizer = 'classes'
@@ -101,6 +110,8 @@ const actionHandler = e => {
       }
       _visCriteria = e.detail;
       geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
+      dispatchFilterEvents(geojsonLayers);
+      _visualization = true;
       break;
     case 'VISUALIZE_PASSFAIL':
       _activeVisualizer = 'passFail'
@@ -125,10 +136,15 @@ const actionHandler = e => {
           linePaint: linePaintOutPF,
           fillPaint: fillPaintOutPF
         }];
+      dispatchFilterEvents(geojsonLayers);
+      _visualization = true;
       break;
     default:
       break;
   }
+}
+
+const dispatchFilterEvents = geojsonLayers => {
   // push in the filtered-out layers
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {

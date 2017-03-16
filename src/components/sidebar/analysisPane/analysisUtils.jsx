@@ -72,6 +72,7 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   return {
     min: Math.floor(min),
     max: Math.ceil(max),
+    median: propsMd[field].median,
     units: units,
     unitFormatter: unitFormatter,
     unitUnformatter: unitUnformatter

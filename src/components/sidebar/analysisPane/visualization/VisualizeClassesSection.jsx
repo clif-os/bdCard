@@ -24,9 +24,14 @@ class VisualizeClassesSection extends React.Component {
 
   componentDidMount(){
     if (this.props.visualizerSwitch){
-      const visEventData = constructVisEventData(memory.visSetting);
-      const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData});
-      document.dispatchEvent(visualize);
+      if (!memory.visSetting.visActive){
+        const unvisualize = new CustomEvent('UNVISUALIZE')
+        document.dispatchEvent(unvisualize);
+      } else {
+        const visEventData = constructVisEventData(memory.visSetting);
+        const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData});
+        document.dispatchEvent(visualize);
+      }
     }
   }
 

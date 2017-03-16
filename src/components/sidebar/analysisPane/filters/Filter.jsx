@@ -32,8 +32,11 @@ class Filter extends React.Component {
       
       const defaultSelectedProp = propRegistry[defaultFieldVal + defaultYearVal];
 
-      var min, max, units, unitFormatter, unitUnformatter;
-      ({min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd));
+       
+      var {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
+      var medianLabel = 'median: ' + unitFormatter(median);
+      var medianMark = {};
+      medianMark[median] = medianLabel;
       // SET THE DEFAULT STATE
       const defaultFilterSetting = {
         yearLookups: yearLookups,
@@ -55,6 +58,7 @@ class Filter extends React.Component {
         freezeFilterValidity: false,
         range: [min, max],
         selectedRange: [min, max],
+        medianMark: medianMark,
         units: units,
         unitFormatter: unitFormatter,
         unitUnformatter: unitUnformatter,
@@ -120,8 +124,10 @@ class Filter extends React.Component {
     const defaultYearVal = defaultYearOptions[0].value;
     const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.state.propRegistry[fieldVal + defaultYearVal];
-    const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
-
+    const {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    var medianLabel = 'median: ' + unitFormatter(median);
+    var medianMark = {};
+    medianMark[median] = medianLabel;
     this.setState({
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
@@ -132,6 +138,7 @@ class Filter extends React.Component {
 
       range: [min, max],
       selectedRange: [min, max],
+      medianMark: medianMark,
       units: units,
       unitFormatter: unitFormatter,
       unitUnformatter: unitUnformatter,
@@ -144,7 +151,10 @@ class Filter extends React.Component {
     const yearVal = val.value;
     const yearLabel = val.label;
     const selectedProp = this.state.propRegistry[this.state.fieldValue + yearVal];
-    const {min, max, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    const {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    var medianLabel = 'median: ' + unitFormatter(median);
+    var medianMark = {};
+    medianMark[median] = medianLabel;
 
     this.setState({
       selectedProp: selectedProp,
@@ -153,6 +163,7 @@ class Filter extends React.Component {
 
       range: [min, max],
       selectedRange: [min, max],
+      medianMark: medianMark,
       units: units,
       unitFormatter: unitFormatter,
       unitUnformatter: unitUnformatter,
@@ -305,6 +316,7 @@ class Filter extends React.Component {
             </div>
             <Range className='slider' value={this.state.selectedRange} 
                    min={this.state.range[0]} max={this.state.range[1]}
+                   marks={this.state.medianMark}
                    onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
             
           </div>

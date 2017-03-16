@@ -1,26 +1,27 @@
 .passFailVisualizer {
-  height: 140px;
+  height: 163px;
   position: relative;
   width: calc(95% + 4px);
+  padding-top: 5px;
   padding-right: 4px;
   margin-top: 5px;
-  padding-top: 8px;
-  background-color: rgb(250, 250, 250);
+  background-color: white;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border-top: .5px solid rgb(200, 200, 200);
   border-left: .5px solid rgb(200, 200, 200);
   transition: right 0.25s ease, box-shadow 0.08s linear;
-  right: 100%
+  right: 100%;
   &:hover {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    background-color: rgb(252, 252, 252);
+    background-color: white;
   }
-  .visSection {
+  .filterSection {
     width: 100%;
     height: 33px;
+    margin-left: 5px
     // border: 1px solid rgba(255,0,0,.1);
     padding: 2px;
-    .visSection-title {
+    .filterSection-title {
       display: block;
       position: relative;
       top: 50%;
@@ -33,10 +34,12 @@
       margin-right: 2.5px;
       user-select: none;
       cursor: default;
+      
     }
   }
   .titleAndControls-visualizer {
     width: 45px;
+    margin-top: 5px;
     margin-bottom: 5px;
     float: right;
     justify-content: center;
@@ -52,6 +55,7 @@
     }
   }
   .fieldSelector {
+    margin-top: 5px;
     height: 42px;
     width: calc(100% - 45px);
     .select {
@@ -62,53 +66,40 @@
     .select-field {
       margin-right: 5px;
       float: right;
-      width: calc(100% - 37px - 18px);
+      width: calc(100% - 65px);
       margin-left: 7px;
     }
   }
   .yearSelector {
     height: 42px;
+    width: 100%;
+    float: left;
     .select {
       display: block;
-      float: left;
+      float: right;
       font-size: 11pt;
     }
     .select-year {
-      margin-right: 5px;
       float: right;
-      width: calc(100% - 37px - 18px);
-      margin-left: 7px;
-    }
-  }
-  .classSelector{
-    height: 42px;
-    .select-classNum{
-      float: left;
-      width: 65px;
-      margin-left: 7px;
-    }
-    .visSection-title-palette{
-      float: right;
-    }
-    .select-palette{
-      float: right;
-      width: 150px;
-      margin-right: 5px;
+      margin-right: 10px;
+      width: calc(100% - 62px);
       margin-left: 7px;
     }
   }
   .rangeSelector {
     // length of Range title is 47.45
     height: 63px;
+    position: relative;
+    float: right;
     .sliderContainer {
       height: 40px;
       position: relative;
-      float: right;
+      float: left;
       top: 50%;
-      margin-top: -20px;
-      margin-left: 10px;
-      margin-right: 10px;
-      width: calc(100% - 47.45px - 10px - 20px);
+      margin-top: -22px;
+      margin-left: 15px;
+      // margin-right: 10px;
+      width: calc(100% - 47.45px - 10px - 25px);
       .slider {
         position: absolute;
         bottom: 0px;
@@ -118,6 +109,22 @@
         }
         .rc-slider-track-1 {
           background-color: #1B9AF7
+        }
+        .rc-slider-mark-text {
+          margin-left: -43px;
+          color: rgba(17,99,158, .8);
+          margin-top: -7px;
+        }
+        .rc-slider-dot {
+          border-color: #C2C2C2;
+        }
+        .rc-slider-mark-text-active{
+          margin-left: -43px;
+          color: #11639E;
+          margin-top: -7px;
+        }
+        .rc-slider-dot-active{
+          border-color: #1B9AF7;
         }
       }
       .rangeInputContainer {

@@ -2,9 +2,9 @@ import './VisualizePassFailSection.styl';
 import React from 'react';
 // import ReactTooltip from 'react-tooltip';
 import ReactDOM from 'react-dom';
-import Filter from '../filters/Filter.jsx';
+import PassFailVisualizer from './PassFailVisualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
-import { constructFilterEventData, filterEventsAreDifferent } from '../filters/filterUtils.jsx';
+import { constructVisPassFailEventData, visPassFailEventsAreDifferent } from './visUtils.jsx';
 import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
 
 import {VelocityTransitionGroup} from 'velocity-react';
@@ -12,7 +12,9 @@ import {VelocityTransitionGroup} from 'velocity-react';
 // FILTER MEMORY
 var memory = {
   filterSettings: {},
-  lastFilterEventData: null
+  lastFilterEventData: null,
+  lastValidFilterEventData: null,
+  unvisualized: false
 };
 
 class VisualizePassFailSection extends React.Component {
@@ -33,13 +35,21 @@ class VisualizePassFailSection extends React.Component {
     this.updateFilterSettingsMemory = this
       .updateFilterSettingsMemory
       .bind(this);
+    this.areSettingsInactive = this.areSettingsInactive.bind(this);
   }
 
   componentDidMount(){
     if (this.props.visualizerSwitch){
-      const visEventData = constructFilterEventData(memory.filterSettings);
-      const visualize = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
-      document.dispatchEvent(visualize);
+      console.log('visualizerSwitch = true and mounting')
+      if (this.areSettingsInactive(memory.filterSettings)){
+        const unvisualize = new CustomEvent('UNVISUALIZE')
+        document.dispatchEvent(unvisualize);
+        memory.unvisualized = true
+      } else {
+        const visEventData = constructVisPassFailEventData(memory.filterSettings);
+        const visualize = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
+        document.dispatchEvent(visualize);
+      }
     }
   }
 
@@ -72,14 +82,34 @@ class VisualizePassFailSection extends React.Component {
     }
   }
 
+  areSettingsInactive(settings){
+    var inactive = true;
+    this.state.filterIds.forEach(filterId => {
+      if (settings[filterId] !== undefined){
+        if (settings[filterId].filterActive){
+          inactive = false;
+        }
+      }
+    });
+    return inactive;
+  }
+
   determineFilterEventFire() {
-    const filterEventData = constructFilterEventData(memory.filterSettings);
-    if (memory.lastFilterEventData !== null) {
-      if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)) {
-        const evt = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': filterEventData})
+    const filterEventData = constructVisPassFailEventData(memory.filterSettings);
+    console.log(memory.lastFilterEventData);
+    if (this.areSettingsInactive(memory.filterSettings)){
+      const unvisualize = new CustomEvent('UNVISUALIZE');
+      document.dispatchEvent(unvisualize);
+      memory.unvisualized = true
+    } else if (memory.lastFilterEventData !== null) {
+      if (memory.unvisualized || visPassFailEventsAreDifferent(memory.lastFilterEventData, filterEventData)) {
+        let evt;
+        evt = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': filterEventData});
+        memory.lastValidFilterEventData = filterEventData;
         document.dispatchEvent(evt);
         const deselect = new CustomEvent('DESELECT_FEATURE');
         document.dispatchEvent(deselect);
+        memory.unvisualized = false
       }
     }
     memory.lastFilterEventData = filterEventData;
@@ -123,7 +153,7 @@ class VisualizePassFailSection extends React.Component {
     const filterNodes = filterIds.map((filterId, i) => {
       const renderOrder = i + 1;
       let defaultFieldIndex = unselectedIndexes[i];
-      return (<Filter
+      return (<PassFailVisualizer
         key={filterId}
         id={filterId}
         memory={memory.filterSettings[filterId]}

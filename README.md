@@ -8,5 +8,5 @@ TODO:
 - add notification counts / activity symbols to the navbar
 - add in download PDF
 - add in download JSON/CSV
-- unvisualize should prob occue when both vis settings are off
 - fix the icon types from the pass/fail visualizer
+- add in 

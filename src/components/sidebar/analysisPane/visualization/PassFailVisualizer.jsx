@@ -111,7 +111,7 @@ class PassFailVisualizer extends React.Component {
     const defaultYearVal = defaultYearOptions[0].value;
     const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.state.propRegistry[fieldVal + defaultYearVal];
-    var {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
+    var {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;

@@ -19,11 +19,23 @@ class DownloadsPane extends React.Component {
   }
 
   handleJSONDownload(){
-    console.log('handling json dowload lmao')
+    let url;
+    if (__DEV__) {
+      url = 'http://localhost:3000/json-dl';
+    } else {
+      url = 'https://panettone.herokuapp.com/json-dl';
+    }
+    window.open(url, '_blank');
   }
 
   handleCSVDownload(){
-    console.log('handling csv dowload lmao')
+    let url;
+    if (__DEV__) {
+      url = 'http://localhost:3000/csv-dl';
+    } else {
+      url = 'https://panettone.herokuapp.com/csv-dl';
+    }
+    window.open(url, '_blank');
   }
 
   handlePDFDownload(){

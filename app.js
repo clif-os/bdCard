@@ -13,17 +13,21 @@ app.get('/json', (req, res) => {
   res.json(json);
 })
 
-app.get('/json-dl',(req, res) => {
-    var data = JSON.stringify(json);
-    res.setHeader('Content-disposition', 'attachment; filename= jchs-bma.json');
-    res.setHeader('Content-type', 'application/json');
-    res.write(json, function (err) {
-        res.end();
-    });
+app.get('/json-dl', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  var file = __dirname + '/src/data/jchs-boston.json'
+  res.download(file);
+});
+
+app.get('/csv-dl', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  var file = __dirname + '/src/data/jchs-boston.csv'
+  res.download(file);
 });
 
 var server = app.listen(app.get('port'), () => {
     var port = server.address().port;
     console.log('server listening on port ', port)
 });
-
+// res.setHeader('Content-disposition', 'attachment; filename= jchs-bma.json');
+// res.setHeader('Content-type', 'application/json');

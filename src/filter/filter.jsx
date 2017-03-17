@@ -40,14 +40,12 @@ const actionHandler = e => {
   let geojsonLayers;
   switch (type) {
     case 'FILTER':
-      console.log('filtering');
       _geojson = window.geojson;
       _filtCriteria = e.detail;
       const splitGeojson = splitGeojsonByCriteria(geojson, _filtCriteria);
       _geojsonIn = splitGeojson.geojsonIn
       _geojsonOut = splitGeojson.geojsonOut
       if (! _visualization || (_visCriteria === null && _passFailCriteria === null)) {
-        console.log('normal filtering')
         geojsonLayers = [{
           geojson: _geojsonIn,
           name: 'inFilter',
@@ -56,7 +54,6 @@ const actionHandler = e => {
           fillPaint: fillPaintIn
         }];
       } else {
-        console.log('visualization filtering')
         if (_activeVisualizer === 'passFail'){
           const splitGeojsonPF = splitGeojsonByCriteria(_geojsonIn, _passFailCriteria);
           var _geojsonPass = splitGeojsonPF.geojsonIn

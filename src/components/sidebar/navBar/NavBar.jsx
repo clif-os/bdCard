@@ -23,8 +23,8 @@ class NavBar extends React.Component {
         this.props.handleClick('filter');
       } else if (id === 'navButtonPaint'){
         this.props.handleClick('visualize');
-      } else if (id === 'navButtonSettings'){
-        this.props.handleClick('settings');
+      } else if (id === 'navButtonDownloads'){
+        this.props.handleClick('downloads');
       }
     }
   }
@@ -35,7 +35,7 @@ class NavBar extends React.Component {
         <NavBarButton id='navButtonHome' title='Home' icon='fa fa-home' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonHome'} />
         <NavBarButton id='navButtonFilter' count={this.props.counts.filter} title='Filter Settings' icon='fa fa-filter' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonFilter'} />
         <NavBarButton id='navButtonPaint' title='Visualization Settings' icon='fa fa-paint-brush' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonPaint'} />
-        <NavBarButton id='navButtonSettings' title='Settings' icon='fa fa-gear' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonSettings'} />
+        <NavBarButton id='navButtonDownloads' title='Downloads' icon='fa fa-download' handleClick={this.handleClick} active={this.state.activeButtonId === 'navButtonDownloads'} />
       </div>
     );
   }

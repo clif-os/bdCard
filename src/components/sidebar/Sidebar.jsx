@@ -4,7 +4,7 @@ import NavBar from './navBar/NavBar.jsx';
 import FilterPane from './analysisPane/FilterPane.jsx';
 import VisualizationPane from './analysisPane/VisualizationPane.jsx';
 import HomePane from './homePane/HomePane.jsx';
-import RandomPane1 from './randomPane1/RandomPane1.jsx';
+import DownloadsPane from './downloadsPane/DownloadsPane.jsx';
 
 class Sidebar extends React.Component {
   constructor(props){
@@ -51,8 +51,8 @@ class Sidebar extends React.Component {
         return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} handleCountUpdate={this.handleCountUpdate} />;
       case 'visualize':
         return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
-      case 'settings':
-        return <RandomPane1 />;
+      case 'downloads':
+        return <DownloadsPane transitionDuration={transitionDuration} />;
       default:
         return <HomePane />;
     }

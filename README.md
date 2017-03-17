@@ -4,9 +4,16 @@ Web application for viewing and interacting with gentrification data in the grea
 
 
 TODO:
-- fix the increase of opacity upon legend use
-- add notification counts / activity symbols to the navbar
+- fix the increase of opacity upon legend use for fails
 - add in download PDF
 - add in download JSON/CSV
-- fix the icon types from the pass/fail visualizer
-- add in 
+- add in dynamic counts to the legend ?
+- consider adding in compiled criteria statements for filters and pass/fail visualizations
+
+TODO FROM FEEDBACK:
+- See if base map can clearly label city/town boundary lines
+- Figure out how we might “pre-load” a few maps showing some “classic” measures of gentrification and/or notable stories
+
+EXTRAS:
+- ESL Options (Spanish)
+- See if we can come up with a way to show transit stops and a tract’s distance from the nearest rapid transit stop. 

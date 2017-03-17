@@ -1,0 +1,57 @@
+.downloadsPane{
+  .downloadsPane-choices{
+    display: flex!important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: 5px;
+    .downloadsPane-choice{
+      height: 75px;
+      text-align: center;
+      // border: 1px solid rgb(100,100,100);
+      cursor: pointer;
+      line-height: 75px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+      transition-duration: .2s;
+      .downloadsPane-choice-title{
+        font-size: 13.5pt;
+        .downloadsPane-choice-icon{
+          margin-right: 10px;
+        }
+      }
+    }
+    .downloadsPane-choices-json{
+      width: calc(50% - 7.5px);
+      margin-left: 5px;
+      margin-right: 2.5px;
+      margin-bottom: 2.5px;
+      color: #89479B;
+      &:hover{
+        color: white;
+        background-color: #89479B;
+      }
+    }
+    .downloadsPane-choices-csv{
+      width: calc(50% - 7.5px);
+      margin-right: 5px;
+      margin-left: 2.5px;
+      margin-bottom: 2.5px;
+      color: #FF9800;
+      &:hover{
+        color: white;
+        background-color: #FF9800;
+      }
+    }
+    .downloadsPane-choices-pdf{
+      width: calc(100% - 10px);
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-top: 2.5px;
+      color: #FF424A;
+      &:hover{
+        color: white;
+        background-color: #FF424A;
+      }
+    }
+  }
+}

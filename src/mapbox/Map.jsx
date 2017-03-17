@@ -198,7 +198,7 @@ export default class Map {
           this.map.setPaintProperty(layerName + '-lines-mimio', 'line-opacity', 1);
         }
       } else if (gj.name !== layerName) {
-        if (gj.name === 'inFilter') {
+        if (gj.name === 'inFilter'  || gj.name === 'pass'  || gj.name === 'fail') {
           this.map.setPaintProperty(gj.name + '-fills-mimio', 'fill-opacity', .3);
           this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .4);
         } else if (gj.name === 'outFilter') {

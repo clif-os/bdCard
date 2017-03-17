@@ -13,6 +13,15 @@ app.get('/json', (req, res) => {
   res.json(json);
 })
 
+app.get('/json-dl',(req, res) => {
+    var data = JSON.stringify(json);
+    res.setHeader('Content-disposition', 'attachment; filename= jchs-bma.json');
+    res.setHeader('Content-type', 'application/json');
+    res.write(json, function (err) {
+        res.end();
+    });
+});
+
 var server = app.listen(app.get('port'), () => {
     var port = server.address().port;
     console.log('server listening on port ', port)

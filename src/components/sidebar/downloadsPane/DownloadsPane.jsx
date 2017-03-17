@@ -78,19 +78,10 @@ class DownloadsPane extends React.Component {
       <div className='downloadsPane-choices'>
         <DownloadsPaneChoice type='json' icon='fa-file-code-o' handleDownload={this.handleJSONDownload} />
         <DownloadsPaneChoice type='csv' icon='fa-file-text-o' handleDownload={this.handleCSVDownload} />
-        <DownloadsPaneChoice type='pdf' icon='fa-file-pdf-o' handleDownload={this.handlePDFDownload} />
       </div>
     )
   }
 }
  export default DownloadsPane;
 
-//  {/*<div className='downloadsPane-choices-json downloadsPane-choice' onClick={this.handleJSONDownload}>
-//           <span className='downloadsPane-choice-title'><span className='downloadsPane-choice-icon fa fa-file-code-o' />JSON</span>
-//         </div>
-//         <div className='downloadsPane-choices-csv downloadsPane-choice' onClick={this.handleCSVDownload}>
-//           <span className='downloadsPane-choice-title'><span className='downloadsPane-choice-icon fa fa-file-text-o' />CSV</span>
-//         </div>
-//         <div className='downloadsPane-choices-pdf downloadsPane-choice' onClick={this.handlePDFDownload}>
-//           <span className='downloadsPane-choice-title'><span className='downloadsPane-choice-icon fa fa-file-pdf-o' />PDF</span>
-//         </div>*/}
+// {/*<DownloadsPaneChoice type='pdf' icon='fa-file-pdf-o' handleDownload={this.handlePDFDownload} />*/}

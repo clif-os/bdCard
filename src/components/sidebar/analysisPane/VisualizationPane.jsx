@@ -41,22 +41,31 @@ class VisualizationPane extends React.Component {
     return (
       <div className="visualizationPane sidebarPane">
         <div className='header'>
+          <div className='titleContainer'>
           <VelocityTransitionGroup
             className='velocityTransitionGroup'
             enter={{animation: "transition.slideLeftIn", duration: this.props.transitionDuration}}
             leave={{animation: "transition.slideLeftOut", duration: this.props.transitionDuration}}
           >
             {this.state.showingPane
-              ? (<div className='titleContainer'>
-                  <span className='header-title'>Visualization Settings</span>
-                  <div className='visualizerChoiceButtons'>
-                      <div id='visChoice-passFail' onClick={this.handleVisualizerChoice} className={'visualizerChoiceButton visualizerChoiceButton-' + (this.state.visualizerChoice === 'passFail' ? 'active' : 'inactive')}>Pass/Fail</div>
-                      <div id='visChoice-classes' onClick={this.handleVisualizerChoice} className={'visualizerChoiceButton visualizerChoiceButton-' + (this.state.visualizerChoice === 'classes' ? 'active' : 'inactive')}>Classes</div>
-                  </div>
-                 </div>)
+              ? (<span className='header-title'>Visualization Settings</span>)
               : null
             }
           </VelocityTransitionGroup>
+          <VelocityTransitionGroup
+            className='velocityTransitionGroup'
+            enter={{animation: "transition.slideRightIn", duration: this.props.transitionDuration}}
+            leave={{animation: "transition.slideRightOut", duration: this.props.transitionDuration}}
+          >
+            {this.state.showingPane
+              ? (<div className='visualizerChoiceButtons'>
+                    <div id='visChoice-passFail' onClick={this.handleVisualizerChoice} className={'visualizerChoiceButton visualizerChoiceButton-' + (this.state.visualizerChoice === 'passFail' ? 'active' : 'inactive')}>Pass/Fail</div>
+                    <div id='visChoice-classes' onClick={this.handleVisualizerChoice} className={'visualizerChoiceButton visualizerChoiceButton-' + (this.state.visualizerChoice === 'classes' ? 'active' : 'inactive')}>Classes</div>
+                  </div>)
+              : null
+            }
+          </VelocityTransitionGroup>
+          </div>
         </div>
         {this.renderVisualizer(this.state.visualizerChoice)}
       </div>

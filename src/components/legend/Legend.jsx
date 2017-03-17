@@ -13,12 +13,17 @@ class Legend extends React.Component {
       ? this.state = {
           title: props.legendData.description,
           nodesData: props.legendData.nodes,
-          featureCountMessage: `Showing All ${activeFeatureCount} Tracts`
+          featureCountMessage: `Showing All ${activeFeatureCount} Tracts`,
+          featureCountTotal: activeFeatureCount,
+          entryHovered: false,
+          entryHoveredMessage: null
         }
       : this.state = memory;
     document.addEventListener('UPDATE_LEGEND', this.updateLegend.bind(this));
     document.addEventListener('UPDATE_FILTER_SECTION', this.updateFeatureCount.bind(this));
     this.updateFeatureCount = this.updateFeatureCount.bind(this);
+    this.hoverLayer = this.hoverLayer.bind(this);
+    this.unhoverLayer = this.unhoverLayer.bind(this);
   }
 
   componentWillUnmount() {
@@ -34,25 +39,32 @@ class Legend extends React.Component {
     memory = newState;
   }
 
-  hoverLayer(layerName, index){
-    const hoverLayer = new CustomEvent('HOVER_LAYER', {detail: layerName});
-    document.dispatchEvent(hoverLayer);
+  hoverLayer(layerName, featureCount){
+    const percent = Math.round((featureCount / this.state.featureCountTotal) * 100);
+    this.setState({
+      entryHovered: true,
+      entryHoveredMessage: `${featureCount} / ${this.state.featureCountTotal} Tracts (${percent}%)`
+    });
+    if (featureCount > 0){
+      const hoverLayer = new CustomEvent('HOVER_LAYER', {detail: layerName});
+      document.dispatchEvent(hoverLayer);
+    }
   }
   
-  unhoverLayer(layerName, layerColor){
-    const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: {layerName: layerName, layerColor: layerColor}});
-    document.dispatchEvent(unhoverLayer);
+  unhoverLayer(layerName, layerColor, layerHasFeatures){
+    this.setState({
+      entryHovered: false
+    });
+    if (layerHasFeatures){
+      const unhoverLayer = new CustomEvent('UNHOVER_LAYER', {detail: {layerName: layerName, layerColor: layerColor}});
+      document.dispatchEvent(unhoverLayer);
+    }
   }
 
   selectLayer(layerName){
     const zoomToLayer = new CustomEvent('ZOOM_TO_LAYER', {detail: layerName});
     document.dispatchEvent(zoomToLayer);
   }
-  
-  // unselectLayer(){
-  //   const unselectLayer = new CustomEvent('UNSELECT_LAYER')
-  //   document.dispatchEvent(unselectLayer);
-  // }
 
   updateFeatureCount(e){
     const subtotal = e.detail.numFeaturesInFilter;
@@ -64,7 +76,8 @@ class Legend extends React.Component {
       message = `Showing ${subtotal} of ${total} Tracts`
     }
     this.setState({
-      featureCountMessage: message
+      featureCountMessage: message,
+      featureCountTotal: total
     });
   }
 
@@ -86,7 +99,10 @@ class Legend extends React.Component {
           </div>
         </div>
         <div className="featureCountContainer">
-          <span className='featureCountMessage'>{this.state.featureCountMessage}</span>
+          {this.state.entryHovered
+            ? <span className='featureCountMessage'>{this.state.entryHoveredMessage}</span>
+            : <span className='featureCountMessage'><span className='fa fa-filter' />{this.state.featureCountMessage}</span>
+          }
         </div>
       </div>
     );
@@ -97,7 +113,8 @@ class Legend extends React.Component {
       const index = i + 1;
       return (
         <LegendEntry key={i} description={nodeData.description} min={nodeData.min} max={nodeData.max} color={nodeData.color}
-                     range={nodeData.range} layerHasFeatures={nodeData.layerHasFeatures} layerName={nodeData.layerName}
+                     range={nodeData.range} layerHasFeatures={nodeData.layerHasFeatures} featureCount={nodeData.layerFeatureCount}
+                     layerName={nodeData.layerName}
                      hoverLayer={this.hoverLayer} unhoverLayer={this.unhoverLayer} 
                      selectLayer={this.selectLayer} unselectLayer={this.unselectLayer} 
                      index={index} />

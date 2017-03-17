@@ -22,12 +22,10 @@ function LegendEntry(props) {
     colorSquareStyle.opacity = '0.3';
   }
   const handleMouseEnter = () => {
-    if (props.layerHasFeatures) 
-      props.hoverLayer(props.layerName);
+      props.hoverLayer(props.layerName, props.featureCount);
     }
   const handleMouseLeave = () => {
-    if (props.layerHasFeatures) 
-      props.unhoverLayer(props.layerName, props.color);
+      props.unhoverLayer(props.layerName, props.color, props.layerHasFeatures);
     }
   const handleOnClick = () => {
     if (props.layerHasFeatures) 

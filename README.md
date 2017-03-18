@@ -17,6 +17,7 @@ TODO:
 - take a look at percentages in the normailzer and make sure the "errors" aren't on our end
 - TURN OFF THE PREVISUALIZATION!!!!!!!
 - consider zooming in on new visualization choice
+- add in notifications to filter additions, also check to make sure that counts are being updated after map load
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

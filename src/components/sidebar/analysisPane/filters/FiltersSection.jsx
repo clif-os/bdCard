@@ -10,7 +10,7 @@ import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../an
 import {VelocityTransitionGroup} from 'velocity-react';
 
 // FILTER MEMORY
-var memory = {
+var currentMemory = {
   filterSettings: {},
   lastFilterEventData: null
 };
@@ -18,9 +18,10 @@ var memory = {
 class FiltersSection extends React.Component {
   constructor(props) {
     super();
+    currentMemory = props.memory;
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     this.state = {
-      filterIds: Object.keys(memory.filterSettings),
+      filterIds: Object.keys(currentMemory.filterSettings),
       showingPane: false,
       showTips: false
     }
@@ -62,7 +63,7 @@ class FiltersSection extends React.Component {
     filterIds.splice(filterIds.indexOf(filterId), 1);
     // if the removed filter is available in the lastFilterEventData -- it should be
     // removed and filter event should be pushed through
-    delete memory.filterSettings[filterId];
+    delete currentMemory.filterSettings[filterId];
     this.determineFilterEventFire();
     this.setState({filterIds: filterIds});
     this.spinAddFilterButton('left');
@@ -90,17 +91,19 @@ class FiltersSection extends React.Component {
   };
 
   updateFilterSettingsMemory(filterId, filterState) {
-    memory.filterSettings[filterId] = filterState;
-    this.updateActiveFields(memory.filterSettings);
+    currentMemory.filterSettings[filterId] = filterState;
+    this.updateActiveFields(currentMemory.filterSettings);
     if (!filterState.freezeFilterValidity) {
       this.determineFilterEventFire();
     }
+    console.log({currentMemory});
+    this.props.updateMasterMemory('filters', currentMemory);
   }
 
   determineFilterEventFire() {
-    const filterEventData = constructFilterEventData(memory.filterSettings);
-    if (memory.lastFilterEventData !== null) {
-      if (filterEventsAreDifferent(memory.lastFilterEventData, filterEventData)) {
+    const filterEventData = constructFilterEventData(currentMemory.filterSettings);
+    if (currentMemory.lastFilterEventData !== null) {
+      if (filterEventsAreDifferent(currentMemory.lastFilterEventData, filterEventData)) {
         const evt = new CustomEvent('FILTER', {'detail': filterEventData})
         document.dispatchEvent(evt);
         const deselect = new CustomEvent('DESELECT_FEATURE');
@@ -108,7 +111,7 @@ class FiltersSection extends React.Component {
         this.props.handleCountUpdate('filter', filterEventData.length);
       }
     }
-    memory.lastFilterEventData = filterEventData;
+    currentMemory.lastFilterEventData = filterEventData;
   }
 
   spinAddFilterButton(dir) {
@@ -204,10 +207,10 @@ class FiltersSection extends React.Component {
   renderFilterNodes(filterIds) {
     //// this process ends up loading a defaultFieldIndex into the nodes so that duplicate fields aren't defaulted
     let fieldLabels;
-    if (Object.keys(memory.filterSettings).length > 0){
+    if (Object.keys(currentMemory.filterSettings).length > 0){
       fieldLabels = filterIds.reduce((acc, filterId) => {
-        if (memory.filterSettings[filterId] !== undefined){
-          acc.push(memory.filterSettings[filterId].fieldLabel);
+        if (currentMemory.filterSettings[filterId] !== undefined){
+          acc.push(currentMemory.filterSettings[filterId].fieldLabel);
         };
         return acc;
       }, []);
@@ -232,7 +235,7 @@ class FiltersSection extends React.Component {
       return (<Filter
         key={filterId}
         id={filterId}
-        memory={memory.filterSettings[filterId]}
+        memory={currentMemory.filterSettings[filterId]}
         defaultFieldIndex={defaultFieldIndex}
         dropdownData={this.dropdownData}
         handleRemoveFilter={this.handleRemoveFilter}

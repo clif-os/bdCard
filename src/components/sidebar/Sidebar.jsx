@@ -5,10 +5,28 @@ import FilterPane from './analysisPane/FilterPane.jsx';
 import VisualizationPane from './analysisPane/VisualizationPane.jsx';
 import HomePane from './homePane/HomePane.jsx';
 import DownloadsPane from './downloadsPane/DownloadsPane.jsx';
+import { memory1 } from './memories/memory1.jsx';
+
+var memory = {
+  filters: {
+    filterSettings: {},
+    lastFilterEventData: null
+  },
+  visualizers: {
+    activeVis: 'classes',
+    classes:{
+
+    },
+    passFail: {
+
+    }
+  }
+}
 
 class Sidebar extends React.Component {
   constructor(props){
     super();
+    memory = memory1;
     this.state = {
       activePane: 'home',
       counts: {
@@ -17,6 +35,11 @@ class Sidebar extends React.Component {
     }
     this.handleNavBarClick = this.handleNavBarClick.bind(this);
     this.handleCountUpdate = this.handleCountUpdate.bind(this);
+  }
+
+  updateMasterMemory(componentName, componentMemory){
+    memory[componentName] = componentMemory;
+    console.log(memory);
   }
 
   handleNavBarClick(paneId){
@@ -48,7 +71,7 @@ class Sidebar extends React.Component {
       case'home':
         return <HomePane />;
       case 'filter':
-        return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} handleCountUpdate={this.handleCountUpdate} />;
+        return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} handleCountUpdate={this.handleCountUpdate} updateMasterMemory={this.updateMasterMemory} memory={memory.filters} />;
       case 'visualize':
         return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
       case 'downloads':

@@ -7,6 +7,8 @@ import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
 const Range = Slider.Range;
 
+import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
+
 import { isSubRange, validateAndNormalizeRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
 
 //// IMPORTANT NOTES
@@ -33,7 +35,8 @@ class Filter extends React.Component {
       const defaultSelectedProp = propRegistry[defaultFieldVal + defaultYearVal];
 
        
-      var {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
+      var { min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
+      const { unitFormatter } = choseFormatter(units);
       var medianLabel = 'median: ' + unitFormatter(median);
       var medianMark = {};
       medianMark[median] = medianLabel;
@@ -60,8 +63,6 @@ class Filter extends React.Component {
         selectedRange: [min, max],
         medianMark: medianMark,
         units: units,
-        unitFormatter: unitFormatter,
-        unitUnformatter: unitUnformatter,
         rangeMinInputActive: false,
         rangeMaxInputActive: false,
         rangeInputValue: ''
@@ -89,6 +90,7 @@ class Filter extends React.Component {
     var style = document.getElementById(this.props.id).style;
     style.right = '0px';
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
+    console.log(this.state);
   }
 
   componentDidUpdate(){
@@ -124,7 +126,7 @@ class Filter extends React.Component {
     const defaultYearVal = defaultYearOptions[0].value;
     const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.state.propRegistry[fieldVal + defaultYearVal];
-    const {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    const { min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
@@ -140,8 +142,6 @@ class Filter extends React.Component {
       selectedRange: [min, max],
       medianMark: medianMark,
       units: units,
-      unitFormatter: unitFormatter,
-      unitUnformatter: unitUnformatter,
       filterValid: false,
       freezeFilterValidity: false
     });
@@ -151,7 +151,8 @@ class Filter extends React.Component {
     const yearVal = val.value;
     const yearLabel = val.label;
     const selectedProp = this.state.propRegistry[this.state.fieldValue + yearVal];
-    const {min, max, median, units, unitFormatter, unitUnformatter} = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    const { min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
@@ -165,8 +166,6 @@ class Filter extends React.Component {
       selectedRange: [min, max],
       medianMark: medianMark,
       units: units,
-      unitFormatter: unitFormatter,
-      unitUnformatter: unitUnformatter,
       filterValid: false,
       freezeFilterValidity: false
     });
@@ -219,7 +218,8 @@ class Filter extends React.Component {
     const className = e.target.className;
     // MAKE A COPY
     var selectedRange = [...this.state.selectedRange];
-    const rangeInputValue = this.state.unitUnformatter(this.state.rangeInputValue);
+    const { unitUnformatter } = choseFormatter(this.state.units);
+    const rangeInputValue = unitUnformatter(this.state.rangeInputValue);
     if (className.indexOf('rangeInput-min') > -1){
       selectedRange[0] = validateAndNormalizeRangeInputValue(rangeInputValue, 'minimum', this.state.range, selectedRange);
       this.setState({
@@ -255,6 +255,7 @@ class Filter extends React.Component {
   //// RENDERING
 
   render() {
+    const { unitFormatter } = choseFormatter(this.state.units);
     return (
       <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
         <div className='titleAndControls filterSection'>
@@ -293,7 +294,7 @@ class Filter extends React.Component {
                 <input className='rangeInput-min rangeInput' type="text" 
                        value={this.state.rangeMinInputActive
                                 ? this.state.rangeInputValue
-                                : this.state.unitFormatter(this.state.selectedRange[0])
+                                : unitFormatter(this.state.selectedRange[0])
                               } 
                        onFocus={this.handleRangeInputFocus} 
                        onBlur={this.handleRangeInputBlur}
@@ -306,7 +307,7 @@ class Filter extends React.Component {
                 <input className='rangeInput-max rangeInput' type="text" 
                        value={this.state.rangeMaxInputActive
                                 ? this.state.rangeInputValue
-                                : this.state.unitFormatter(this.state.selectedRange[1])
+                                : unitFormatter(this.state.selectedRange[1])
                               } 
                        onFocus={this.handleRangeInputFocus} 
                        onBlur={this.handleRangeInputBlur}

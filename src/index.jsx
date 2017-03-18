@@ -10,6 +10,10 @@ import {convertGeojsonToLookup} from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 import {dashboardListener} from './filter/filter.jsx'
 
+window.fetch = window.fetch || require('fetch-ie8');
+window.Promise = window.Promise || require('promise-polyfill');
+require('custom-event-polyfill');
+
 import gjPropsMetadata from './data/jchs-boston-md.json';
 import {convertGJLayersToLegendData} from './components/legend/legendUtils.jsx';
 
@@ -17,7 +21,6 @@ import {convertGJLayersToLegendData} from './components/legend/legendUtils.jsx';
 import {dollarFormatter} from './utils/generalUtils.jsx';
 
 let url;
-
 if (__DEV__) {
   url = 'http://localhost:3000/json';
 } else {
@@ -67,5 +70,5 @@ fetch(url)
     dashboardListener();
     const m = new Map(geojsonLayers, mapStyle);
     render(
-      <AppInterface propsMd={gjPropsMetadata} legendData={legendData}/>, document.getElementById('AppInterface'));
+        <AppInterface propsMd={gjPropsMetadata} legendData={legendData}/>, document.getElementById('AppInterface'));
   });

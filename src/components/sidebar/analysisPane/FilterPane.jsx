@@ -11,9 +11,10 @@ class FilterPane extends React.Component {
   }
 
   render() {
+    console.log(this.props.memory)
     return (
       <div className="filterPane sidebarPane">
-        <FiltersSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} handleCountUpdate={this.props.handleCountUpdate} />
+        <FiltersSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} handleCountUpdate={this.props.handleCountUpdate} memory={this.props.memory} updateMasterMemory={this.props.updateMasterMemory}/>
       </div>
     );
   }

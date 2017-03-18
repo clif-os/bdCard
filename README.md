@@ -9,6 +9,9 @@ TODO:
 - add in download JSON/CSV
 - add in dynamic counts to the legend ?
 - consider adding in compiled criteria statements for filters and pass/fail visualizations
+- fix internet explorer data fetch error
+- fix ui errors in firefox
+- fix flickering in firefox
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

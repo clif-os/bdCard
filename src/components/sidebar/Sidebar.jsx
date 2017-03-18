@@ -99,7 +99,7 @@ class Sidebar extends React.Component {
       case 'visualize':
         return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} updateMasterMemory={this.updateMasterMemory} memory={memory.visualizers} />;
       case 'downloads':
-        return <DownloadsPane transitionDuration={transitionDuration} />;
+        return <DownloadsPane transitionDuration={transitionDuration} memory={memory} />;
       case 'maps':
         return <MapsPane transitionDuration={transitionDuration} handleMapMemoryChoice={this.handleMapMemoryChoice} mapMemories={mapMemories}/>
       default:

@@ -15,6 +15,7 @@ TODO:
 - consider adding 'change' to year range labels
 - have legend title wrap after a certain number of characters
 - take a look at percentages in the normailzer and make sure the "errors" aren't on our end
+- TURN OFF THE PREVISUALIZATION!!!!!!!
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

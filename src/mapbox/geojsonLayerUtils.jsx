@@ -186,7 +186,7 @@ export const generatePaintArray = (classes, colorScheme) => {
   colorScheme = colorScheme.toLowerCase();
   let colorScale;
   let colorIdxs;
-  let reverse = false
+  let reverse = false;
   if (colorScheme.includes('green') && colorScheme.includes('red')){
     if (colorScheme === 'red to green') reverse = true;
     colorScale = greenRedColors;

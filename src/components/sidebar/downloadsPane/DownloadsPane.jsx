@@ -10,6 +10,7 @@ class DownloadsPane extends React.Component {
       showingPane: false
       
     }
+    this.handleJSONMSDownload = this.handleJSONMSDownload.bind(this);
   }
 
   componentDidMount(){
@@ -18,7 +19,7 @@ class DownloadsPane extends React.Component {
     })
   }
 
-  handleJSONDownload(){
+  handleJSONCTDownload(){
     let url;
     if (__DEV__) {
       url = 'http://localhost:3000/json-dl';
@@ -26,6 +27,10 @@ class DownloadsPane extends React.Component {
       url = 'https://panettone.herokuapp.com/json-dl';
     }
     window.open(url, '_blank');
+  }
+
+  handleJSONMSDownload(){
+    console.log('handling JSONMS download');
   }
 
   handleCSVDownload(){
@@ -73,11 +78,24 @@ class DownloadsPane extends React.Component {
     );
   }
   renderChoices(){
-
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.memory));
     return (
-      <div className='downloadsPane-choices'>
-        <DownloadsPaneChoice type='json' icon='fa-file-code-o' handleDownload={this.handleJSONDownload} />
-        <DownloadsPaneChoice type='csv' icon='fa-file-text-o' handleDownload={this.handleCSVDownload} />
+      <div>
+        <div className='downloadsPane-choices-titleContainer'>
+          <span className='downloadsPane-choices-title'>Census Data<span className='fa fa-bar-chart downloadsPane-choices-titleIcon' /></span>
+        </div>
+        <div className='downloadsPane-choices downloadsPane-choices-censusData'>
+          <DownloadsPaneChoice type='json' icon='fa-file-code-o' handleDownload={this.handleJSONCTDownload} />
+          <DownloadsPaneChoice type='csv' icon='fa-file-text-o' handleDownload={this.handleCSVDownload} />
+        </div>
+        <div className='downloadsPane-choices-titleContainer'>
+          <span className='downloadsPane-choices-title'>Map Session<span className='fa fa-map-o downloadsPane-choices-titleIcon' /></span>
+        </div>
+        <div className='downloadsPane-choices downloadsPane-choices-mapSession'>
+          <a href={dataStr} download='mapSession.json' >
+            <DownloadsPaneChoice type='json' icon='fa-file-code-o' handleDownload={this.handleJSONMSDownload} />
+          </a>
+        </div>
       </div>
     )
   }

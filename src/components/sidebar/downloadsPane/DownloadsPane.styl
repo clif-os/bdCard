@@ -1,11 +1,76 @@
-.downloadsPane{
-  .downloadsPane-choices{
+.downloadsPane {
+  .downloadsPane-choices-titleContainer {
+    height: 40px;
+    width: calc(100% - 10px);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+    margin: 5px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14pt;
+    color: white;
+    background-color: rgba(10, 131, 201, .8);
+    .downloadsPane-choices-titleIcon {
+      margin-left: 10px;
+    }
+  }
+  .downloadsPane-choices-censusData {
+    .downloadsPane-choices-json {
+      width: calc(50% - 7.5px);
+      margin-left: 5px;
+      margin-right: 2.5px;
+      margin-bottom: 2.5px;
+      color: #0A83C9;
+      &:hover {
+        color: white;
+        background-color: #0A83C9;
+      }
+    }
+    .downloadsPane-choices-csv {
+      width: calc(50% - 7.5px);
+      margin-right: 5px;
+      margin-left: 2.5px;
+      margin-bottom: 2.5px;
+      color: #FF9800;
+      &:hover {
+        color: white;
+        background-color: #FF9800;
+      }
+    }
+    .downloadsPane-choices-pdf {
+      width: calc(100% - 10px);
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-top: 2.5px;
+      color: #FF424A;
+      &:hover {
+        color: white;
+        background-color: #FF424A;
+      }
+    }
+  }
+  .downloadsPane-choices-mapSession {
+    a {
+      width: 100%;
+      .downloadsPane-choices-json {
+        width: calc(100% - 10px);
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-bottom: 2.5px;
+        color: #0A83C9;
+        &:hover {
+          color: white;
+          background-color: #0A83C9;
+        }
+      }
+    }
+  }
+  .downloadsPane-choices {
     display: flex!important;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
     margin-top: 5px;
-    .downloadsPane-choice{
+    .downloadsPane-choice {
       height: 75px;
       text-align: center;
       // border: 1px solid rgb(100,100,100);
@@ -14,48 +79,15 @@
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
       transition-duration: .2s;
       user-select: none;
-      &:hover{
+      &:hover {
         transition-duration: .2s;
         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
       }
-      .downloadsPane-choice-title{
+      .downloadsPane-choice-title {
         font-size: 13.5pt;
-        .downloadsPane-choice-icon{
+        .downloadsPane-choice-icon {
           margin-right: 10px;
         }
-      }
-    }
-    .downloadsPane-choices-json{
-      width: calc(50% - 7.5px);
-      margin-left: 5px;
-      margin-right: 2.5px;
-      margin-bottom: 2.5px;
-      color: #0A83C9;
-      &:hover{
-        color: white;
-        background-color: #0A83C9;
-      }
-    }
-    .downloadsPane-choices-csv{
-      width: calc(50% - 7.5px);
-      margin-right: 5px;
-      margin-left: 2.5px;
-      margin-bottom: 2.5px;
-      color: #FF9800;
-      &:hover{
-        color: white;
-        background-color: #FF9800;
-      }
-    }
-    .downloadsPane-choices-pdf{
-      width: calc(100% - 10px);
-      margin-left: 5px;
-      margin-right: 5px;
-      margin-top: 2.5px;
-      color: #FF424A;
-      &:hover{
-        color: white;
-        background-color: #FF424A;
       }
     }
   }

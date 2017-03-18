@@ -26,7 +26,7 @@ var memory = {
 class Sidebar extends React.Component {
   constructor(props){
     super();
-    memory = memory1;
+    // memory = memory1;
     this.state = {
       activePane: 'home',
       counts: {

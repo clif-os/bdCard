@@ -16,6 +16,7 @@ TODO:
 - have legend title wrap after a certain number of characters
 - take a look at percentages in the normailzer and make sure the "errors" aren't on our end
 - TURN OFF THE PREVISUALIZATION!!!!!!!
+- consider zooming in on new visualization choice
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

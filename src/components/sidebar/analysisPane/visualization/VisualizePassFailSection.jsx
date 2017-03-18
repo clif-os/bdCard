@@ -9,15 +9,15 @@ import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../an
 
 // FILTER MEMORY
 var memory = {
-  filterSettings: {},
-  lastFilterEventData: null,
-  lastValidFilterEventData: null,
-  unvisualized: false
+  // filterSettings: {},
+  // lastFilterEventData: null,
+  // unvisualized: false
 };
 
 class VisualizePassFailSection extends React.Component {
   constructor(props) {
     super();
+    memory = props.memory;
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     if (Object.keys(memory.filterSettings).length > 0){
       this.state = {
@@ -75,8 +75,9 @@ class VisualizePassFailSection extends React.Component {
     memory.filterSettings[filterId] = filterState;
     this.updateActiveFields(memory.filterSettings);
     if (!filterState.freezeFilterValidity) {
-      this.determineFilterEventFire();
+      this.determineVisEventFire();
     }
+    this.props.updateVisualizersMemory('passFail', memory);
   }
 
   areSettingsInactive(settings){
@@ -91,24 +92,23 @@ class VisualizePassFailSection extends React.Component {
     return inactive;
   }
 
-  determineFilterEventFire() {
-    const filterEventData = constructVisPassFailEventData(memory.filterSettings);
+  determineVisEventFire() {
+    const visEventData = constructVisPassFailEventData(memory.filterSettings);
     if (this.areSettingsInactive(memory.filterSettings)){
       const unvisualize = new CustomEvent('UNVISUALIZE');
       document.dispatchEvent(unvisualize);
       memory.unvisualized = true
-    } else if (memory.lastFilterEventData !== null) {
-      if (memory.unvisualized || visPassFailEventsAreDifferent(memory.lastFilterEventData, filterEventData)) {
+    } else if (memory.lastVisEventData !== null) {
+      if (memory.unvisualized || visPassFailEventsAreDifferent(memory.lastVisEventData, visEventData)) {
         let evt;
-        evt = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': filterEventData});
-        memory.lastValidFilterEventData = filterEventData;
+        evt = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
         document.dispatchEvent(evt);
         const deselect = new CustomEvent('DESELECT_FEATURE');
         document.dispatchEvent(deselect);
         memory.unvisualized = false
       }
     }
-    memory.lastFilterEventData = filterEventData;
+    memory.lastVisEventData = visEventData;
   }
 
   render() {

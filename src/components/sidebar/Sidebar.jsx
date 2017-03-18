@@ -5,7 +5,10 @@ import FilterPane from './analysisPane/FilterPane.jsx';
 import VisualizationPane from './analysisPane/VisualizationPane.jsx';
 import HomePane from './homePane/HomePane.jsx';
 import DownloadsPane from './downloadsPane/DownloadsPane.jsx';
-import { memory1 } from './memories/memory1.jsx';
+import MapsPane from './mapsPane/MapsPane.jsx';
+
+import { homesMap, educationMap, incomeMap, raceMap } from './mapMemories/memories.jsx';
+const mapMemories = [homesMap, educationMap, incomeMap, raceMap];
 
 var memory = {
   filters: {
@@ -13,12 +16,16 @@ var memory = {
     lastFilterEventData: null
   },
   visualizers: {
-    activeVis: 'classes',
+    visualizerChoice: 'classes',
     classes:{
-
+      visSetting: {},
+      lastVisEventData: null,
+      firstDraw: true
     },
     passFail: {
-
+      filterSettings: {},
+      lastVisEventData: null,
+      unvisualized: false
     }
   }
 }
@@ -26,7 +33,6 @@ var memory = {
 class Sidebar extends React.Component {
   constructor(props){
     super();
-    // memory = memory1;
     this.state = {
       activePane: 'home',
       counts: {
@@ -37,9 +43,27 @@ class Sidebar extends React.Component {
     this.handleCountUpdate = this.handleCountUpdate.bind(this);
   }
 
+  handleMapMemoryChoice(memoryChoice){
+    memory = memoryChoice;
+    const filterEvent = memory.filters.lastFilterEventData;
+    const visEvent = memory.visualizers[memory.visualizers.visualizerChoice].lastVisEventData;
+    const visFiltEvent = {
+      filterEvent: filterEvent,
+      visEvent: visEvent
+    }
+    if (memory.visualizers.visualizerChoice === 'classes'){
+      const loadMap = new CustomEvent('VISFILT_CLASSES', {'detail': visFiltEvent})
+      document.dispatchEvent(loadMap);
+    } else if (memory.visualizers.visualizerChoice === 'passFail'){
+      const loadMap = new CustomEvent('VISFILT_PASSFAIL', {'detail': visFiltEvent})
+      document.dispatchEvent(loadMap);
+    }
+    const deselect = new CustomEvent('DESELECT_FEATURE');
+    document.dispatchEvent(deselect);
+  }
+
   updateMasterMemory(componentName, componentMemory){
     memory[componentName] = componentMemory;
-    console.log(memory);
   }
 
   handleNavBarClick(paneId){
@@ -73,9 +97,11 @@ class Sidebar extends React.Component {
       case 'filter':
         return <FilterPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} handleCountUpdate={this.handleCountUpdate} updateMasterMemory={this.updateMasterMemory} memory={memory.filters} />;
       case 'visualize':
-        return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration}/>;
+        return <VisualizationPane propsMd={this.props.propsMd} transitionDuration={transitionDuration} updateMasterMemory={this.updateMasterMemory} memory={memory.visualizers} />;
       case 'downloads':
         return <DownloadsPane transitionDuration={transitionDuration} />;
+      case 'maps':
+        return <MapsPane transitionDuration={transitionDuration} handleMapMemoryChoice={this.handleMapMemoryChoice} mapMemories={mapMemories}/>
       default:
         return <HomePane />;
     }

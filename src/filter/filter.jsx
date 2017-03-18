@@ -1,7 +1,6 @@
 import {
   linePaintIn, fillPaintIn, linePaintOut, fillPaintOut,
   linePaintInPF, fillPaintInPF, linePaintOutPF, fillPaintOutPF,
-  generatePaintArray,
   buildGeojsonLayerArray
 } from '../mapbox/geojsonLayerUtils.jsx';
 import {
@@ -13,7 +12,7 @@ import {
 
 import gjPropsMetadata from '../data/jchs-boston-md.json';
 
-const actions = ['FILTER', 'VISUALIZE_CLASSES', 'VISUALIZE_PASSFAIL', 'UNVISUALIZE'];
+const actions = ['FILTER', 'VISUALIZE_CLASSES', 'VISUALIZE_PASSFAIL', 'UNVISUALIZE', 'VISFILT_PASSFAIL', 'VISFILT_CLASSES'];
 
 // all features
 var _geojson;
@@ -73,7 +72,7 @@ const actionHandler = e => {
               fillPaint: fillPaintOutPF
             }];
             } else if (_activeVisualizer === 'classes'){
-          geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
+          geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
         }
       }
       const updateCount = new CustomEvent('UPDATE_FILTER_SECTION', {
@@ -106,7 +105,7 @@ const actionHandler = e => {
         _geojsonIn = window.geojson;
       }
       _visCriteria = e.detail;
-      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette, _visCriteria.unitFormatter);
+      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
       dispatchFilterEvents(geojsonLayers);
       _visualization = true;
       break;
@@ -133,6 +132,46 @@ const actionHandler = e => {
           linePaint: linePaintOutPF,
           fillPaint: fillPaintOutPF
         }];
+      dispatchFilterEvents(geojsonLayers);
+      _visualization = true;
+      break;
+    case 'VISFILT_PASSFAIL':
+      _activeVisualizer = 'passFail'
+      _geojson = window.geojson;
+      _filtCriteria = e.detail.filterEvent;
+      const splitGeojson_VF_PF1 = splitGeojsonByCriteria(_geojson, _filtCriteria);
+      _geojsonIn = splitGeojson_VF_PF1.geojsonIn
+      _geojsonOut = splitGeojson_VF_PF1.geojsonOut
+      _passFailCriteria = e.detail.visEvent;
+      const splitGeojson_VF_PF2 = splitGeojsonByCriteria(_geojsonIn, _passFailCriteria);
+      var _geojsonPass = splitGeojson_VF_PF2.geojsonIn
+      var _geojsonFail = splitGeojson_VF_PF2.geojsonOut
+      geojsonLayers = [{
+          geojson: _geojsonPass,
+          name: 'pass',
+          filterStatus: 'Passes Visualization Criteria',
+          linePaint: linePaintInPF,
+          fillPaint: fillPaintInPF
+        },
+        {
+          geojson: _geojsonFail,
+          name: 'fail',
+          filterStatus: 'Fails Visualization Criteria',
+          linePaint: linePaintOutPF,
+          fillPaint: fillPaintOutPF
+        }];
+      dispatchFilterEvents(geojsonLayers);
+      _visualization = true;
+      break;
+    case 'VISFILT_CLASSES':
+      _activeVisualizer = 'classes'
+      _geojson = window.geojson;
+      _filtCriteria = e.detail.filterEvent;
+      const splitGeojson_VF_C1 = splitGeojsonByCriteria(_geojson, _filtCriteria);
+      _geojsonIn = splitGeojson_VF_C1.geojsonIn
+      _geojsonOut = splitGeojson_VF_C1.geojsonOut
+      _visCriteria = e.detail.visEvent;
+      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
       dispatchFilterEvents(geojsonLayers);
       _visualization = true;
       break;

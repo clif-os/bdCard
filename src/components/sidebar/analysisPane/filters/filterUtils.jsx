@@ -1,18 +1,3 @@
-// const defaultFilterMemory = {
-//   titleValue: '',
-//   filterActive: true,
-//   fieldValue: defaultFieldVal,
-//   filterValid: false,
-//   range: [min, max],
-//   selectedRange: [min, max],
-//   units: units,
-//   unitFormatter: unitFormatter,
-//   unitUnformatter: unitUnformatter,
-//   rangeMinInputActive: false,
-//   rangeMaxInputActive: false,
-//   rangeInputValue: ''
-// }
-
 export const constructFilterEventData = (filterSettings) => {
   return Object.keys(filterSettings).reduce((acc, key) => {
     if ((filterSettings[key].selectedRange[0] === filterSettings[key].range[0] 

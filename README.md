@@ -12,6 +12,9 @@ TODO:
 - fix internet explorer data fetch error
 - fix ui errors in firefox
 - fix flickering in firefox
+- consider adding 'change' to year range labels
+- have legend title wrap after a certain number of characters
+- take a look at percentages in the normailzer and make sure the "errors" aren't on our end
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

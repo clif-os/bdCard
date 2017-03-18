@@ -3,7 +3,6 @@ export const constructVisEventData = visSetting => {
     field: visSetting.selectedProp,
     classes: visSetting.classNumValue,
     palette: visSetting.paletteValue,
-    unitFormatter: visSetting.unitFormatter,
     visActive: visSetting.visActive
   }
 }

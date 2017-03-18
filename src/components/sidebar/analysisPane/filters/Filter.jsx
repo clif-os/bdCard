@@ -20,19 +20,22 @@ class Filter extends React.Component {
     //// CREATE THE DEFAULT STATE
     // DETERMINE UNITS AND FORMATTERS
     // consider removing the propsMD from the props and only including it in the utils;
-    
+
+    // SET THE LOOKUPS
+    this.yearLookups = props.dropdownData.yearLookups;
+    this.propRegistry = props.dropdownData.dropdownPropRegistry;
+
     //// LOAD STATE FROM MEMORY
     if (props.memory === undefined){
       const fieldOptions = props.dropdownData.fieldDropdowns;
-      const yearLookups = props.dropdownData.yearLookups;
-      const propRegistry = props.dropdownData.dropdownPropRegistry;
+      
       const defaultFieldVal = fieldOptions[props.defaultFieldIndex].value;
       const defaultFieldLabel = fieldOptions[props.defaultFieldIndex].label;
-      const defaultYearOptions = yearLookups[defaultFieldVal];
+      const defaultYearOptions = this.yearLookups[defaultFieldVal];
       const defaultYearVal = defaultYearOptions[0].value;
       const defaultYearLabel = defaultYearOptions[0].label;
       
-      const defaultSelectedProp = propRegistry[defaultFieldVal + defaultYearVal];
+      const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
 
        
       var { min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
@@ -40,12 +43,9 @@ class Filter extends React.Component {
       var medianLabel = 'median: ' + unitFormatter(median);
       var medianMark = {};
       medianMark[median] = medianLabel;
+
       // SET THE DEFAULT STATE
       const defaultFilterSetting = {
-        yearLookups: yearLookups,
-        propRegistry: propRegistry,
-
-        titleValue: '',
         filterActive: true,
 
         selectedProp: defaultSelectedProp,
@@ -90,7 +90,6 @@ class Filter extends React.Component {
     var style = document.getElementById(this.props.id).style;
     style.right = '0px';
     this.props.updateFilterSettingsMemory(this.props.id, this.state);
-    console.log(this.state);
   }
 
   componentDidUpdate(){
@@ -122,11 +121,12 @@ class Filter extends React.Component {
     const fieldVal = val.value;
     const fieldLabel = val.label;
 
-    const defaultYearOptions = this.state.yearLookups[fieldVal];
+    const defaultYearOptions = this.yearLookups[fieldVal];
     const defaultYearVal = defaultYearOptions[0].value;
     const defaultYearLabel = defaultYearOptions[0].label;
-    const defaultSelectedProp = this.state.propRegistry[fieldVal + defaultYearVal];
+    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
     const { min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
@@ -150,7 +150,7 @@ class Filter extends React.Component {
   handleYearSelection(val){
     const yearVal = val.value;
     const yearLabel = val.label;
-    const selectedProp = this.state.propRegistry[this.state.fieldValue + yearVal];
+    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
     const { min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
@@ -246,7 +246,8 @@ class Filter extends React.Component {
   }
 
   handleRangeInputChange(e){
-    const newVal = this.state.unitUnformatter(e.target.value);
+    const { unitUnformatter } = choseFormatter(this.state.units);
+    const newVal = unitUnformatter(e.target.value);
     this.setState({
       rangeInputValue: newVal
     });

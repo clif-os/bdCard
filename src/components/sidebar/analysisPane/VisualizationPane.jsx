@@ -6,24 +6,37 @@ import VisualizePassFailSection from './visualization/VisualizePassFailSection.j
 import { VelocityTransitionGroup } from 'velocity-react';
 
 var memory = {
-  visualizerChoice: 'classes'
+  // visualizerChoice: 'classes',
+  // classes:{
+
+  // },
+  // passFail: {
+
+  // }
 }
 
 class VisualizationPane extends React.Component {
   constructor(props){
     super();
+    memory = props.memory;
     this.state = {
       showingPane: false,
-      visualizerChoice: memory.visualizerChoice,
+      visualizerChoice: props.memory.visualizerChoice,
       visualizerSwitch: false
     }
     this.handleVisualizerChoice = this.handleVisualizerChoice.bind(this);
+    this.updateVisualizersMemory = this.updateVisualizersMemory.bind(this);
   }
 
   componentDidMount(){
     this.setState({
       showingPane: true
-    })
+    });
+  }
+
+  updateVisualizersMemory(componentName, componentMemory){
+    memory[componentName] = componentMemory;
+    this.props.updateMasterMemory('visualizers', memory);
   }
 
   handleVisualizerChoice(e){
@@ -34,6 +47,7 @@ class VisualizationPane extends React.Component {
         visualizerSwitch: true
       });
       memory.visualizerChoice = choice;
+      this.props.updateMasterMemory('visualizers', memory);
     }
   };
 
@@ -73,9 +87,9 @@ class VisualizationPane extends React.Component {
   }
   renderVisualizer(choice){
     if (choice === 'classes'){
-      return <VisualizeClassesSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} visualizerSwitch={this.state.visualizerSwitch}/> 
+      return <VisualizeClassesSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} visualizerSwitch={this.state.visualizerSwitch} memory={this.props.memory.classes} updateVisualizersMemory={this.updateVisualizersMemory} />
     } else if (choice === 'passFail') {
-      return <VisualizePassFailSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} visualizerSwitch={this.state.visualizerSwitch}/>
+      return <VisualizePassFailSection propsMd={this.props.propsMd} transitionDuration={this.props.transitionDuration} visualizerSwitch={this.state.visualizerSwitch} memory={this.props.memory.passFail} updateVisualizersMemory={this.updateVisualizersMemory} />
     }
   }
 }

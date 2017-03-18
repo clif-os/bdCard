@@ -9,14 +9,15 @@ import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
 
 // VISUALIZER MEMORY
 var memory = {
-  visSetting: {},
-  lastVisEventData: null,
-  firstDraw: true
+  // visSetting: {},
+  // lastVisEventData: null,
+  // firstDraw: true
 };
 
 class VisualizeClassesSection extends React.Component {
   constructor(props){
     super();
+    memory = props.memory;
     this.dropdownData = Object.assign({}, convertPropsMetadataToDrodownObject(props.propsMd));
     this.id = guid();
     this.updateVisSettingMemory = this.updateVisSettingMemory.bind(this);
@@ -64,7 +65,7 @@ class VisualizeClassesSection extends React.Component {
     if ( !visState.freezeVisValidity ) {
       this.determineVisEventFire();
     };
-    
+    this.props.updateVisualizersMemory('classes', memory);
   }
 
   determineVisEventFire(){

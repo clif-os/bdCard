@@ -274,9 +274,9 @@ export const generatePaintArray = (classes, colorScheme) => {
   return paintPacks;
 }
 
-export const buildGeojsonLayerArray = (gj, field, classes, palette, unitFormatter) => {
+export const buildGeojsonLayerArray = (gj, field, classes, palette) => {
   const paints = generatePaintArray(classes, palette);
-  const geojsons = splitGeojsonByFieldAndClasses(gj, field, classes, unitFormatter);
+  const geojsons = splitGeojsonByFieldAndClasses(gj, field, classes);
   if (geojsons.length !== paints.length){
     console.error('incoming geojsons and paints to "buildGeojsonLayerArray" are different lengths, these should always be the same length')
   }

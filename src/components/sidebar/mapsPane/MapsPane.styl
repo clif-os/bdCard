@@ -1,0 +1,37 @@
+.mapsPane{
+  .mapsPane-choices{
+    display: flex!important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+    .mapChoice{
+      height: 75px;
+      width: calc(50% - 4px);
+      text-align: center;
+      // border: 1px solid rgb(100,100,100);
+      cursor: pointer;
+      line-height: 75px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+      transition-duration: .2s;
+      user-select: none;
+      margin: 2px;
+      color: #0A83C9;
+      background-color: white;
+      &:hover{
+        transition-duration: .2s;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
+        color: white;
+        background-color: #0A83C9;
+      }
+      .mapChoice-title{
+        font-size: 13.5pt;
+        .mapChoice-icon{
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}

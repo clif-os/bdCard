@@ -75,14 +75,6 @@ const actionHandler = e => {
           geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
         }
       }
-      const updateCount = new CustomEvent('UPDATE_FILTER_SECTION', {
-        'detail': {
-          numFeaturesInFilter: _geojsonIn.features.length,
-          numFeaturesTotal: _geojson.features.length
-        }
-      });
-      // document.dispatchEvent(updateCount);
-      // window.activeFeatureCount = _geojsonIn.features.length;
       dispatchFilterEvents(geojsonLayers);
       break;
     case 'UNVISUALIZE':
@@ -203,6 +195,13 @@ const dispatchFilterEvents = geojsonLayers => {
     'detail': legendData
   });
   document.dispatchEvent(updateLegend);
+  window.activeFeatureCount = _geojsonIn.features.length;
+  const updateCount = new CustomEvent('UPDATE_FILTER_SECTION', {
+        'detail': {
+          numFeaturesInFilter: _geojsonIn.features.length,
+          numFeaturesTotal: _geojson.features.length
+        }
+      });
   document.dispatchEvent(updateCount);
   window.activeFeatureCount = _geojsonIn.features.length;
 }

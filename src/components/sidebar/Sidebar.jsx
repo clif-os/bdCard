@@ -7,6 +7,8 @@ import HomePane from './homePane/HomePane.jsx';
 import DownloadsPane from './downloadsPane/DownloadsPane.jsx';
 import MapsPane from './mapsPane/MapsPane.jsx';
 
+import { mergeAllActiveFields } from './analysisPane/analysisUtils.jsx';
+
 import { homesMap, educationMap, incomeMap, raceMap } from './mapMemories/memories.jsx';
 const mapMemories = [homesMap, educationMap, incomeMap, raceMap];
 
@@ -41,7 +43,17 @@ class Sidebar extends React.Component {
     }
     this.handleNavBarClick = this.handleNavBarClick.bind(this);
     this.handleCountUpdate = this.handleCountUpdate.bind(this);
+    this.handleMapMemoryChoice = this.handleMapMemoryChoice.bind(this);
   }
+
+  buildPropLabel(setting){
+    if (Object.keys(setting).length === 0){
+      return null;
+    }
+    const fieldLabel = setting.fieldLabel;
+    const yearLabel = setting.yearLabel;
+    return fieldLabel + ' ' + yearLabel;
+  };
 
   handleMapMemoryChoice(memoryChoice){
     memory = memoryChoice;
@@ -52,12 +64,41 @@ class Sidebar extends React.Component {
       visEvent: visEvent
     }
     if (memory.visualizers.visualizerChoice === 'classes'){
+      // DISPATCH MAP LOAD EVENT
       const loadMap = new CustomEvent('VISFILT_CLASSES', {'detail': visFiltEvent})
       document.dispatchEvent(loadMap);
+      // UPDATE ACTIVE VIS FIELDS (THIS SHOULD PROB BE REFACTORED);
+      window.activeVisFields = {};
+      const setting = memory.visualizers.classes.visSetting
+      const propLabel = this.buildPropLabel(setting);
+      const selectedProp = setting.selectedProp;
+      window.activeVisFields[selectedProp] = propLabel;
     } else if (memory.visualizers.visualizerChoice === 'passFail'){
+      // DISPATCH MAP LOAD EVENT
       const loadMap = new CustomEvent('VISFILT_PASSFAIL', {'detail': visFiltEvent})
       document.dispatchEvent(loadMap);
+      // UPDATE ACTIVE VIS FIELDS (THIS SHOULD PROB BE REFACTORED);
+      window.activeVisFields = {};
+      const settings = memory.visualizers.passFail.filterSettings
+      Object.keys(settings).forEach(settingId => {
+        const setting = settings[settingId];
+        const propLabel = this.buildPropLabel(setting);
+        const selectedProp = setting.selectedProp;
+        window.activeVisFields[selectedProp] = propLabel;
+      });
     }
+    // UPDATE ACTIVE FILT FIELDS (THIS SHOULD PROB BE REFACTORED);
+    window.activeFiltFields = {};
+    const settings = memory.filters.filterSettings
+    Object.keys(settings).forEach(settingId => {
+      const setting = settings[settingId];
+      const propLabel = this.buildPropLabel(setting);
+      const selectedProp = setting.selectedProp;
+      window.activeFiltFields[selectedProp] = propLabel;
+    });
+    // MERGE ACTIVE FIELDS
+    mergeAllActiveFields();
+
     const deselect = new CustomEvent('DESELECT_FEATURE');
     document.dispatchEvent(deselect);
   }

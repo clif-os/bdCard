@@ -379,8 +379,8 @@ export default class Map {
     const evt = new CustomEvent('MAP_LOADED')
     document.dispatchEvent(evt);
     this.mapLoaded = true;
-    const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': window.defaultVisEvent});
-    document.dispatchEvent(visualize);
+    // const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': window.defaultVisEvent});
+    // document.dispatchEvent(visualize);
   }
 
 }

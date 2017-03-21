@@ -85,7 +85,6 @@ class Sidebar extends React.Component {
       }
     });
     this.handleCountUpdate('filter', count);
-    console.log({visFiltEvent});
   }
 
   setSavedMemories(newMapMemories){

@@ -128,7 +128,6 @@ class MapsPane extends React.Component {
         handleMapMemoryChoice={this.handleMapMemoryChoice}/>
     });
     const savedNodes = savedChoices.map((choice, i) => {
-      console.log(choice)
       const order = i + 1;
       return <SavedMapChoice
         key={i}

@@ -20,7 +20,6 @@ class UploadMapButton extends React.Component {
     var uploader = document.getElementById('mapChoice-upload');
     uploader.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      console.log(file);
       const fr = new FileReader();
       let message;
       fr.onload = (e) => {

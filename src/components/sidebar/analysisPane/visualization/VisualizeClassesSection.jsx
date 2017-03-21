@@ -2,7 +2,7 @@ import './VisualizeClassesSection.styl';
 import React from 'react';
 import ClassesVisualizer from './ClassesVisualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
-import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
+import { convertPropsMetadataToDrodownObject, updateActiveFields } from '../analysisUtils.jsx';
 import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
 
 // consider https://www.npmjs.com/package/react-color
@@ -14,6 +14,8 @@ var memory = {
   // firstDraw: true
 };
 
+var firstDraw = true;
+
 class VisualizeClassesSection extends React.Component {
   constructor(props){
     super();
@@ -24,7 +26,8 @@ class VisualizeClassesSection extends React.Component {
   }
 
   componentDidMount(){
-    if (this.props.visualizerSwitch){
+    if (this.props.visualizerSwitch || firstDraw){
+      firstDraw = false;
       if (!memory.visSetting.visActive){
         const unvisualize = new CustomEvent('UNVISUALIZE')
         document.dispatchEvent(unvisualize);
@@ -36,27 +39,9 @@ class VisualizeClassesSection extends React.Component {
     }
   }
 
-  buildPropLabel(setting){
-    if (Object.keys(setting).length === 0){
-      return null;
-    }
-    const fieldLabel = setting.fieldLabel;
-    const yearLabel = setting.yearLabel;
-    return fieldLabel + ' ' + yearLabel;
-  };
-
-  updateActiveFields(setting){
-    // this will need to be refactored eventually;
-    window.activeVisFields = {};
-    const propLabel = this.buildPropLabel(setting);
-    const selectedProp = setting.selectedProp;
-    window.activeVisFields[selectedProp] = propLabel;
-    mergeAllActiveFields();
-  };
-
   updateVisSettingMemory(visId, visState){
     memory.visSetting = visState;
-    this.updateActiveFields(memory.visSetting);
+    updateActiveFields('classes', memory.visSetting);
     if (memory.firstDraw){
       memory.firstDraw = false;
       memory.lastVisEventData = window.defaultVisEvent;

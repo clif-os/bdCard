@@ -1,15 +1,98 @@
 .mapsPane{
+  .mapsPane-choices-titleContainer {
+    height: 40px;
+    width: calc(100% - 10px);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+    margin: 5px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14pt;
+    color: white;
+    background-color: rgba(10, 131, 201, 1);
+    .mapsPane-choices-titleIcon {
+      margin-left: 10px;
+    }
+  }
+  .mapsPane-choices-controls{
+    // margin-top: 5px;
+  }
   .mapsPane-choices{
     display: flex!important;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
-    margin-top: 5px;
-    padding-left: 2px;
-    padding-right: 2px;
-    .mapChoice{
+    .mapChoice-control-1{
+      border: 1px solid rgb(180,180,180);
+    }
+    .mapChoice-control-2{
+      border: 1px dashed rgb(160,160,160);
+    }
+    .mapChoice-control{
+      .mapChoice-uploadMask{
+        background-color: white;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 300;
+      }
+      input{
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+      }
+      z-index: 250;
+      position: relative;
       height: 75px;
-      width: calc(50% - 4px);
+      width: calc(50% - 7.5px);
+      text-align: center;
+      // border: 1px solid rgb(100,100,100);
+      cursor: pointer;
+      line-height: 75px;
+      transition-duration: .2s;
+      user-select: none;
+      color: rgb(160,160,160);
+      
+      border-radius: 4px;
+      background-color: white;
+      &:hover{
+        transition-duration: .2s;
+        color: rgb(80,80,80);
+        border-color: rgb(80,80,80);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
+        // color: white;
+        // background-color: #3A9AD2;
+      }
+      .mapChoice-title{
+        position: relative;
+        font-size: 13.5pt;
+        z-index: 301;
+        pointer-events: none;
+        .mapChoice-icon{
+          margin-right: 10px;
+        }
+      }
+    }
+    .mapChoice-odd {
+      margin-left: 5px;
+      margin-right: 2.5px;
+    }
+    .mapChoice-even {
+      margin-right: 5px;
+      margin-left: 2.5px;
+    }
+    .mapChoice-row-preceeding {
+      
+      // margin-bottom: 5px;
+    }
+    .mapChoice-load{
+      position: relative;
+      margin-bottom: 5px;
+      height: 75px;
+      width: calc(50% - 7.5px);
       text-align: center;
       // border: 1px solid rgb(100,100,100);
       cursor: pointer;
@@ -17,14 +100,13 @@
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
       transition-duration: .2s;
       user-select: none;
-      margin: 2px;
       color: #0A83C9;
       background-color: white;
       &:hover{
         transition-duration: .2s;
         box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
-        color: white;
-        background-color: #0A83C9;
+        // color: white;
+        background-color: #DAEFFA;
       }
       .mapChoice-title{
         font-size: 13.5pt;

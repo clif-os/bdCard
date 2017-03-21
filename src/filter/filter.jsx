@@ -35,11 +35,11 @@ export const dashboardListener = () => {
 };
 
 const actionHandler = e => {
+  _geojson = window.geojson;
   const type = e['type'];
   let geojsonLayers;
   switch (type) {
     case 'FILTER':
-      _geojson = window.geojson;
       _filtCriteria = e.detail;
       const splitGeojson = splitGeojsonByCriteria(geojson, _filtCriteria);
       _geojsonIn = splitGeojson.geojsonIn
@@ -129,7 +129,6 @@ const actionHandler = e => {
       break;
     case 'VISFILT_PASSFAIL':
       _activeVisualizer = 'passFail'
-      _geojson = window.geojson;
       _filtCriteria = e.detail.filterEvent;
       const splitGeojson_VF_PF1 = splitGeojsonByCriteria(_geojson, _filtCriteria);
       _geojsonIn = splitGeojson_VF_PF1.geojsonIn
@@ -156,16 +155,29 @@ const actionHandler = e => {
       _visualization = true;
       break;
     case 'VISFILT_CLASSES':
-      _activeVisualizer = 'classes'
-      _geojson = window.geojson;
+      _activeVisualizer = 'classes';
       _filtCriteria = e.detail.filterEvent;
-      const splitGeojson_VF_C1 = splitGeojsonByCriteria(_geojson, _filtCriteria);
-      _geojsonIn = splitGeojson_VF_C1.geojsonIn
-      _geojsonOut = splitGeojson_VF_C1.geojsonOut
+      if (_filtCriteria !== null) {
+        const splitGeojson_VF_C1 = splitGeojsonByCriteria(_geojson, _filtCriteria);
+        _geojsonIn = splitGeojson_VF_C1.geojsonIn
+        _geojsonOut = splitGeojson_VF_C1.geojsonOut
+      } else {
+        _geojsonIn = _geojson;
+      }
       _visCriteria = e.detail.visEvent;
-      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+      if (_visCriteria !== null){
+        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+        _visualization = true;
+      } else {
+        geojsonLayers = [{
+          geojson: _geojsonIn,
+          name: 'inFilter',
+          filterStatus: 'Meets Filter Criteria',
+          linePaint: linePaintIn,
+          fillPaint: fillPaintIn
+        }];
+      }
       dispatchFilterEvents(geojsonLayers);
-      _visualization = true;
       break;
     default:
       break;

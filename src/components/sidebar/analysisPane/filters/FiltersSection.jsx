@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Filter from './Filter.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { constructFilterEventData, filterEventsAreDifferent } from './filterUtils.jsx';
-import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
+import { convertPropsMetadataToDrodownObject, updateActiveFields } from '../analysisUtils.jsx';
 
 import {VelocityTransitionGroup} from 'velocity-react';
 
@@ -69,30 +69,9 @@ class FiltersSection extends React.Component {
     this.spinAddFilterButton('left');
   }
 
-  buildPropLabel(setting){
-    if (Object.keys(setting).length === 0){
-      return null;
-    }
-    const fieldLabel = setting.fieldLabel;
-    const yearLabel = setting.yearLabel;
-    return fieldLabel + ' ' + yearLabel;
-    const selectedProp = setting.selectedProp;
-  };
-
-  updateActiveFields(settings) {
-    window.activeFiltFields = {};
-    Object.keys(settings).forEach(settingId => {
-      const setting = settings[settingId];
-      const propLabel = this.buildPropLabel(setting);
-      const selectedProp = setting.selectedProp;
-      window.activeFiltFields[selectedProp] = propLabel;
-    });
-    mergeAllActiveFields();
-  };
-
   updateFilterSettingsMemory(filterId, filterState) {
     memory.filterSettings[filterId] = filterState;
-    this.updateActiveFields(memory.filterSettings);
+    updateActiveFields('filter', memory.filterSettings);
     if (!filterState.freezeFilterValidity) {
       this.determineFilterEventFire();
     }

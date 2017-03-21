@@ -119,6 +119,48 @@ export const validateAndNormalizeRangeInputValue = (input, rangeClass, range, se
     }
   }
 }
+
+const buildPropLabel = (setting) => {
+  if (Object.keys(setting).length === 0){
+    return null;
+  }
+  const fieldLabel = setting.fieldLabel;
+  const yearLabel = setting.yearLabel;
+  return fieldLabel + ' ' + yearLabel;
+};
+
+export const updateActiveFields = (type, settings) => {
+  switch(type){
+    case 'filter':
+      window.activeFiltFields = {};
+      Object.keys(settings).forEach(settingId => {
+        const setting = settings[settingId];
+        const propLabel = buildPropLabel(setting);
+        const selectedProp = setting.selectedProp;
+        window.activeFiltFields[selectedProp] = propLabel;
+      });
+      break;
+    case 'passFail':
+      window.activeVisFields = {};
+      Object.keys(settings).forEach(settingId => {
+        const setting = settings[settingId];
+        const propLabel = buildPropLabel(setting);
+        const selectedProp = setting.selectedProp;
+        window.activeVisFields[selectedProp] = propLabel;
+      });
+      break;
+    case 'classes':
+      window.activeVisFields = {};
+      const propLabel = buildPropLabel(settings);
+      const selectedProp = settings.selectedProp;
+      window.activeVisFields[selectedProp] = propLabel;
+      break;
+    default:
+      break;
+  }
+  mergeAllActiveFields();
+}
+
 import {
   isEquivalent
 } from '../../../utils/generalUtils.jsx';
@@ -126,7 +168,7 @@ const defaultFields = {
   TractPopulation2010: "Tract Population 2010",
   MedINC14: "Median Household Income 2014"
 }
-export const mergeAllActiveFields = () => {
+const mergeAllActiveFields = () => {
   const oldActiveFields = Object.assign({}, window.activeFields);
   const activityObjects = [window.activeVisFields, window.activeFiltFields];
   window.activeFields = activityObjects.reduce((acc, activityObject) => {

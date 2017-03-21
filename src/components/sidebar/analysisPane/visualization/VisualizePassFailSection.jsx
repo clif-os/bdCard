@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import PassFailVisualizer from './PassFailVisualizer.jsx';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { constructVisPassFailEventData, visPassFailEventsAreDifferent } from './visUtils.jsx';
-import { convertPropsMetadataToDrodownObject, mergeAllActiveFields } from '../analysisUtils.jsx';
+import { convertPropsMetadataToDrodownObject, updateActiveFields } from '../analysisUtils.jsx';
 
 // FILTER MEMORY
 var memory = {
@@ -50,30 +50,9 @@ class VisualizePassFailSection extends React.Component {
     }
   }
 
-  buildPropLabel(setting){
-    if (Object.keys(setting).length === 0){
-      return null;
-    }
-    const fieldLabel = setting.fieldLabel;
-    const yearLabel = setting.yearLabel;
-    return fieldLabel + ' ' + yearLabel;
-    const selectedProp = setting.selectedProp;
-  };
-
-  updateActiveFields(settings) {
-    window.activeVisFields = {};
-    Object.keys(settings).forEach(settingId => {
-      const setting = settings[settingId];
-      const propLabel = this.buildPropLabel(setting);
-      const selectedProp = setting.selectedProp;
-      window.activeVisFields[selectedProp] = propLabel;
-    });
-    mergeAllActiveFields();
-  };
-
   updateFilterSettingsMemory(filterId, filterState) {
     memory.filterSettings[filterId] = filterState;
-    this.updateActiveFields(memory.filterSettings);
+    updateActiveFields('passFail', memory.filterSettings);
     if (!filterState.freezeFilterValidity) {
       this.determineVisEventFire();
     }

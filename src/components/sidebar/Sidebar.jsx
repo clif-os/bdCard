@@ -7,7 +7,7 @@ import HomePane from './homePane/HomePane.jsx';
 import DownloadsPane from './downloadsPane/DownloadsPane.jsx';
 import MapsPane from './mapsPane/MapsPane.jsx';
 
-import { mergeAllActiveFields } from './analysisPane/analysisUtils.jsx';
+import { updateActiveFields } from './analysisPane/analysisUtils.jsx';
 
 import { homesMap, educationMap, incomeMap, raceMap } from './mapMemories/memories.jsx';
 const mapMemories = [homesMap, educationMap, incomeMap, raceMap];
@@ -31,6 +31,8 @@ var memory = {
     }
   }
 }
+
+var savedMapMemories = []
 
 class Sidebar extends React.Component {
   constructor(props){
@@ -56,51 +58,38 @@ class Sidebar extends React.Component {
   };
 
   handleMapMemoryChoice(memoryChoice){
-    memory = memoryChoice;
+    memory = JSON.parse(JSON.stringify(memoryChoice));
     const filterEvent = memory.filters.lastFilterEventData;
     const visEvent = memory.visualizers[memory.visualizers.visualizerChoice].lastVisEventData;
     const visFiltEvent = {
       filterEvent: filterEvent,
       visEvent: visEvent
-    }
+    };
+    let eventType;
     if (memory.visualizers.visualizerChoice === 'classes'){
-      // DISPATCH MAP LOAD EVENT
-      const loadMap = new CustomEvent('VISFILT_CLASSES', {'detail': visFiltEvent})
-      document.dispatchEvent(loadMap);
-      // UPDATE ACTIVE VIS FIELDS (THIS SHOULD PROB BE REFACTORED);
-      window.activeVisFields = {};
-      const setting = memory.visualizers.classes.visSetting
-      const propLabel = this.buildPropLabel(setting);
-      const selectedProp = setting.selectedProp;
-      window.activeVisFields[selectedProp] = propLabel;
+      eventType = 'VISFILT_CLASSES';
+      updateActiveFields('classes', memory.visualizers.classes.visSetting)
     } else if (memory.visualizers.visualizerChoice === 'passFail'){
-      // DISPATCH MAP LOAD EVENT
-      const loadMap = new CustomEvent('VISFILT_PASSFAIL', {'detail': visFiltEvent})
-      document.dispatchEvent(loadMap);
-      // UPDATE ACTIVE VIS FIELDS (THIS SHOULD PROB BE REFACTORED);
-      window.activeVisFields = {};
-      const settings = memory.visualizers.passFail.filterSettings
-      Object.keys(settings).forEach(settingId => {
-        const setting = settings[settingId];
-        const propLabel = this.buildPropLabel(setting);
-        const selectedProp = setting.selectedProp;
-        window.activeVisFields[selectedProp] = propLabel;
-      });
+      eventType = 'VISFILT_PASSFAIL';
+      updateActiveFields('passFail', memory.visualizers.passFail.filterSettings)
     }
-    // UPDATE ACTIVE FILT FIELDS (THIS SHOULD PROB BE REFACTORED);
-    window.activeFiltFields = {};
-    const settings = memory.filters.filterSettings
-    Object.keys(settings).forEach(settingId => {
-      const setting = settings[settingId];
-      const propLabel = this.buildPropLabel(setting);
-      const selectedProp = setting.selectedProp;
-      window.activeFiltFields[selectedProp] = propLabel;
-    });
-    // MERGE ACTIVE FIELDS
-    mergeAllActiveFields();
-
+    const loadMap = new CustomEvent(eventType, {'detail': visFiltEvent})
+    document.dispatchEvent(loadMap);
     const deselect = new CustomEvent('DESELECT_FEATURE');
     document.dispatchEvent(deselect);
+    updateActiveFields('filter', memory.filters.filterSettings);
+    let count = 0;
+    Object.keys(memory.filters.filterSettings).forEach(filterKey => {
+      if (memory.filters.filterSettings[filterKey].filterActive){
+        count++;
+      }
+    });
+    this.handleCountUpdate('filter', count);
+    console.log({visFiltEvent});
+  }
+
+  setSavedMemories(newMapMemories){
+    savedMapMemories = newMapMemories;
   }
 
   updateMasterMemory(componentName, componentMemory){
@@ -142,7 +131,7 @@ class Sidebar extends React.Component {
       case 'downloads':
         return <DownloadsPane transitionDuration={transitionDuration} memory={memory} />;
       case 'maps':
-        return <MapsPane transitionDuration={transitionDuration} handleMapMemoryChoice={this.handleMapMemoryChoice} mapMemories={mapMemories}/>
+        return <MapsPane transitionDuration={transitionDuration} handleMapMemoryChoice={this.handleMapMemoryChoice} memory={memory} mapMemories={mapMemories}  savedMapMemories={savedMapMemories} setSavedMemories={this.setSavedMemories}/>
       default:
         return <HomePane />;
     }

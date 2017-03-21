@@ -2,8 +2,8 @@ import './MapsPane.styl';
 import React from 'react';
 import {VelocityTransitionGroup} from 'velocity-react';
 import MapChoice from './MapChoice.jsx';
+import UploadMapButton from './UploadMapButton.jsx';
 import SavedMapChoice from './SavedMapChoice.jsx'
-import {verifyMemory} from '../mapMemories/memoryVerifier.jsx';
 
 var memoryIndex = 1
 var uploadedMemoryIndex = 1
@@ -23,16 +23,13 @@ class MapsPane extends React.Component {
     this.saveMap = this
       .saveMap
       .bind(this);
-    this.uploadMap = this
-      .uploadMap
-      .bind(this);
     this.handleDeleteSavedMemory = this
       .handleDeleteSavedMemory
       .bind(this);
   }
 
   componentDidMount() {
-    this.setState({showingPane: true})
+    this.setState({showingPane: true});
   }
 
   handleMapMemoryChoice(choice) {
@@ -74,33 +71,6 @@ class MapsPane extends React.Component {
       .props
       .setSavedMemories(newMapMemories);
   };
-
-  uploadMap() {
-    var uploader = document.getElementById('mapChoice-upload')
-    uploader.click();
-    console.log('uploading from top')
-    uploader.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      console.log(file);
-      const fr = new FileReader();
-      let message;
-      fr.onload = (e) => {
-        try {
-          const json = JSON.parse(e.target.result);
-          const {verified, message} = verifyMemory(json);
-          if (verified) {
-            this.saveMap(json);
-          } else {
-            console.log('not verified')
-          }
-        } catch (e) {
-          console.log('NOT A VALID JSON FILE');
-          message = 'Not a valid JSON file'
-        }
-      }
-      fr.readAsText(file);
-    });
-  }
 
   render() {
     return (
@@ -192,13 +162,12 @@ class MapsPane extends React.Component {
             order={1}
             type='control'
             handleMapMemoryChoice={this.saveMap}/>
-          <MapChoice
+          <UploadMapButton
             title='Upload Map'
             icon='fa-upload'
             order={2}
             type='control'
-            upload={true}
-            handleMapMemoryChoice={this.uploadMap}/>
+            saveMap={this.saveMap} />
         </div>
       </div>
     )

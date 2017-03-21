@@ -59,7 +59,7 @@ class MapsPane extends React.Component {
     } else {
       mapMemory = {
         memory: memory,
-        title: 'Uploaded Map ' + uploadedMemoryIndex,
+        title: 'Upload Map ' + uploadedMemoryIndex,
         icon: 'fa-upload'
       }
       uploadedMemoryIndex++;

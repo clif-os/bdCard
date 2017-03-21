@@ -55,7 +55,13 @@ class MapsPane extends React.Component {
   };
 
   uploadMap(){
-    document.getElementById('mapChoice-upload').click();
+    var uploader = document.getElementById('mapChoice-upload')
+    uploader.click();
+    uploader.onchange = function() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "submitform.php");
+      request.send(new FormData(uploader));
+    };
   }
 
   render() {
@@ -120,6 +126,9 @@ class MapsPane extends React.Component {
           <MapChoice title='Save Map' icon='fa-save' order={1}
                     type='control'
                     handleMapMemoryChoice={this.saveMap} />
+          <MapChoice title='Upload Map' icon='fa-upload' order={2}
+                    type='control' upload={true}
+                    handleMapMemoryChoice={this.uploadMap} />
         </div>
       </div>
     )
@@ -128,6 +137,3 @@ class MapsPane extends React.Component {
  export default MapsPane;
 
 // {/*<DownloadsPaneChoice type='pdf' icon='fa-file-pdf-o' handleDownload={this.handlePDFDownload} />*/}
-//<MapChoice title='Upload Map' icon='fa-upload' order={2}
-                    // type='control' upload={true}
-                    // handleMapMemoryChoice={this.uploadMap} />

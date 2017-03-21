@@ -72,7 +72,9 @@ class MapChoice extends React.Component {
         {this.props.upload
           ? (<div>
                <div className='mapChoice-uploadMask'/>
-               <input type="file" id="mapChoice-upload" />
+               <form id="mapChoice-upload-form">
+                <input type="file" id="mapChoice-upload" accept="text/json"/>
+               </form>
              </div>)
           : null
         }

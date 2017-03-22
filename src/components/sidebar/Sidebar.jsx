@@ -62,8 +62,8 @@ class Sidebar extends React.Component {
     const filterEvent = memory.filters.lastFilterEventData;
     const visEvent = memory.visualizers[memory.visualizers.visualizerChoice].lastVisEventData;
     const visFiltEvent = {
-      filterEvent: filterEvent,
-      visEvent: visEvent
+      filterEvent: filterEvent === null ? [] : filterEvent,
+      visEvent: visEvent === null ? [] : visEvent
     };
     let eventType;
     if (memory.visualizers.visualizerChoice === 'classes'){

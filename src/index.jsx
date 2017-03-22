@@ -5,7 +5,7 @@ require('velocity-animate');
 require('velocity-animate/velocity.ui');
 import AppInterface from './AppInterface.jsx';
 import Map from './mapbox/Map.jsx';
-import {linePaintIn, fillPaintIn} from './mapbox/geojsonLayerUtils.jsx';
+import { buildPaint } from './mapbox/geojsonLayerUtils.jsx';
 import {convertGeojsonToLookup} from './utils/geojsonUtils.jsx'
 global.mapboxgl = require('mapbox-gl');
 import {dashboardListener} from './filter/filter.jsx'
@@ -35,13 +35,14 @@ fetch(url)
     // and even zooms
     window.geojsonLookup = convertGeojsonToLookup(gj);
     window.geojson = gj;
+    const { linePaint, fillPaint } = buildPaint('defaultPass');
     const geojsonLayers = [
       {
         geojson: gj,
         name: 'inFilter',
         filterStatus: 'Meets Filter Criteria',
-        linePaint: linePaintIn,
-        fillPaint: fillPaintIn
+        linePaint: linePaint,
+        fillPaint: fillPaint
       }
     ]
     const legendDescription = 'NULL';

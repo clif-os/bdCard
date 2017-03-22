@@ -21,6 +21,7 @@ TODO:
   - refactor as needed
   - styles seems to be conflicting
   - fix transition times between icons and regular text
+- add in feedback on failed upload
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

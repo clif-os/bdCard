@@ -1,81 +1,38 @@
-// const color = '#547980' // dark blue-green
-// const color = '#4682B4' // steel blue
-const defaultColor = '#06507A' // darker sidebar blue
-
-export const linePaintIn = {
-  'line-width': {
-    'stops': [
-      [10, .75],
-      [11, 1],
-      [12, 1.5],
-      [13, 1.75],
-      [14, 2]
-    ]
-  },
-  'line-opacity': 0.6,
-  'line-color': defaultColor
+const paintTypes = {
+  defaultPass: ['#06507A', [0.6, 0.4]], // darker sidebar blue
+  defaultFail: ['#06507A', [0.15, 0.1]],
+  pass: ['green', [0.6, 0.4]],
+  fail: ['red', [0.6, 0.4]],
+  passAlt1: ['#ff7f00', [0.6, 0.4]],
+  passAlt2: ['#ffff33', [0.6, 0.4]]
 }
 
-export const fillPaintIn = {
-  'fill-color': defaultColor,
-  'fill-opacity': 0.4
-}
-
-export const linePaintOut = {
-  'line-width': {
-    'stops': [
-      [10, .75],
-      [11, 1],
-      [12, 1.5],
-      [13, 1.75],
-      [14, 2]
-    ]
-  },
-  'line-opacity': .15,
-  'line-color': defaultColor
-}
-
-export const fillPaintOut = {
-  'fill-color': defaultColor,
-  'fill-opacity': 0.1
-}
-
-export const linePaintInPF = {
-  'line-width': {
-    'stops': [
-      [10, .75],
-      [11, 1],
-      [12, 1.5],
-      [13, 1.75],
-      [14, 2]
-    ]
-  },
-  'line-opacity': 0.6,
-  'line-color': 'green'
-}
-
-export const fillPaintInPF = {
-  'fill-color': 'green',
-  'fill-opacity': 0.4
-}
-
-export const linePaintOutPF = {
-  'line-width': {
-    'stops': [
-      [10, .75],
-      [11, 1],
-      [12, 1.5],
-      [13, 1.75],
-      [14, 2]
-    ]
-  },
-  'line-opacity': .6,
-  'line-color': 'red'
-}
-
-export const fillPaintOutPF = {
-  'fill-color': 'red',
-  'fill-opacity': 0.4
+export const buildPaint = (type) => {
+  let color;
+  if (type === undefined || paintTypes[type] === undefined){
+    color = paintTypes.defaultPass;
+  } else {
+    color = paintTypes[type];
+  }
+  return {
+    linePaint: {
+      'line-width': {
+        'stops': [
+          [10, .75],
+          [11, 1],
+          [12, 1.5],
+          [13, 1.75],
+          [14, 2]
+        ]
+      },
+      'line-opacity': color[1][0],
+      'line-color': color[0]
+    },
+    fillPaint: {
+      'fill-opacity': color[1][1],
+      'fill-color': color[0]
+    }
+  }
 }
 
 ////////////////////////////////

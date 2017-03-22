@@ -58,7 +58,6 @@ class SavedMapChoice extends React.Component {
       this.setState({
         clicked: true
       });
-      console.log('setting')
       window.setTimeout(() => {
         this.setState({
           clicked: false

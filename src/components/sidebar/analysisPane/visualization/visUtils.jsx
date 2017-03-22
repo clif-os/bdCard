@@ -7,11 +7,10 @@ export const constructVisEventData = visSetting => {
   }
 }
 
+// allow full ranges to pass through
 export const constructVisPassFailEventData = (filterSettings) => {
   return Object.keys(filterSettings).reduce((acc, key) => {
-    if ((filterSettings[key].selectedRange[0] === filterSettings[key].range[0] 
-        && filterSettings[key].selectedRange[1] === filterSettings[key].range[1]) ||
-        !filterSettings[key].filterActive){
+    if (!filterSettings[key].filterActive){
       return acc;
     } else {
       acc.push({

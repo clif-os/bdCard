@@ -23,6 +23,7 @@ TODO:
   - fix transition times between icons and regular text
 - add in feedback on failed upload
 - add ON/OFF into the on/off button
+- try to add an animation on legend update (since it gets finessed so much)
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

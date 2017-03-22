@@ -141,8 +141,10 @@ const actionHandler = e => {
 
 const dispatchFilterEvents = geojsonLayers => {
   // push in the filtered-out layers
+  console.log(_geojsonOut)
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {
+      console.log('drawing _geojsonOut')
       let failPaint = buildPaint('defaultFail');
       geojsonLayers.push({
         geojson: _geojsonOut,
@@ -181,8 +183,6 @@ const generatePassFailLayers = (_passFailCriteria, gj) => {
       let passPaint = buildPaint('pass');
       let failPaint = buildPaint('fail');
       if (_passFailCriteria.length === 0 || _passFailCriteria.length === 1){
-        _geojsonIn = _bothCriteriaPass;
-        _geojsonOut = _bothCriteriaFail;
         return [{
           geojson: _bothCriteriaPass,
           name: 'pass',

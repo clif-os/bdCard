@@ -44,6 +44,7 @@ const actionHandler = e => {
       _geojsonIn = splitGeojson.geojsonIn
       _geojsonOut = splitGeojson.geojsonOut
       if (! _visualization || (_visCriteria === null && _passFailCriteria === null)) {
+        console.log('performing full default filter vis');
         const {linePaint, fillPaint} = buildPaint('defaultPass')
         geojsonLayers = [{
           geojson: _geojsonIn,
@@ -54,26 +55,8 @@ const actionHandler = e => {
         }];
       } else {
         if (_activeVisualizer === 'passFail'){
-          const splitGeojsonPF = splitGeojsonByCriteria(_geojsonIn, _passFailCriteria);
-          var _geojsonPass = splitGeojsonPF.geojsonIn
-          var _geojsonFail = splitGeojsonPF.geojsonOut
-          let passPaint = buildPaint('defaultPass');
-          let failPaint = buildPaint('defaultFail');
-          geojsonLayers = [{
-              geojson: _geojsonPass,
-              name: 'pass',
-              filterStatus: 'Passes Visualization Criteria',
-              linePaint: passPaint.linePaint,
-              fillPaint: passPaint.fillPaint
-            },
-            {
-              geojson: _geojsonFail,
-              name: 'fail',
-              filterStatus: 'Fails Visualization Criteria',
-              linePaint: failPaint.linePaint,
-              fillPaint: failPaint.fillPaint
-            }];
-            } else if (_activeVisualizer === 'classes'){
+          geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
+        } else if (_activeVisualizer === 'classes'){
           geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
         }
       }
@@ -88,8 +71,8 @@ const actionHandler = e => {
           geojson: _geojsonIn,
           name: 'inFilter',
           filterStatus: 'Meets Filter Criteria',
-          linePaint: failPaint.linePaint,
-          fillPaint: failPaint.fillPaint
+          linePaint: passPaint.linePaint,
+          fillPaint: passPaint.fillPaint
         }];
       dispatchFilterEvents(geojsonLayers);
       _visualization = false;
@@ -198,6 +181,8 @@ const generatePassFailLayers = (_passFailCriteria, gj) => {
       let passPaint = buildPaint('pass');
       let failPaint = buildPaint('fail');
       if (_passFailCriteria.length === 0 || _passFailCriteria.length === 1){
+        _geojsonIn = _bothCriteriaPass;
+        _geojsonOut = _bothCriteriaFail;
         return [{
           geojson: _bothCriteriaPass,
           name: 'pass',

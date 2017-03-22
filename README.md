@@ -15,7 +15,8 @@ TODO:
 - take a look at percentages in the normailzer and make sure the "errors" aren't on our end
 - consider zooming in on new visualization choice;
 - turn the add filter button into a SVG (is mis-centered in other browsers);
-- fix the fact some map saves aren't respecting turned off filters (hopefully this issue can be resolved in the JSX) /// RESOLVED ???
+- standardize the scrolling on sidebar panes
+- add map extent into memory?
 - map memory selection UI:
   - make save transition to green
   - refactor as needed

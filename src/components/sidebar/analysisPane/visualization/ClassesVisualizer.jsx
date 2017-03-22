@@ -279,8 +279,6 @@ class ClassesVisualizer extends React.Component {
       const order = i + 1;
       const handle = document.getElementsByClassName('rc-slider-handle-' + order)[0];
       handle.style.visibility = 'visible';
-      handle.click();
-      handle.focus();
     }
     // set ends to hidden
     const lastHandle = document.getElementsByClassName('rc-slider-handle-' + this.state.selectedRange.length)[0];

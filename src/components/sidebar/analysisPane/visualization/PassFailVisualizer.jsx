@@ -53,7 +53,7 @@ class PassFailVisualizer extends React.Component {
         yearOptions: defaultYearOptions,
 
         filterValid: false,
-        freezeFilterValidity: false,
+        freezeValidity: false,
         range: [min, max],
         selectedRange: [min, max],
         medianMark: medianMark,
@@ -126,7 +126,7 @@ class PassFailVisualizer extends React.Component {
       medianMark: medianMark,
       units: units,
       filterValid: false,
-      freezeFilterValidity: false
+      freezeValidity: false
     });
   }
 
@@ -149,13 +149,13 @@ class PassFailVisualizer extends React.Component {
       medianMark: medianMark,
       units: units,
       filterValid: false,
-      freezeFilterValidity: false
+      freezeValidity: false
     });
   }
 
   //// SLIDER HANDLERS
   // BUG :: handle slider change is being called on change of field but, after change is not
-  // thus, freezeFilterValidity is being left as true after field selections -- so far this is not affecting the process
+  // thus, freezeValidity is being left as true after field selections -- so far this is not affecting the process
   // but later on it might
   handleSliderChange(selectedRange){
     if (this.state.rangeMinInputActive){
@@ -165,7 +165,7 @@ class PassFailVisualizer extends React.Component {
     }
     this.setState({
       selectedRange: selectedRange,
-      freezeFilterValidity: true
+      freezeValidity: true
     });
   }
 
@@ -173,7 +173,7 @@ class PassFailVisualizer extends React.Component {
     this.setState({
       selectedRange: selectedRange,
       filterValid: isSubRange(this.state.range, selectedRange),
-      freezeFilterValidity: false
+      freezeValidity: false
     });
   }
 
@@ -185,13 +185,13 @@ class PassFailVisualizer extends React.Component {
       this.setState({
         rangeInputValue: this.state.selectedRange[0],
         rangeMinInputActive: true,
-        freezeFilterValidity: true
+        freezeValidity: true
       });
     } else if (className.indexOf('rangeInput-max') > -1){
       this.setState({
         rangeInputValue: this.state.selectedRange[1],
         rangeMaxInputActive: true,
-        freezeFilterValidity: true
+        freezeValidity: true
       });
     }
   }
@@ -208,7 +208,7 @@ class PassFailVisualizer extends React.Component {
         selectedRange: selectedRange,
         rangeMinInputActive: false,
         filterValid: isSubRange(this.state.range, selectedRange),
-        freezeFilterValidity: false
+        freezeValidity: false
       });
     } else if (className.indexOf('rangeInput-max') > -1){
       selectedRange[1] = validateAndNormalizeRangeInputValue(rangeInputValue, 'maximum', this.state.range , selectedRange);
@@ -216,7 +216,7 @@ class PassFailVisualizer extends React.Component {
         selectedRange: selectedRange,
         rangeMaxInputActive: false,
         filterValid: isSubRange(this.state.range, selectedRange),
-        freezeFilterValidity: false
+        freezeValidity: false
       });
     }
   }

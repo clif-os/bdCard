@@ -86,9 +86,15 @@ const splitGeojsonByRanges = (geojson, field, splitRanges, unitFormatter) => {
   }, geojsonShells);
 }
 
-const splitRangeByClasses = (range, classes) => {
-  const min = Math.floor(range.min);
-  const max = Math.ceil(range.max);
+export const splitRangeByClasses = (range, classes) => {
+  let min, max
+  if ( Object.prototype.toString.call( range ) === '[object Array]' ) {
+    min = Math.floor(range[0]);
+    max = Math.ceil(range[1]);
+  } else {
+    min = Math.floor(range.min);
+    max = Math.ceil(range.max);
+  }
   const classLength = Math.round((max - min) / classes);
   var minVal = min;
   var splitRanges = [];

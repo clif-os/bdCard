@@ -4,8 +4,52 @@ import ReactTooltip from 'react-tooltip';
 import ActiveSlider from '../commonComponents/ActiveSlider.jsx';
 import Select from 'react-select';
 
+import 'rc-slider/assets/index.css';
+const Slider = require('rc-slider');
+const Range = Slider.Range;
+
+import { fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
+import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
+
+import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
+import { generatePaintArray } from '../../../../mapbox/geojsonLayerUtils.jsx';
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
+
+const splitsToSliderValues = splits => {
+  return splits.reduce((acc, split) => {
+    split.forEach(value => {
+      if (acc.length === 0 || acc.indexOf(value) === -1){
+        acc.push(value);
+      }
+    });
+    return acc;
+  }, []);
+}
+
+// was attempting to remove min and max values but would remove ability to color the slider accordingly
+// const splitsToSliderValues = splits => {
+//   return splits.reduce((acc, split, i1) => {
+//     split.forEach((value, i2) => {
+//       if (acc.length === 0 || acc.indexOf(value) === -1){
+//         // avoid the first and last values
+//         if ((i1 === 0 && i2 === 0)){
+//           return acc;
+//         } else {
+//           acc.push(value);
+//         }
+//       }
+//     });
+//     return acc;
+//   }, []);
+// }
+
+const sliderValuesToSplits = sliderVals => {
+  return sliderVals.reduce((acc, val) => {
+    
+    return acc;
+  }, [])
+}
 
 const classes = [
   {value: 2, label: '2'},
@@ -52,12 +96,20 @@ class ClassesVisualizer extends React.Component {
       const defaultYearLabel = defaultYearOptions[0].label;
 
       const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
+
+      var {min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
+      const { unitFormatter } = choseFormatter(units);
+      var medianLabel = 'median: ' + unitFormatter(median);
+      var medianMark = {};
+      medianMark[median] = medianLabel;
       
+      const splits = splitRangeByClasses([min, max], classes[2].value);
+      const splitVals = splitsToSliderValues(splits);
+
       // SET THE DEFAULT STATE
       const defaultVisSetting = {
         visActive: true,
         visValid: true,
-        freezeVisValidity: false,
 
         selectedProp: defaultSelectedProp,
 
@@ -69,7 +121,14 @@ class ClassesVisualizer extends React.Component {
         yearOptions: defaultYearOptions,
 
         classNumValue: classes[2].value,
-        paletteValue: palettes[0].value
+        paletteValue: palettes[0].value,
+        
+        freezeValidity: false,
+        range: [min, max],
+        selectedRange: splitVals,
+        selectedSplitRanges: splits,
+        medianMark: medianMark,
+        units: units
       }
       this.state = defaultVisSetting;
     } else {
@@ -79,22 +138,26 @@ class ClassesVisualizer extends React.Component {
     // general bindings
     this.handleVisActiveToggle = this.handleVisActiveToggle.bind(this);
 
-    //class-based visualization bindings
+    // class-based visualization bindings
     this.handleClassNumSelection = this.handleClassNumSelection.bind(this);
     this.handlePaletteSelection = this.handlePaletteSelection.bind(this);
     this.handleFieldSelection = this.handleFieldSelection.bind(this);
     this.handleYearSelection = this.handleYearSelection.bind(this);
-    
+    // slider
+    this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.handleSliderAfterChange = this.handleSliderAfterChange.bind(this);
   }
 
   componentDidMount(){
     var style = document.getElementById(this.props.id).style;
     style.right = '0px';
     this.props.updateVisSettingMemory(this.props.id, this.state);
+    this.updateSliderStyles();
   }
 
   componentDidUpdate(){
     this.props.updateVisSettingMemory(this.props.id, this.state);
+    this.updateSliderStyles();
   }
 
   //// FIELD ACTIVE TOGGLER HANDLERS
@@ -108,8 +171,12 @@ class ClassesVisualizer extends React.Component {
   //// FIELD SELECTION HANDLERS
 
   handleClassNumSelection(val){
+    const splits = splitRangeByClasses(this.state.range, val.value);
+    const splitVals = splitsToSliderValues(splits);
     this.setState({
-      classNumValue: val.value
+      classNumValue: val.value,
+      selectedRange: splitVals,
+      selectedSplitRanges: splits,
     });
   }
 
@@ -136,7 +203,7 @@ class ClassesVisualizer extends React.Component {
       yearOptions: defaultYearOptions,
       
       filterValid: false,
-      freezeFilterValidity: false
+      freezeValidity: false
     });
   }
 
@@ -151,7 +218,53 @@ class ClassesVisualizer extends React.Component {
       yearLabel: yearLabel,
       
       filterValid: false,
-      freezeFilterValidity: false
+      freezeValidity: false
+    });
+  }
+
+  //// SLIDER HANDLERS
+  // BUG :: handle slider change is being called on change of field but, after change is not
+  // thus, freezeValidity is being left as true after field selections -- so far this is not affecting the process
+  // but later on it might
+  handleSliderChange(selectedRange){
+    // keep upper and lower limits locked
+    selectedRange[0] = this.state.range[0];
+    selectedRange[selectedRange.length - 1] = this.state.range[1];
+    this.setState({
+      selectedRange: selectedRange,
+      freezeValidity: true
+    });
+  }
+
+  handleSliderAfterChange(selectedRange){
+    this.setState({
+      selectedRange: selectedRange,
+      freezeValidity: false
+    });
+  }
+
+  updateSliderStyles(){
+    //// FORMAT HANDLES ////
+    // reset all to visible
+    for (var i = 0; i < this.state.selectedRange.length; i++){
+      const order = i + 1;
+      const handle = document.getElementsByClassName('rc-slider-handle-' + order)[0];
+      handle.style.visibility = 'visible';
+    }
+    // set ends to hidden
+    const lastHandle = document.getElementsByClassName('rc-slider-handle-' + this.state.selectedRange.length)[0];
+    lastHandle.style.visibility = 'hidden';
+    const firstHandle = document.getElementsByClassName('rc-slider-handle-1')[0];
+    firstHandle.style.visibility = 'hidden';
+    //// FORMAT TRACKS ////
+    var paintArray = generatePaintArray(this.state.classNumValue, this.state.paletteValue);
+    // the last value of the paint array will cover null values and is not relevant to the slider process
+    paintArray.pop();
+    paintArray.forEach((paint, i) => {
+      const order = i + 1;
+      const color = paint.fillPaint['fill-color'];
+      const track = document.getElementsByClassName('rc-slider-track-' + order)[0];
+      track.style.backgroundColor = color;
     });
   }
 
@@ -204,6 +317,15 @@ class ClassesVisualizer extends React.Component {
             clearable={false}
           />
           <span className='visSection-title visSection-title-palette'>Palette:</span>
+        </div>
+        <div className='rangeSelector visSection'>
+          <span className='visSection-title'>Range:</span>
+          <div className='sliderContainer'>
+            <Range className='slider' value={this.state.selectedRange} 
+                   min={this.state.range[0]} max={this.state.range[1]}
+                   marks={this.state.medianMark}
+                   onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
+          </div>
         </div>
         <div className={'validationBar validationBar-' + (this.state.visValid && this.state.visActive)} />
       </div>

@@ -1,5 +1,5 @@
 .classesVisualizer {
-  height: 140px;
+  height: 185px;
   position: relative;
   width: calc(95% + 4px);
   padding-right: 4px;
@@ -99,9 +99,9 @@
   }
   .rangeSelector {
     // length of Range title is 47.45
-    height: 63px;
+    height: 40px;
     .sliderContainer {
-      height: 40px;
+      height: 30px;
       position: relative;
       float: right;
       top: 50%;
@@ -116,42 +116,27 @@
           border: none;
           box-shadow: 0px 0px 1.5px rgba(0, 0, 0, 0.6);
         }
-        .rc-slider-track-1 {
+        .rc-slider-rail {
           background-color: #1B9AF7
         }
-      }
-      .rangeInputContainer {
-        margin-bottom: 3px;
-        width: 100%;
-        .rangeInputSubCont-min {
-          float: left;
+        .rc-slider-track {
+          // background-color: #1B9AF7
         }
-        .rangeInputSubCont-max {
-          float: right;
+        .rc-slider-mark-text {
+          margin-left: -43px;
+          color: rgba(17,99,158, .8);
+          margin-top: -7px;
         }
-        .rangeInputSubCont {
-          .rangeInputLabel {
-            font-size: 9pt;
-            color: #11639E;
-            user-select: none;
-            cursor: default;
-          }
-          .rangeInputLabel-min{
-            margin-left: 5px;
-          }
-          .rangeInputLabel-max{
-            margin-right: 5px;
-          }
-          .rangeInput {
-            width: 75px;
-            height: 20px;
-            font-size: 9.5pt;
-            padding-left: 3px;
-            padding-right: 3px;
-            border-radius: 3px;
-          }
-          .rangeInput-min {}
-          .rangeInput-max {}
+        .rc-slider-dot {
+          border-color: #C2C2C2;
+        }
+        .rc-slider-mark-text-active{
+          margin-left: -43px;
+          color: #11639E;
+          margin-top: -7px;
+        }
+        .rc-slider-dot-active{
+          border-color: #1B9AF7;
         }
       }
     }

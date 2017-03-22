@@ -10,8 +10,7 @@ import { convertPropsMetadataToDrodownObject, updateActiveFields } from '../anal
 // FILTER MEMORY
 var memory = {
   // filterSettings: {},
-  // lastFilterEventData: null,
-  // unvisualized: false
+  // lastFilterEventData: null
 };
 
 class VisualizePassFailSection extends React.Component {
@@ -46,7 +45,7 @@ class VisualizePassFailSection extends React.Component {
   updateFilterSettingsMemory(filterId, filterState) {
     memory.filterSettings[filterId] = filterState;
     updateActiveFields('passFail', memory.filterSettings);
-    if (!filterState.freezeFilterValidity) {
+    if (!filterState.freezeValidity) {
       this.determineVisEventFire();
     }
     this.props.updateVisualizersMemory('passFail', memory);
@@ -55,13 +54,12 @@ class VisualizePassFailSection extends React.Component {
   determineVisEventFire() {
     const visEventData = constructVisPassFailEventData(memory.filterSettings);
     if (memory.lastVisEventData !== null) {
-      if (memory.unvisualized || visPassFailEventsAreDifferent(memory.lastVisEventData, visEventData)) {
+      if (visPassFailEventsAreDifferent(memory.lastVisEventData, visEventData)) {
         let evt;
         evt = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
         document.dispatchEvent(evt);
         const deselect = new CustomEvent('DESELECT_FEATURE');
         document.dispatchEvent(deselect);
-        memory.unvisualized = false
       }
     }
     memory.lastVisEventData = visEventData;

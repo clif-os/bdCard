@@ -42,7 +42,7 @@ class VisualizeClassesSection extends React.Component {
       memory.lastVisEventData = window.defaultVisEvent;
       return;
     };
-    if ( !visState.freezeVisValidity ) {
+    if ( !visState.freezeValidity ) {
       this.determineVisEventFire();
     };
     this.props.updateVisualizersMemory('classes', memory);

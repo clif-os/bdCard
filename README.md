@@ -34,3 +34,6 @@ EXTRAS:
 - add in a landing page
 - ESL Options (Spanish)
 - See if we can come up with a way to show transit stops and a tract’s distance from the nearest rapid transit stop. 
+
+COMPETITORS:
+- http://www.socialexplorer.com/

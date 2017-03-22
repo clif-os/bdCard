@@ -11,7 +11,7 @@ import {
 
 import gjPropsMetadata from '../data/jchs-boston-md.json';
 
-const actions = ['FILTER', 'VISUALIZE_CLASSES', 'VISUALIZE_PASSFAIL', 'UNVISUALIZE', 'VISFILT_PASSFAIL', 'VISFILT_CLASSES'];
+const actions = ['FILTER', 'VISUALIZE_CLASSES', 'VISUALIZE_PASSFAIL', 'VISFILT_PASSFAIL', 'VISFILT_CLASSES'];
 
 // all features
 var _geojson;
@@ -24,7 +24,9 @@ var _activeVisualizer = null
 var _visCriteria = null;
 var _passFailCriteria = null;
 var _filtCriteria = null;
-// general variables
+
+// this variable is used to inform the filter event to remain unvisualized if false
+
 var _visualization = false;
 
 export const dashboardListener = () => {
@@ -44,7 +46,6 @@ const actionHandler = e => {
       _geojsonIn = splitGeojson.geojsonIn
       _geojsonOut = splitGeojson.geojsonOut
       if (! _visualization || (_visCriteria === null && _passFailCriteria === null)) {
-        console.log('performing full default filter vis');
         const {linePaint, fillPaint} = buildPaint('defaultPass')
         geojsonLayers = [{
           geojson: _geojsonIn,
@@ -83,9 +84,7 @@ const actionHandler = e => {
         _geojsonIn = window.geojson;
       }
       _passFailCriteria = e.detail;
-      console.log(_passFailCriteria);
       if (_passFailCriteria.length === 0){
-        console.log('criteria 0 length');
         geojsonLayers = unvisualize(_geojsonIn);
       } else if (_passFailCriteria.length > 0) {
         geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
@@ -119,7 +118,6 @@ const actionHandler = e => {
         _geojsonIn = _geojson;
       }
       _visCriteria = e.detail.visEvent;
-      console.log(_visCriteria)
       if (! _visCriteria.visActive){
         geojsonLayers = unvisualize(_geojsonIn);
       } else if (_visCriteria !== null){
@@ -146,7 +144,6 @@ const dispatchFilterEvents = geojsonLayers => {
   // push in the filtered-out layers
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {
-      console.log('drawing _geojsonOut')
       let failPaint = buildPaint('defaultFail');
       geojsonLayers.push({
         geojson: _geojsonOut,

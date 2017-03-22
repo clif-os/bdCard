@@ -19,7 +19,6 @@ var memory = {
   },
   visualizers: {
     visualizerChoice: 'classes',
-    unvisualized: '',
     classes:{
       visSetting: {},
       lastVisEventData: null,
@@ -27,8 +26,7 @@ var memory = {
     },
     passFail: {
       filterSettings: {},
-      lastVisEventData: null,
-      unvisualized: false
+      lastVisEventData: null
     }
   }
 }

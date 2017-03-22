@@ -21,7 +21,6 @@ TODO:
   - refactor as needed
   - styles seems to be conflicting
   - fix transition times between icons and regular text
-- CSV is missing a header
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

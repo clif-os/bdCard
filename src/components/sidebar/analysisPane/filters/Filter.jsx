@@ -323,7 +323,8 @@ class Filter extends React.Component {
             
           </div>
         </div>
-        <div className={'validationBar validationBar-' + (this.state.filterValid && this.state.filterActive)} />
+        <div className={'validationBar validationBar-' + (this.state.filterValid ? 'valid' : 'invalid') 
+                        + ' validationBar-' +  (this.state.filterActive ? 'active' : 'inactive')} />
       </div>
     );
   }

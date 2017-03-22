@@ -109,6 +109,10 @@
       margin-left: 10px;
       margin-right: 10px;
       width: calc(100% - 47.45px - 10px - 20px);
+      .rc-slider-tooltip{
+        z-index: 1000;
+        visibility: visible!important;
+      }
       .slider {
         position: absolute;
         bottom: 0px;
@@ -128,16 +132,16 @@
           margin-top: -7px;
         }
         .rc-slider-dot {
-          border-color: #C2C2C2;
+          border-color: rgb(150,150,150);
         }
         .rc-slider-mark-text-active{
           margin-left: -43px;
           color: #11639E;
           margin-top: -7px;
         }
-        .rc-slider-dot-active{
-          border-color: #1B9AF7;
-        }
+        // .rc-slider-dot-active{
+        //   border-color: #1B9AF7;
+        // }
       }
     }
   }

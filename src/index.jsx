@@ -3,6 +3,9 @@ import React from 'react';
 import {render} from 'react-dom';
 require('velocity-animate');
 require('velocity-animate/velocity.ui');
+require('rc-slider/assets/index.css');
+require('rc-tooltip/assets/bootstrap.css');
+
 import AppInterface from './AppInterface.jsx';
 import Map from './mapbox/Map.jsx';
 import { buildPaint } from './mapbox/geojsonLayerUtils.jsx';

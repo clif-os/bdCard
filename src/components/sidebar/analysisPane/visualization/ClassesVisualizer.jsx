@@ -6,7 +6,8 @@ import Select from 'react-select';
 
 import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
-const Range = Slider.Range;
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Range = createSliderWithTooltip(Slider.Range);
 
 import { fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
 import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
@@ -26,23 +27,6 @@ const splitsToSliderValues = splits => {
     return acc;
   }, []);
 }
-
-// was attempting to remove min and max values but would remove ability to color the slider accordingly
-// const splitsToSliderValues = splits => {
-//   return splits.reduce((acc, split, i1) => {
-//     split.forEach((value, i2) => {
-//       if (acc.length === 0 || acc.indexOf(value) === -1){
-//         // avoid the first and last values
-//         if ((i1 === 0 && i2 === 0)){
-//           return acc;
-//         } else {
-//           acc.push(value);
-//         }
-//       }
-//     });
-//     return acc;
-//   }, []);
-// }
 
 const sliderValuesToSplits = sliderVals => {
   return sliderVals.reduce((acc, val) => {
@@ -146,6 +130,7 @@ class ClassesVisualizer extends React.Component {
     // slider
     this.handleSliderChange = this.handleSliderChange.bind(this);
     this.handleSliderAfterChange = this.handleSliderAfterChange.bind(this);
+    this.sliderTipFormatter = this.sliderTipFormatter.bind(this);
   }
 
   componentDidMount(){
@@ -243,6 +228,12 @@ class ClassesVisualizer extends React.Component {
     });
   }
 
+  sliderTipFormatter(val){
+    console.log('formatting');
+    console.log(val);
+    return `${val}`;
+  }
+
   updateSliderStyles(){
     //// FORMAT HANDLES ////
     // reset all to visible
@@ -324,7 +315,8 @@ class ClassesVisualizer extends React.Component {
             <Range className='slider' value={this.state.selectedRange} 
                    min={this.state.range[0]} max={this.state.range[1]}
                    marks={this.state.medianMark}
-                   onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
+                   onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} 
+                   tipFormatter={this.sliderTipFormatter} />
           </div>
         </div>
         <div className={'validationBar validationBar-' + (this.state.visValid && this.state.visActive)} />

@@ -56,6 +56,7 @@ class FiltersSection extends React.Component {
       this.setState({filterIds: filterIds});
       this.spinAddFilterButton('right');
     }
+    updateActiveFields('filter', memory.filterSettings);
   }
 
   handleRemoveFilter(filterId) {
@@ -67,6 +68,7 @@ class FiltersSection extends React.Component {
     this.determineFilterEventFire();
     this.setState({filterIds: filterIds});
     this.spinAddFilterButton('left');
+    updateActiveFields('filter', memory.filterSettings);
   }
 
   updateFilterSettingsMemory(filterId, filterState) {

@@ -168,8 +168,8 @@ const defaultFields = {
   TractPopulation2010: "Tract Population 2010",
   MedINC14: "Median Household Income 2014"
 }
+let oldActivityObjects = [];
 const mergeAllActiveFields = () => {
-  const oldActiveFields = Object.assign({}, window.activeFields);
   const activityObjects = [window.activeVisFields, window.activeFiltFields];
   window.activeFields = activityObjects.reduce((acc, activityObject) => {
     Object.keys(activityObject).forEach(field => {
@@ -177,11 +177,18 @@ const mergeAllActiveFields = () => {
     });
     return acc;
   }, {});
-  Object.keys(defaultFields).forEach(field => {
+  Object.keys(defaultFields).forEach( field => {
     window.activeFields[field] = defaultFields[field];
   });
-  if (! isEquivalent(oldActiveFields, window.activeFields)){
+  let equivalent;
+  oldActivityObjects.forEach((aObject, i) => {
+    if (! isEquivalent(aObject, activityObjects[i])){
+      equivalent = false
+    }
+  });
+  if (! equivalent || oldActivityObjects.length === 0) {
     const deselect = new CustomEvent('DESELECT_FEATURE');
     document.dispatchEvent(deselect);
   }
+  oldActivityObjects = [Object.assign({}, window.activeVisFields), Object.assign({}, window.activeFiltFields)]
 }

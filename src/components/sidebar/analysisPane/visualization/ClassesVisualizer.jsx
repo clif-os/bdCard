@@ -14,6 +14,7 @@ import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
 import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
 import { generatePaintArray } from '../../../../mapbox/geojsonLayerUtils.jsx';
+
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
 
@@ -179,6 +180,15 @@ class ClassesVisualizer extends React.Component {
     const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
     
+    var {min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    const { unitFormatter } = choseFormatter(units);
+    var medianLabel = 'median: ' + unitFormatter(median);
+    var medianMark = {};
+    medianMark[median] = medianLabel;
+      
+    const splits = splitRangeByClasses([min, max], this.state.classNumValue);
+    const splitVals = splitsToSliderValues(splits);
+
     this.setState({
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
@@ -188,7 +198,13 @@ class ClassesVisualizer extends React.Component {
       yearOptions: defaultYearOptions,
       
       filterValid: false,
-      freezeValidity: false
+      freezeValidity: false,
+
+      range: [min, max],
+      selectedRange: splitVals,
+      selectedSplitRanges: splits,
+      medianMark: medianMark,
+      units: units
     });
   }
 
@@ -197,13 +213,28 @@ class ClassesVisualizer extends React.Component {
     const yearLabel = val.label;
     const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
 
+    var {min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    const { unitFormatter } = choseFormatter(units);
+    var medianLabel = 'median: ' + unitFormatter(median);
+    var medianMark = {};
+    medianMark[median] = medianLabel;
+      
+    const splits = splitRangeByClasses([min, max], this.state.classNumValue);
+    const splitVals = splitsToSliderValues(splits);
+
     this.setState({
       selectedProp: selectedProp,
       yearValue: yearVal,
       yearLabel: yearLabel,
       
       filterValid: false,
-      freezeValidity: false
+      freezeValidity: false,
+
+      range: [min, max],
+      selectedRange: splitVals,
+      selectedSplitRanges: splits,
+      medianMark: medianMark,
+      units: units
     });
   }
 
@@ -229,9 +260,8 @@ class ClassesVisualizer extends React.Component {
   }
 
   sliderTipFormatter(val){
-    console.log('formatting');
-    console.log(val);
-    return `${val}`;
+    const { unitFormatter } = choseFormatter(this.state.units);
+    return `${unitFormatter(val)}`;
   }
 
   updateSliderStyles(){

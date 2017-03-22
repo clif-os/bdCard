@@ -1,7 +1,7 @@
 export const constructVisEventData = (visSetting, visualized) => {
   return {
     field: visSetting.selectedProp,
-    classes: visSetting.classNumValue,
+    ranges: visSetting.selectedSplitRanges,
     palette: visSetting.paletteValue,
     visActive: visSetting.visActive
   }
@@ -28,7 +28,7 @@ export const visEventsAreDifferent = (last, next) => {
     return true;
   }
   if (last.field !== next.field || 
-      last.classes !== next.classes ||
+      last.ranges !== next.ranges ||
       last.palette !== next.palette || 
       last.visActive !== next.visActive ) {
     return true;

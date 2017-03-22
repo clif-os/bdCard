@@ -25,6 +25,11 @@ TODO:
 - add ON/OFF into the on/off button
 - try to add an animation on legend update (since it gets finessed so much)
 - try to find a way to disassociate clicks from processing lag
+- classes slider: 
+  - find a way to make slider colors that are light popout on classes slider
+  - add in min/max as marks
+  - spread out mark values and cetner the slider (will also make room for tooltips)
+  - optimize steps (will probably mean updating the props MD with field/unit-specific step values)
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

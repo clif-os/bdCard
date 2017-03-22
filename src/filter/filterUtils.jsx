@@ -113,9 +113,9 @@ export const splitRangeByClasses = (range, classes) => {
 }
 
 import { choseFormatter } from '../utils/unitFormatters.jsx';
-export const splitGeojsonByFieldAndClasses = (geojson, field, classes) => {
-  const range = gjPropsMetadata[field].range;
-  const splitRanges = splitRangeByClasses(range, classes);
+export const splitGeojsonByFieldAndClasses = (geojson, field, ranges) => {
+  // const range = gjPropsMetadata[field].range;
+  // const splitRanges = splitRangeByClasses(range, classes);
   const { unitFormatter } = choseFormatter(gjPropsMetadata[field].units);
-  return splitGeojsonByRanges(geojson, field, splitRanges, unitFormatter);
+  return splitGeojsonByRanges(geojson, field, ranges, unitFormatter);
 }

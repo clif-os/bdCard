@@ -30,10 +30,12 @@ const splitsToSliderValues = splits => {
 }
 
 const sliderValuesToSplits = sliderVals => {
-  return sliderVals.reduce((acc, val) => {
-    
+  return sliderVals.reduce((acc, val, i) => {
+    if (i < sliderVals.length - 1){
+      acc.push([val, sliderVals[i + 1]]);
+    };
     return acc;
-  }, [])
+  }, []);
 }
 
 const classes = [
@@ -163,12 +165,14 @@ class ClassesVisualizer extends React.Component {
       classNumValue: val.value,
       selectedRange: splitVals,
       selectedSplitRanges: splits,
+      freezeValidity: false
     });
   }
 
   handlePaletteSelection(val){
     this.setState({
-      paletteValue: val.value
+      paletteValue: val.value,
+      freezeValidity: false
     });
   }
 
@@ -246,15 +250,19 @@ class ClassesVisualizer extends React.Component {
     // keep upper and lower limits locked
     selectedRange[0] = this.state.range[0];
     selectedRange[selectedRange.length - 1] = this.state.range[1];
+    const splits = sliderValuesToSplits(selectedRange);
     this.setState({
       selectedRange: selectedRange,
+      selectedSplitRanges: splits,
       freezeValidity: true
     });
   }
 
   handleSliderAfterChange(selectedRange){
+    const splits = sliderValuesToSplits(selectedRange);
     this.setState({
       selectedRange: selectedRange,
+      selectedSplitRanges: splits,
       freezeValidity: false
     });
   }
@@ -271,6 +279,8 @@ class ClassesVisualizer extends React.Component {
       const order = i + 1;
       const handle = document.getElementsByClassName('rc-slider-handle-' + order)[0];
       handle.style.visibility = 'visible';
+      handle.click();
+      handle.focus();
     }
     // set ends to hidden
     const lastHandle = document.getElementsByClassName('rc-slider-handle-' + this.state.selectedRange.length)[0];
@@ -340,7 +350,7 @@ class ClassesVisualizer extends React.Component {
           <span className='visSection-title visSection-title-palette'>Palette:</span>
         </div>
         <div className='rangeSelector visSection'>
-          <span className='visSection-title'>Range:</span>
+          <span className='visSection-title'>Ranges:</span>
           <div className='sliderContainer'>
             <Range className='slider' value={this.state.selectedRange} 
                    min={this.state.range[0]} max={this.state.range[1]}

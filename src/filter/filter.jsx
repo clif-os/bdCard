@@ -58,7 +58,7 @@ const actionHandler = e => {
         if (_activeVisualizer === 'passFail'){
           geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
         } else if (_activeVisualizer === 'classes'){
-          geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+          geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.ranges, _visCriteria.palette);
         }
       }
       dispatchFilterEvents(geojsonLayers);
@@ -70,7 +70,7 @@ const actionHandler = e => {
       }
       _visCriteria = e.detail;
       if (_visCriteria.visActive){
-        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.ranges, _visCriteria.palette);
         _visualization = true;
       } else {
         if (! _visualization) break; //?????
@@ -121,7 +121,7 @@ const actionHandler = e => {
       if (! _visCriteria.visActive){
         geojsonLayers = unvisualize(_geojsonIn);
       } else if (_visCriteria !== null){
-        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.ranges, _visCriteria.palette);
         _visualization = true;
       } else {
         let passPaint = buildPaint('defaultPass');

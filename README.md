@@ -24,6 +24,7 @@ TODO:
 - add in feedback on failed upload
 - add ON/OFF into the on/off button
 - try to add an animation on legend update (since it gets finessed so much)
+- try to find a way to disassociate clicks from processing lag
 
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines

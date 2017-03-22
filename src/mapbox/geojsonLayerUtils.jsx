@@ -232,6 +232,7 @@ export const generatePaintArray = (classes, colorScheme) => {
 }
 
 export const buildGeojsonLayerArray = (gj, field, classes, palette) => {
+  console.log(palette)
   const paints = generatePaintArray(classes, palette);
   const geojsons = splitGeojsonByFieldAndClasses(gj, field, classes);
   if (geojsons.length !== paints.length){

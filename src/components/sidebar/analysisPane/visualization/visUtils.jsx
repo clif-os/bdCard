@@ -1,4 +1,4 @@
-export const constructVisEventData = visSetting => {
+export const constructVisEventData = (visSetting, visualized) => {
   return {
     field: visSetting.selectedProp,
     classes: visSetting.classNumValue,

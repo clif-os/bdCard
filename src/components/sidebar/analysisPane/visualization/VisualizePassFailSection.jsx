@@ -33,20 +33,13 @@ class VisualizePassFailSection extends React.Component {
     this.updateFilterSettingsMemory = this
       .updateFilterSettingsMemory
       .bind(this);
-    this.areSettingsInactive = this.areSettingsInactive.bind(this);
   }
 
   componentDidMount(){
     if (this.props.visualizerSwitch){
-      if (this.areSettingsInactive(memory.filterSettings)){
-        const unvisualize = new CustomEvent('UNVISUALIZE')
-        document.dispatchEvent(unvisualize);
-        memory.unvisualized = true
-      } else {
-        const visEventData = constructVisPassFailEventData(memory.filterSettings);
-        const visualize = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
-        document.dispatchEvent(visualize);
-      }
+      const visEventData = constructVisPassFailEventData(memory.filterSettings);
+      const visualize = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
+      document.dispatchEvent(visualize);
     }
   }
 
@@ -59,25 +52,9 @@ class VisualizePassFailSection extends React.Component {
     this.props.updateVisualizersMemory('passFail', memory);
   }
 
-  areSettingsInactive(settings){
-    var inactive = true;
-    this.state.filterIds.forEach(filterId => {
-      if (settings[filterId] !== undefined){
-        if (settings[filterId].filterActive){
-          inactive = false;
-        }
-      }
-    });
-    return inactive;
-  }
-
   determineVisEventFire() {
     const visEventData = constructVisPassFailEventData(memory.filterSettings);
-    if (this.areSettingsInactive(memory.filterSettings)){
-      const unvisualize = new CustomEvent('UNVISUALIZE');
-      document.dispatchEvent(unvisualize);
-      memory.unvisualized = true
-    } else if (memory.lastVisEventData !== null) {
+    if (memory.lastVisEventData !== null) {
       if (memory.unvisualized || visPassFailEventsAreDifferent(memory.lastVisEventData, visEventData)) {
         let evt;
         evt = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});

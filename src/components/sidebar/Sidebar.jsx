@@ -19,6 +19,7 @@ var memory = {
   },
   visualizers: {
     visualizerChoice: 'classes',
+    unvisualized: '',
     classes:{
       visSetting: {},
       lastVisEventData: null,

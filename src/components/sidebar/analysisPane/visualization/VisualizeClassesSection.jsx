@@ -28,14 +28,9 @@ class VisualizeClassesSection extends React.Component {
   componentDidMount(){
     if (this.props.visualizerSwitch || firstDraw){
       firstDraw = false;
-      if (!memory.visSetting.visActive){
-        const unvisualize = new CustomEvent('UNVISUALIZE')
-        document.dispatchEvent(unvisualize);
-      } else {
-        const visEventData = constructVisEventData(memory.visSetting);
-        const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData});
-        document.dispatchEvent(visualize);
-      }
+      const visEventData = constructVisEventData(memory.visSetting);
+      const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData});
+      document.dispatchEvent(visualize);
     }
   }
 
@@ -55,13 +50,12 @@ class VisualizeClassesSection extends React.Component {
 
   determineVisEventFire(){
     const visEventData = constructVisEventData(memory.visSetting);
-    if (!memory.visSetting.visActive && (memory.visSetting.visActive !== memory.lastVisEventData.visActive)){
-      const unvisualize = new CustomEvent('UNVISUALIZE')
-      document.dispatchEvent(unvisualize);
-    } else if (visEventsAreDifferent(memory.lastVisEventData, visEventData) && memory.visSetting.visActive){
+    if (visEventsAreDifferent(memory.lastVisEventData, visEventData)){
       const deselect = new CustomEvent('DESELECT_FEATURE');
       document.dispatchEvent(deselect);
-      const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData})
+      const visualize = new CustomEvent('VISUALIZE_CLASSES',
+        {'detail': visEventData }
+      )
       document.dispatchEvent(visualize);
     }
     memory.lastVisEventData = visEventData;

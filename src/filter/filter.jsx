@@ -62,30 +62,20 @@ const actionHandler = e => {
       }
       dispatchFilterEvents(geojsonLayers);
       break;
-    case 'UNVISUALIZE':
-      // don't unvisualize twice in a row
-      if (! _visualization) break;
-      _visCriteria = null;
-      let passPaint = buildPaint('defaultPass');
-      geojsonLayers = [{
-          geojson: _geojsonIn,
-          name: 'inFilter',
-          filterStatus: 'Meets Filter Criteria',
-          linePaint: passPaint.linePaint,
-          fillPaint: passPaint.fillPaint
-        }];
-      dispatchFilterEvents(geojsonLayers);
-      _visualization = false;
-      break;
     case 'VISUALIZE_CLASSES':
     _activeVisualizer = 'classes'
       if (_geojsonIn === undefined) {
         _geojsonIn = window.geojson;
       }
       _visCriteria = e.detail;
-      geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+      if (_visCriteria.visActive){
+        geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
+        _visualization = true;
+      } else {
+        if (! _visualization) break; //?????
+        geojsonLayers = unvisualize(_geojsonIn);
+      }
       dispatchFilterEvents(geojsonLayers);
-      _visualization = true;
       break;
     case 'VISUALIZE_PASSFAIL':
       _activeVisualizer = 'passFail'
@@ -93,9 +83,15 @@ const actionHandler = e => {
         _geojsonIn = window.geojson;
       }
       _passFailCriteria = e.detail;
-      geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
+      console.log(_passFailCriteria);
+      if (_passFailCriteria.length === 0){
+        console.log('criteria 0 length');
+        geojsonLayers = unvisualize(_geojsonIn);
+      } else if (_passFailCriteria.length > 0) {
+        geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
+        _visualization = true;
+      }
       dispatchFilterEvents(geojsonLayers);
-      _visualization = true;
       break;
     case 'VISFILT_PASSFAIL':
       _activeVisualizer = 'passFail'
@@ -104,9 +100,13 @@ const actionHandler = e => {
       _geojsonIn = splitGeojson_VF_PF1.geojsonIn
       _geojsonOut = splitGeojson_VF_PF1.geojsonOut
       _passFailCriteria = e.detail.visEvent;
-      geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
+      if (_passFailCriteria.length === 0){
+        geojsonLayers = unvisualize(_geojsonIn);
+      } else if (_passFailCriteria.length > 0){
+        geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
+        _visualization = true;
+      }
       dispatchFilterEvents(geojsonLayers);
-      _visualization = true;
       break;
     case 'VISFILT_CLASSES':
       _activeVisualizer = 'classes';
@@ -119,7 +119,10 @@ const actionHandler = e => {
         _geojsonIn = _geojson;
       }
       _visCriteria = e.detail.visEvent;
-      if (_visCriteria !== null){
+      console.log(_visCriteria)
+      if (! _visCriteria.visActive){
+        geojsonLayers = unvisualize(_geojsonIn);
+      } else if (_visCriteria !== null){
         geojsonLayers = buildGeojsonLayerArray(_geojsonIn, _visCriteria.field, _visCriteria.classes, _visCriteria.palette);
         _visualization = true;
       } else {
@@ -141,7 +144,6 @@ const actionHandler = e => {
 
 const dispatchFilterEvents = geojsonLayers => {
   // push in the filtered-out layers
-  console.log(_geojsonOut)
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {
       console.log('drawing _geojsonOut')
@@ -159,7 +161,7 @@ const dispatchFilterEvents = geojsonLayers => {
     'detail': geojsonLayers
   });
   document.dispatchEvent(draw);
-  const legendDescription = _visCriteria === null ? 'NULL' : gjPropsMetadata[_visCriteria.field].description;
+  const legendDescription = (_visCriteria === null || _visCriteria === []) ? 'NULL' : gjPropsMetadata[_visCriteria.field].description;
   const legendData = convertGJLayersToLegendData(geojsonLayers, legendDescription);
   const updateLegend = new CustomEvent('UPDATE_LEGEND', {
     'detail': legendData
@@ -235,4 +237,17 @@ const generatePassFailLayers = (_passFailCriteria, gj) => {
           fillPaint: pass2Paint.fillPaint
         }];
       }
+}
+
+const unvisualize = (gj) => {
+  _visCriteria = null;
+  _visualization = false;
+  let passPaint = buildPaint('defaultPass');
+  return [{
+      geojson: gj,
+      name: 'inFilter',
+      filterStatus: 'Meets Filter Criteria',
+      linePaint: passPaint.linePaint,
+      fillPaint: passPaint.fillPaint
+    }];
 }

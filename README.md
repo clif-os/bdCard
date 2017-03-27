@@ -5,7 +5,7 @@ Web application for viewing and interacting with gentrification data in the grea
 
 TODO:
 - fix the increase of opacity upon legend use for fails
-- add in download PDF
+- add in download PDF/PNG
 - consider adding in compiled criteria statements for filters and pass/fail visualizations
 - fix internet explorer data fetch error
 - fix ui errors in firefox
@@ -31,7 +31,7 @@ TODO:
   - add in min/max as marks
   - spread out mark values and cetner the slider (will also make room for tooltips)
   - optimize steps (will probably mean updating the props MD with field/unit-specific step values)
-
+  - add push value to the slider to not allow weird interactivity
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines
 - have them create some map selections

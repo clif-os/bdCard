@@ -17,7 +17,7 @@ import { generatePaintArray } from '../../../../mapbox/geojsonLayerUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
-
+// 2) A rounded stepValue is being used to determine min and max for the sliders, hard values for the min and max were causing issues
 const splitsToSliderValues = splits => {
   return splits.reduce((acc, split) => {
     split.forEach(value => {
@@ -84,13 +84,13 @@ class ClassesVisualizer extends React.Component {
 
       const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
 
-      var {min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
+      var {min, max, median, units, stepMin, stepMax, stepVal } = fieldUnitAndRangeHandler(defaultSelectedProp, props.propsMd);
       const { unitFormatter } = choseFormatter(units);
       var medianLabel = 'median: ' + unitFormatter(median);
       var medianMark = {};
       medianMark[median] = medianLabel;
       
-      const splits = splitRangeByClasses([min, max], classes[2].value);
+      const splits = splitRangeByClasses([stepMin, stepMax], classes[2].value);
       const splitVals = splitsToSliderValues(splits);
 
       // SET THE DEFAULT STATE
@@ -115,7 +115,10 @@ class ClassesVisualizer extends React.Component {
         selectedRange: splitVals,
         selectedSplitRanges: splits,
         medianMark: medianMark,
-        units: units
+        units: units,
+        stepMax: stepMax,
+        stepMin: stepMin,
+        stepVal: stepVal
       }
       this.state = defaultVisSetting;
     } else {
@@ -159,7 +162,7 @@ class ClassesVisualizer extends React.Component {
   //// FIELD SELECTION HANDLERS
 
   handleClassNumSelection(val){
-    const splits = splitRangeByClasses(this.state.range, val.value);
+    const splits = splitRangeByClasses([this.state.stepMin, this.state.stepMax], val.value);
     const splitVals = splitsToSliderValues(splits);
     this.setState({
       classNumValue: val.value,
@@ -184,13 +187,13 @@ class ClassesVisualizer extends React.Component {
     const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
     
-    var {min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    var {min, max, median, units, stepMax, stepMin, stepVal } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
       
-    const splits = splitRangeByClasses([min, max], this.state.classNumValue);
+    const splits = splitRangeByClasses([stepMin, stepMax], this.state.classNumValue);
     const splitVals = splitsToSliderValues(splits);
 
     this.setState({
@@ -208,7 +211,10 @@ class ClassesVisualizer extends React.Component {
       selectedRange: splitVals,
       selectedSplitRanges: splits,
       medianMark: medianMark,
-      units: units
+      units: units,
+      stepMax: stepMax,
+      stepMin: stepMin,
+      stepVal: stepVal
     });
   }
 
@@ -217,13 +223,13 @@ class ClassesVisualizer extends React.Component {
     const yearLabel = val.label;
     const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
 
-    var {min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    var {min, max, median, units, stepVal, stepMin, stepMax } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
       
-    const splits = splitRangeByClasses([min, max], this.state.classNumValue);
+    const splits = splitRangeByClasses([stepMin, stepMax], this.state.classNumValue);
     const splitVals = splitsToSliderValues(splits);
 
     this.setState({
@@ -238,7 +244,10 @@ class ClassesVisualizer extends React.Component {
       selectedRange: splitVals,
       selectedSplitRanges: splits,
       medianMark: medianMark,
-      units: units
+      units: units,
+      stepMax: stepMax,
+      stepMin: stepMin,
+      stepVal: stepVal
     });
   }
 
@@ -248,8 +257,8 @@ class ClassesVisualizer extends React.Component {
   // but later on it might
   handleSliderChange(selectedRange){
     // keep upper and lower limits locked
-    selectedRange[0] = this.state.range[0];
-    selectedRange[selectedRange.length - 1] = this.state.range[1];
+    selectedRange[0] = this.state.stepMin;
+    selectedRange[selectedRange.length - 1] = this.state.stepMax;
     const splits = sliderValuesToSplits(selectedRange);
     this.setState({
       selectedRange: selectedRange,
@@ -351,10 +360,11 @@ class ClassesVisualizer extends React.Component {
           <span className='visSection-title'>Ranges:</span>
           <div className='sliderContainer'>
             <Range className='slider' value={this.state.selectedRange} 
-                   min={this.state.range[0]} max={this.state.range[1]}
-                   marks={this.state.medianMark}
+                   min={this.state.stepMin} max={this.state.stepMax}
+                   marks={this.state.medianMark} step={this.state.stepVal}
                    onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} 
-                   tipFormatter={this.sliderTipFormatter} />
+                   tipFormatter={this.sliderTipFormatter} 
+                   pushable={true} />
           </div>
         </div>
         <div className={'validationBar validationBar-' + (this.state.visValid && this.state.visActive)} />

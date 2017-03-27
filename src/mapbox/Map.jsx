@@ -22,7 +22,8 @@ export default class Map {
       center: [-70.89185581741563, 42.36291931096801],
       maxBounds: [[-74.2073746412643, 40.949064517736076],[-67.36532786318315, 44.30691815250722]],
       zoom: 8.6,
-      attributionControl: false
+      attributionControl: false,
+      preserveDrawingBuffer: true
     });
     this.defaultBounds = [[-72.01858426851405, 41.94303653564825], [-70.18527815507241, 42.846450867079625]];
     // this.map.boxZoom.disable();

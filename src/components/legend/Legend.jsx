@@ -84,6 +84,7 @@ class Legend extends React.Component {
   render() {
     return (
       <div className="legend">
+        <div className='legend-mainContent'>
         <div className='legend-titleBar'>
           <span className='legend-title'>
             {this.state.title === "NULL"
@@ -97,6 +98,7 @@ class Legend extends React.Component {
           <div className='legend-nodesContainer'>
             {this.renderLegendEntryNodes(this.state.nodesData)}
           </div>
+        </div>
         </div>
         <div className="featureCountContainer">
           {this.state.entryHovered

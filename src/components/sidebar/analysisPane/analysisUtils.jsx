@@ -48,25 +48,39 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   let min = propsMd[field].range.min;
   let max = propsMd[field].range.max;
   let unitFormatter, unitUnformatter;
+  let stepVal;
   switch(units){
     case 'usd':
+      stepVal = 100;
       unitFormatter = dollarFormatter;
       unitUnformatter = dollarUnformatter;
       break;
     case 'decile':
+      stepVal = 1;
       unitFormatter = returnVal;
       unitUnformatter = returnVal;
       break;
     case  'number':
+      stepVal = 1;
       unitFormatter = returnVal;
       unitUnformatter = returnVal;
       break;
     case 'percent':
+      stepVal = 1;
       unitFormatter = percentFormatter;
       unitUnformatter = percentUnformatter;
       break;
     default:
       break;
+  }
+  // set max and min of slider equal something reachable by stepVal, but keep min/max separate
+  let stepMin = min;
+  let stepMax = max;
+  if (stepMin % stepVal !== 0){
+    stepMin = stepMin - (stepMin % stepVal);
+  }
+  if (stepMax % stepVal !== 0){
+    stepMax = stepMax + (stepVal - (stepMax % stepVal));
   }
   // math floor and ceil are use to straddle either side of the smallest and largest values without truncating the range
   return {
@@ -75,7 +89,10 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
     median: propsMd[field].median,
     units: units,
     unitFormatter: unitFormatter,
-    unitUnformatter: unitUnformatter
+    unitUnformatter: unitUnformatter,
+    stepMax: stepMax,
+    stepMin: stepMin,
+    stepVal: stepVal
   }
 }
 

@@ -4,7 +4,6 @@ import {VelocityTransitionGroup} from 'velocity-react';
 
 function NavBarButton(props) {
   const classNameNavBarButton = 'navBarButton navBarButton-' + (props.active ? 'active' : 'inactive');
-  
   let count;
   count = props.count === undefined ? 0 : props.count;
   const onClick = () => {
@@ -22,6 +21,10 @@ function NavBarButton(props) {
         : null
       }
       </VelocityTransitionGroup>
+      {props.loading
+        ? <div className="loadingSpinner-small" />
+        : null
+      }
       <span className={props.icon} />
       <div className='hoverBox' />
       <div className='activeBarContainer'>

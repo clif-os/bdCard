@@ -40,7 +40,9 @@ class Sidebar extends React.Component {
       activePane: 'home',
       counts: {
         filter: undefined
-      }
+      },
+      loadingComponents: [],
+      loadingAnimationSpeed: 500
     }
     this.handleNavBarClick = this.handleNavBarClick.bind(this);
     this.handleCountUpdate = this.handleCountUpdate.bind(this);
@@ -84,6 +86,14 @@ class Sidebar extends React.Component {
       }
     });
     this.handleCountUpdate('filter', count);
+    this.setState({
+      loadingComponents: ['filter', 'visualize']
+    });
+    window.setTimeout(() => {
+      this.setState({
+        loadingComponents: []
+      })
+    }, this.state.loadingAnimationSpeed)
   }
 
   setSavedMemories(newMapMemories){
@@ -103,15 +113,24 @@ class Sidebar extends React.Component {
   handleCountUpdate(componentName, count){
     var newCounts = Object.assign({}, this.state.counts);
     newCounts[componentName] = count;
+    const animationTriggerCounts = Object.keys(newCounts).reduce((acc, val) => {
+      acc[val] = 0;
+      return acc;
+    }, {});
     this.setState({
-      counts: newCounts 
-    });
+      counts: animationTriggerCounts
+    })
+    window.setTimeout(() => {
+      this.setState({
+        counts: newCounts 
+      });
+    }, this.state.loadingAnimationSpeed);
   }
 
   render() {
     return (
       <div className="sidebar">
-        <NavBar handleClick={this.handleNavBarClick} counts={this.state.counts} />
+        <NavBar handleClick={this.handleNavBarClick} counts={this.state.counts} loadingComponents={this.state.loadingComponents}/>
         {this.renderActivePane()}
       </div>
     );

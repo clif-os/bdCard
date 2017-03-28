@@ -23,15 +23,14 @@ TODO:
   - styles seems to be conflicting
   - fix transition times between icons and regular text
 - add in feedback on failed upload
-- add ON/OFF into the on/off button
+- add spinners to show activity in the filter/visualizer
 - try to add an animation on legend update (since it gets finessed so much)
 - try to find a way to disassociate clicks from processing lag
 - classes slider: 
   - find a way to make slider colors that are light popout on classes slider
   - add in min/max as marks
-  - spread out mark values and cetner the slider (will also make room for tooltips)
-  - optimize steps (will probably mean updating the props MD with field/unit-specific step values)
-  - add push value to the slider to not allow weird interactivity
+  - spread out mark values and center the slider (will also make room for tooltips)
+
 TODO FROM FEEDBACK:
 - See if base map can clearly label city/town boundary lines
 - have them create some map selections

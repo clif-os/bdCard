@@ -24,9 +24,11 @@ class SavedMapChoice extends React.Component {
 
   handleMouseEnter(){
     // this.element.style.textAlign = 'left';
-    this.setState({
-      hover: true
-    })
+    if (! this.state.controlHovered){
+      this.setState({
+        hover: true
+      });
+    }
   }
 
   handleMouseLeave(){
@@ -37,8 +39,10 @@ class SavedMapChoice extends React.Component {
   }
 
   handleControlEnter(){
+    console.log('entering control')
     this.setState({
-      controlHovered: true
+      controlHovered: true,
+      hover: false
     });
   }
 
@@ -90,6 +94,7 @@ class SavedMapChoice extends React.Component {
           <div className='savedMapChoice-control savedMapChoice-control-delete' 
                onClick={this.handleDeleteSavedMemory}
                onMouseEnter={this.handleControlEnter} onMouseLeave={this.handleControlLeave}>
+
             <span className='fa fa-trash savedMapChoice-control-icon' />
           </div>
           <a href={dataStr} download='mapSession.json'>

@@ -22,7 +22,7 @@ class DownloadsPane extends React.Component {
   }
   
   handlePDFDownload(){
-    console.alert('In development.')
+    alert('PDF download under development')
     // const mapCanvas = document.querySelector('.mapboxgl-canvas');
     // const {orientation, dWidth, dHeight, iWidth, iHeight, left, top} = fitMapToPage(mapCanvas);
     // const mapImgData = mapCanvas.toDataURL('image/jpeg', 1.0);
@@ -44,7 +44,7 @@ class DownloadsPane extends React.Component {
     // // legendCanvas.style.height = `${lHeight}px`;
     // // legendCanvas.style.width = `${lWidth}px`;
     // var legendCanvasCopy = legendCanvas.cloneNode(true);
-    // var ctx = legendCanvas.getContext('2d');
+    
     // // here we clone the original element to create a new DOM node
     // let legendCopy = legend.cloneNode(true);
     // // now take all of the styles from the original node (so we can inline them)
@@ -66,18 +66,21 @@ class DownloadsPane extends React.Component {
     // console.log(legendCopy.outerHTML)
 
     // var DOMURL = window.URL || window.webkitURL || window;
-    // const legendImage = document.querySelector('#legendImage');
+    // var legendImage = document.querySelector('#legendImage');
+    // legendImage.crossOrigin = 'Anonymous'
     // var svg = new Blob([data], {type: 'image/svg+xml'});
     // var url = DOMURL.createObjectURL(svg);
     // legendImage.onload = function() {
-    //   // draw the new image to the canvas
-    //   // ctx.drawImage(img, 0, 0);
+    //   // // draw the new image to the canvas
+    //   var ctx = legendCanvas.getContext('2d');
+    //   ctx.drawImage(legendImage, 0, 0);
     //   DOMURL.revokeObjectURL(url);
     // }
     // legendImage.src = url;
+    // console.log(legendImage)
+    // var ctx = legendCanvas.getContext('2d');
     // window.setTimeout(() => {
     //   const legendImgData = legendCanvas.toDataURL();
-    //   console.log(legendImgData)
     //   pdf.addImage(legendImgData, 'PNG', 0, 0);
     //   pdf.save('jchs_map.pdf');
     // }, 2000)

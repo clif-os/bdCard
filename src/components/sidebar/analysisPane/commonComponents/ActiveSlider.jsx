@@ -10,6 +10,10 @@ function ActiveSlider (props) {
     <div className={'activeSlider activeSlider-' + props.active}>
       <div className='slidingContainer' onClick={handleClick}>
         <div className='slidingBead'/>
+        {props.active 
+          ? <span className='slider-message'>ON</span>
+          : <span className='slider-message'>OFF</span>
+        }
       </div>
     </div>
   );

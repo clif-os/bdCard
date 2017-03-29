@@ -14,14 +14,132 @@
       margin-left: 10px;
     }
   }
-  .mapsPane-choices-controls{
-    // margin-top: 5px;
-  }
-  .mapsPane-choices{
+  .mapsPane-buttons{
     display: flex!important;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: stretch;
+    .mapsPane-button{
+      z-index: 250;
+      position: relative;
+      height: 75px;
+      text-align: center;
+      cursor: pointer;
+      line-height: 75px;
+      transition-duration: .2s;
+      user-select: none;
+      a{
+        transition-duration: .2s;
+      }
+      margin-bottom: 5px;
+      .mapsPane-button-title{
+        // color: rgb(160,160,160);
+        font-size: 13.5pt;
+        position: relative;
+        z-index: 301;
+        .mapsPane-button-icon{
+          // color: rgb(160,160,160);
+          margin-right: 10px;
+        }
+      }
+    }
+    .mapsPane-button-odd {
+      margin-left: 5px;
+      margin-right: 2.5px;
+    }
+    .mapsPane-button-even {
+      margin-right: 5px;
+      margin-left: 2.5px;
+    }
+
+    .mapChoice-load {
+      width: calc(50% - 7.5px);
+    }
+    
+    .mapChoice-load-clicked{
+      background-color: #0A83C9;
+      border-color: white;
+      span{
+        color: white;
+      }
+      a{
+        color: white;
+      }
+    }
+    // .mapChoice-load:active{
+    //   background-color: #0A83C9;
+    //   border-color: white;
+    //   span{
+    //     color: white;
+    //   }
+    //   a{
+    //     color: white;
+    //   }
+    // }
+    .mapChoice-load-notClicked{
+      background-color: white;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
+      color: rgb(160,160,160);
+      a {
+        color: rgb(160,160,160);
+      }
+      &:hover{
+        color: rgb(80,80,80);
+        a{
+          color: rgb(80,80,80);
+        }
+        border-color: rgb(80,80,80);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    .mapChoice-control{
+      width: calc(50% - 7.5px);
+    }
+    .mapChoice-control-clicked{
+      background-color: #0A83C9;
+      color: white;
+      border-color: white;
+      a{
+        color: white;
+      }
+      .mapChoice-uploadMask{
+        background-color: #0A83C9;
+      }
+    }
+    // .mapChoice-control:active{
+    //   background-color: #0A83C9;
+    //   border-color: white;
+    //   span{
+    //     color: white;
+    //   }
+    //   a{
+    //     color: white;
+    //   }
+    //   .mapChoice-uploadMask{
+    //     background-color: #0A83C9;
+    //   }
+    // }
+    .mapChoice-control-notClicked{
+      background-color: white;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.45);
+      color: rgb(160,160,160);
+      a {
+        color: rgb(160,160,160);
+      }
+      .mapChoice-uploadMask{
+        background-color: white;
+      }
+      &:hover{
+        color: rgb(80,80,80);
+        a{
+          color: rgb(80,80,80);
+        }
+        border-color: rgb(80,80,80);
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
+      }
+    }
+
     .mapChoice-control-1{
       border: 1px solid rgb(180,180,180);
     }
@@ -30,7 +148,6 @@
     }
     .mapChoice-control{
       .mapChoice-uploadMask{
-        background-color: white;
         position: absolute;
         top: 0px;
         left: 0px;
@@ -45,76 +162,9 @@
         width: 100%;
         height: 100%;
       }
-      z-index: 250;
-      position: relative;
-      height: 75px;
-      width: calc(50% - 7.5px);
-      text-align: center;
-      // border: 1px solid rgb(100,100,100);
-      cursor: pointer;
-      line-height: 75px;
-      transition-duration: .2s;
-      user-select: none;
-      color: rgb(160,160,160);
+    }
+    .mapsPane-buttonRow-preceeding {
       
-      border-radius: 4px;
-      background-color: white;
-      &:hover{
-        transition-duration: .2s;
-        color: rgb(80,80,80);
-        border-color: rgb(80,80,80);
-        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
-        // color: white;
-        // background-color: #3A9AD2;
-      }
-      .mapChoice-title{
-        position: relative;
-        font-size: 13.5pt;
-        z-index: 301;
-        pointer-events: none;
-        .mapChoice-icon{
-          margin-right: 10px;
-        }
-      }
-    }
-    .mapChoice-odd {
-      margin-left: 5px;
-      margin-right: 2.5px;
-    }
-    .mapChoice-even {
-      margin-right: 5px;
-      margin-left: 2.5px;
-    }
-    .mapChoice-row-preceeding {
-      
-      // margin-bottom: 5px;
-    }
-    .mapChoice-load{
-      position: relative;
-      margin-bottom: 5px;
-      height: 75px;
-      width: calc(50% - 7.5px);
-      text-align: center;
-      // border: 1px solid rgb(100,100,100);
-      cursor: pointer;
-      line-height: 75px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
-      transition-duration: .2s;
-      user-select: none;
-      color: #0A83C9;
-      background-color: white;
-      &:hover{
-        transition-duration: .2s;
-        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.45);
-        // color: white;
-        background-color: #DAEFFA;
-      }
-      .mapChoice-title{
-        font-size: 13.5pt;
-        .mapChoice-icon{
-          margin-right: 10px;
-        }
-      }
     }
   }
 }

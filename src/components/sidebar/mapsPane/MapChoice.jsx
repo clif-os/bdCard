@@ -5,7 +5,8 @@ class MapChoice extends React.Component {
     super();
     this.state = {
       hover: false,
-      mouseDown: false
+      mouseDown: false,
+      clicked: false
     }
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
@@ -46,32 +47,31 @@ class MapChoice extends React.Component {
   }
 
   handleClick(e){
-    const baseBGColor = this.element.style.backgroundColor;
-    const baseTColor = this.element.style.color;
-    const baseBColor = this.element.style.borderColor;
     this.props.handleMapMemoryChoice(this.props.choice);
-    this.element.style.backgroundColor = '#0A83C9';
-    this.element.style.color = 'white';
-    this.element.style.borderColor = 'white';
+    this.setState({
+      clicked: true
+    });
     window.setTimeout(() => {
-      this.element.style.backgroundColor = baseBGColor;
-      this.element.style.color = baseTColor;
-      this.element.style.borderColor = baseTColor;
-    }, 200);
+      this.setState({
+        clicked: false
+      });
+    }, 200)
   }
 
   render() {
     let oddEven = this.props.order % 2 ? 'odd' : 'even';
     let rowNum = Math.ceil(this.props.order / 2);
+    const className= `mapChoice-${this.props.type} mapChoice-${this.props.type}-${this.props.order} mapsPane-choices-${this.props.title}
+                mapsPane-button mapsPane-button-${oddEven} mapChoice-buttonRow-${rowNum}`
+                + (rowNum === this.props.rows ? ' mapChoice-buttonRow-preceeding' : '')
+                + (this.state.clicked ? ` mapChoice-${this.props.type}-clicked` : ` mapChoice-${this.props.type}-notClicked`);
     return (
-      <div className={`mapChoice-${this.props.type} mapChoice-${this.props.type}-${this.props.order} mapsPane-choices-` + this.props.title 
-                      + ' mapChoice-' + oddEven  + ' mapChoice-row-' + rowNum 
-                      + (rowNum === this.props.rows ? 'mapChoice-row-preceeding' : '') }
+      <div className={className}
            onMouseUp={this.handleMouseUp} onMouseDown={this.handleMouseDown}
            onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}
            ref={'mapChoice-' + this.props.order} >
-        <span className='mapChoice-title'>
-          <span className={'mapChoice-icon fa ' + this.props.icon} /> 
+        <span className='mapsPane-button-title'>
+          <span className={'mapsPane-button-icon fa ' + this.props.icon} /> 
           {this.props.title}
         </span>
       </div>

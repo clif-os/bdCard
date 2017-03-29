@@ -23,7 +23,8 @@ TODO:
   - styles seems to be conflicting
   - fix transition times between icons and regular text
 - add in feedback on failed upload
-- add spinners to show activity in the filter/visualizer
+- change the legend title on pass/fail
+- add tip to create subrange on the visualization settings
 - try to add an animation on legend update (since it gets finessed so much)
 - try to find a way to disassociate clicks from processing lag
 - classes slider: 

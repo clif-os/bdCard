@@ -39,7 +39,6 @@ class SavedMapChoice extends React.Component {
   }
 
   handleControlEnter(){
-    console.log('entering control')
     this.setState({
       controlHovered: true,
       hover: false
@@ -79,22 +78,22 @@ class SavedMapChoice extends React.Component {
     let oddEven = this.props.order % 2 ? 'odd' : 'even';
     let rowNum = Math.ceil(this.props.order / 2);
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.choice.memory));
+    const className = `savedMapChoice mapsPane-button 
+                      mapChoice-${this.props.type} mapsPane-button-${oddEven} mapsPane-buttonRow-${rowNum}` 
+                      + (rowNum === this.props.rows ? ' mapsPane-buttonRow-preceeding' : '') 
+                      + (this.state.clicked ? ` mapChoice-${this.props.type}-clicked` : ` mapChoice-${this.props.type}-notClicked`);
     return (
-      <div className={`savedMapChoice mapChoice-${this.props.type} mapsPane-choices-` + this.props.title 
-                      + ' mapChoice-' + oddEven  + ' mapChoice-row-' + rowNum 
-                      + (rowNum === this.props.rows ? 'mapChoice-row-preceeding' : '') 
-                      + (this.state.clicked ? ' savedMapChoice-clicked' : '')}
+      <div className={className}
            onClick={this.handleClick} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}
            ref={'savedMapChoice-' + this.props.order} >
-        <span className='mapChoice-title savedMapChoice-title'>
-          <span className={'mapChoice-icon fa ' + this.props.icon} /> 
+        <span className='mapsPane-button-title savedMapChoice-title'>
+          <span className={'mapsPane-button-icon fa ' + this.props.icon} /> 
           {this.props.title}
         </span>
         <div className='savedMapChoice-controls '>
           <div className='savedMapChoice-control savedMapChoice-control-delete' 
                onClick={this.handleDeleteSavedMemory}
                onMouseEnter={this.handleControlEnter} onMouseLeave={this.handleControlLeave}>
-
             <span className='fa fa-trash savedMapChoice-control-icon' />
           </div>
           <a href={dataStr} download='mapSession.json'>

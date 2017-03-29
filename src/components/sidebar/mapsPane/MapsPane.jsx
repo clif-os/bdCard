@@ -145,16 +145,13 @@ class MapsPane extends React.Component {
         <div className='mapsPane-choices-titleContainer'>
           <span className='mapsPane-choices-title'>Recommended Maps<span className='fa fa-star-o mapsPane-choices-titleIcon'/></span>
         </div>
-        <div className='mapsPane-choices'>
+        <div className='mapsPane-buttons'>
           {recommendedNodes}
         </div>
         <div className='mapsPane-choices-titleContainer'>
           <span className='mapsPane-choices-title'>User-selected Maps<span className='fa fa-user-o mapsPane-choices-titleIcon'/></span>
         </div>
-        <div className='mapsPane-choices'>
-          {savedNodes}
-        </div>
-        <div className='mapsPane-choices mapsPane-choices-controls'>
+        <div className='mapsPane-buttons mapsPane-controls'>
           <MapChoice
             title='Save Map'
             icon='fa-save'
@@ -167,6 +164,9 @@ class MapsPane extends React.Component {
             order={2}
             type='control'
             saveMap={this.saveMap} />
+        </div>
+        <div className='mapsPane-buttons'>
+          {savedNodes}
         </div>
       </div>
     )

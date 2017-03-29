@@ -80,7 +80,7 @@ class UploadMapButton extends React.Component {
     });
     
     // BRING IN NEW MESSAGE
-    animationSchedule += this.state.animationDurationUnit;
+    animationSchedule += this.state.animationDurationUnit + 20;
     window.setTimeout(() => {
       this.setState({
         animationOngoing: true,
@@ -89,7 +89,7 @@ class UploadMapButton extends React.Component {
         animationMessage: message,
         animationStartMessage: true
       });
-    }, animationSchedule);
+    }, animationSchedule + 50);
     
     // SEND ANIMATION MESSAGE AWAY
     animationSchedule += 2000;

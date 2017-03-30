@@ -61,10 +61,10 @@ class MapChoice extends React.Component {
   render() {
     let oddEven = this.props.order % 2 ? 'odd' : 'even';
     let rowNum = Math.ceil(this.props.order / 2);
-    const className= `mapChoice-${this.props.type} mapChoice-${this.props.type}-${this.props.order} mapsPane-choices-${this.props.title}
-                mapsPane-button mapsPane-button-${oddEven} mapChoice-buttonRow-${rowNum}`
-                + (rowNum === this.props.rows ? ' mapChoice-buttonRow-preceeding' : '')
-                + (this.state.clicked ? ` mapChoice-${this.props.type}-clicked` : ` mapChoice-${this.props.type}-notClicked`);
+    const className= `mapsPane-${this.props.type}Button mapsPane-${this.props.type}Button-${this.props.order} mapsPane-choices-${this.props.title}
+                mapsPane-button mapsPane-button-${oddEven} mapsPane-buttonRow-${rowNum}`
+                + (rowNum === this.props.rows ? ' mapsPane-buttonRow-preceeding' : '')
+                + ` mapsPane-${this.props.type}Button-` + (this.state.clicked ? 'clicked' : 'notClicked');
     return (
       <div className={className}
            onMouseUp={this.handleMouseUp} onMouseDown={this.handleMouseDown}

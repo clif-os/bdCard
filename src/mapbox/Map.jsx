@@ -1,8 +1,10 @@
 /* global mapboxgl, fetch, document */
 global.turf = require('turf');
+const debounce = require('debounce');
 import './Map.styl';
 import {
-  geojsonNull
+  geojsonNull,
+  geojsonEmpty
 } from '../utils/geojsonUtils.jsx'
 import {
   buildPopupHTMLFromFeature,
@@ -76,7 +78,7 @@ export default class Map {
     // document.addEventListener('SELECT_LAYER', this.selectLayer.bind(this));
 
     //// internal map event handlers ////
-    this.map.on('mousemove', this.onMouseMove.bind(this));
+    this.map.on('mousemove', debounce(this.onMouseMove.bind(this), 5));
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
     this.map.on('load', this.onMapLoaded.bind(this));
@@ -177,6 +179,11 @@ export default class Map {
     this.map.getSource('hover').setData(window.geojsonLookup[id]);
   }
 
+  unhover(id) {
+    this.map.getCanvas().style.cursor = '';
+    this.map.getSource('hover').setData(geojsonEmpty);
+  }
+
   // the hover and unhover layers probably need to be done more systematically with calculated transparency increases
   // also the record of the previous transparency needs to be known in order to do this properly,
   // otherwise unhover has no idea what to reset to
@@ -233,11 +240,6 @@ export default class Map {
         this.map.setPaintProperty(gj.name + '-lines-mimio', 'line-opacity', .8);
       }
     });
-  }
-
-  unhover(id) {
-    this.map.getCanvas().style.cursor = '';
-    this.map.getSource('hover').setData(geojsonNull);
   }
 
   selectFeature(id, selectionPaint, e) {

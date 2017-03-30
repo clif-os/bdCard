@@ -79,9 +79,9 @@ class SavedMapChoice extends React.Component {
     let rowNum = Math.ceil(this.props.order / 2);
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.choice.memory));
     const className = `savedMapChoice mapsPane-button 
-                      mapChoice-${this.props.type} mapsPane-button-${oddEven} mapsPane-buttonRow-${rowNum}` 
+                      mapsPane-${this.props.type}Button mapsPane-button-${oddEven} mapsPane-buttonRow-${rowNum}` 
                       + (rowNum === this.props.rows ? ' mapsPane-buttonRow-preceeding' : '') 
-                      + (this.state.clicked ? ` mapChoice-${this.props.type}-clicked` : ` mapChoice-${this.props.type}-notClicked`);
+                      + ` mapsPane-${this.props.type}Button-` + (this.state.clicked ? 'clicked' : 'notClicked');
     return (
       <div className={className}
            onClick={this.handleClick} onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}

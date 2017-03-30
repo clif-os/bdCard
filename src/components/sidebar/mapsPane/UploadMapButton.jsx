@@ -162,10 +162,10 @@ class UploadMapButton extends React.Component {
   render() {
     let oddEven = this.props.order % 2 ? 'odd' : 'even';
     let rowNum = Math.ceil(this.props.order / 2);
-    const className = `mapChoice-${this.props.type} mapChoice-${this.props.type}-${this.props.order}  mapsPane-choices-${this.props.title} 
+    const className = `mapsPane-${this.props.type}Button mapsPane-${this.props.type}Button-${this.props.order} mapsPane-choices-${this.props.title} 
                        mapsPane-button mapsPane-button-${oddEven} mapsPane-buttonRow-${rowNum} `
-                       + (rowNum === this.props.rows ? 'mapChoice-row-preceeding' : '')
-                       + (this.state.clicked ? ` mapChoice-${this.props.type}-clicked` : ` mapChoice-${this.props.type}-notClicked`);
+                       + (rowNum === this.props.rows ? 'mapsPane-row-preceeding' : '')
+                       + ` mapsPane-${this.props.type}Button-` + (this.state.clicked ? 'clicked' : 'notClicked');
     return (
       <div className={className}
            id='uploadMapButton'
@@ -209,7 +209,7 @@ class UploadMapButton extends React.Component {
         }
         </VelocityTransitionGroup>
         <div>
-          <div className='mapChoice-uploadMask'/>
+          <div className={`mapsPane-${this.props.type}Button-uploadMask`}/>
           <form id="mapChoice-upload-form">
           <input type="file" id="mapChoice-upload" accept="text/json"/>
           </form>

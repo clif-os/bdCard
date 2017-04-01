@@ -15,6 +15,7 @@ import {dashboardListener} from './filter/filter.jsx'
 
 window.fetch = window.fetch || require('fetch-ie8');
 window.Promise = window.Promise || require('promise-polyfill');
+require('es6-shim');
 require('custom-event-polyfill');
 
 import gjPropsMetadata from './data/jchs-boston-md.json';

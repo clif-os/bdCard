@@ -179,7 +179,7 @@ export default class Map {
     this.map.getSource('hover').setData(window.geojsonLookup[id]);
   }
 
-  unhover(id) {
+  unhover() {
     this.map.getCanvas().style.cursor = '';
     this.map.getSource('hover').setData(geojsonEmpty);
   }

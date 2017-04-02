@@ -306,7 +306,6 @@ class Filter extends React.Component {
               <div className='rangeInputSubCont-max rangeInputSubCont'>
                 <span className='rangeInputLabel rangeInputLabel-max'>max</span>
                 <input className='rangeInput-max rangeInput' type="text"
-                       id='rangeInput-max'
                        value={this.state.rangeMaxInputActive
                                 ? this.state.rangeInputValue
                                 : unitFormatter(this.state.selectedRange[1])

@@ -24,7 +24,8 @@ class FiltersSection extends React.Component {
       filterIds: Object.keys(memory.filterSettings),
       showingPane: false,
       showTips: false,
-      resetClicked: false
+      resetClicked: false,
+      deleteClicked: false
     }
     this.handleAddFilter = this
       .handleAddFilter
@@ -32,6 +33,7 @@ class FiltersSection extends React.Component {
     this.handleRemoveFilter = this
       .handleRemoveFilter
       .bind(this);
+    this.handleRemoveAllFilters = this.handleRemoveAllFilters.bind(this);
     this.spinAddFilterButton = this
       .spinAddFilterButton
       .bind(this);
@@ -82,11 +84,31 @@ class FiltersSection extends React.Component {
     this.setState({filterIds: filterIds});
     this.spinAddFilterButton('left');
     updateActiveFields('filter', memory.filterSettings);
+    // RESET THE FILTER PANE CONTROLS BACK IN QUEU FOR ANIMATION
     if (Object.keys(memory.filterSettings).length === 0){
-      console.log('setting to far right')
       var style = document.getElementById("filtersControls").style;
       style.right = '100%';
     }
+  }
+
+  handleRemoveAllFilters(){
+    memory.filterSettings = {};
+    this.determineFilterEventFire();
+    this.setState({
+      filterIds: [],
+      deleteClicked: true
+    });
+    this.spinAddFilterButton('left');
+    updateActiveFields('filter', memory.filterSettings);
+    if (Object.keys(memory.filterSettings).length === 0){
+      var style = document.getElementById("filtersControls").style;
+      style.right = '100%';
+    }
+    window.setTimeout(() => {
+        this.setState({
+          deleteClicked: false
+        });
+      }, 500);
   }
 
   updateFilterSettingsMemory(filterId, filterState) {
@@ -218,8 +240,17 @@ class FiltersSection extends React.Component {
               <div className="filtersControls" id="filtersControls"> 
                 <div className={"filtersControls-resetButton filtersControls-resetButton-" + (this.state.resetClicked ? 'clicked' : 'notClicked')} 
                     onClick={this.handleReset}>
-                  <span className="filtersControls-resetButton-text"><span className="fa fa-rotate-left filtersControls-resetButton-icon" />Reset</span>
+                  <span className="filtersControls-resetButton-text"><span className="fa fa-rotate-left filtersControls-resetButton-icon" />Reset All</span>
                 </div>
+                {this.state.filterIds.length > 1
+                  ? (
+                      <div className={"filtersControls-deleteButton filtersControls-deleteButton-" + (this.state.deleteClicked ? 'clicked' : 'notClicked')} 
+                           onClick={this.handleRemoveAllFilters}>
+                        <span className="filtersControls-deleteButton-text"><span className="fa fa-trash filtersControls-deleteButton-icon" />Delete All</span>
+                      </div>
+                    )
+                  : null
+                }
               </div>
               )
           }

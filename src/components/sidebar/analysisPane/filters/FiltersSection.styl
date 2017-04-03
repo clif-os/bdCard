@@ -31,15 +31,17 @@
       text-align: center;
       line-height: 25px;
       height: 25px;
-      width: 70px;
+      width: 90px;
       cursor: pointer;
       transition-duration: 0.3s;
       border-radius: 4px;
+      margin-right: 5px;
       .filtersControls-resetButton-text{
         user-select: none;
         .filtersControls-resetButton-icon{
           margin-right 5px;
           font-size: 9pt;
+          margin-bottom: 2px;
         } 
       }
     }
@@ -50,6 +52,36 @@
     }
     .filtersControls-resetButton-notClicked{
       background-color: #81C784;
+      color: white;
+      box-shadow: 2px 2px 3px rgba(100, 100, 100, 0.22);
+      &:hover{
+        box-shadow: 2.7px 2.7px 8px rgba(50, 50, 50, 0.22);
+      }
+    }
+    .filtersControls-deleteButton{
+      text-align: center;
+      line-height: 25px;
+      height: 25px;
+      width: 93px;
+      cursor: pointer;
+      transition-duration: 0.3s;
+      border-radius: 4px;
+      margin-right: 5px;
+      .filtersControls-deleteButton-text{
+        user-select: none;
+        .filtersControls-deleteButton-icon{
+          margin-right 5px;
+          font-size: 10pt;
+        } 
+      }
+    }
+    .filtersControls-deleteButton-clicked{
+      background-color: tomato;
+      color: white;
+      box-shadow: 1px 1px .5px rgba(100, 100, 100, 0.4);
+    }
+    .filtersControls-deleteButton-notClicked{
+      background-color: tomato;
       color: white;
       box-shadow: 2px 2px 3px rgba(100, 100, 100, 0.22);
       &:hover{

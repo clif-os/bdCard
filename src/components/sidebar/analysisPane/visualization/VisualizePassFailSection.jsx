@@ -21,20 +21,23 @@ class VisualizePassFailSection extends React.Component {
     if (Object.keys(memory.filterSettings).length > 0){
       this.state = {
         filterIds: Object.keys(memory.filterSettings),
+        resetClicked: false,
         showingPane: false
       }
     } else {
       this.state = {
         filterIds: [guid(), guid()],
+        resetClicked: false,
         showingPane: false
       }
     }
-    this.updateFilterSettingsMemory = this
-      .updateFilterSettingsMemory
-      .bind(this);
+    this.updateFilterSettingsMemory = this.updateFilterSettingsMemory.bind(this);
+    this.handleReset = this.handleReset.bind(this)
   }
 
   componentDidMount(){
+    var style = document.getElementById("visPassFailControls").style;
+    style.right = '0px';
     if (this.props.visualizerSwitch){
       const visEventData = constructVisPassFailEventData(memory.filterSettings);
       const visualize = new CustomEvent('VISUALIZE_PASSFAIL', {'detail': visEventData});
@@ -65,11 +68,36 @@ class VisualizePassFailSection extends React.Component {
     memory.lastVisEventData = visEventData;
   }
 
+  handleReset(){
+    if (this.state.resetClicked === false){
+      const filterIds = Object.keys(memory.filterSettings)
+      filterIds.forEach(filterId => {
+        const range = [...memory.filterSettings[filterId].range];
+        memory.filterSettings[filterId].selectedRange = [...range];
+      });
+      this.setState({
+        filterIds: filterIds,
+        resetClicked: true
+      });
+      window.setTimeout(() => {
+        this.setState({
+          resetClicked: false
+        });
+      }, 500);
+    }
+  }
+
   render() {
     return (
       <div className="visualizePassFailSection section">
         <div className='filtersContainer'>
           {this.renderFilterNodes(this.state.filterIds)}
+          <div className="visPassFailControls" id="visPassFailControls"> 
+            <div className={"visPassFailControls-resetButton visPassFailControls-resetButton-" + (this.state.resetClicked ? 'clicked' : 'notClicked')} 
+                 onClick={this.handleReset}>
+              <span className="visPassFailControls-resetButton-text"><span className="fa fa-rotate-left visPassFailControls-resetButton-icon" />Reset</span>
+            </div>
+          </div>
         </div>
       </div>
     );

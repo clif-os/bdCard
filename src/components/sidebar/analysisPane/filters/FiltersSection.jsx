@@ -23,7 +23,8 @@ class FiltersSection extends React.Component {
     this.state = {
       filterIds: Object.keys(memory.filterSettings),
       showingPane: false,
-      showTips: false
+      showTips: false,
+      resetClicked: false
     }
     this.handleAddFilter = this
       .handleAddFilter
@@ -37,13 +38,25 @@ class FiltersSection extends React.Component {
     this.updateFilterSettingsMemory = this
       .updateFilterSettingsMemory
       .bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   componentDidMount() {
+    if (document.getElementById("filtersControls") !== null){
+      var style = document.getElementById("filtersControls").style;
+      style.right = '0px';
+    }
     this.setState({showingPane: true});
     window.setTimeout(() => {
       this.setState({showTips: true})
     }, this.props.transitionDuration)
+  }
+
+  componentDidUpdate(){
+    if (document.getElementById("filtersControls") !== null){
+      var style = document.getElementById("filtersControls").style;
+      style.right = '0px';
+    }
   }
 
   handleAddFilter() {
@@ -69,6 +82,11 @@ class FiltersSection extends React.Component {
     this.setState({filterIds: filterIds});
     this.spinAddFilterButton('left');
     updateActiveFields('filter', memory.filterSettings);
+    if (Object.keys(memory.filterSettings).length === 0){
+      console.log('setting to far right')
+      var style = document.getElementById("filtersControls").style;
+      style.right = '100%';
+    }
   }
 
   updateFilterSettingsMemory(filterId, filterState) {
@@ -108,6 +126,25 @@ class FiltersSection extends React.Component {
     } else {
       const currentRotation = parseInt(currentRotationCSS.split('(')[1].slice(0, -1));
       this.refs.faPlusRotator.style.transform = `rotateZ(${currentRotation + incrementNum}deg)`;
+    }
+  }
+
+  handleReset(){
+    if (this.state.resetClicked === false){
+      const filterIds = Object.keys(memory.filterSettings)
+      filterIds.forEach(filterId => {
+        const range = [...memory.filterSettings[filterId].range];
+        memory.filterSettings[filterId].selectedRange = [...range];
+      });
+      this.setState({
+        filterIds: filterIds,
+        resetClicked: true
+      });
+      window.setTimeout(() => {
+        this.setState({
+          resetClicked: false
+        });
+      }, 500);
     }
   }
 
@@ -177,8 +214,16 @@ class FiltersSection extends React.Component {
             ? <div className='noFiltersMessage-container'>
                 <span className='noFiltersMessage'>No Filters Active</span>
               </div>
-            : null
-}
+            : (
+              <div className="filtersControls" id="filtersControls"> 
+                <div className={"filtersControls-resetButton filtersControls-resetButton-" + (this.state.resetClicked ? 'clicked' : 'notClicked')} 
+                    onClick={this.handleReset}>
+                  <span className="filtersControls-resetButton-text"><span className="fa fa-rotate-left filtersControls-resetButton-icon" />Reset</span>
+                </div>
+              </div>
+              )
+          }
+          
         </div>
       </div>
     );

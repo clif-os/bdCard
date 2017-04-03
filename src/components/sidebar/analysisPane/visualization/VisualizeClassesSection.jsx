@@ -1,6 +1,7 @@
 import './VisualizeClassesSection.styl';
 import React from 'react';
 import ClassesVisualizer from './ClassesVisualizer.jsx';
+import { VelocityTransitionGroup } from 'velocity-react';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { convertPropsMetadataToDrodownObject, updateActiveFields } from '../analysisUtils.jsx';
 import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
@@ -32,6 +33,11 @@ class VisualizeClassesSection extends React.Component {
   }
 
   componentDidMount(){
+    // this.setState({
+    //   showingVis: true
+    // });
+    var style = document.getElementById("visClassesControls").style;
+    style.right = '0px';
     if (this.props.visualizerSwitch || firstDraw){
       console.log('sending vis event from componentDidMount')
       firstDraw = false;
@@ -69,20 +75,22 @@ class VisualizeClassesSection extends React.Component {
   }
   
   handleReset(){
-    const { stepMin, stepMax, classNumValue } = memory.visSetting;
-    const splits = splitRangeByClasses([stepMin, stepMax], classNumValue);
-    const splitVals = splitsToSliderValues(splits);
-    memory.visSetting.selectedRange = splitVals;
-    memory.visSetting.selectedSplitRanges = splits;
-    this.setState({
-      visualizerIds: [this.id],
-      resetClicked: true
-    });
-    window.setTimeout(() => {
+    if (this.state.resetClicked === false){
+      const { stepMin, stepMax, classNumValue } = memory.visSetting;
+      const splits = splitRangeByClasses([stepMin, stepMax], classNumValue);
+      const splitVals = splitsToSliderValues(splits);
+      memory.visSetting.selectedRange = splitVals;
+      memory.visSetting.selectedSplitRanges = splits;
       this.setState({
-        resetClicked: false
+        visualizerIds: [this.id],
+        resetClicked: true
       });
-    }, 500);
+      window.setTimeout(() => {
+        this.setState({
+          resetClicked: false
+        });
+      }, 500);
+    }
   }
 
   render() {
@@ -90,7 +98,7 @@ class VisualizeClassesSection extends React.Component {
       <div className="visualizeClassesSection section">
         <div className='visContainer'>
           {this.renderVisualizer(this.state.visualizerIds)}
-          <div className="visClassesControls"> 
+          <div className="visClassesControls" id="visClassesControls"> 
             <div className={"visClassesControls-resetButton visClassesControls-resetButton-" + (this.state.resetClicked ? 'clicked' : 'notClicked')} onClick={this.handleReset}>
               <span className="visClassesControls-resetButton-text"><span className="fa fa-rotate-left visClassesControls-resetButton-icon" />Reset</span>
             </div>

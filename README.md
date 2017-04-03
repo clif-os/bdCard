@@ -20,6 +20,7 @@ TODO:
 - add tip to create subrange on the visualization settings
 - try to add an animation on legend update (since it gets finessed so much)
 - try to find a way to disassociate clicks from processing lag
+- rounding is off between multiple parts of the app including but not limited to the class slider tooltips and the legend
 - classes slider: 
   - find a way to make slider colors that are light popout on classes slider
   - add in min/max as marks

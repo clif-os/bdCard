@@ -14,53 +14,11 @@ import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
 import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
 import { generatePaintArray } from '../../../../mapbox/geojsonLayerUtils.jsx';
+import { splitsToSliderValues, sliderValuesToSplits, classes, palettes } from './classesVisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
 // 2) A rounded stepValue is being used to determine min and max for the sliders, hard values for the min and max were causing issues
-const splitsToSliderValues = splits => {
-  return splits.reduce((acc, split) => {
-    split.forEach(value => {
-      if (acc.length === 0 || acc.indexOf(value) === -1){
-        acc.push(value);
-      }
-    });
-    return acc;
-  }, []);
-}
-
-const sliderValuesToSplits = sliderVals => {
-  return sliderVals.reduce((acc, val, i) => {
-    if (i < sliderVals.length - 1){
-      acc.push([val, sliderVals[i + 1]]);
-    };
-    return acc;
-  }, []);
-}
-
-const classes = [
-  {value: 2, label: '2'},
-  {value: 3, label: '3'},
-  {value: 4, label: '4'},
-  {value: 5, label: '5'},
-  {value: 6, label: '6'},
-  {value: 7, label: '7'},
-  {value: 8, label: '8'},
-  {value: 9, label: '9'},
-  {value: 10, label: '10'},
-]
-const palettes = [
-  {value: 'red to green', label: 'Red to Green'},
-  {value: 'green to red', label: 'Green to Red'},
-  {value: 'increasing green', label: 'Increasing Green'},
-  {value: 'decreasing green', label: 'Decreasing Green'},
-  {value: 'increasing red', label: 'Increasing Red'},
-  {value: 'decreasing red', label: 'Decreasing Red'},
-  {value: 'increasing pink', label: 'Increasing Pink'},
-  {value: 'decreasing pink', label: 'Decreasing Pink'},
-  {value: 'increasing blue', label: 'Increasing Blue'},
-  {value: 'decreasing blue', label: 'Decreasing Blue'}
-]
 
 class ClassesVisualizer extends React.Component {
   constructor(props){
@@ -74,8 +32,7 @@ class ClassesVisualizer extends React.Component {
     //// LOAD STATE FROM MEMORY
     if (Object.keys(props.memory).length === 0){
       const fieldOptions = props.dropdownData.fieldDropdowns;
-      
-      
+
       const defaultFieldVal = fieldOptions[0].value;
       const defaultFieldLabel = fieldOptions[0].label;
       const defaultYearOptions = this.yearLookups[defaultFieldVal];
@@ -139,7 +96,7 @@ class ClassesVisualizer extends React.Component {
     this.sliderTipFormatter = this.sliderTipFormatter.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount(props){
     var style = document.getElementById(this.props.id).style;
     style.right = '0px';
     this.props.updateVisSettingMemory(this.props.id, this.state);
@@ -282,7 +239,7 @@ class ClassesVisualizer extends React.Component {
   }
 
   updateSliderStyles(){
-    //// FORMAT HANDLES ////
+    //// FORMAT HANDLES ////0
     // reset all to visible
     for (var i = 0; i < this.state.selectedRange.length; i++){
       const order = i + 1;

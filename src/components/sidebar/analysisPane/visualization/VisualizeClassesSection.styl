@@ -1,5 +1,38 @@
 .visualizeClassesSection{
   // margin-top: 8px;
+  .visClassesControls{
+    margin-top: 20px;
+    .visClassesControls-resetButton{
+      
+      text-align: center;
+      line-height: 25px;
+      height: 25px;
+      width: 70px;
+      cursor: pointer;
+      transition-duration: 0.3s;
+      border-radius: 4px;
+      .visClassesControls-resetButton-text{
+        user-select: none;
+        .visClassesControls-resetButton-icon{
+          margin-right 5px;
+          font-size: 9pt;
+        } 
+      }
+    }
+    .visClassesControls-resetButton-clicked{
+      background-color: #81C784;
+      color: white;
+      box-shadow: 1px 1px .5px rgba(100, 100, 100, 0.4);
+    }
+    .visClassesControls-resetButton-notClicked{
+      background-color: #81C784;
+      color: white;
+      box-shadow: 2px 2px 3px rgba(100, 100, 100, 0.22);
+      &:hover{
+        box-shadow: 2.7px 2.7px 8px rgba(50, 50, 50, 0.22);
+      }
+    }
+  }
 }
 
 .visContainer {

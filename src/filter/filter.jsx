@@ -90,7 +90,7 @@ const actionHandler = e => {
         geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
         _visualization = true;
       }
-      dispatchFilterEvents(geojsonLayers);
+      dispatchFilterEvents(geojsonLayers, true);
       break;
     case 'VISFILT_PASSFAIL':
       _activeVisualizer = 'passFail'
@@ -105,7 +105,7 @@ const actionHandler = e => {
         geojsonLayers = generatePassFailLayers(_passFailCriteria, _geojsonIn);
         _visualization = true;
       }
-      dispatchFilterEvents(geojsonLayers);
+      dispatchFilterEvents(geojsonLayers, true);
       break;
     case 'VISFILT_CLASSES':
       _activeVisualizer = 'classes';
@@ -140,7 +140,7 @@ const actionHandler = e => {
   }
 }
 
-const dispatchFilterEvents = geojsonLayers => {
+const dispatchFilterEvents = (geojsonLayers, isPassFailEvent) => {
   // push in the filtered-out layers
   if (_geojsonOut !== null) {
     if (_geojsonOut.features.length > 0) {
@@ -158,7 +158,7 @@ const dispatchFilterEvents = geojsonLayers => {
     'detail': geojsonLayers
   });
   document.dispatchEvent(draw);
-  const legendDescription = (_visCriteria === null || _visCriteria === []) ? 'NULL' : gjPropsMetadata[_visCriteria.field].description;
+  const legendDescription = (_visCriteria === null || _visCriteria === [] || isPassFailEvent) ? 'NULL' : gjPropsMetadata[_visCriteria.field].description;
   const legendData = convertGJLayersToLegendData(geojsonLayers, legendDescription);
   const updateLegend = new CustomEvent('UPDATE_LEGEND', {
     'detail': legendData

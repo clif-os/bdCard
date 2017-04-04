@@ -96,7 +96,7 @@ class VisualizePassFailSection extends React.Component {
           <div className="visPassFailControls" id="visPassFailControls"> 
             <div className={"visPassFailControls-resetButton visPassFailControls-resetButton-" + (this.state.resetClicked ? 'clicked' : 'notClicked')} 
                  onClick={this.handleReset}>
-              <span className="visPassFailControls-resetButton-text"><span className="fa fa-rotate-left visPassFailControls-resetButton-icon" />Reset</span>
+              <span className="visPassFailControls-resetButton-text"><span className="fa fa-rotate-left visPassFailControls-resetButton-icon" />Reset All</span>
             </div>
           </div>
         </div>

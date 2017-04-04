@@ -238,10 +238,6 @@ class PassFailVisualizer extends React.Component {
   //// RENDERING
  //// TODO: CECKOUT THE REFS TURN TO PASS/FAIL
   render() {
-    console.log('selectedRange', this.state.selectedRange);
-    console.log('range', this.state.range);
-    // range: [min, max],
-    // selectedRange: [min, max],
     const { unitFormatter } = choseFormatter(this.state.units);
     return (
       <div className="passFailVisualizer" ref={'filter-' + this.props.id} id={this.props.id}>

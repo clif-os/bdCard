@@ -74,6 +74,7 @@ class VisualizePassFailSection extends React.Component {
       filterIds.forEach(filterId => {
         const range = [...memory.filterSettings[filterId].range];
         memory.filterSettings[filterId].selectedRange = [...range];
+        memory.filterSettings[filterId].filterValid = false;
       });
       this.setState({
         filterIds: filterIds,

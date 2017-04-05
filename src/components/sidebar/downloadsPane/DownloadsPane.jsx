@@ -22,16 +22,16 @@ class DownloadsPane extends React.Component {
   }
   
   handlePDFDownload(){
-    alert('PDF download under development')
-    // const mapCanvas = document.querySelector('.mapboxgl-canvas');
-    // const {orientation, dWidth, dHeight, iWidth, iHeight, left, top} = fitMapToPage(mapCanvas);
-    // const mapImgData = mapCanvas.toDataURL('image/jpeg', 1.0);
-    // const pdf = new jsPDF({
-    //   orientation: orientation,
-    //   unit: 'in',
-    //   format: [dWidth, dHeight]
-    // });
-    // pdf.addImage(mapImgData, 'JPEG', left, top, iWidth, iHeight);
+    alert('PDF download under development');
+    const mapCanvas = document.querySelector('.mapboxgl-canvas');
+    const {orientation, dWidth, dHeight, iWidth, iHeight, left, top} = fitMapToPage(mapCanvas);
+    const mapImgData = mapCanvas.toDataURL('image/jpeg', 1.0);
+    const pdf = new jsPDF({
+      orientation: orientation,
+      unit: 'in',
+      format: [dWidth, dHeight]
+    });
+    pdf.addImage(mapImgData, 'JPEG', left, top, iWidth, iHeight);
 
     // /////////////////////////////////////
     // /// ADD LEGEND TO PDF
@@ -79,13 +79,13 @@ class DownloadsPane extends React.Component {
     // legendImage.src = url;
     // console.log(legendImage)
     // var ctx = legendCanvas.getContext('2d');
-    // window.setTimeout(() => {
-    //   const legendImgData = legendCanvas.toDataURL();
-    //   pdf.addImage(legendImgData, 'PNG', 0, 0);
-    //   pdf.save('jchs_map.pdf');
-    // }, 2000)
+    window.setTimeout(() => {
+      // const legendImgData = legendCanvas.toDataURL();
+      // pdf.addImage(legendImgData, 'PNG', 0, 0);
+      pdf.save('jchs_map.pdf');
+    }, 0)
     
-    /////////////////////////////////////
+    ///////////////////////////////////
 
     // pdf.text('JCHS', 10, 10)
     // document.body.removeChild(legendCanvas);

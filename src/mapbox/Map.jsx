@@ -245,7 +245,7 @@ export default class Map {
   selectFeature(id, selectionPaint, e) {
     this.map.getSource('selected').setData(window.geojsonLookup[id]);
     window.selectedFeature = window.geojsonLookup[id];
-    // console.log('SELECTED FEATURE:', selectedFeature);
+    console.log('SELECTED FEATURE:', selectedFeature);
     this.addSelectionPopup(window.selectedFeature, selectionPaint, e);
   }
 

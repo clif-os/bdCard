@@ -90,6 +90,7 @@ class Sidebar extends React.Component {
 
   handleMapMemoryChoice(memoryChoice){
     memory = JSON.parse(JSON.stringify(memoryChoice));
+    localStorage.setItem('masterMemory', JSON.stringify(memoryChoice));
     const filterEvent = memory.filters.lastFilterEventData;
     const visEvent = memory.visualizers[memory.visualizers.visualizerChoice].lastVisEventData;
     const visFiltEvent = {

@@ -11,9 +11,13 @@ class AppInterface extends React.Component {
       mapLoaded: false
     };
     document.addEventListener('MAP_LOADED', this.handleMapLoad.bind(this));
+    this.handleMapLoad = this.handleMapLoad.bind(this);
   }
 
   handleMapLoad(){
+    this.setState({
+      mapLoaded: true
+    });
     const loadingPane = document.getElementById('mainLoadingPane');
     loadingPane.style.opacity = '0';
     window.setTimeout(() => {
@@ -24,9 +28,16 @@ class AppInterface extends React.Component {
   render() {
     return (
       <div className="AppInterface">
-        <Sidebar propsMd={this.props.propsMd} />
-        <Legend legendData={this.props.legendData} />
-        <MBFullExtentButton />
+        {this.state.mapLoaded
+          ? (
+            <div>
+              <Sidebar propsMd={this.props.propsMd} />
+              <Legend legendData={this.props.legendData} />
+              <MBFullExtentButton />
+            </div>
+          )
+          : null        
+        }
       </div>
     );
   }

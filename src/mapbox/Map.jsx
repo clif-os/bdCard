@@ -93,14 +93,18 @@ export default class Map {
   }
 
   clearLayers() {
-    window.sources.forEach(source => {
-      this.map.removeSource(source);
-    });
-    this.map.getStyle().layers.forEach(layer => {
-      if (layer.id.indexOf('mimio') !== -1) {
-        this.map.removeLayer(layer.id);
-      }
-    });
+    try {
+      window.sources.forEach(source => {
+        this.map.removeSource(source);
+      });
+      this.map.getStyle().layers.forEach(layer => {
+        if (layer.id.indexOf('mimio') !== -1) {
+          this.map.removeLayer(layer.id);
+        }
+      });
+    } catch(e) {
+      console.info('clearLayers failed');
+    }
   }
 
   ///////// INTERNAL MAP EVENT HANDLERS /////////

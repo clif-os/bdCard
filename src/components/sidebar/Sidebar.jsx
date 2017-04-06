@@ -1,6 +1,7 @@
 import React from 'react';
 import './Sidebar.styl';
 import NavBar from './navBar/NavBar.jsx';
+import MapStoragePane from './mapStoragePane/MapStoragePane.jsx';
 import FilterPane from './analysisPane/FilterPane.jsx';
 import VisualizationPane from './analysisPane/VisualizationPane.jsx';
 import HomePane from './homePane/HomePane.jsx';
@@ -12,7 +13,7 @@ import { updateActiveFields } from './analysisPane/analysisUtils.jsx';
 import { homesMap, educationMap, incomeMap, raceMap } from './mapMemories/memories.jsx';
 const mapMemories = [homesMap, educationMap, incomeMap, raceMap];
 
-var memory = {
+let memory = {
   filters: {
     filterSettings: {},
     lastFilterEventData: null
@@ -29,24 +30,53 @@ var memory = {
       lastVisEventData: null
     }
   }
-}
+};
+let storageMemory;
+let memoryInStorage = false;
 
 var savedMapMemories = []
 
 class Sidebar extends React.Component {
   constructor(props){
     super();
+    if (localStorage.getItem('masterMemory')){
+      console.info('Found masterMemory in localStorage');
+      try {
+        const savedMasterMemory = JSON.parse(localStorage.getItem('masterMemory'));
+        storageMemory = savedMasterMemory;
+        console.info('Found masterMemory in Local Storage');
+        console.log({savedMasterMemory});
+        memoryInStorage = true;
+      } catch (e) {
+        console.error('masterMemory found in Storage, but Handling it Failed with the Following Error:');
+        console.error(e);
+      }
+    } else {
+      console.info('masterMemory Not Found in Local Storage');
+    }
     this.state = {
       activePane: 'home',
       counts: {
         filter: undefined
       },
       loadingComponents: [],
-      loadingAnimationSpeed: 500
+      loadingAnimationSpeed: 500,
+      handleMemoryInStorage: memoryInStorage
     }
     this.handleNavBarClick = this.handleNavBarClick.bind(this);
     this.handleCountUpdate = this.handleCountUpdate.bind(this);
     this.handleMapMemoryChoice = this.handleMapMemoryChoice.bind(this);
+    this.handleMapStorageChoice = this.handleMapStorageChoice.bind(this);
+  }
+
+  handleMapStorageChoice(loadFromStorage){
+    console.log(loadFromStorage);
+    if (loadFromStorage){
+      this.handleMapMemoryChoice(storageMemory);
+    }
+    this.setState({
+      handleMemoryInStorage: false
+    });
   }
 
   buildPropLabel(setting){
@@ -102,6 +132,7 @@ class Sidebar extends React.Component {
 
   updateMasterMemory(componentName, componentMemory){
     memory[componentName] = componentMemory;
+    localStorage.setItem('masterMemory', JSON.stringify(memory));
   }
 
   handleNavBarClick(paneId){
@@ -130,6 +161,10 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className="sidebar">
+        {this.state.handleMemoryInStorage
+          ? <MapStoragePane memory={storageMemory} handleMapStorageChoice={this.handleMapStorageChoice} />
+          : null
+        }
         <NavBar handleClick={this.handleNavBarClick} counts={this.state.counts} loadingComponents={this.state.loadingComponents}/>
         {this.renderActivePane()}
       </div>

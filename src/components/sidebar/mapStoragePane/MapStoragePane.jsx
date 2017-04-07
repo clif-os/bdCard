@@ -7,6 +7,17 @@ class MapStoragePane extends React.Component {
     this.transitionOut = this.transitionOut.bind(this);
     this.handleNo = this.handleNo.bind(this);
     this.handleYes = this.handleYes.bind(this);
+    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+  }
+
+  componentWillUnmount(){
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown(e){
+    if (e.keyCode === 27){
+      this.handleNo();
+    }
   }
 
   transitionOut(){

@@ -3,6 +3,7 @@ import React from 'react';
 import Sidebar from './components/sidebar/Sidebar.jsx';
 import Legend from './components/legend/Legend.jsx';
 import MBFullExtentButton from './components/customMapboxControls/MBFullExtentButton.jsx';
+import MBCredits from './components/customMapboxControls/MBCredits.jsx';
 
 class AppInterface extends React.Component {
   constructor(props){
@@ -34,6 +35,7 @@ class AppInterface extends React.Component {
               <Sidebar propsMd={this.props.propsMd} />
               <Legend legendData={this.props.legendData} />
               <MBFullExtentButton />
+              <MBCredits />
             </div>
           )
           : null        

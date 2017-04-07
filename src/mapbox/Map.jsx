@@ -82,6 +82,7 @@ export default class Map {
     this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('dblclick', this.onMapDoubleClicked.bind(this));
     this.map.on('load', this.onMapLoaded.bind(this));
+    this.map.on('move', this.onMapMove.bind(this));
   }
 
   ///////// CUSTOM MAPBOX CONTROL HANDLERS /////////
@@ -108,6 +109,20 @@ export default class Map {
   }
 
   ///////// INTERNAL MAP EVENT HANDLERS /////////
+
+  onMapMove(e) {
+    var center = this.map.getCenter();
+    var lng = Math.round(center.lng * 10) / 10;
+    var lat = Math.round(center.lat * 10) / 10;
+    var zoom = Math.round(this.map.getZoom());
+    window.mapMetrics = {
+      center: {
+        lng: lng,
+        lat: lat
+      },
+      zoom: zoom
+    }
+  }
 
   onMouseMove(e) {
     // queries fills and outlines because, at high zooms, outlines take up a 

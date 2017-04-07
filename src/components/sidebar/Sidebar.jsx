@@ -40,11 +40,11 @@ class Sidebar extends React.Component {
   constructor(props){
     super();
     if (localStorage.getItem('masterMemory')){
-      console.info('Found masterMemory in localStorage');
+      console.info('Found masterMemory in Local Storage');
       try {
         const savedMasterMemory = JSON.parse(localStorage.getItem('masterMemory'));
         storageMemory = savedMasterMemory;
-        console.info('Found masterMemory in Local Storage');
+        console.info('masterMemory from Local Storage successfully parsed');
         console.log({savedMasterMemory});
         memoryInStorage = true;
       } catch (e) {

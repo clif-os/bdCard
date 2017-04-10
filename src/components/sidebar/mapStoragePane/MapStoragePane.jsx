@@ -17,6 +17,8 @@ class MapStoragePane extends React.Component {
   handleKeyDown(e){
     if (e.keyCode === 27){
       this.handleNo();
+    } else if (e.keyCode === 13){
+      this.handleYes();
     }
   }
 

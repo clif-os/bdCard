@@ -59,7 +59,7 @@ fetch(url)
       "visActive": true
     }
     // loading activeVisFields with a default value that is represented in a superficial visualization event from the Map.jsx
-    window.activeFields = {MedINC14:"Median Household Income 2014", TractPopulation2010: "Tract Population 2010"};
+    window.activeFields = {MedInc_14:"Median Household Income 2014", TractPopulation2010: "Tract Population 2010"};
     window.activeVisFields = {};
     // window.activeFields = {MedINC14:"Median Household Income 2014", TractPopulation2010: "Tract Population 2010"};
     // window.activeVisFields = {MedINC14:"Median Household Income 2014"};

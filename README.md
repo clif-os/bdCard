@@ -15,6 +15,7 @@ TODO:
 - rounding is off between multiple parts of the app including but not limited to the class slider tooltips and the legend
 - make the visualization and filter loading more intelligent (not load at unecessary times)
 - find a better option for the popup -- potentially pitch the selection as a anchored popup
+- download should only return the features returned by the filter
 - local storage reload session:
   - on choice of 'no', the old session should be deleted and the new blank slate should be saved in its place
 - classes slider: 

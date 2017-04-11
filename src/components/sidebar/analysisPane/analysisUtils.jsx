@@ -181,10 +181,6 @@ export const updateActiveFields = (type, settings) => {
 import {
   isEquivalent
 } from '../../../utils/generalUtils.jsx';
-const defaultFields = {
-  TractPopulation2010: "Tract Population 2010",
-  MedINC14: "Median Household Income 2014"
-}
 let oldActivityObjects = [];
 const mergeAllActiveFields = () => {
   const activityObjects = [window.activeVisFields, window.activeFiltFields];
@@ -194,8 +190,8 @@ const mergeAllActiveFields = () => {
     });
     return acc;
   }, {});
-  Object.keys(defaultFields).forEach( field => {
-    window.activeFields[field] = defaultFields[field];
+  Object.keys(window.defaultActiveFields).forEach( field => {
+    window.activeFields[field] = window.defaultActiveFields[field];
   });
   let equivalent;
   oldActivityObjects.forEach((aObject, i) => {

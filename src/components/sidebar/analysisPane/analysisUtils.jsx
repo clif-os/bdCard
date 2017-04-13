@@ -77,7 +77,7 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   let stepMin = min;
   let stepMax = max;
   if (stepMin % stepVal !== 0){
-    stepMin = stepMin - (stepMin % stepVal);
+    stepMin = stepMin - ((stepMin % stepVal) + stepVal);
   }
   if (stepMax % stepVal !== 0){
     stepMax = stepMax + (stepVal - (stepMax % stepVal));

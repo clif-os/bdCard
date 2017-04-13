@@ -34,7 +34,7 @@ let memory = {
 let storageMemory;
 let memoryInStorage = false;
 
-var savedMapMemories = []
+var savedMapMemories = [];
 
 class Sidebar extends React.Component {
   constructor(props){
@@ -73,6 +73,8 @@ class Sidebar extends React.Component {
     console.log(loadFromStorage);
     if (loadFromStorage){
       this.handleMapMemoryChoice(storageMemory);
+    } else {
+      localStorage.removeItem('masterMemory');
     }
     this.setState({
       handleMemoryInStorage: false

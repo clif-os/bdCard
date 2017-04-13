@@ -5,20 +5,46 @@ import DownloadsPaneChoice from './DownloadsPaneChoice.jsx';
 
 import { fitMapToPage } from './downloadsUtils.jsx';
 
+var memory = {}
+
 class DownloadsPane extends React.Component {
   constructor(props){
     super();
     this.state = {
-      showingPane: false
-      
+      showingPane: false,
+      dataType: memory.dataType === undefined ? 'all' : memory.dataType
     }
+    this.handleJSONCTDownload = this.handleJSONCTDownload.bind(this);
     this.handleJSONMSDownload = this.handleJSONMSDownload.bind(this);
+    this.handleDataTypeClick = this.handleDataTypeClick.bind(this);
   }
 
   componentDidMount(){
     this.setState({
       showingPane: true
-    })
+    });
+  }
+
+  componentDidUpdate(){
+    memory = this.state;
+  }
+
+  handleDataTypeClick(e){
+    const selDataType = e.target.id.split('-')[e.target.id.split('-').length - 1];
+    const currDataType = this.state.dataType;
+    if (selDataType !== currDataType){
+      if (selDataType === 'all'){
+        this.setState({
+          dataType: 'all'
+        });
+      } else if (selDataType === 'filtered') {
+        this.setState({
+          dataType: 'filtered'
+        });
+      } else {
+        console.error('invalid value in place for DownloadsPane state.dataType: ', selDataType);
+      }  
+    }
   }
   
   handlePDFDownload(){
@@ -94,12 +120,34 @@ class DownloadsPane extends React.Component {
 
   handleJSONCTDownload(){
     let url;
-    if (__DEV__) {
-      url = 'http://localhost:3000/json-dl';
-    } else {
-      url = 'https://panettone.herokuapp.com/json-dl';
+    let baseUrl = __DEV__ ? 'http://localhost:3000' : 'https://panettone.herokuapp.com';
+    if (this.state.dataType === 'filtered') {
+      const config = {
+        method: 'POST',
+        body: JSON.stringify(window.geojsonFiltered),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }
+    
+      fetch(`${baseUrl}/json-dl-filtered`, config).then(res => res.json()).then(json => {
+        location.assign(`${baseUrl}/json-dl-filtered`)
+      })
+
     }
-    window.open(url, '_blank');
+    if (this.state.dataType === 'all') {
+        window.open(baseUrl + '/json-dl', '_blank');
+    } else if (this.state.dataType === 'filtered') {
+      // var xhr = new XMLHttpRequest();
+      // xhr.open('POST', baseUrl + '/json-dl-filtered', true);
+      // xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+      // // send the collected data as JSON
+      // xhr.send(JSON.stringify(window.geojsonFiltered));
+      // console.log(window.geojsonFiltered);
+      // xhr.onloadend = function () {
+      //   console.log('done');
+      // };
+    }
   }
 
   handleJSONMSDownload(){
@@ -152,6 +200,24 @@ class DownloadsPane extends React.Component {
       <div>
         <div className='downloadsPane-choices-titleContainer'>
           <span className='downloadsPane-choices-title'>Census Data<span className='fa fa-bar-chart downloadsPane-choices-titleIcon' /></span>
+          <div className='downloadsPane-toggleDataType' id='downloadsPane-toggleDataType'>
+            <div className={'downloadsPane-toggleDataType-choice downloadsPane-toggleDataType-choice1 downloadsPane-toggleDataType-choice-' +
+                            (this.state.dataType === 'all' ? 'active' : 'inactive') }
+                 id={'downloadsPane-toggleDataType-all'}
+                 onClick={this.handleDataTypeClick} >
+              <span className='downloadsPane-toggleDataType-choice-text'>
+                All
+              </span>
+            </div>
+            <div className={'downloadsPane-toggleDataType-choice downloadsPane-toggleDataType-choice2 downloadsPane-toggleDataType-choice-' +
+                            (this.state.dataType === 'filtered' ? 'active' : 'inactive') }
+                 id={'downloadsPane-toggleDataType-filtered'}
+                 onClick={this.handleDataTypeClick} >
+              <span className='downloadsPane-toggleDataType-choice-text'>
+                Filtered
+              </span>
+            </div>
+          </div>
         </div>
         <div className='downloadsPane-choices downloadsPane-choices-censusData'>
           <DownloadsPaneChoice type='json' icon='fa-file-code-o' handleDownload={this.handleJSONCTDownload} />

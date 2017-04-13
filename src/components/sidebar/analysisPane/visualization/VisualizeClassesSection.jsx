@@ -39,7 +39,7 @@ class VisualizeClassesSection extends React.Component {
     var style = document.getElementById("visClassesControls").style;
     style.right = '0px';
     if (this.props.visualizerSwitch || firstDraw){
-      console.log('sending vis event from componentDidMount')
+      if (window.troubleshootMode) console.log('sending vis event from componentDidMount')
       firstDraw = false;
       const visEventData = constructVisEventData(memory.visSetting);
       const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': visEventData});
@@ -48,20 +48,25 @@ class VisualizeClassesSection extends React.Component {
   }
 
   updateVisSettingMemory(visId, visState){
+    if (window.troubleshootMode) console.log('UPDATING SETTING MEMORY (vis classes section)');
     memory.visSetting = visState;
     updateActiveFields('classes', memory.visSetting);
     if (memory.firstDraw){
+      if (window.troubleshootMode) console.log('FIRST DRAW (vis classes section)');
       memory.firstDraw = false;
       memory.lastVisEventData = window.defaultVisEvent;
       return;
     };
     if ( !visState.freezeValidity ) {
       this.determineVisEventFire();
-    };
+    } else {
+      console.log('VISUALIZER VALIDITY IS FROZEN (vis classes section)');
+    }
     this.props.updateVisualizersMemory('classes', memory);
   }
 
   determineVisEventFire(){
+    if (window.troubleshootMode) console.log('DETERMINING VIS EVENT FIRE (vis classes section)');
     const visEventData = constructVisEventData(memory.visSetting);
     if (visEventsAreDifferent(memory.lastVisEventData, visEventData)){
       const deselect = new CustomEvent('DESELECT_FEATURE');
@@ -70,6 +75,7 @@ class VisualizeClassesSection extends React.Component {
         {'detail': visEventData }
       )
       document.dispatchEvent(visualize);
+      if (window.troubleshootMode) console.log('FIRING MAP RENDER EVENT --------> (vis classes section)');
     }
     memory.lastVisEventData = visEventData;
   }

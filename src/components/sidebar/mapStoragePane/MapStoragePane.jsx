@@ -11,14 +11,17 @@ class MapStoragePane extends React.Component {
   }
 
   componentWillUnmount(){
-    document.removeEventListener('keydown', this.handleKeyDown);
+    // THIS DOESNT SEEM TO BE WORKING
+    document.removeEventListener('keydown', this.handleKeyDown.bind(this));
   }
 
   handleKeyDown(e){
-    if (e.keyCode === 27){
-      this.handleNo();
-    } else if (e.keyCode === 13){
-      this.handleYes();
+    if (this.refs["mapStoragePane"] !== undefined){
+      if (e.keyCode === 27){
+        this.handleNo();
+      } else if (e.keyCode === 13){
+        this.handleYes();
+      }
     }
   }
 

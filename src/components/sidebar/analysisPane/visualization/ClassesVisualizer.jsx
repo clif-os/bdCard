@@ -68,6 +68,8 @@ class ClassesVisualizer extends React.Component {
         paletteValue: palettes[0].value,
         
         freezeValidity: false,
+        alertSliderOfRedefinition: false,
+
         range: [min, max],
         selectedRange: splitVals,
         selectedSplitRanges: splits,
@@ -163,6 +165,7 @@ class ClassesVisualizer extends React.Component {
       
       filterValid: false,
       freezeValidity: false,
+      alertSliderOfRedefinition: true,
 
       range: [min, max],
       selectedRange: splitVals,
@@ -196,6 +199,7 @@ class ClassesVisualizer extends React.Component {
       
       filterValid: false,
       freezeValidity: false,
+      alertSliderOfRedefinition: true,
 
       range: [min, max],
       selectedRange: splitVals,
@@ -213,6 +217,7 @@ class ClassesVisualizer extends React.Component {
   // thus, freezeValidity is being left as true after field selections -- so far this is not affecting the process
   // but later on it might
   handleSliderChange(selectedRange){
+    
     // keep upper and lower limits locked
     selectedRange[0] = this.state.stepMin;
     selectedRange[selectedRange.length - 1] = this.state.stepMax;
@@ -220,7 +225,8 @@ class ClassesVisualizer extends React.Component {
     this.setState({
       selectedRange: selectedRange,
       selectedSplitRanges: splits,
-      freezeValidity: true
+      freezeValidity: this.state.alertSliderOfRedefinition ? false : true,
+      alertSliderOfRedefinition: false
     });
   }
 
@@ -330,3 +336,37 @@ class ClassesVisualizer extends React.Component {
   }
 }
  export default ClassesVisualizer;
+
+
+// readme stateValues = {
+  // visActive: true,
+  // visValid: true,
+
+  // selectedProp: defaultSelectedProp,
+
+  // fieldValue: defaultFieldVal,
+  // fieldLabel: defaultFieldLabel,
+  // fieldOptions: fieldOptions,
+  // yearValue: defaultYearVal,
+  // yearLabel: defaultYearLabel,
+  // yearOptions: defaultYearOptions,
+
+  // classNumValue: classes[2].value,
+  // paletteValue: palettes[0].value,
+  
+  // freezeValidity: false,
+  // alertChangeOfFieldSelection: 'because the onSliderChange gets called after onSliderAfterChange during redefinitions 
+                                // of the major slider values (cased by field and possibly year selections), 
+                                // this boolean was created to communicate selections after to onSliderChange and avoid
+                                // undesired validity freezes',
+
+  // range: 'currently doesn't seem to be used by anything',
+  // selectedRange: 'controller variable for the slider',
+  // selectedSplitRanges: 'DRAFT: i think this is actually a data structure i've
+  //                       precreated to be shipped to the filter on map rendering event that parallels selectedRanges'
+  // medianMark: 'controller variable for the slider',
+  // units: 'interpretive variable used to convert values to their corresponding strings throughout the component',
+  // stepMax: 'controller variable for the slider',
+  // stepMin: 'controller variable for the slider',
+  // stepVal: 'controller variable for the slider'
+// }

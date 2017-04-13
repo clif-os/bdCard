@@ -12,6 +12,40 @@
     .downloadsPane-choices-titleIcon {
       margin-left: 10px;
     }
+    .downloadsPane-toggleDataType{
+      position: absolute;
+      height: 20px;
+      top: 10px;
+      right: 13px;
+      border: 1px solid white;
+      overflow: hidden;
+      cursor: pointer;
+      .downloadsPane-toggleDataType-choice{
+        position: relative;
+        height: 20px;
+        font-size: 8pt;
+        margin: 0px;
+        line-height: 20px;
+        float: right;
+        transition-duration: .2s;
+        .downloadsPane-toggleDataType-choice-text{
+          padding-left: 3.5px;
+          padding-right: 3.5px;
+          pointer-events: none;
+          user-select: none;
+        }
+      }
+      .downloadsPane-toggleDataType-choice-active{
+        color: rgba(10, 131, 201, 1);
+        background-color: white;
+      }
+      .downloadsPane-toggleDataType-choice-inactive{
+        color: white;
+        &:hover{
+          background-color: rgba(255, 255, 255, .1);
+        }
+      }
+    }
   }
   .downloadsPane-choices-map{
     .downloadsPane-choices-pdf {

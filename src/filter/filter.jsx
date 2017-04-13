@@ -165,6 +165,7 @@ const dispatchFilterEvents = (geojsonLayers, isPassFailEvent) => {
   });
   document.dispatchEvent(updateLegend);
   window.activeFeatureCount = _geojsonIn.features.length;
+  window.geojsonFiltered = Object.assign({}, _geojsonIn);
   const updateCount = new CustomEvent('UPDATE_FILTER_SECTION', {
         'detail': {
           numFeaturesInFilter: _geojsonIn.features.length,

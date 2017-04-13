@@ -18,6 +18,9 @@ window.Promise = window.Promise || require('promise-polyfill');
 require('es6-shim');
 require('custom-event-polyfill');
 
+// CUSTOM TESTING MODE //
+window.troubleshootMode = true;
+
 import gjPropsMetadata from './data/jchs-boston-md.json';
 import {convertGJLayersToLegendData} from './components/legend/legendUtils.jsx';
 
@@ -38,7 +41,8 @@ fetch(url)
     // geojsons at hand in order to perform rapid lookups --> things like selections
     // and even zooms
     window.geojsonLookup = convertGeojsonToLookup(gj);
-    window.geojson = gj;
+    window.geojson = Object.assign({}, gj);
+    window.geojsonFiltered = Object.assign({}, gj);
     const { linePaint, fillPaint } = buildPaint('defaultPass');
     const geojsonLayers = [
       {

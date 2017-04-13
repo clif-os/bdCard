@@ -30,7 +30,6 @@ class PassFailVisualizer extends React.Component {
       const defaultFieldLabel = fieldOptions[props.defaultFieldIndex].label;
       const defaultYearOptions = this.yearLookups[defaultFieldVal];
       const defaultYearVal = defaultYearOptions[0].value;
-      const defaultYearLabel = defaultYearOptions[0].label;
       
       const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
 
@@ -49,11 +48,12 @@ class PassFailVisualizer extends React.Component {
         fieldLabel: defaultFieldLabel,
         fieldOptions: fieldOptions,
         yearValue: defaultYearVal,
-        yearLabel: defaultYearLabel,
         yearOptions: defaultYearOptions,
 
         filterValid: false,
         freezeValidity: false,
+        alertSliderOfRedefinition: false,
+
         range: [min, max],
         selectedRange: [min, max],
         medianMark: medianMark,
@@ -106,7 +106,6 @@ class PassFailVisualizer extends React.Component {
 
     const defaultYearOptions = this.yearLookups[fieldVal];
     const defaultYearVal = defaultYearOptions[0].value;
-    const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
     var {min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
@@ -118,7 +117,6 @@ class PassFailVisualizer extends React.Component {
       fieldValue: fieldVal,
       fieldLabel: fieldLabel,
       yearValue: defaultYearVal,
-      yearLabel: defaultYearLabel,
       yearOptions: defaultYearOptions,
 
       range: [min, max],
@@ -126,13 +124,13 @@ class PassFailVisualizer extends React.Component {
       medianMark: medianMark,
       units: units,
       filterValid: false,
-      freezeValidity: false
+      freezeValidity: false,
+      alertSliderOfRedefinition: true
     });
   }
 
   handleYearSelection(val){
     const yearVal = val.value;
-    const yearLabel = val.label;
     const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
     const {min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
@@ -142,14 +140,14 @@ class PassFailVisualizer extends React.Component {
     this.setState({
       selectedProp: selectedProp,
       yearValue: yearVal,
-      yearLabel: yearLabel,
 
       range: [min, max],
       selectedRange: [min, max],
       medianMark: medianMark,
       units: units,
       filterValid: false,
-      freezeValidity: false
+      freezeValidity: false,
+      alertSliderOfRedefinition: true
     });
   }
 
@@ -165,7 +163,8 @@ class PassFailVisualizer extends React.Component {
     }
     this.setState({
       selectedRange: selectedRange,
-      freezeValidity: true
+      freezeValidity: this.state.alertSliderOfRedefinition ? false : true,
+      alertSliderOfRedefinition: false
     });
   }
 

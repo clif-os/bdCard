@@ -81,15 +81,6 @@ class Sidebar extends React.Component {
     });
   }
 
-  buildPropLabel(setting){
-    if (Object.keys(setting).length === 0){
-      return null;
-    }
-    const fieldLabel = setting.fieldLabel;
-    const yearLabel = setting.yearLabel;
-    return fieldLabel + ' ' + yearLabel;
-  };
-
   handleMapMemoryChoice(memoryChoice){
     memory = JSON.parse(JSON.stringify(memoryChoice));
     localStorage.setItem('masterMemory', JSON.stringify(memoryChoice));

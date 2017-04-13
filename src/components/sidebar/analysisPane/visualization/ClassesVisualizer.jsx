@@ -37,7 +37,6 @@ class ClassesVisualizer extends React.Component {
       const defaultFieldLabel = fieldOptions[0].label;
       const defaultYearOptions = this.yearLookups[defaultFieldVal];
       const defaultYearVal = defaultYearOptions[0].value;
-      const defaultYearLabel = defaultYearOptions[0].label;
 
       const defaultSelectedProp = this.propRegistry[defaultFieldVal + defaultYearVal];
 
@@ -53,7 +52,6 @@ class ClassesVisualizer extends React.Component {
       // SET THE DEFAULT STATE
       const defaultVisSetting = {
         visActive: true,
-        visValid: true,
 
         selectedProp: defaultSelectedProp,
 
@@ -61,7 +59,6 @@ class ClassesVisualizer extends React.Component {
         fieldLabel: defaultFieldLabel,
         fieldOptions: fieldOptions,
         yearValue: defaultYearVal,
-        yearLabel: defaultYearLabel,
         yearOptions: defaultYearOptions,
 
         classNumValue: classes[2].value,
@@ -127,14 +124,16 @@ class ClassesVisualizer extends React.Component {
       classNumValue: val.value,
       selectedRange: splitVals,
       selectedSplitRanges: splits,
-      freezeValidity: false
+      freezeValidity: false,
+      alertSliderOfRedefinition: true
     });
   }
 
   handlePaletteSelection(val){
     this.setState({
       paletteValue: val.value,
-      freezeValidity: false
+      freezeValidity: false,
+      alertSliderOfRedefinition: true
     });
   }
 
@@ -143,7 +142,6 @@ class ClassesVisualizer extends React.Component {
     const fieldLabel = val.label;
     const defaultYearOptions = this.yearLookups[fieldVal];
     const defaultYearVal = defaultYearOptions[0].value;
-    const defaultYearLabel = defaultYearOptions[0].label;
     const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
     
     var {min, max, median, units, stepMax, stepMin, stepVal } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
@@ -160,7 +158,6 @@ class ClassesVisualizer extends React.Component {
       fieldValue: fieldVal,
       fieldLabel: fieldLabel,
       yearValue: defaultYearVal,
-      yearLabel: defaultYearLabel,
       yearOptions: defaultYearOptions,
       
       filterValid: false,
@@ -180,7 +177,6 @@ class ClassesVisualizer extends React.Component {
 
   handleYearSelection(val){
     const yearVal = val.value;
-    const yearLabel = val.label;
     const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
 
     var {min, max, median, units, stepVal, stepMin, stepMax } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
@@ -195,7 +191,6 @@ class ClassesVisualizer extends React.Component {
     this.setState({
       selectedProp: selectedProp,
       yearValue: yearVal,
-      yearLabel: yearLabel,
       
       filterValid: false,
       freezeValidity: false,
@@ -330,43 +325,9 @@ class ClassesVisualizer extends React.Component {
                    pushable={true} />
           </div>
         </div>
-        <div className={'validationBar validationBar-' + (this.state.visValid && this.state.visActive)} />
+        <div className={'validationBar validationBar-' + this.state.visActive} />
       </div>
     );
   }
 }
  export default ClassesVisualizer;
-
-
-// readme stateValues = {
-  // visActive: true,
-  // visValid: true,
-
-  // selectedProp: defaultSelectedProp,
-
-  // fieldValue: defaultFieldVal,
-  // fieldLabel: defaultFieldLabel,
-  // fieldOptions: fieldOptions,
-  // yearValue: defaultYearVal,
-  // yearLabel: defaultYearLabel,
-  // yearOptions: defaultYearOptions,
-
-  // classNumValue: classes[2].value,
-  // paletteValue: palettes[0].value,
-  
-  // freezeValidity: false,
-  // alertChangeOfFieldSelection: 'because the onSliderChange gets called after onSliderAfterChange during redefinitions 
-                                // of the major slider values (cased by field and possibly year selections), 
-                                // this boolean was created to communicate selections after to onSliderChange and avoid
-                                // undesired validity freezes',
-
-  // range: 'currently doesn't seem to be used by anything',
-  // selectedRange: 'controller variable for the slider',
-  // selectedSplitRanges: 'DRAFT: i think this is actually a data structure i've
-  //                       precreated to be shipped to the filter on map rendering event that parallels selectedRanges'
-  // medianMark: 'controller variable for the slider',
-  // units: 'interpretive variable used to convert values to their corresponding strings throughout the component',
-  // stepMax: 'controller variable for the slider',
-  // stepMin: 'controller variable for the slider',
-  // stepVal: 'controller variable for the slider'
-// }

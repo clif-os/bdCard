@@ -43,15 +43,28 @@ import {
   returnVal
 } from '../../../utils/generalUtils.jsx';
 
+// const determineStepValue = (breaks, range) => {
+//   if 
+//   return Math.ceil(range / breaks);
+// }
+
 export const fieldUnitAndRangeHandler = (field, propsMd) => {
   const units = propsMd[field].units;
   let min = propsMd[field].range.min;
   let max = propsMd[field].range.max;
   let unitFormatter, unitUnformatter;
   let stepVal;
+  // const draftStepVal = determineStepValue(30, max - min);
+  // console.log({draftStepVal});
   switch(units){
     case 'usd':
-      stepVal = 100;
+      if ((max - min) <= 5000){
+        stepVal = 10;  
+      } else if ((max - min) > 5000 && (max - min) <= 10000){
+        stepVal = 100;
+      } else if ((max - min) > 10000) {
+        stepVal = 1000  ;
+      }
       unitFormatter = dollarFormatter;
       unitUnformatter = dollarUnformatter;
       break;
@@ -77,7 +90,12 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   let stepMin = min;
   let stepMax = max;
   if (stepMin % stepVal !== 0){
-    stepMin = stepMin - ((stepMin % stepVal) + stepVal);
+    if (stepMin < 0){
+      stepMin = stepMin - ((stepMin % stepVal) + stepVal);
+    } else if (stepMin >= 0) {
+      // DOUBLE CHECK THIS!!!
+      stepMin = stepMin - (stepVal - (stepMin % stepVal));
+    }
   }
   if (stepMax % stepVal !== 0){
     stepMax = stepMax + (stepVal - (stepMax % stepVal));

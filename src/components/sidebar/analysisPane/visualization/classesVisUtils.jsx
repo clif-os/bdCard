@@ -1,3 +1,36 @@
+export const splitRangeByClassesWithStepVals = (range, classes, stepVal) => {
+  let min, max
+  if ( Object.prototype.toString.call( range ) === '[object Array]' ) {
+    min = Math.floor(range[0]);
+    max = Math.ceil(range[1]);
+  } else {
+    min = Math.floor(range.min);
+    max = Math.ceil(range.max);
+  }
+  console.log({min}, {max});
+  
+  const classLength = Math.round((max - min) / classes);
+
+  var minVal = min;
+  var splitRanges = [];
+  for (var i = 0; i < classes; i++) {
+    let maxVal;
+    if (i === (classes - 1)) {
+      maxVal = max;
+    } else {
+      // dunno why i even have to round here someone plz explain math to me
+      maxVal = Math.round((minVal + classLength) * 100) / 100;
+    }
+    splitRanges.push([
+      (Math.round(minVal / stepVal) * stepVal), 
+      (Math.round(maxVal / stepVal) * stepVal)
+    ]);
+    minVal = maxVal;
+  };
+  console.log({splitRanges});
+  return splitRanges;
+}
+
 export const splitsToSliderValues = splits => {
   return splits.reduce((acc, split) => {
     split.forEach(value => {

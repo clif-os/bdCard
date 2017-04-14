@@ -14,7 +14,7 @@ import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
 import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
 import { generatePaintArray } from '../../../../mapbox/geojsonLayerUtils.jsx';
-import { splitsToSliderValues, sliderValuesToSplits, classes, palettes } from './classesVisUtils.jsx';
+import { splitRangeByClassesWithStepVals, splitsToSliderValues, sliderValuesToSplits, classes, palettes } from './classesVisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
@@ -46,7 +46,7 @@ class ClassesVisualizer extends React.Component {
       var medianMark = {};
       medianMark[median] = medianLabel;
       
-      const splits = splitRangeByClasses([stepMin, stepMax], classes[2].value);
+      const splits = splitRangeByClassesWithStepVals([stepMin, stepMax], classes[2].value, stepVal);
       const splitVals = splitsToSliderValues(splits);
 
       // SET THE DEFAULT STATE
@@ -118,7 +118,7 @@ class ClassesVisualizer extends React.Component {
   //// FIELD SELECTION HANDLERS
 
   handleClassNumSelection(val){
-    const splits = splitRangeByClasses([this.state.stepMin, this.state.stepMax], val.value);
+    const splits = splitRangeByClassesWithStepVals([this.state.stepMin, this.state.stepMax], val.value, this.state.stepVal);
     const splitVals = splitsToSliderValues(splits);
     this.setState({
       classNumValue: val.value,
@@ -150,7 +150,7 @@ class ClassesVisualizer extends React.Component {
     var medianMark = {};
     medianMark[median] = medianLabel;
       
-    const splits = splitRangeByClasses([stepMin, stepMax], this.state.classNumValue);
+    const splits = splitRangeByClassesWithStepVals([stepMin, stepMax], this.state.classNumValue, stepVal);
     const splitVals = splitsToSliderValues(splits);
 
     this.setState({
@@ -185,7 +185,7 @@ class ClassesVisualizer extends React.Component {
     var medianMark = {};
     medianMark[median] = medianLabel;
       
-    const splits = splitRangeByClasses([stepMin, stepMax], this.state.classNumValue);
+    const splits = splitRangeByClassesWithStepVals([stepMin, stepMax], this.state.classNumValue, stepVal);
     const splitVals = splitsToSliderValues(splits);
 
     this.setState({

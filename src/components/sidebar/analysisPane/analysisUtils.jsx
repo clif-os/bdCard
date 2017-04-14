@@ -58,12 +58,14 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   // console.log({draftStepVal});
   switch(units){
     case 'usd':
-      if ((max - min) <= 5000){
+      if ((max - min) <= 2000){
         stepVal = 10;  
+      } else if ((max - min) > 2000 && (max - min) <= 5000){
+        stepVal = 50;
       } else if ((max - min) > 5000 && (max - min) <= 10000){
         stepVal = 100;
       } else if ((max - min) > 10000) {
-        stepVal = 1000  ;
+        stepVal = 1000;
       }
       unitFormatter = dollarFormatter;
       unitUnformatter = dollarUnformatter;

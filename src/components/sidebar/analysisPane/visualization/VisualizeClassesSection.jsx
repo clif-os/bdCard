@@ -5,8 +5,7 @@ import { VelocityTransitionGroup } from 'velocity-react';
 import { guid } from '../../../../utils/generalUtils.jsx';
 import { convertPropsMetadataToDrodownObject, updateActiveFields } from '../analysisUtils.jsx';
 import { constructVisEventData, visEventsAreDifferent } from './visUtils.jsx';
-import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
-import { splitsToSliderValues, sliderValuesToSplits } from './classesVisUtils.jsx';
+import { splitRangeByClassesWithStepVals, splitsToSliderValues, sliderValuesToSplits } from './classesVisUtils.jsx';
 // consider https://www.npmjs.com/package/react-color
 
 // VISUALIZER MEMORY
@@ -82,8 +81,8 @@ class VisualizeClassesSection extends React.Component {
   
   handleReset(){
     if (this.state.resetClicked === false){
-      const { stepMin, stepMax, classNumValue } = memory.visSetting;
-      const splits = splitRangeByClasses([stepMin, stepMax], classNumValue);
+      const { stepMin, stepMax, stepVal, classNumValue } = memory.visSetting;
+      const splits = splitRangeByClassesWithStepVals([stepMin, stepMax], classNumValue, stepVal);
       const splitVals = splitsToSliderValues(splits);
       memory.visSetting.selectedRange = splitVals;
       memory.visSetting.selectedSplitRanges = splits;

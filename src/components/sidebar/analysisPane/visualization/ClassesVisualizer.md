@@ -1,7 +1,7 @@
 ### State Object Overview:
   - **visActive**: controller variable used to turn off map renders,
   - **selectedProp**: interpretive variable used to build `min`, `max`, `median`, `units`, `stepVal`, `stepMin`, `stepMax` using the `fieldUnitAndRangeHandler` function
-  
+
   - **fieldValue**: controller and interpretive variable
     - as a controller it informs the `Fields` dropdown
     - as an interpretive variable, it is used to select the `selectedProp` from the propRegistry on `handleYearSelection`

@@ -43,45 +43,54 @@ import {
   returnVal
 } from '../../../utils/generalUtils.jsx';
 
-// const determineStepValue = (breaks, range) => {
-//   if 
-//   return Math.ceil(range / breaks);
-// }
+
+// this function finds a step value that creates the closest step count to 100 as possible
+const determineStepValue = range => {
+  const idealStepNum = 100;
+  const acceptableSteps = [1, 5, 10, 25, 50, 100, 250, 500, 1000, 2500, 5000, 10000, 25000, 50000, 100000];
+  return acceptableSteps.reduce((acc, val, i, arr) => {
+    const newSteps = range / val;
+    if (i === 0) {
+      acc = val;
+    } else {
+      const oldSteps = range / acc;
+      if (Math.abs(idealStepNum - oldSteps) > Math.abs(idealStepNum - newSteps)) {
+        acc = val;
+      }
+    }
+    // Log an error on the last assignment if the current best value is still pretty far from ideal.
+    if (i === (arr.length - 1)){
+      if (Math.abs(idealStepNum - (range / acc)) > 30) {
+        console.error('Slider step value is outside the ideal threshold.');
+      }
+    }
+    return acc;
+  }, null);
+}
 
 export const fieldUnitAndRangeHandler = (field, propsMd) => {
   const units = propsMd[field].units;
   let min = propsMd[field].range.min;
   let max = propsMd[field].range.max;
+  let range = (max - min);
   let unitFormatter, unitUnformatter;
-  let stepVal;
+  let stepVal = determineStepValue(range);
   // const draftStepVal = determineStepValue(30, max - min);
   // console.log({draftStepVal});
   switch(units){
     case 'usd':
-      if ((max - min) <= 2000){
-        stepVal = 10;  
-      } else if ((max - min) > 2000 && (max - min) <= 5000){
-        stepVal = 50;
-      } else if ((max - min) > 5000 && (max - min) <= 10000){
-        stepVal = 100;
-      } else if ((max - min) > 10000) {
-        stepVal = 1000;
-      }
       unitFormatter = dollarFormatter;
       unitUnformatter = dollarUnformatter;
       break;
     case 'decile':
-      stepVal = 1;
       unitFormatter = returnVal;
       unitUnformatter = returnVal;
       break;
     case  'number':
-      stepVal = 1;
       unitFormatter = returnVal;
       unitUnformatter = returnVal;
       break;
     case 'percent':
-      stepVal = 1;
       unitFormatter = percentFormatter;
       unitUnformatter = percentUnformatter;
       break;

@@ -10,8 +10,8 @@ import MapsPane from './mapsPane/MapsPane.jsx';
 
 import { updateActiveFields } from './analysisPane/analysisUtils.jsx';
 
-import { homesMap, educationMap, incomeMap, raceMap } from './mapMemories/memories.jsx';
-const mapMemories = [homesMap, educationMap, incomeMap, raceMap];
+import { povConcMap, gentMap, raceMap, rentMap } from './mapMemories/memories.jsx';
+const mapMemories = [povConcMap, gentMap, raceMap, rentMap];
 
 let memory = {
   filters: {

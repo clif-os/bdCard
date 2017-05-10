@@ -404,5 +404,4 @@ export default class Map {
     // const visualize = new CustomEvent('VISUALIZE_CLASSES', {'detail': window.defaultVisEvent});
     // document.dispatchEvent(visualize);
   }
-
 }

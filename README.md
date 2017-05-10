@@ -25,7 +25,6 @@ TODO:
   - delete filters when the filters are full-range is not updating to state
   - when the map is at a blank state, it should delete the local storage and not cause a loading prompt on next session
 - classes slider: 
-  - some values are failing to be assigned, check for those errors and resolve them
   - find a way to make slider colors that are light popout on classes slider
   - add in min/max as marks
   - find a way to handle overflow / text-wrapping of min/max/median marks

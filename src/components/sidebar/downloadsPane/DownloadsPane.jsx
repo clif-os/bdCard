@@ -200,24 +200,6 @@ class DownloadsPane extends React.Component {
       <div>
         <div className='downloadsPane-choices-titleContainer'>
           <span className='downloadsPane-choices-title'>Census Data<span className='fa fa-bar-chart downloadsPane-choices-titleIcon' /></span>
-          <div className='downloadsPane-toggleDataType' id='downloadsPane-toggleDataType'>
-            <div className={'downloadsPane-toggleDataType-choice downloadsPane-toggleDataType-choice1 downloadsPane-toggleDataType-choice-' +
-                            (this.state.dataType === 'all' ? 'active' : 'inactive') }
-                 id={'downloadsPane-toggleDataType-all'}
-                 onClick={this.handleDataTypeClick} >
-              <span className='downloadsPane-toggleDataType-choice-text'>
-                All
-              </span>
-            </div>
-            <div className={'downloadsPane-toggleDataType-choice downloadsPane-toggleDataType-choice2 downloadsPane-toggleDataType-choice-' +
-                            (this.state.dataType === 'filtered' ? 'active' : 'inactive') }
-                 id={'downloadsPane-toggleDataType-filtered'}
-                 onClick={this.handleDataTypeClick} >
-              <span className='downloadsPane-toggleDataType-choice-text'>
-                Filtered
-              </span>
-            </div>
-          </div>
         </div>
         <div className='downloadsPane-choices downloadsPane-choices-censusData'>
           <DownloadsPaneChoice type='json' icon='fa-file-code-o' handleDownload={this.handleJSONCTDownload} />
@@ -244,3 +226,22 @@ class DownloadsPane extends React.Component {
  export default DownloadsPane;
  
  //<DownloadsPaneChoice type='PNG' icon='fa-file-image-o' handleDownload={this.handlePNGDownload} />
+
+//  <div className='downloadsPane-toggleDataType' id='downloadsPane-toggleDataType'>
+//             <div className={'downloadsPane-toggleDataType-choice downloadsPane-toggleDataType-choice1 downloadsPane-toggleDataType-choice-' +
+//                             (this.state.dataType === 'all' ? 'active' : 'inactive') }
+//                  id={'downloadsPane-toggleDataType-all'}
+//                  onClick={this.handleDataTypeClick} >
+//               <span className='downloadsPane-toggleDataType-choice-text'>
+//                 All
+//               </span>
+//             </div>
+//             <div className={'downloadsPane-toggleDataType-choice downloadsPane-toggleDataType-choice2 downloadsPane-toggleDataType-choice-' +
+//                             (this.state.dataType === 'filtered' ? 'active' : 'inactive') }
+//                  id={'downloadsPane-toggleDataType-filtered'}
+//                  onClick={this.handleDataTypeClick} >
+//               <span className='downloadsPane-toggleDataType-choice-text'>
+//                 Filtered
+//               </span>
+//             </div>
+//           </div>

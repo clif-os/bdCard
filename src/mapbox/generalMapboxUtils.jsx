@@ -115,9 +115,9 @@ export const buildPopupHTMLFromFeature = (feature, selectionPaint) => {
       </div>
       <div class="propDisplayContainer" >
         ${propDisplay}
-      </div>
-      <div class="selectionTitle-underline"></div>
-      <div class="tableContainer">
+      </div>` +
+      (Object.keys(window.activeFields).length > 0 ? `<div class="selectionTitle-underline"></div>` : '')
+      + `<div class="tableContainer">
         ${propTable}
       </div>
     </div>

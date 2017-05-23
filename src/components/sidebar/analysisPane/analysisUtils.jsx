@@ -61,7 +61,7 @@ const determineStepValue = range => {
     // Log an error on the last assignment if the current best value is still pretty far from ideal.
     if (i === (arr.length - 1)){
       if (Math.abs(idealStepNum - (range / acc)) > 30) {
-        console.error('Slider step value is outside the ideal threshold.');
+        // console.error('Slider step value is outside the ideal threshold.');
       }
     }
     return acc;
@@ -219,9 +219,6 @@ const mergeAllActiveFields = () => {
     });
     return acc;
   }, {});
-  Object.keys(window.defaultActiveFields).forEach( field => {
-    window.activeFields[field] = window.defaultActiveFields[field];
-  });
   let equivalent;
   oldActivityObjects.forEach((aObject, i) => {
     if (! isEquivalent(aObject, activityObjects[i])){

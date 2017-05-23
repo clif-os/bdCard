@@ -180,34 +180,37 @@ const buildPropLabel = (setting) => {
 };
 
 export const updateActiveFields = (type, settings) => {
-  console.log({settings})
   switch(type){
     case 'filter':
       window.activeFiltFields = {};
       Object.keys(settings).forEach(settingId => {
         const setting = settings[settingId];
-        console.log({setting});
-        const propLabel = buildPropLabel(setting);
-        console.log({propLabel});
-        const selectedProp = setting.selectedProp;
-        console.log({selectedProp});
-        window.activeFiltFields[selectedProp] = propLabel;
+        // only push through those that are active
+        if (setting.filterActive) {
+          const propLabel = buildPropLabel(setting);
+          const selectedProp = setting.selectedProp;
+          window.activeFiltFields[selectedProp] = propLabel;
+        }
       });
       break;
     case 'passFail':
       window.activeVisFields = {};
       Object.keys(settings).forEach(settingId => {
         const setting = settings[settingId];
-        const propLabel = buildPropLabel(setting);
-        const selectedProp = setting.selectedProp;
-        window.activeVisFields[selectedProp] = propLabel;
+        if (setting.filterActive) {
+          const propLabel = buildPropLabel(setting);
+          const selectedProp = setting.selectedProp;
+          window.activeVisFields[selectedProp] = propLabel;
+        }
       });
       break;
     case 'classes':
       window.activeVisFields = {};
-      const propLabel = buildPropLabel(settings);
-      const selectedProp = settings.selectedProp;
-      window.activeVisFields[selectedProp] = propLabel;
+      if (settings.visActive) {
+        const propLabel = buildPropLabel(settings);
+        const selectedProp = settings.selectedProp;
+        window.activeVisFields[selectedProp] = propLabel;
+      }
       break;
     default:
       break;
@@ -221,7 +224,6 @@ import {
 let oldActivityObjects = [];
 const mergeAllActiveFields = () => {
   const activityObjects = [window.activeVisFields, window.activeFiltFields];
-  console.log({activityObjects});
   window.activeFields = activityObjects.reduce((acc, activityObject) => {
     Object.keys(activityObject).forEach(field => {
       acc[field] = activityObject[field];

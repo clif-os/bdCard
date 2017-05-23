@@ -66,6 +66,7 @@ export const buildPropTable = props => {
 }
 import { numberWithCommas } from '../utils/generalUtils.jsx';
 export const buildPropDisplay = (propsToShow, props) => {
+  console.log({propsToShow})
   const propRows = Object.keys(propsToShow).reduce((acc, prop) => {
     let label = propsToShow[prop];
     let value;
@@ -86,6 +87,7 @@ export const buildPropDisplay = (propsToShow, props) => {
       let { unitFormatter } = fieldUnitAndRangeHandler(prop, gjPropsMetadata);
       value = unitFormatter(props[prop]);
     }
+    console.log({label});
     const row = (`
       <div class="selectionProps-row">
         <span class="propDisplay-label propDisplay-text">${label}</span>  :  <span class="propDisplay-value propDisplay-text">${value}</span>${propType}

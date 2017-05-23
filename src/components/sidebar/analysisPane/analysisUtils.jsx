@@ -171,18 +171,26 @@ const buildPropLabel = (setting) => {
     return null;
   }
   const fieldLabel = setting.fieldLabel;
-  const yearLabel = setting.yearLabel;
-  return fieldLabel + ' ' + yearLabel;
+  var yearValue = setting.yearValue;
+  // TODO: this is a temorary measure -- the 'yearLabel' field seems to have been deleted
+  if (yearValue.length === 8) {
+    yearValue = `${yearValue.slice(0,4)}-${yearValue.slice(4)}`
+  }
+  return fieldLabel + ' ' + yearValue;
 };
 
 export const updateActiveFields = (type, settings) => {
+  console.log({settings})
   switch(type){
     case 'filter':
       window.activeFiltFields = {};
       Object.keys(settings).forEach(settingId => {
         const setting = settings[settingId];
+        console.log({setting});
         const propLabel = buildPropLabel(setting);
+        console.log({propLabel});
         const selectedProp = setting.selectedProp;
+        console.log({selectedProp});
         window.activeFiltFields[selectedProp] = propLabel;
       });
       break;
@@ -213,6 +221,7 @@ import {
 let oldActivityObjects = [];
 const mergeAllActiveFields = () => {
   const activityObjects = [window.activeVisFields, window.activeFiltFields];
+  console.log({activityObjects});
   window.activeFields = activityObjects.reduce((acc, activityObject) => {
     Object.keys(activityObject).forEach(field => {
       acc[field] = activityObject[field];

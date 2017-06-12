@@ -1,4 +1,5 @@
 const subwords = ['to', 'in', 'of'];
+// needs to be changed to respect '/' as a space
 export const toTitleCase = (str, avoidSubwords) => {
   if (avoidSubwords === undefined){
     avoidSubwords = true

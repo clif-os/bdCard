@@ -177,31 +177,37 @@ const dispatchFilterEvents = (geojsonLayers, isPassFailEvent) => {
 }
 
 const generatePassFailLayers = (_passFailCriteria, gj) => {
+  
   const bothCriteria = splitGeojsonByCriteria(gj, _passFailCriteria);
       var _bothCriteriaPass = bothCriteria.geojsonIn
       var _bothCriteriaFail = bothCriteria.geojsonOut
       let passPaint = buildPaint('pass');
       let failPaint = buildPaint('fail');
       if (_passFailCriteria.length === 0 || _passFailCriteria.length === 1){
+        const criteria = _passFailCriteria.length === 0
+          ? 'Visualization'
+          : gjPropsMetadata[_passFailCriteria[0].field].descriptionShort
         return [{
           geojson: _bothCriteriaPass,
           name: 'pass',
-          filterStatus: 'Passes Visualization Criteria',
+          filterStatus: `Passes ${criteria} Criteria`,
           linePaint: passPaint.linePaint,
           fillPaint: passPaint.fillPaint
         },
         {
           geojson: _bothCriteriaFail,
           name: 'fail',
-          filterStatus: 'Fails Visualization Criteria',
+          filterStatus: `Fails ${criteria} Criteria`,
           linePaint: failPaint.linePaint,
           fillPaint: failPaint.fillPaint
         }];
       } else if (_passFailCriteria.length === 2){
         const firstCriteria = splitGeojsonByCriteria(_bothCriteriaFail, [_passFailCriteria[0]]);
+        const criteria1 = gjPropsMetadata[_passFailCriteria[0].field].descriptionShort
         var _firstCriteriaPassOnly = firstCriteria.geojsonIn;
         var _firstCriteriaFailOnly = firstCriteria.geojsonOut;
         const secondCriteria = splitGeojsonByCriteria(_firstCriteriaFailOnly, [_passFailCriteria[1]]);
+        const criteria2 = gjPropsMetadata[_passFailCriteria[1].field].descriptionShort
         var _secondCriteriaPassOnly = secondCriteria.geojsonIn;
         var _secondCriteriaFailOnly = secondCriteria.geojsonOut;
         let pass1Paint = buildPaint('passAlt1');
@@ -216,21 +222,21 @@ const generatePassFailLayers = (_passFailCriteria, gj) => {
         {
           geojson: _secondCriteriaFailOnly,
           name: 'fail',
-          filterStatus: 'Fails All Visualization Criteria',
+          filterStatus: 'Fails Both Visualization Criteria',
           linePaint: failPaint.linePaint,
           fillPaint: failPaint.fillPaint
         },
         {
           geojson: _firstCriteriaPassOnly,
           name: 'firstPass',
-          filterStatus: 'Passes First Visualization Criteria Only',
+          filterStatus: `Passes ${criteria1} Criteria Only`,
           linePaint: pass1Paint.linePaint,
           fillPaint: pass1Paint.fillPaint
         },
         {
           geojson: _secondCriteriaPassOnly,
           name: 'secondPass',
-          filterStatus: 'Passes Second Visualization Criteria Only',
+          filterStatus: `Passes ${criteria2} Criteria Only`,
           linePaint: pass2Paint.linePaint,
           fillPaint: pass2Paint.fillPaint
         }];

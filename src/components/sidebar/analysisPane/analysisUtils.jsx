@@ -7,7 +7,8 @@ export const convertPropsMetadataToDrodownObject = (metadata) => {
     const descWords = description.split(' ');
     const fieldLabel = metadata[prop].descriptionShort;
     const fieldValue = metadata[prop].descriptionKey;
-    const yearLabel = metadata[prop].year;
+    const yearLabel = metadata[prop].year.indexOf('-') > -1 ? `Change ${metadata[prop].year}` : metadata[prop].year;
+    console.log(yearLabel)
     const yearValue = metadata[prop].yearKey
     
     dropdownPropRegistry[fieldValue + yearValue] = prop;

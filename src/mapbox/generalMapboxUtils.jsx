@@ -108,8 +108,9 @@ export const buildPopupHTMLFromFeature = (feature, selectionPaint) => {
     <div class="selection">
       <div class='selectionTitle-container'>
         <span class="selectionTitle">
-          ${props["NAME_1"]} 
-          <span class="selectionSubtitle">(${props["NAMELSAD"]})</span>
+          ${props["NAME_1"]}` +
+          (props.neighborhood === 0 ? ' ' : `: ${props.neighborhood} `) + 
+          `<span class="selectionSubtitle">(${props["NAMELSAD"]})</span>
           <span class='fa fa-square' style="color:${squareFill};opacity:${squareOpacity}"></span>
         </span>
       </div>

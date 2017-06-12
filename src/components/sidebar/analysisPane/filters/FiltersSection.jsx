@@ -289,16 +289,20 @@ class FiltersSection extends React.Component {
     const filterNodes = filterIds.map((filterId, i) => {
       const renderOrder = i + 1;
       let defaultFieldIndex = unselectedIndexes[i];
-      return (<Filter
-        key={filterId}
-        id={filterId}
-        memory={memory.filterSettings[filterId]}
-        defaultFieldIndex={defaultFieldIndex}
-        dropdownData={this.dropdownData}
-        handleRemoveFilter={this.handleRemoveFilter}
-        updateFilterSettingsMemory={this.updateFilterSettingsMemory}
-        renderOrder={renderOrder}
-        propsMd={this.props.propsMd}/>)
+      return (
+        <Filter
+          key={i}
+          id={filterId}
+          memory={memory.filterSettings[filterId]}
+          defaultFieldIndex={defaultFieldIndex}
+          dropdownData={this.dropdownData}
+          handleRemoveFilter={this.handleRemoveFilter}
+          updateFilterSettingsMemory={this.updateFilterSettingsMemory}
+          renderOrder={renderOrder}
+          propsMd={this.props.propsMd}
+          displayFilterType={filterIds.length > 1 && i > 0}
+        />
+      )
     });
     return filterNodes;
   }

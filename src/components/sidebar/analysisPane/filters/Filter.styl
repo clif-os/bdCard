@@ -1,7 +1,29 @@
+.filter-container {
+  width: calc(95% + 4px);
+  position: relative;
+  transition: right 0.25s ease;
+  right: 100%;  
+  .filterType-container {
+    margin-top: 5px;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: middle;
+    .filterType {
+      color: #0A83C9;
+      font-weight: bolder;
+      font-size: 10pt;
+      margin-top: 4px;
+      transition-duration: 0.2s;
+    }
+  }
+}
+
 .filter {
   height: 163px;
   position: relative;
-  width: calc(95% + 4px);
+  width: 100%;
   padding-top: 5px;
   padding-right: 4px;
   margin-top: 5px;
@@ -9,8 +31,7 @@
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border-top: .5px solid rgb(200, 200, 200);
   border-left: .5px solid rgb(200, 200, 200);
-  transition: right 0.25s ease, box-shadow 0.08s linear;
-  right: 100%;
+  transition: box-shadow 0.08s linear;
   &:hover {
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     background-color: white;

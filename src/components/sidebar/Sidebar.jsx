@@ -70,7 +70,6 @@ class Sidebar extends React.Component {
   }
 
   handleMapStorageChoice(loadFromStorage){
-    console.log(loadFromStorage);
     if (loadFromStorage){
       this.handleMapMemoryChoice(storageMemory);
     } else {

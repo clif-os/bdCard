@@ -109,7 +109,7 @@ class Filter extends React.Component {
 
   //// FIELD ACTIVE TOGGLER HANDLERS
 
-  handleFilterActiveToggle(ref){
+  handleFilterActiveToggle(){
     this.setState({
       filterActive: !this.state.filterActive
     });
@@ -256,74 +256,83 @@ class Filter extends React.Component {
 
   render() {
     const { unitFormatter } = choseFormatter(this.state.units);
+    const { displayFilterType } = this.props;
     return (
-      <div className="filter" ref={'filter-' + this.props.id} id={this.props.id}>
-        <div className='titleAndControls filterSection'>
-          <ActiveSlider active={this.state.filterActive} handleActiveToggle={this.handleFilterActiveToggle} />
-          <div className='removeFilterButton'>
-            <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
+      <div  className="filter-container" id={this.props.id}>
+        {displayFilterType
+          ? <div className="filterType-container">
+            <span className="filterType">AND</span>
           </div>
-        </div>
-        <div className='fieldSelector filterSection'>
-          <span className='filterSection-title'>Field:</span>
-          <Select
-            className='select-field select'
-            name="Select Field"
-            value={this.state.fieldValue}
-            options={this.state.fieldOptions}
-            onChange={this.handleFieldSelection}
-            clearable={false}
-          />
-        </div>
-        <div className='yearSelector filterSection'>
-          <span className='filterSection-title'>Year:</span>
-          <Select
-            className='select-year select'
-            name="Select Year"
-            value={this.state.yearValue}
-            options={this.state.yearOptions}
-            onChange={this.handleYearSelection}
-            clearable={false}
-          />
-        </div>
-        <div className='rangeSelector filterSection'>
-          <span className='filterSection-title'>Range:</span>
-          <div className='sliderContainer'>
-            <div className='rangeInputContainer'>
-              <div className='rangeInputSubCont-min rangeInputSubCont'>
-                <input className='rangeInput-min rangeInput' type="text" 
-                       value={this.state.rangeMinInputActive
-                                ? this.state.rangeInputValue
-                                : unitFormatter(this.state.selectedRange[0])
-                              } 
-                       onFocus={this.handleRangeInputFocus} 
-                       onBlur={this.handleRangeInputBlur}
-                       onChange={this.handleRangeInputChange}
-                       onKeyDown={this.handleRangeInputKeydown} />
-                <span className='rangeInputLabel rangeInputLabel-min'>min</span>
-              </div>
-              <div className='rangeInputSubCont-max rangeInputSubCont'>
-                <span className='rangeInputLabel rangeInputLabel-max'>max</span>
-                <input className='rangeInput-max rangeInput' type="text"
-                       value={this.state.rangeMaxInputActive
-                                ? this.state.rangeInputValue
-                                : unitFormatter(this.state.selectedRange[1])
-                              }
-                       onFocus={this.handleRangeInputFocus} 
-                       onBlur={this.handleRangeInputBlur}
-                       onChange={this.handleRangeInputChange}
-                       onKeyDown={this.handleRangeInputKeydown} />
-              </div>
+          : null
+        }
+        <div className="filter" >
+          <div className='titleAndControls filterSection'>
+            <ActiveSlider active={this.state.filterActive} handleActiveToggle={this.handleFilterActiveToggle} />
+            <div className='removeFilterButton'>
+              <span className='fa fa-trash' id={'rfb-' + this.props.id} onClick={this.handleRemoveFilter} />
             </div>
-            <Range className='slider' value={this.state.selectedRange} 
-                   min={this.state.range[0]} max={this.state.range[1]}
-                   marks={this.state.medianMark}
-                   onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
-            
           </div>
+          <div className='fieldSelector filterSection'>
+            <span className='filterSection-title'>Field:</span>
+            <Select
+              className='select-field select'
+              name="Select Field"
+              value={this.state.fieldValue}
+              options={this.state.fieldOptions}
+              onChange={this.handleFieldSelection}
+              clearable={false}
+            />
+          </div>
+          <div className='yearSelector filterSection'>
+            <span className='filterSection-title'>Year:</span>
+            <Select
+              className='select-year select'
+              name="Select Year"
+              value={this.state.yearValue}
+              options={this.state.yearOptions}
+              onChange={this.handleYearSelection}
+              clearable={false}
+            />
+          </div>
+          <div className='rangeSelector filterSection'>
+            <span className='filterSection-title'>Range:</span>
+            <div className='sliderContainer'>
+              <div className='rangeInputContainer'>
+                <div className='rangeInputSubCont-min rangeInputSubCont'>
+                  <input className='rangeInput-min rangeInput' type="text" 
+                        value={this.state.rangeMinInputActive
+                                  ? this.state.rangeInputValue
+                                  : unitFormatter(this.state.selectedRange[0])
+                                } 
+                        onFocus={this.handleRangeInputFocus} 
+                        onBlur={this.handleRangeInputBlur}
+                        onChange={this.handleRangeInputChange}
+                        onKeyDown={this.handleRangeInputKeydown} />
+                  <span className='rangeInputLabel rangeInputLabel-min'>min</span>
+                </div>
+                <div className='rangeInputSubCont-max rangeInputSubCont'>
+                  <span className='rangeInputLabel rangeInputLabel-max'>max</span>
+                  <input className='rangeInput-max rangeInput' type="text"
+                        value={this.state.rangeMaxInputActive
+                                  ? this.state.rangeInputValue
+                                  : unitFormatter(this.state.selectedRange[1])
+                                }
+                        onFocus={this.handleRangeInputFocus} 
+                        onBlur={this.handleRangeInputBlur}
+                        onChange={this.handleRangeInputChange}
+                        onKeyDown={this.handleRangeInputKeydown} />
+                </div>
+              </div>
+              <Range className='slider' value={this.state.selectedRange} 
+                    min={this.state.range[0]} max={this.state.range[1]}
+                    marks={this.state.medianMark}
+                    onChange={this.handleSliderChange} onAfterChange={this.handleSliderAfterChange} />
+              
+            </div>
+          </div>
+          <div className={'validationBar validationBar-' + (this.state.filterValid ? 'valid' : 'invalid') 
+                          + ' validationBar-' +  (this.state.filterActive ? 'active' : 'inactive')} />
         </div>
-        <div className={'validationBar validationBar-' + (this.state.filterValid ? 'valid' : 'invalid') 
-                        + ' validationBar-' +  (this.state.filterActive ? 'active' : 'inactive')} />
       </div>
     );
   }

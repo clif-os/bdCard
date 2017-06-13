@@ -136,16 +136,16 @@ class PassFailVisualizer extends React.Component {
   }
 
   handleYearSelection(val){
-    const newyearValue = val.value;
+    const newYearValue = val.value;
     
     const { fieldValue, selectedRange, yearValue } = this.state;
     const oldUnits = this.state.units;
 
-    const selectedProp = this.propRegistry[fieldValue + newyearValue];
+    const selectedProp = this.propRegistry[fieldValue + newYearValue];
     const {min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
     
     const defaultRange = [min, max];
-    const newSelectedRange = determineNewSelectedRange(selectedRange, defaultRange, oldUnits, units, yearValue, newyearValue);
+    const newSelectedRange = determineNewSelectedRange(selectedRange, defaultRange, oldUnits, units, yearValue, newYearValue);
     
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
@@ -153,7 +153,7 @@ class PassFailVisualizer extends React.Component {
     medianMark[median] = medianLabel;
     this.setState({
       selectedProp: selectedProp,
-      yearValue: yearVal,
+      yearValue: newYearValue,
 
       range: [min, max],
       selectedRange: newSelectedRange,

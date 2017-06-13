@@ -14,7 +14,8 @@ import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
 import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
 import { generatePaintArray } from '../../../../mapbox/geojsonLayerUtils.jsx';
-import { splitRangeByClassesWithStepVals, splitsToSliderValues, sliderValuesToSplits, classes, palettes } from './classesVisUtils.jsx';
+import { splitRangeByClassesWithStepVals, splitsToSliderValues, sliderValuesToSplits,
+         determineNewSelectedSplitRanges, classes, palettes } from './classesVisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
@@ -192,46 +193,6 @@ class ClassesVisualizer extends React.Component {
     medianMark[median] = medianLabel;
     
     const defaultSplits = splitRangeByClassesWithStepVals([stepMin, stepMax], classNumValue, stepVal);
-    const determineNewSelectedSplitRanges = (selectedSplitRanges, defaultSplits, stepMin, stepMax, stepVal, yearValue, newYearValue) => {
-      const slotsAvailable = (stepMax - stepMin) / stepVal;
-      const slotsNeeded = selectedSplitRanges.length * 2;
-      if (yearValue.length === newYearValue.length &&
-          selectedSplitRanges[0][0] < stepMax &&
-          selectedSplitRanges[selectedSplitRanges.length - 1][1] > stepMin &&
-          slotsAvailable >= slotsNeeded) {
-        return selectedSplitRanges.reduce((acc, sRange, i) => {
-          const assignmentsRemaining = ((selectedSplitRanges.length) - i);
-          let nRange = [...sRange];
-          let rollingMin = stepMin;
-          if (i !== 0) {
-            rollingMin = acc[i - 1][1];
-          }
-          if (nRange[0] <= stepMin) {
-            nRange[0] = rollingMin;
-          }
-          if (nRange[1] <= stepMin || nRange[1] <= nRange[0]) {
-            nRange[1] = nRange[0] + stepVal;
-          }
-          if (nRange[1] >= stepMax) {
-            nRange[1] = stepMax - (stepVal * assignmentsRemaining);
-          }
-          if (nRange[0] >= stepMax || nRange[0] >= nRange[1]) {
-            nRange[0] = nRange[1] - stepVal; // times some representation of the index to make room for others
-          }
-          if (i === 0) {
-            // first array needs to start at the stepMin
-            nRange[0] = stepMin;
-          } else if (i === selectedSplitRanges.length - 1) {
-            // last array needs to end at the stepMax
-            nRange[1] = stepMax;
-          }
-          acc.push(nRange);
-          return acc;
-        }, [])
-      } else {
-        return defaultSplits;
-      }
-    };
     const newSplits = determineNewSelectedSplitRanges(selectedSplitRanges, defaultSplits, stepMin, stepMax, stepVal, yearValue, newYearValue);
     const newSplitVals = splitsToSliderValues(newSplits);
 

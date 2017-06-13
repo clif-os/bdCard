@@ -51,6 +51,53 @@ export const sliderValuesToSplits = sliderVals => {
   }, []);
 }
 
+export const determineNewSelectedSplitRanges = (selectedSplitRanges, defaultSplits, stepMin, stepMax, stepVal, yearValue, newYearValue) => {
+  const slotsAvailable = (stepMax - stepMin) / stepVal;
+  const slotsNeeded = selectedSplitRanges.length * 2;
+  // the min/max criteria dont seem to be working as expected, but the results of this function are satisfactory for now
+  // check the min/max criteria which are the second and third conditions of four necessary to perform settings preservation
+  // for the slider
+  if (yearValue.length === newYearValue.length &&
+      selectedSplitRanges[0][0] < stepMax &&
+      selectedSplitRanges[selectedSplitRanges.length - 1][1] > stepMin &&
+      slotsAvailable >= slotsNeeded) {
+    return selectedSplitRanges.reduce((acc, sRange, i) => {
+      const assignmentsRemaining = ((selectedSplitRanges.length) - i);
+      const ceiling = stepMax - (stepVal * assignmentsRemaining);
+      let nRange = [...sRange];
+      let rollingMin = stepMin;
+      if (i !== 0) {
+        rollingMin = acc[i - 1][1];
+      }
+      if (nRange[0] <= stepMin) {
+        nRange[0] = rollingMin;
+      }
+      if (nRange[1] <= stepMin || nRange[1] <= nRange[0]) {
+        nRange[1] = nRange[0] + stepVal;
+      }
+      if (nRange[1] >= stepMax || sRange[1] > ceiling) {
+        nRange[1] = ceiling;
+      }
+      if (nRange[0] >= stepMax || nRange[0] >= nRange[1]) {
+        nRange[0] = nRange[1] - stepVal; // times some representation of the index to make room for others
+      }
+      if (i === 0) {
+        // first array needs to start at the stepMin
+        nRange[0] = stepMin;
+      } else if (i === selectedSplitRanges.length - 1) {
+        // last array needs to end at the stepMax
+        nRange[1] = stepMax;
+      }
+      console.log({sRange}, {nRange});
+      console.log({acc});
+      acc.push(nRange);
+      return acc;
+    }, []);
+  } else {
+    return defaultSplits;
+  }
+};
+
 export const classes = [
   {value: 2, label: '2'},
   {value: 3, label: '3'},

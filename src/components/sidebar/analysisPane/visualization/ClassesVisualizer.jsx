@@ -9,7 +9,7 @@ const Slider = require('rc-slider');
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 
-import { fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
+import { fieldUnitAndRangeHandler, determineNewYear } from '../analysisUtils.jsx';
 import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
 import { splitRangeByClasses } from '../../../../filter/filterUtils.jsx';
@@ -140,9 +140,12 @@ class ClassesVisualizer extends React.Component {
   handleFieldSelection(val){
     const fieldVal = val.value;
     const fieldLabel = val.label;
+
+    const { yearValue } = this.state;
+
     const defaultYearOptions = this.yearLookups[fieldVal];
-    const defaultYearVal = defaultYearOptions[0].value;
-    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    const newYearVal = determineNewYear(defaultYearOptions, yearValue);
+    const defaultSelectedProp = this.propRegistry[fieldVal + newYearVal];
     
     var {min, max, median, units, stepMax, stepMin, stepVal } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
@@ -157,7 +160,7 @@ class ClassesVisualizer extends React.Component {
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
       fieldLabel: fieldLabel,
-      yearValue: defaultYearVal,
+      yearValue: newYearVal,
       yearOptions: defaultYearOptions,
       
       filterValid: false,
@@ -176,8 +179,8 @@ class ClassesVisualizer extends React.Component {
   }
 
   handleYearSelection(val){
-    const yearVal = val.value;
-    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const newyearValue = val.value;
+    const selectedProp = this.propRegistry[this.state.fieldValue + newyearValue];
 
     var {min, max, median, units, stepVal, stepMin, stepMax } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
@@ -190,7 +193,7 @@ class ClassesVisualizer extends React.Component {
 
     this.setState({
       selectedProp: selectedProp,
-      yearValue: yearVal,
+      yearValue: newyearValue,
       
       filterValid: false,
       freezeValidity: false,

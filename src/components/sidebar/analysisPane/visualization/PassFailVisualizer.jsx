@@ -7,7 +7,9 @@ import 'rc-slider/assets/index.css';
 const Slider = require('rc-slider');
 const Range = Slider.Range;
 
-import { isSubRange, validateAndNormalizeRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
+import { isSubRange, validateAndNormalizeRangeInputValue,
+         fieldUnitAndRangeHandler, determineNewYear,
+         determineNewSelectedRange } from '../analysisUtils.jsx';
 import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
 //// IMPORTANT NOTES
@@ -104,9 +106,13 @@ class PassFailVisualizer extends React.Component {
     const fieldVal = val.value;
     const fieldLabel = val.label;
 
+    const { yearValue } = this.state;
+
+
     const defaultYearOptions = this.yearLookups[fieldVal];
-    const defaultYearVal = defaultYearOptions[0].value;
-    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    const newYearVal = determineNewYear(defaultYearOptions, yearValue);
+    const defaultSelectedProp = this.propRegistry[fieldVal + newYearVal];
+
     var {min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
@@ -116,7 +122,7 @@ class PassFailVisualizer extends React.Component {
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
       fieldLabel: fieldLabel,
-      yearValue: defaultYearVal,
+      yearValue: newYearVal,
       yearOptions: defaultYearOptions,
 
       range: [min, max],
@@ -130,9 +136,17 @@ class PassFailVisualizer extends React.Component {
   }
 
   handleYearSelection(val){
-    const yearVal = val.value;
-    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const newyearValue = val.value;
+    
+    const { fieldValue, selectedRange, yearValue } = this.state;
+    const oldUnits = this.state.units;
+
+    const selectedProp = this.propRegistry[fieldValue + newyearValue];
     const {min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    
+    const defaultRange = [min, max];
+    const newSelectedRange = determineNewSelectedRange(selectedRange, defaultRange, oldUnits, units, yearValue, newyearValue);
+    
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
@@ -142,7 +156,7 @@ class PassFailVisualizer extends React.Component {
       yearValue: yearVal,
 
       range: [min, max],
-      selectedRange: [min, max],
+      selectedRange: newSelectedRange,
       medianMark: medianMark,
       units: units,
       filterValid: false,

@@ -135,11 +135,12 @@ export const determineNewYear = (defaultYearOptions, oldYearValue) => {
     };
   };
   return yearStillAvailable ? oldYearValue : defaultYearOptions[0].value;
-}
+};
 
-export const determineNewSelectedRange = (defaultRange, selectedRange, oldUnits, newUnits) => {
+// (old, new, old, new, ...etc)
+export const determineNewSelectedRange = (selectedRange, defaultRange, oldUnits, newUnits, oldYearValue, newYearValue) => {
   let newRange;
-  if (oldUnits === newUnits) {
+  if (oldUnits === newUnits && oldYearValue.length === newYearValue.length) {
     const newMin = (selectedRange[0] >= defaultRange[0] && selectedRange[0] <= defaultRange[1])
        ? selectedRange[0]
        : defaultRange[0];

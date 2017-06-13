@@ -9,7 +9,8 @@ const Range = Slider.Range;
 
 import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
-import { isSubRange, validateAndNormalizeRangeInputValue, fieldUnitAndRangeHandler, determineNewSelectedRange } from '../analysisUtils.jsx';
+import { isSubRange, validateAndNormalizeRangeInputValue,
+         fieldUnitAndRangeHandler, determineNewYear, determineNewSelectedRange } from '../analysisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
@@ -126,20 +127,8 @@ class Filter extends React.Component {
     const oldUnits = this.state.units;
 
     const defaultYearOptions = this.yearLookups[fieldVal];
-    ///// REFACTOR TO ALL ANALYSIS COMPONENTS
-    var yearStillAvailable = false;
-    for (var i = 0, limit = (defaultYearOptions.length - 1); i < limit; i++) {
-      const defaultYearOption = defaultYearOptions[i].value;
-      if (defaultYearOption === yearValue) {
-        yearStillAvailable = true;
-        break;
-      };
-    };
-    /////
-    const yearVal = yearStillAvailable ? yearValue : defaultYearOptions[0].value;
-    //// ??? this too ^^ ????
-
-    const defaultSelectedProp = this.propRegistry[fieldVal + yearVal];
+    const newYearVal = determineNewYear(defaultYearOptions, yearValue);
+    const defaultSelectedProp = this.propRegistry[fieldVal + newYearVal];
     
     const { min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
     
@@ -154,7 +143,7 @@ class Filter extends React.Component {
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
       fieldLabel: fieldLabel,
-      yearValue: yearVal,
+      yearValue: newYearVal,
       yearOptions: defaultYearOptions,
 
       range: [min, max],

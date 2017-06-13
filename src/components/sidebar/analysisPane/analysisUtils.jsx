@@ -125,20 +125,30 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   }
 }
 
+export const determineNewYear = (defaultYearOptions, oldYearValue) => {
+  let yearStillAvailable = false;
+  for (var i = 0, limit = (defaultYearOptions.length - 1); i < limit; i++) {
+    const defaultYearOption = defaultYearOptions[i].value;
+    if (defaultYearOption === oldYearValue) {
+      yearStillAvailable = true;
+      break;
+    };
+  };
+  return yearStillAvailable ? oldYearValue : defaultYearOptions[0].value;
+}
+
 export const determineNewSelectedRange = (defaultRange, selectedRange, oldUnits, newUnits) => {
   let newRange;
   if (oldUnits === newUnits) {
-    let newMin;
-    let newMax;
-    newMin = (selectedRange[0] >= defaultRange[0] && selectedRange[0] <= defaultRange[1])
+    const newMin = (selectedRange[0] >= defaultRange[0] && selectedRange[0] <= defaultRange[1])
        ? selectedRange[0]
        : defaultRange[0];
-    newMax = (selectedRange[1] >= defaultRange[0] && selectedRange[1] <= defaultRange[1])
+    const newMax = (selectedRange[1] >= defaultRange[0] && selectedRange[1] <= defaultRange[1])
       ? selectedRange[1]
       : defaultRange[1];
     newRange = [newMin, newMax];
   } else {
-    newRange = defaultRange;
+    return defaultRange;
   }
   return newRange;
 }

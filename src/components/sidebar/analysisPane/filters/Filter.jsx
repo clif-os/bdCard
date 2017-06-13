@@ -9,7 +9,7 @@ const Range = Slider.Range;
 
 import { choseFormatter } from '../../../../utils/unitFormatters.jsx';
 
-import { isSubRange, validateAndNormalizeRangeInputValue, fieldUnitAndRangeHandler } from '../analysisUtils.jsx';
+import { isSubRange, validateAndNormalizeRangeInputValue, fieldUnitAndRangeHandler, determineNewSelectedRange } from '../analysisUtils.jsx';
 
 //// IMPORTANT NOTES
 // 1) This component is only currently capable of handling integers, thus all min/max values coming in are floored/ceiled accordingly
@@ -121,10 +121,31 @@ class Filter extends React.Component {
     const fieldVal = val.value;
     const fieldLabel = val.label;
 
+    const { yearValue, selectedRange } = this.state;
+    // need to refactor terminology to var, newVar for everything
+    const oldUnits = this.state.units;
+
     const defaultYearOptions = this.yearLookups[fieldVal];
-    const defaultYearVal = defaultYearOptions[0].value;
-    const defaultSelectedProp = this.propRegistry[fieldVal + defaultYearVal];
+    ///// REFACTOR TO ALL ANALYSIS COMPONENTS
+    var yearStillAvailable = false;
+    for (var i = 0, limit = (defaultYearOptions.length - 1); i < limit; i++) {
+      const defaultYearOption = defaultYearOptions[i].value;
+      if (defaultYearOption === yearValue) {
+        yearStillAvailable = true;
+        break;
+      };
+    };
+    /////
+    const yearVal = yearStillAvailable ? yearValue : defaultYearOptions[0].value;
+    //// ??? this too ^^ ????
+
+    const defaultSelectedProp = this.propRegistry[fieldVal + yearVal];
+    
     const { min, max, median, units } = fieldUnitAndRangeHandler(defaultSelectedProp, this.props.propsMd);
+    
+    const defaultRange = [min, max];
+    const newSelectedRange = determineNewSelectedRange(defaultRange, selectedRange, oldUnits, units);
+
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
@@ -133,11 +154,11 @@ class Filter extends React.Component {
       selectedProp: defaultSelectedProp,
       fieldValue: fieldVal,
       fieldLabel: fieldLabel,
-      yearValue: defaultYearVal,
+      yearValue: yearVal,
       yearOptions: defaultYearOptions,
 
       range: [min, max],
-      selectedRange: [min, max],
+      selectedRange: newSelectedRange,
       medianMark: medianMark,
       units: units,
       filterValid: false,
@@ -148,19 +169,26 @@ class Filter extends React.Component {
 
   handleYearSelection(val){
     const yearVal = val.value;
-    const selectedProp = this.propRegistry[this.state.fieldValue + yearVal];
+    const { fieldValue, selectedRange } = this.state;
+    const oldUnits = this.state.units;
+
+    const selectedProp = this.propRegistry[fieldValue + yearVal];
     const { min, max, median, units } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
+    
+    const defaultRange = [min, max];
+    const newSelectedRange = determineNewSelectedRange(defaultRange, selectedRange, oldUnits, units);
+
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
-
+    
     this.setState({
       selectedProp: selectedProp,
       yearValue: yearVal,
 
       range: [min, max],
-      selectedRange: [min, max],
+      selectedRange: newSelectedRange,
       medianMark: medianMark,
       units: units,
       filterValid: false,

@@ -125,6 +125,24 @@ export const fieldUnitAndRangeHandler = (field, propsMd) => {
   }
 }
 
+export const determineNewSelectedRange = (defaultRange, selectedRange, oldUnits, newUnits) => {
+  let newRange;
+  if (oldUnits === newUnits) {
+    let newMin;
+    let newMax;
+    newMin = (selectedRange[0] >= defaultRange[0] && selectedRange[0] <= defaultRange[1])
+       ? selectedRange[0]
+       : defaultRange[0];
+    newMax = (selectedRange[1] >= defaultRange[0] && selectedRange[1] <= defaultRange[1])
+      ? selectedRange[1]
+      : defaultRange[1];
+    newRange = [newMin, newMax];
+  } else {
+    newRange = defaultRange;
+  }
+  return newRange;
+}
+
 export const isSubRange = (range, selectedRange) => {
   if (selectedRange[0] > range[0] || selectedRange[1] < range[1]){
     return true;

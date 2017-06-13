@@ -117,10 +117,12 @@ class MapsPane extends React.Component {
   renderChoices(recommendedChoices, savedChoices) {
     const recommendedNodes = recommendedChoices.map((choice, i) => {
       const order = i + 1;
+      const { title, icon, description } = choice;
       return <MapChoice
         key={i}
-        title={choice.title}
-        icon={choice.icon}
+        title={title}
+        icon={icon}
+        description={description}
         choice={choice}
         order={order}
         type='load'

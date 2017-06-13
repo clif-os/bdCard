@@ -1,4 +1,6 @@
 import React from 'react';
+import './MapChoice.styl';
+
 
 class MapChoice extends React.Component {
   constructor(props){
@@ -59,9 +61,11 @@ class MapChoice extends React.Component {
   }
 
   render() {
-    let oddEven = this.props.order % 2 ? 'odd' : 'even';
-    let rowNum = Math.ceil(this.props.order / 2);
-    const className= `mapsPane-${this.props.type}Button mapsPane-${this.props.type}Button-${this.props.order} mapsPane-choices-${this.props.title}
+    const { description, order } = this.props;
+    const { hover } = this.state;
+    let oddEven = order % 2 ? 'odd' : 'even';
+    let rowNum = Math.ceil(order / 2);
+    const className= `mapChoice mapsPane-${this.props.type}Button mapsPane-${this.props.type}Button-${order} mapsPane-choices-${this.props.title}
                 mapsPane-button mapsPane-button-${oddEven} mapsPane-buttonRow-${rowNum}`
                 + (rowNum === this.props.rows ? ' mapsPane-buttonRow-preceeding' : '')
                 + ` mapsPane-${this.props.type}Button-` + (this.state.clicked ? 'clicked' : 'notClicked');
@@ -69,7 +73,13 @@ class MapChoice extends React.Component {
       <div className={className}
            onMouseUp={this.handleMouseUp} onMouseDown={this.handleMouseDown}
            onMouseEnter={this.handleMouseEnter} onMouseLeave={this.handleMouseLeave}
-           ref={'mapChoice-' + this.props.order} >
+           ref={'mapChoice-' + order} >
+        {description !== undefined
+          ? <div className={`mapChoice-description-container mapChoice-description-hover-${hover}`}>
+            <span className="mapChoice-description">{description}</span>
+          </div>
+          : null
+        }
         <span className='mapsPane-button-title'>
           <span className={'mapsPane-button-icon fa ' + this.props.icon} /> 
           {this.props.title}

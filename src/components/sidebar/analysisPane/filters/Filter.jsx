@@ -46,9 +46,9 @@ class Filter extends React.Component {
       // SET THE DEFAULT STATE
       const defaultFilterSetting = {
         filterActive: true,
-
+        
         selectedProp: defaultSelectedProp,
-
+        
         fieldValue: defaultFieldVal,
         fieldLabel: defaultFieldLabel,
         fieldOptions: fieldOptions,

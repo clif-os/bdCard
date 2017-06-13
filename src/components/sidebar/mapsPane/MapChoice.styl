@@ -1,0 +1,28 @@
+.mapChoice {
+  .mapChoice-description-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: rgba(50,50,50,.8);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 15px;
+    padding: 3px;
+    transition: opacity 0.1s linear;
+    .mapChoice-description {
+      font-size: 10pt;
+      // color: rgb(20,20,20);
+      color: white!important;
+    }
+  }
+  .mapChoice-description-hover-true {
+    opacity: 1;
+  }
+  .mapChoice-description-hover-false {
+    opacity: 0;
+  }
+}

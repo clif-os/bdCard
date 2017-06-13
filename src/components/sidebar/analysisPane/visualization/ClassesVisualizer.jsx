@@ -179,29 +179,73 @@ class ClassesVisualizer extends React.Component {
   }
 
   handleYearSelection(val){
-    const newyearValue = val.value;
-    const selectedProp = this.propRegistry[this.state.fieldValue + newyearValue];
+    const newYearValue = val.value;
+
+    const { fieldValue, classNumValue, selectedRange, selectedSplitRanges, yearValue } = this.state;
+
+    const selectedProp = this.propRegistry[fieldValue + newYearValue];
 
     var {min, max, median, units, stepVal, stepMin, stepMax } = fieldUnitAndRangeHandler(selectedProp, this.props.propsMd);
     const { unitFormatter } = choseFormatter(units);
     var medianLabel = 'median: ' + unitFormatter(median);
     var medianMark = {};
     medianMark[median] = medianLabel;
-      
-    const splits = splitRangeByClassesWithStepVals([stepMin, stepMax], this.state.classNumValue, stepVal);
-    const splitVals = splitsToSliderValues(splits);
+    
+    const defaultSplits = splitRangeByClassesWithStepVals([stepMin, stepMax], classNumValue, stepVal);
+    const determineNewSelectedSplitRanges = (selectedSplitRanges, defaultSplits, stepMin, stepMax, stepVal, yearValue, newYearValue) => {
+      const slotsAvailable = (stepMax - stepMin) / stepVal;
+      const slotsNeeded = selectedSplitRanges.length * 2;
+      if (yearValue.length === newYearValue.length &&
+          selectedSplitRanges[0][0] < stepMax &&
+          selectedSplitRanges[selectedSplitRanges.length - 1][1] > stepMin &&
+          slotsAvailable >= slotsNeeded) {
+        return selectedSplitRanges.reduce((acc, sRange, i) => {
+          const assignmentsRemaining = ((selectedSplitRanges.length) - i);
+          let nRange = [...sRange];
+          let rollingMin = stepMin;
+          if (i !== 0) {
+            rollingMin = acc[i - 1][1];
+          }
+          if (nRange[0] <= stepMin) {
+            nRange[0] = rollingMin;
+          }
+          if (nRange[1] <= stepMin || nRange[1] <= nRange[0]) {
+            nRange[1] = nRange[0] + stepVal;
+          }
+          if (nRange[1] >= stepMax) {
+            nRange[1] = stepMax - (stepVal * assignmentsRemaining);
+          }
+          if (nRange[0] >= stepMax || nRange[0] >= nRange[1]) {
+            nRange[0] = nRange[1] - stepVal; // times some representation of the index to make room for others
+          }
+          if (i === 0) {
+            // first array needs to start at the stepMin
+            nRange[0] = stepMin;
+          } else if (i === selectedSplitRanges.length - 1) {
+            // last array needs to end at the stepMax
+            nRange[1] = stepMax;
+          }
+          acc.push(nRange);
+          return acc;
+        }, [])
+      } else {
+        return defaultSplits;
+      }
+    };
+    const newSplits = determineNewSelectedSplitRanges(selectedSplitRanges, defaultSplits, stepMin, stepMax, stepVal, yearValue, newYearValue);
+    const newSplitVals = splitsToSliderValues(newSplits);
 
     this.setState({
       selectedProp: selectedProp,
-      yearValue: newyearValue,
+      yearValue: newYearValue,
       
       filterValid: false,
       freezeValidity: false,
       alertSliderOfRedefinition: true,
 
       range: [min, max],
-      selectedRange: splitVals,
-      selectedSplitRanges: splits,
+      selectedSplitRanges: newSplits,      
+      selectedRange: newSplitVals,
       medianMark: medianMark,
       units: units,
       stepMax: stepMax,

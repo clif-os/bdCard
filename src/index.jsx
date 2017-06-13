@@ -19,7 +19,7 @@ require('es6-shim');
 require('custom-event-polyfill');
 
 // CUSTOM TESTING MODE //
-window.troubleshootMode = true;
+window.troubleshootMode = false;
 
 import gjPropsMetadata from './data/jchs-boston-md.json';
 import {convertGJLayersToLegendData} from './components/legend/legendUtils.jsx';

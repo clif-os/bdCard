@@ -7,7 +7,7 @@ export const splitRangeByClassesWithStepVals = (range, classes, stepVal) => {
     min = Math.floor(range.min);
     max = Math.ceil(range.max);
   }
-  console.log({min}, {max});
+  // console.log({min}, {max});
   
   const classLength = Math.round((max - min) / classes);
 
@@ -27,7 +27,7 @@ export const splitRangeByClassesWithStepVals = (range, classes, stepVal) => {
     ]);
     minVal = maxVal;
   };
-  console.log({splitRanges});
+  // console.log({splitRanges});
   return splitRanges;
 }
 

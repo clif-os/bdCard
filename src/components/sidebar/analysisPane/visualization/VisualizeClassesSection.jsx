@@ -59,7 +59,7 @@ class VisualizeClassesSection extends React.Component {
     if ( !visState.freezeValidity ) {
       this.determineVisEventFire();
     } else {
-      console.log('VISUALIZER VALIDITY IS FROZEN (vis classes section)');
+      // console.log('VISUALIZER VALIDITY IS FROZEN (vis classes section)');
     }
     this.props.updateVisualizersMemory('classes', memory);
   }

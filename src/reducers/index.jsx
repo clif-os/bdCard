@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import { showcase } from './showcase.jsx';
 
-const formApp = combineReducers({
-  
+const bmShowcaseApp = combineReducers({
+  showcase
 });
 
-export default formApp;
+export default bmShowcaseApp;

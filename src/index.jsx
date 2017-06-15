@@ -5,7 +5,7 @@ import {render} from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import logger from 'redux-logger';
-import formApp from './reducers/index.jsx';
+import bmShowcaseApp from './reducers/index.jsx';
 
 import AppInterface from './AppInterface.jsx';
 
@@ -16,7 +16,7 @@ require('es6-shim');
 require('custom-event-polyfill');
 
 const store = createStore(
-  formApp,
+  bmShowcaseApp,
   applyMiddleware(logger),
 );
 

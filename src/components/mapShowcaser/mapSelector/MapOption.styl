@@ -1,15 +1,23 @@
 .mapOption-resting {
   cursor: pointer;
+  .mapOption-info {
+    opacity: 0;
+  }
 }
 
 .mapOption-chosen {
-  cursor: auto;
-  pointer-events: none;
+  .mapOption-info {
+    opacity: 1;
+    .mapOption-underline {
+      width: 30%!important;
+    }
+  }
 }
 
 .mapOption-notChosen {
-  cursor: auto;
-  pointer-events: none;
+  .mapOption-info {
+    opacity: 0;
+  }
 }
 
 .mapOption {
@@ -32,7 +40,6 @@
     height: 100%;
     width: 100%;
     background: rgba(0, 0, 0, .5);
-    opacity: 0;
     transition-duration: 0.2s;
     color: white;
     padding: 5px;

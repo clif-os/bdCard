@@ -2,22 +2,20 @@ import React, { PropTypes } from 'react';
 import './MapOption.styl';
 
 function MapOption(props) {
-  const { nodeId, handleChoice, chosen, optionChosen,
+  const { nodeId, handleChoice, chosen,
           title, description, imgUrl, optionData } = props;
   const hClick = () => {
-    handleChoice(optionData, nodeId);
+    if (! chosen) {
+      handleChoice(optionData, nodeId);
+    }
   };
   
   let chosenClass;
-  if (optionChosen) {
-    if (chosen) {
-      chosenClass = 'chosen';
-    } else {
-      chosenClass = 'notChosen';
-    }
+  if (chosen) {
+    chosenClass = 'chosen';
   } else {
-    chosenClass = 'resting';
-  };
+    chosenClass = 'notChosen';
+  }
 
   return (
     <button className={`mapOption mapOption-${chosenClass}`} id={`mapOption-${nodeId}`} onClick={hClick} >
@@ -41,15 +39,10 @@ MapOption.propTypes = {
   nodeId: PropTypes.number.isRequired,
   handleChoice: PropTypes.func.isRequired,
   chosen: PropTypes.bool.isRequired,
-  optionChosen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,
   optionData: PropTypes.object.isRequired,
 };
-
-      // <div className="mapOption-selectionMask-container" >
-      //   <div className="mapOption-selectionMask" />
-      // </div>
 
 export default MapOption;

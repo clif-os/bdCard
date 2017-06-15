@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './Map.styl';
+import React, { Component, PropTypes } from 'react';
+import './ReactMap.styl';
 
 global.mapboxgl = require('mapbox-gl');
 
@@ -10,7 +10,7 @@ const startingPosition = {
   zoom: 13
 }
 
-export default class Map extends Component {
+class ReactMap extends Component {
   constructor(props) {
     super();
     this.firstLoad = false;
@@ -18,10 +18,13 @@ export default class Map extends Component {
   }
 
   componentDidMount(){
+    const { chosenOptionData } = this.props;
     if (! this.firstLoad){
+      const { chosenOptionData } = this.props;
+      const defaultStyle = chosenOptionData.styleUrl
       this.map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mimio/cj3hkvc2h001x2rq9db374sjn',
+        container: 'reactMap',
+        style: defaultStyle,
         repaint: true,
         center: startingPosition.center,
         zoom: startingPosition.zoom,
@@ -29,9 +32,6 @@ export default class Map extends Component {
       });
       this.bindMapEvents();
       this.addControls();
-      this.map.on('style.load', () => {
-        // do sumthin
-      });
       this.firstLoad = true;
     }
   }
@@ -47,17 +47,35 @@ export default class Map extends Component {
 
   //// MAP BINDING ////
   bindMapEvents(){
+    //// LISTEN FOR STYLE CHANGES ////
+    window.addEventListener('LOAD_MAP', this.switchBasemaps.bind(this));
     //// internal map event handlers ////
     this.map.on('load', this.onMapLoaded.bind(this));
     this.map.on('move', this.onMapMove.bind(this));
     this.map.on('mousemove', this.onMouseMove.bind(this));
     this.map.on('click', this.onMapClicked.bind(this));
+    this.map.on('style.load', this.onStyleLoad.bind(this));
   }
 
   onMapLoaded() {
     this.firstLoad = false;
-    const { handleMapLoaded } = this.props;
-    handleMapLoaded();
+  }
+
+  switchBasemaps() {
+    const { chosenOptionData } = this.props;
+    const chosenStyle = chosenOptionData.styleUrl
+    this.map.setStyle(chosenStyle);
+  }
+
+  onStyleLoad() {
+    const { onBoarding } = this.props;
+    if (! onBoarding) {
+      const { handleMapLoaded } = this.props;
+      // for some reason the style.load event is always before the map actually loads...
+      setTimeout(() => {
+        handleMapLoaded();
+      }, 500)
+    }
   }
 
   onMapMove(e) {
@@ -73,7 +91,15 @@ export default class Map extends Component {
 
   render() {
     return (
-      <div id='map' />
+      <div id='reactMap' />
     )
   }
 }
+
+ReactMap.propTypes = {
+  handleMapLoaded: PropTypes.func.isRequired,
+  chosenOptionData: PropTypes.object.isRequired,
+  onBoarding: PropTypes.bool.isRequired,
+};
+
+export default ReactMap;

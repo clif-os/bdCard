@@ -28,13 +28,13 @@ class MapShowcaser extends Component {
     const { dispatch } = this.props;
 
     dispatch(prepareMapLoad(nodeId, optionData));
-    //stagger the animations or else set up a way to close the selectorClose instantly
+    //timeouts are for staggering animations, need to set up a special way to cause instant transitions
     setTimeout(() => {
       dispatch(toggleSelectorOpen());
-    }, 1000);
+    }, 300);
     setTimeout(() => {
       this.loadMap();
-    }, 2000)
+    }, 500);
   }
 
   render() {

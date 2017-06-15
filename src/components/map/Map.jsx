@@ -3,7 +3,7 @@ import './Map.styl';
 
 global.mapboxgl = require('mapbox-gl');
 
-mapboxgl.accessToken = 'pk.eyJ1IjoidmFpbHZhbGxleWZvdW5kYXRpb24iLCJhIjoiY2ozM2hzNWozMDA2dDMybzl5cHk1aGQzYiJ9.kmGmld5SPo-MqEp34u_vJQ';
+mapboxgl.accessToken = 'pk.eyJ1IjoibWltaW8iLCJhIjoiY2l6ZjJoenBvMDA4eDJxbWVkd2IzZjR0ZCJ9.ppwGNP_-LS2K4jUvgXG2pA';
 
 const startingPosition = {
   center: [-106.3755, 39.6355],
@@ -18,12 +18,10 @@ export default class Map extends Component {
   }
 
   componentDidMount(){
-    console.log('component mounted')
     if (! this.firstLoad){
-      console.log('trynta make a map')
       this.map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/vailvalleyfoundation/cj33vhx8300442smdioc4jhkh',
+        style: 'mapbox://styles/mimio/cj3hkvc2h001x2rq9db374sjn',
         repaint: true,
         center: startingPosition.center,
         zoom: startingPosition.zoom,
@@ -57,7 +55,6 @@ export default class Map extends Component {
   }
 
   onMapLoaded() {
-    console.log('LOADED')
     this.firstLoad = false;
     const { handleMapLoad } = this.props;
     handleMapLoad();

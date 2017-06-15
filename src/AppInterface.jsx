@@ -16,7 +16,7 @@ class AppInterface extends Component {
       mapLoaded: true
     });
     const loadingPane = document.getElementById('mainLoadingPane');
-    loadingPane.style.opacity = '0';
+    loadingPane.style.bottom = '100%';
     window.setTimeout(() => {
       loadingPane.style.display = 'none';
     }, 500);

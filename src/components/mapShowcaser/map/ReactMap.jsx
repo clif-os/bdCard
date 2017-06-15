@@ -5,9 +5,10 @@ global.mapboxgl = require('mapbox-gl');
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWltaW8iLCJhIjoiY2l6ZjJoenBvMDA4eDJxbWVkd2IzZjR0ZCJ9.ppwGNP_-LS2K4jUvgXG2pA';
 
+// portland = [-122.683145, 45.532482]
 const startingPosition = {
-  center: [-106.3755, 39.6355],
-  zoom: 13
+  center: [-122.683145, 45.532482],
+  zoom: 9
 }
 
 class ReactMap extends Component {

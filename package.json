@@ -7,8 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/concurrently \"node app.js\" \"webpack-dev-server --hot --inline --config webpack.config.dev.js\"",
     "lint": "./node_modules/.bin/eslint.cmd --fix --config .eslintrc ./src/**/*.{js,jsx}",
-    "heroku-postbuild": "webpack --progress",
-    "start": "node app.js"
+    "heroku-postbuild": "webpack --progress && cp src/index.html dist/index.html",
+    "start": "node app.js",
+    "build": "webpack --config ./config/webpack.config.js --progress --colors",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",

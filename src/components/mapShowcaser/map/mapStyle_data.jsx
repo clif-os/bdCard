@@ -1,4 +1,4 @@
-export const mapStyleNodes = [
+export const mapStyles = [
   {
     title: 'MellowSight-Custom',
     description: 'This is a style description. This is an amazing style that you would like to purchase the use of. Good on you.',

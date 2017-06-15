@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './MapSelector.styl';
 import MapOption from './MapOption.jsx';
 
-import { mapStyleNodes } from '../map/mapStyle_data.jsx';
-
 const renderOptions = (options, handleChoice, chosenId) => {
   const nodes = options.map((option, i) => {
     const { title, description, img } = option;
@@ -28,25 +26,13 @@ const renderOptions = (options, handleChoice, chosenId) => {
 export default class MapSelector extends Component {
   constructor(props) {
     super();
-    this.state = {
-      chosenId: null,
-    }
-    this.hMapChoice = this.hMapChoice.bind(this);
-  }
-
-  hMapChoice(optionData, nodeId) {
-    this.setState({
-      chosenId: nodeId
-    });
-    const { handleMapChoice } = this.props;
-    handleMapChoice();
   }
 
   render() {
-    const { chosenId } = this.state;
+    const { handleMapChoice, chosenId, mapStyles } = this.props;
     return (
       <div className='mapSelector'>
-        {renderOptions(mapStyleNodes, this.hMapChoice, chosenId)}
+        {renderOptions(mapStyles, handleMapChoice, chosenId)}
       </div>
     )
   }

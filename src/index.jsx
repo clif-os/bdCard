@@ -1,5 +1,5 @@
 import './index.styl';
-import './components/loader/LoadingPane.styl';
+import './components/mapShowcaser/loader/LoadingPane.styl';
 import React from 'react';
 import {render} from 'react-dom';
 import { Provider } from 'react-redux';

@@ -56,8 +56,8 @@ export default class Map extends Component {
 
   onMapLoaded() {
     this.firstLoad = false;
-    const { handleMapLoad } = this.props;
-    handleMapLoad();
+    const { handleMapLoaded } = this.props;
+    handleMapLoaded();
   }
 
   onMapMove(e) {

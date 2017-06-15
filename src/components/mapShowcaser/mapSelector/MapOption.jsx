@@ -8,7 +8,6 @@ function MapOption(props) {
     handleChoice(optionData, nodeId);
   };
   
-
   let chosenClass;
   if (optionChosen) {
     if (chosen) {
@@ -22,21 +21,18 @@ function MapOption(props) {
 
   return (
     <button className={`mapOption mapOption-${chosenClass}`} id={`mapOption-${nodeId}`} onClick={hClick} >
-      <div className="mapOption-visibleContent-container">
-        <div className="mapOption-info">
-          <div className="mapOption-title-container">
-            {title}
-          </div>
-          <div className="mapOption-underline-container">
-            <div className="mapOption-underline" />
-          </div>
-          <div className="mapOption-description-container">
-            {description}
-          </div>
+      <div className="mapOption-info">
+        <div className="mapOption-title-container">
+          {title}
         </div>
-        <img className="mapOption-image" src={imgUrl} alt={title} />
+        <div className="mapOption-underline-container">
+          <div className="mapOption-underline" />
+        </div>
+        <div className="mapOption-description-container">
+          {description}
+        </div>
       </div>
-
+      <img className="mapOption-image" src={imgUrl} alt={title} />
     </button>
   );
 }

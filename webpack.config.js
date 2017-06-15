@@ -8,6 +8,11 @@ module.exports = {
     bundle: './src/index.jsx',
     vendor: ['react', 'mapbox-gl']
   },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    filename: '[name].js'
+  },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
@@ -29,14 +34,14 @@ module.exports = {
       }
     })
   ],
-  output: {
-    path: path.join(__dirname, 'src/'),
-    publicPath: 'src/', // relative path for github pages
-    filename: '[name].js', // no hash in main.js because index.html is a static page
-    chunkFilename: '[hash]/js/[id].js',
-    hotUpdateMainFilename: '[hash]/update.json',
-    hotUpdateChunkFilename: '[hash]/js/[id].update.js'
-  },
+  // output: {
+  //   path: path.join(__dirname, 'src/'),
+  //   publicPath: 'src/', // relative path for github pages
+  //   filename: '[name].js', // no hash in main.js because index.html is a static page
+  //   chunkFilename: '[hash]/js/[id].js',
+  //   hotUpdateMainFilename: '[hash]/update.json',
+  //   hotUpdateChunkFilename: '[hash]/js/[id].update.js'
+  // },
   module: {
     loaders: [{
       test: /\.jsx$/,

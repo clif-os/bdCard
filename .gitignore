@@ -40,4 +40,5 @@ src/vendor.js.map
 src/vendor.js
 src/bundle.js
 
+dist/
 stats.json

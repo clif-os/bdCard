@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 
 app.set('port', process.env.PORT || 3000);
+app.use('/', express.static('dist'));
+// app.use('/', express.static('src'));
 
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -17,8 +19,6 @@ app.use(function (req, res, next) {
     next();
   }
 });
-
-app.use('/', express.static('src'));
 
 var server = app.listen(app.get('port'), () => {
   var port = server

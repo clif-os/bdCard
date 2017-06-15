@@ -6,7 +6,7 @@ module.exports = {
   devtool: 'eval-cheap-module-source-map',
   entry: {
     bundle: './src/index.jsx',
-    vendor: ['react', 'mapbox-gl', 'turf', 'react-dom']
+    vendor: ['react', 'mapbox-gl']
   },
   resolve: {
     extensions: [

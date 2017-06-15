@@ -1,0 +1,15 @@
+// {
+//   "extends": "airbnb",
+//   "rules": {
+//     "linebreak-style": 0,
+//     "import/prefer-default-export": 0
+//   },
+//   "globals": {
+//     "window": true,
+//     "document": true,
+//     "CustomEvent": true,
+//     "fetch": true,
+//     "Headers": true,
+//     "__DEV__": true,
+//   }
+// }

@@ -1,17 +1,13 @@
+import React, { Component } from 'react';
 import './AppInterface.styl';
-import React from 'react';
-import Sidebar from './components/sidebar/Sidebar.jsx';
-import Legend from './components/legend/Legend.jsx';
-import MBFullExtentButton from './components/customMapboxControls/MBFullExtentButton.jsx';
-import MBCredits from './components/customMapboxControls/MBCredits.jsx';
+import Map from './components/map/map.jsx';
 
-class AppInterface extends React.Component {
+class AppInterface extends Component {
   constructor(props){
     super();
     this.state = {
       mapLoaded: false
     };
-    document.addEventListener('MAP_LOADED', this.handleMapLoad.bind(this));
     this.handleMapLoad = this.handleMapLoad.bind(this);
   }
 
@@ -29,19 +25,13 @@ class AppInterface extends React.Component {
   render() {
     return (
       <div className="AppInterface">
-        {this.state.mapLoaded
-          ? (
-            <div>
-              <Sidebar propsMd={this.props.propsMd} />
-              <Legend legendData={this.props.legendData} />
-              <MBFullExtentButton />
-              <MBCredits />
-            </div>
-          )
-          : null        
-        }
+        <Map handleMapLoad={this.handleMapLoad} />
       </div>
     );
   }
 }
+
+// <Map handleMapLoad={this.handleMapLoad} />
+
  export default AppInterface;
+ 

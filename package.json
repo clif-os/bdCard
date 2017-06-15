@@ -1,29 +1,28 @@
 {
-  "name": "boston",
+  "name": "basemap.showcase",
   "version": "1.0.0",
-  "description": "Boston",
+  "description": "An application for showcasing a basemap portfolio.",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "./node_modules/.bin/concurrently \"node app.js\" \"webpack-dev-server --hot --inline --config webpack.config.dev.js\"",
+    "lint": "./node_modules/.bin/eslint.cmd --fix --config .eslintrc ./src/**/*.{js,jsx}",
     "heroku-postbuild": "webpack --progress",
     "start": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eltonjuan/boston.git"
+    "url": "git+https://github.com/ChiefKleef/basemapShowcase.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eltonjuan/boston/issues"
+    "url": "https://github.com/ChiefKleef/basemapShowcase/issues"
   },
-  "homepage": "https://github.com/eltonjuan/boston#readme",
+  "homepage": "https://github.com/ChiefKleef/basemapShowcase#readme",
   "dependencies": {
-    "body-parser": "^1.17.1",
     "child_process": "^1.0.2",
-    "compression": "^1.6.2",
     "custom-event-polyfill": "^0.3.0",
     "debounce": "^1.0.0",
     "es6-shim": "^0.35.3",
@@ -31,26 +30,18 @@
     "fetch-ie8": "^1.5.0",
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
-    "jspdf": "^1.3.3",
-    "lodash.debounce": "^4.0.8",
     "mapbox-gl": "^0.28.0",
     "net": "^1.0.2",
-    "pageres": "^4.4.0",
     "promise-polyfill": "^6.0.2",
-    "rc-slider": "^6.3.1",
-    "rc-slider-hostile-fork": "^5.3.7",
-    "rc-tooltip": "^3.4.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "react-native-view-shot": "^1.9.1",
     "react-redux": "^5.0.3",
     "react-select": "^1.0.0-rc.3",
     "react-tooltip": "^3.2.7",
+    "redux": "^3.6.0",
+    "redux-logger": "^3.0.6",
     "tls": "0.0.1",
-    "turf": "^3.0.14",
-    "velocity-react": "^1.1.11",
-    "webpack": "^1.14.0",
-    "webshot": "^0.18.0"
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",
@@ -62,6 +53,11 @@
     "brfs": "^1.4.3",
     "concurrently": "^3.4.0",
     "css-loader": "^0.26.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.9.0",
     "json-loader": "^0.5.4",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
@@ -69,5 +65,6 @@
     "transform-loader": "^0.2.3",
     "webpack-dev-server": "^1.16.2",
     "webworkify-webpack-dropin": "^1.1.9"
-  }
+  },
+  "false": {}
 }

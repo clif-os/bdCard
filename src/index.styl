@@ -1,39 +1,9 @@
-// font-family: 'Montserrat', sans-serif;
-// font-family: 'Roboto', sans-serif;
-
-html{
-height: 100vh;
-  width: 100vw;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  border: none;
-  overflow: hidden;
-  .legendCanvas{
+#appInterface-container {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: white
-  z-index: 2000
-  height: 300;
-  width: 300;
-  #legendImage{
-    height: 100%;
-    width: 100%;
-  }
-}
-}
-#app-wrapper {
+  top: 0px;
+  left: 0px;
   height: 100vh;
   width: 100vw;
-  // position: relative;
-  // display: flex;
-  // align-items: right;
-  // justify-content: right;
-  background: none;
 }
 
 .mainLoadingPane {
@@ -82,20 +52,5 @@ body {
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-.rc-slider-tooltip{
-  z-index: 1000;
-  transform: translateY(5px);
-}
-.rc-slider-tooltip-content{
-  transform: translateY(7.5px);
-  .rc-slider-tooltip-arrow{
-    transform: inherit!important;
-    border-top-color: #0A83C9!important;
-  }
-  .rc-slider-tooltip-inner{
-    background-color: #0A83C9;
   }
 }

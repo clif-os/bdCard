@@ -74,9 +74,9 @@ class ReactMap extends Component {
     window.addEventListener('LOAD_MAP', this.switchBasemaps.bind(this));
     // // internal map event handlers ////
     this.map.on('load', this.onMapLoaded.bind(this));
-    this.map.on('move', this.onMapMove.bind(this));
-    this.map.on('mousemove', this.onMouseMove.bind(this));
-    this.map.on('click', this.onMapClicked.bind(this));
+    // this.map.on('move', this.onMapMove.bind(this));
+    // this.map.on('mousemove', this.onMouseMove.bind(this));
+    // this.map.on('click', this.onMapClicked.bind(this));
     this.map.on('style.load', this.onStyleLoad.bind(this));
   }
 

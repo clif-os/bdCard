@@ -15,7 +15,6 @@ const loadMap = () => {
 class MapShowcaser extends Component {
   constructor() {
     super();
-    this.loadMap = this.loadMap.bind(this);
     this.handleMapLoaded = this.handleMapLoaded.bind(this);
     this.handleMapChoice = this.handleMapChoice.bind(this);
   }

@@ -36,7 +36,7 @@ function MapOption(props) {
 }
 
 MapOption.propTypes = {
-  nodeId: PropTypes.number.isRequired,
+  nodeId: PropTypes.string.isRequired,
   handleChoice: PropTypes.func.isRequired,
   chosen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,

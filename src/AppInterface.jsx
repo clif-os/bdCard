@@ -11,6 +11,8 @@ const handleAppLoad = () => {
   }, 500);
 };
 
+// resizing logic needs to be started
+
 class AppInterface extends Component {
 
   componentDidMount() {

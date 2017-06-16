@@ -12,14 +12,13 @@ const startingPosition = {
 };
 
 class ReactMap extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.firstLoad = false;
     this.controlsLoaded = false;
   }
 
   componentDidMount() {
-    const { chosenOptionData } = this.props;
     if (!this.firstLoad) {
       const { chosenOptionData } = this.props;
       const defaultStyle = chosenOptionData.styleUrl;
@@ -37,13 +36,36 @@ class ReactMap extends Component {
     }
   }
 
-  // // CONTROLS ////
-  addControls() {
-    if (!this.controlsLoaded) {
-      // ZOOM CONTROLS
-      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right');
-      this.controlsLoaded = true;
+  onMapLoaded() {
+    this.firstLoad = false;
+  }
+
+  onStyleLoad() {
+    const { onBoarding } = this.props;
+    if (!onBoarding) {
+      const { handleMapLoaded } = this.props;
+      // for some reason the style.load event is always before the map actually loads...
+      setTimeout(() => {
+        handleMapLoaded();
+      }, 500);
     }
+  }
+
+  // onMapMove(e) {
+
+  // }
+
+  // onMouseMove(e) {
+
+  // }
+  // onMapClicked(e) {
+
+  // }
+
+  switchBasemaps() {
+    const { chosenOptionData } = this.props;
+    const chosenStyle = chosenOptionData.styleUrl;
+    this.map.setStyle(chosenStyle);
   }
 
   // // MAP BINDING ////
@@ -58,36 +80,13 @@ class ReactMap extends Component {
     this.map.on('style.load', this.onStyleLoad.bind(this));
   }
 
-  onMapLoaded() {
-    this.firstLoad = false;
-  }
-
-  switchBasemaps() {
-    const { chosenOptionData } = this.props;
-    const chosenStyle = chosenOptionData.styleUrl;
-    this.map.setStyle(chosenStyle);
-  }
-
-  onStyleLoad() {
-    const { onBoarding } = this.props;
-    if (!onBoarding) {
-      const { handleMapLoaded } = this.props;
-      // for some reason the style.load event is always before the map actually loads...
-      setTimeout(() => {
-        handleMapLoaded();
-      }, 500);
+  // // CONTROLS ////
+  addControls() {
+    if (!this.controlsLoaded) {
+      // ZOOM CONTROLS
+      this.map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      this.controlsLoaded = true;
     }
-  }
-
-  onMapMove(e) {
-
-  }
-
-  onMouseMove(e) {
-
-  }
-  onMapClicked(e) {
-
   }
 
   render() {

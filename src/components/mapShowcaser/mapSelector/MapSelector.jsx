@@ -8,10 +8,11 @@ const renderOptions = (options, handleChoice, chosenId) => {
   const nodes = options.map((option, i) => {
     const { title, description, img } = option;
     const { url } = img;
-    const nodeId = i + 1;
+    const nodeId = `${i + 1}`;
+    const key = i;
     return (
       <MapOption
-        key={i} nodeId={nodeId} handleChoice={handleChoice}
+        key={key} nodeId={nodeId} handleChoice={handleChoice}
         title={title} description={description} imgUrl={url}
         optionData={option} chosen={nodeId === chosenId}
       />
@@ -25,7 +26,7 @@ const renderOptions = (options, handleChoice, chosenId) => {
 };
 
 class MapSelector extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.toggleSelectorOpen = this.toggleSelectorOpen.bind(this);
   }
@@ -55,7 +56,7 @@ class MapSelector extends Component {
 MapSelector.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleMapChoice: PropTypes.func.isRequired,
-  // chosenId: PropTypes.number.isRequired,
+  chosenId: PropTypes.string.isRequired,
   mapStyles: PropTypes.array.isRequired,
   onBoarding: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,

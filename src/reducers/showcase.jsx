@@ -5,6 +5,7 @@ const defaultState = {
   selectorOpen: true,
   onBoarding: true,
   chosenOptionData: mapStyles[0],
+  chosenId: 'null',
 };
 
 // TOGGLE SELECTOR OPEN is a weird place to put onBoarding, but is actually effective...

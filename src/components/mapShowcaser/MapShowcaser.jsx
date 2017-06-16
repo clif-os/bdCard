@@ -7,17 +7,17 @@ import { mapStyles } from './map/mapStyle_data.jsx';
 import LoadingPane from './loader/LoadingPane.jsx';
 import MapSelector from './mapSelector/MapSelector.jsx';
 
+const loadMap = () => {
+  const evt = new CustomEvent('LOAD_MAP');
+  window.dispatchEvent(evt);
+};
+
 class MapShowcaser extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.loadMap = this.loadMap.bind(this);
     this.handleMapLoaded = this.handleMapLoaded.bind(this);
     this.handleMapChoice = this.handleMapChoice.bind(this);
-  }
-
-  loadMap() {
-    const evt = new CustomEvent('LOAD_MAP');
-    window.dispatchEvent(evt);
   }
 
   handleMapLoaded() {
@@ -28,12 +28,13 @@ class MapShowcaser extends Component {
     const { dispatch } = this.props;
 
     dispatch(prepareMapLoad(nodeId, optionData));
-    // timeouts are for staggering animations, need to set up a special way to cause instant transitions
+    // timeouts are for staggering animations,
+    // need to set up a special way to cause instant transitions
     setTimeout(() => {
       dispatch(toggleSelectorOpen());
     }, 300);
     setTimeout(() => {
-      this.loadMap();
+      loadMap();
     }, 500);
   }
 
@@ -44,9 +45,15 @@ class MapShowcaser extends Component {
       <div className="mapShowcaser">
         <LoadingPane active={handlingMapChoice} />
         <div className="mapSelector-container">
-          <MapSelector handleMapChoice={handleMapChoice} chosenId={chosenId} mapStyles={mapStyles} onBoarding={onBoarding} />
+          <MapSelector
+            handleMapChoice={handleMapChoice} chosenId={chosenId}
+            mapStyles={mapStyles} onBoarding={onBoarding}
+          />
         </div>
-        <ReactMap handleMapLoaded={handleMapLoaded} chosenOptionData={chosenOptionData} onBoarding={onBoarding} />
+        <ReactMap
+          handleMapLoaded={handleMapLoaded} chosenOptionData={chosenOptionData}
+          onBoarding={onBoarding}
+        />
       </div>
     );
   }
@@ -54,9 +61,8 @@ class MapShowcaser extends Component {
 
 MapShowcaser.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  // chosenId: PropTypes.number.isRequired,
+  chosenId: PropTypes.string.isRequired,
   handlingMapChoice: PropTypes.bool.isRequired,
-  selectorOpen: PropTypes.bool.isRequired,
   onBoarding: PropTypes.bool.isRequired,
   chosenOptionData: PropTypes.object.isRequired,
 };

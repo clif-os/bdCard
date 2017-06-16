@@ -12,5 +12,6 @@
     "Headers": true,
     "__DEV__": true,
     "require": true,
+    "mapboxgl": true,
   }
 }

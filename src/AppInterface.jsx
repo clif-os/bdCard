@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './AppInterface.styl';
+import './styles/general.styl';
 import MapShowcaser from './components/mapShowcaser/MapShowcaser.jsx';
+import MapSplitter from './components/showcaseControls/MapSplitter.jsx';
+
+global.mapboxgl = require('mapbox-gl');
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibWltaW8iLCJhIjoiY2l6ZjJoenBvMDA4eDJxbWVkd2IzZjR0ZCJ9.ppwGNP_-LS2K4jUvgXG2pA';
 
 const handleAppLoad = () => {
   const loadingPane = document.getElementById('primaryLoadingPane');
@@ -22,12 +30,54 @@ class AppInterface extends Component {
   }
 
   render() {
+    const { mapSplit, showcase1, showcase2 } = this.props;
     return (
       <div className="AppInterface">
-        <MapShowcaser />
+        {mapSplit
+          ? <div className="showcase-masterContainer">
+            <div className="showcase1-container">
+              <MapShowcaser
+                showcaseId={'showcase1'}
+                chosenId={showcase1.chosenId} handlingMapChoice={showcase1.handlingMapChoice}
+                selectorOpen={showcase1.selectorOpen} onBoarding={showcase1.onBoarding}
+                chosenOptionData={showcase1.chosenOptionData}
+              />
+            </div>
+            <div className="showcase2-container">
+              <MapShowcaser
+                showcaseId={'showcase2'}
+                chosenId={showcase2.chosenId} handlingMapChoice={showcase2.handlingMapChoice}
+                selectorOpen={showcase2.selectorOpen} onBoarding={showcase2.onBoarding}
+                chosenOptionData={showcase2.chosenOptionData}
+              />
+            </div>
+          </div>
+          : <MapShowcaser
+            showcaseId={'showcase1'}
+            chosenId={showcase1.chosenId} handlingMapChoice={showcase1.handlingMapChoice}
+            selectorOpen={showcase1.selectorOpen} onBoarding={showcase1.onBoarding}
+            chosenOptionData={showcase1.chosenOptionData}
+          />
+        }
+        <MapSplitter />
       </div>
     );
   }
 }
 
-export default AppInterface;
+AppInterface.propTypes = {
+  mapSplit: PropTypes.bool.isRequired,
+  showcase1: PropTypes.object.isRequired,
+  showcase2: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  mapSplit: state.showcase.mapSplit,
+  showcase1: state.showcase.showcase1,
+  showcase2: state.showcase.showcase2,
+});
+
+export default connect(
+  mapStateToProps,
+)(AppInterface);
+

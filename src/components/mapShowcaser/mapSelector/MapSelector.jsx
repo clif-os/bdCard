@@ -33,7 +33,8 @@ class MapSelector extends Component {
   }
 
   toggleSelectorOpen() {
-    this.props.dispatch(toggleSelectorOpen());
+    const { showcaseId } = this.props;
+    this.props.dispatch(toggleSelectorOpen(showcaseId));
   }
 
   render() {
@@ -44,7 +45,7 @@ class MapSelector extends Component {
       <div className={`mapSelector mapSelector-open-${open}`}>
         {onBoarding
           ? null
-          : <button className="mapSelector-button" onClick={this.toggleSelectorOpen} >
+          : <button className="mapSelector-button bms-button" onClick={this.toggleSelectorOpen} >
             <span className={`mapSelector-button-icon fa fa-${icon}`} />
           </button>
         }
@@ -55,6 +56,7 @@ class MapSelector extends Component {
 }
 
 MapSelector.propTypes = {
+  showcaseId: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleMapChoice: PropTypes.func.isRequired,
   chosenId: PropTypes.string.isRequired,
@@ -63,10 +65,4 @@ MapSelector.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  open: state.showcase.selectorOpen,
-});
-
-export default connect(
-  mapStateToProps,
-)(MapSelector);
+export default connect()(MapSelector);

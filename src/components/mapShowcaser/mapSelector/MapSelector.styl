@@ -6,15 +6,10 @@ transitionSpeed = .15s;
   width: 100%;
   border-radius: 0%;
   .mapSelector-button {
-    color: rgba(255,255,255, .8);
     border-radius: 0% 0% 0% 100%;
     justify-content: flex-start;
     align-items: flex-end;
-    opacity: 0.8;
     transition: opacity 0.2s linear;
-    &:hover {
-      opacity: 1;
-    }
   }
   .mapOptions-container {
     opacity: 1;
@@ -29,15 +24,9 @@ transitionSpeed = .15s;
   border-radius: 50%;
   margin: 10px;
   .mapSelector-button {
-    color: rgba(255,255,255, .8);
     border-radius: 50% 50% 50% 50%;
     justify-content: center;
     align-items: center;
-    &:hover {
-      .mapSelector-button {
-        color: rgba(255,255,255, 1);
-      }
-    }
   }
   .mapOptions-container {
     opacity: 0;
@@ -64,10 +53,7 @@ transitionSpeed = .15s;
     flex-direction: column;
     font-size: 15pt; 
     padding: 10px;
-    background-image: linear-gradient(135deg, #34abfa, #585CF4);
-    border: none;
-    cursor: pointer;
-    transition: border-radius transitionSpeed linear;
+    transition: border-radius transitionSpeed linear, color 0.1s linear, background-color 0.1s linear, box-shadow 0.1s linear;
   }
   .mapOptions-container {
     position: absolute;

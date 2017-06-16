@@ -8,8 +8,8 @@ import { mapStyles } from './map/mapStyle_data.jsx';
 import LoadingPane from './loader/LoadingPane.jsx';
 import MapSelector from './mapSelector/MapSelector.jsx';
 
-const loadMap = () => {
-  const evt = new CustomEvent('LOAD_MAP');
+const loadMap = (showcaseId) => {
+  const evt = new CustomEvent(`LOAD_MAP_${showcaseId}`);
   window.dispatchEvent(evt);
 };
 
@@ -21,36 +21,41 @@ class MapShowcaser extends Component {
   }
 
   handleMapLoaded() {
-    this.props.dispatch(mapLoaded());
+    const { showcaseId } = this.props;
+    console.log(`MAP ${showcaseId} LOADED`);
+    this.props.dispatch(mapLoaded(showcaseId));
   }
 
   handleMapChoice(optionData, nodeId) {
+    const { showcaseId } = this.props;
     const { dispatch } = this.props;
-
-    dispatch(prepareMapLoad(nodeId, optionData));
+    dispatch(prepareMapLoad(showcaseId, nodeId, optionData));
     // timeouts are for staggering animations,
     // need to set up a special way to cause instant transitions
     setTimeout(() => {
-      dispatch(toggleSelectorOpen());
+      dispatch(toggleSelectorOpen(showcaseId));
     }, 300);
     setTimeout(() => {
-      loadMap();
+      loadMap(showcaseId);
     }, 500);
   }
 
   render() {
-    const { handlingMapChoice, chosenId, onBoarding, chosenOptionData } = this.props;
+    const { showcaseId, handlingMapChoice, chosenId,
+            onBoarding, chosenOptionData, selectorOpen } = this.props;
     const { handleMapChoice, handleMapLoaded } = this;
     return (
       <div className="mapShowcaser">
         <LoadingPane active={handlingMapChoice} />
         <div className="mapSelector-container">
           <MapSelector
+            showcaseId={showcaseId}
             handleMapChoice={handleMapChoice} chosenId={chosenId}
-            mapStyles={mapStyles} onBoarding={onBoarding}
+            mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen}
           />
         </div>
         <ReactMap
+          showcaseId={showcaseId}
           handleMapLoaded={handleMapLoaded} chosenOptionData={chosenOptionData}
           onBoarding={onBoarding}
         />
@@ -60,21 +65,13 @@ class MapShowcaser extends Component {
 }
 
 MapShowcaser.propTypes = {
+  showcaseId: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   chosenId: PropTypes.string.isRequired,
   handlingMapChoice: PropTypes.bool.isRequired,
   onBoarding: PropTypes.bool.isRequired,
   chosenOptionData: PropTypes.object.isRequired,
+  selectorOpen: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  chosenId: state.showcase.chosenId,
-  handlingMapChoice: state.showcase.handlingMapChoice,
-  selectorOpen: state.showcase.selectorOpen,
-  onBoarding: state.showcase.onBoarding,
-  chosenOptionData: state.showcase.chosenOptionData,
-});
-
-export default connect(
-  mapStateToProps,
-)(MapShowcaser);
+export default connect()(MapShowcaser);

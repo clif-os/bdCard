@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './ReactMap.styl';
 
-global.mapboxgl = require('mapbox-gl');
-
-mapboxgl.accessToken = 'pk.eyJ1IjoibWltaW8iLCJhIjoiY2l6ZjJoenBvMDA4eDJxbWVkd2IzZjR0ZCJ9.ppwGNP_-LS2K4jUvgXG2pA';
-
 // portland = [-122.683145, 45.532482]
 const startingPosition = {
   center: [-122.683145, 45.532482],
@@ -21,10 +17,11 @@ class ReactMap extends Component {
 
   componentDidMount() {
     if (!this.firstLoad) {
-      const { chosenOptionData } = this.props;
+      const { chosenOptionData, showcaseId } = this.props;
+      console.log(`reactMap-${showcaseId}`)
       const defaultStyle = chosenOptionData.styleUrl;
       this.map = new mapboxgl.Map({
-        container: 'reactMap',
+        container: `reactMap-${showcaseId}`,
         style: defaultStyle,
         repaint: true,
         center: startingPosition.center,
@@ -72,7 +69,9 @@ class ReactMap extends Component {
   // // MAP BINDING ////
   bindMapEvents() {
     // // LISTEN FOR STYLE CHANGES ////
-    window.addEventListener('LOAD_MAP', this.switchBasemaps.bind(this));
+    const { showcaseId } = this.props;
+    console.log(showcaseId)
+    window.addEventListener(`LOAD_MAP_${showcaseId}`, this.switchBasemaps.bind(this));
     // // internal map event handlers ////
     this.map.on('load', this.onMapLoaded.bind(this));
     // this.map.on('move', this.onMapMove.bind(this));
@@ -91,13 +90,16 @@ class ReactMap extends Component {
   }
 
   render() {
+    const { showcaseId } = this.props;
+    console.log(`reactMap-${showcaseId}`);
     return (
-      <div id="reactMap" />
+      <div id={`reactMap-${showcaseId}`} className="reactMap" />
     );
   }
 }
 
 ReactMap.propTypes = {
+  showcaseId: PropTypes.string.isRequired,
   handleMapLoaded: PropTypes.func.isRequired,
   chosenOptionData: PropTypes.object.isRequired,
   onBoarding: PropTypes.bool.isRequired,

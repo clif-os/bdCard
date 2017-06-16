@@ -7,10 +7,10 @@ function LoadingPane(props) {
   return (
     <div id="mainLoadingPane" className={`loadingPane loadingPane-${activeClass}`}>
       <div className="loadingBar-container" >
-        <div className="loadingBar" ></div>
+        <div className="loadingBar" />
       </div>
       <div className="loadingBar-container" >
-        <div className="loadingBar-backdrop" ></div>
+        <div className="loadingBar-backdrop" />
       </div>
     </div>
   );

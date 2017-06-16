@@ -8,7 +8,7 @@ import LoadingPane from './loader/LoadingPane.jsx';
 import MapSelector from './mapSelector/MapSelector.jsx';
 
 class MapShowcaser extends Component {
-  constructor(props){
+  constructor(props) {
     super();
     this.loadMap = this.loadMap.bind(this);
     this.handleMapLoaded = this.handleMapLoaded.bind(this);
@@ -17,10 +17,10 @@ class MapShowcaser extends Component {
 
   loadMap() {
     const evt = new CustomEvent('LOAD_MAP');
-    window.dispatchEvent(evt)
+    window.dispatchEvent(evt);
   }
 
-  handleMapLoaded(){
+  handleMapLoaded() {
     this.props.dispatch(mapLoaded());
   }
 
@@ -28,7 +28,7 @@ class MapShowcaser extends Component {
     const { dispatch } = this.props;
 
     dispatch(prepareMapLoad(nodeId, optionData));
-    //timeouts are for staggering animations, need to set up a special way to cause instant transitions
+    // timeouts are for staggering animations, need to set up a special way to cause instant transitions
     setTimeout(() => {
       dispatch(toggleSelectorOpen());
     }, 300);
@@ -53,6 +53,7 @@ class MapShowcaser extends Component {
 }
 
 MapShowcaser.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   // chosenId: PropTypes.number.isRequired,
   handlingMapChoice: PropTypes.bool.isRequired,
   selectorOpen: PropTypes.bool.isRequired,

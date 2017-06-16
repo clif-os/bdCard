@@ -9,5 +9,5 @@ export const prepareMapLoad = (nodeId, optionData) => ({
 });
 
 export const mapLoaded = nodeId => ({
-  type: 'MAP_LOADED'
+  type: 'MAP_LOADED',
 });

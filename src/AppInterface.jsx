@@ -9,19 +9,16 @@ const handleAppLoad = () => {
   window.setTimeout(() => {
     loadingPane.style.display = 'none';
   }, 500);
-}
+};
 
 class AppInterface extends Component {
-  constructor(){
-    super();
-  }
 
   componentDidMount() {
     setTimeout(() => {
       handleAppLoad();
-    }, 1500)
+    }, 1500);
   }
-  
+
   render() {
     return (
       <div className="AppInterface">
@@ -31,5 +28,4 @@ class AppInterface extends Component {
   }
 }
 
- export default AppInterface;
- 
+export default AppInterface;

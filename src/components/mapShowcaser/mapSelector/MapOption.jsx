@@ -5,11 +5,11 @@ function MapOption(props) {
   const { nodeId, handleChoice, chosen,
           title, description, imgUrl, optionData } = props;
   const hClick = () => {
-    if (! chosen) {
+    if (!chosen) {
       handleChoice(optionData, nodeId);
     }
   };
-  
+
   let chosenClass;
   if (chosen) {
     chosenClass = 'chosen';

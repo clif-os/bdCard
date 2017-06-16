@@ -10,19 +10,19 @@ const renderOptions = (options, handleChoice, chosenId) => {
     const { url } = img;
     const nodeId = i + 1;
     return (
-      <MapOption 
+      <MapOption
         key={i} nodeId={nodeId} handleChoice={handleChoice}
         title={title} description={description} imgUrl={url}
         optionData={option} chosen={nodeId === chosenId}
       />
-    )
+    );
   });
   return (
     <div className="mapOptions-container">
       {nodes}
     </div>
-  )
-}
+  );
+};
 
 class MapSelector extends Component {
   constructor(props) {
@@ -48,11 +48,12 @@ class MapSelector extends Component {
         }
         {renderOptions(mapStyles, handleMapChoice, chosenId)}
       </div>
-    )
+    );
   }
 }
 
 MapSelector.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   handleMapChoice: PropTypes.func.isRequired,
   // chosenId: PropTypes.number.isRequired,
   mapStyles: PropTypes.array.isRequired,

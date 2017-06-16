@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { showcase } from './showcase.jsx';
 
 const bmShowcaseApp = combineReducers({
-  showcase
+  showcase,
 });
 
 export default bmShowcaseApp;

@@ -16,7 +16,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
-      'webworkify': 'webworkify-webpack',
+      webworkify: 'webworkify-webpack',
       'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
     },
     modules: ['node_modules', 'src']
@@ -26,13 +26,13 @@ module.exports = {
       'process.env': {
         NODE_ENV: JSON.stringify('production')
       },
-      '__DEV__': false
+      __DEV__: false,
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
-      }
-    })
+        warnings: false,
+      },
+    }),
   ],
   module: {
     loaders: [{

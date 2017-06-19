@@ -41,6 +41,7 @@ export const showcase = (state = defaultState, action) => {
           [action.showcaseId]: null,
         },
         primaryShowcase: showcaseToggler[action.showcaseId],
+        [action.showcaseId]: defaultShowcaseState,
       };
     case 'TOGGLE_SELECTOR_OPEN':
       return {

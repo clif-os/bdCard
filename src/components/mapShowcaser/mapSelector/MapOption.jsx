@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import './MapOption.styl';
 
 function MapOption(props) {
-  const { nodeId, handleChoice, chosen,
-          title, description, imgUrl, optionData } = props;
+  const { handleChoice, chosen, title, description,
+          imgUrl, optionId, optionData } = props;
   const hClick = () => {
     if (!chosen) {
-      handleChoice(optionData, nodeId);
+      handleChoice(optionId, optionData);
     }
   };
 
@@ -19,7 +19,7 @@ function MapOption(props) {
   }
 
   return (
-    <button className={`mapOption mapOption-${chosenClass}`} id={`mapOption-${nodeId}`} onClick={hClick} >
+    <button className={`mapOption mapOption-${chosenClass}`} onClick={hClick} >
       <div className="mapOption-info">
         <div className="mapOption-title-container">
           {title}
@@ -37,12 +37,12 @@ function MapOption(props) {
 }
 
 MapOption.propTypes = {
-  nodeId: PropTypes.string.isRequired,
   handleChoice: PropTypes.func.isRequired,
   chosen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,
+  optionId: PropTypes.string.isRequired,
   optionData: PropTypes.object.isRequired,
 };
 

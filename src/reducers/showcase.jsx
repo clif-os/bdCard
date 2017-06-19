@@ -5,23 +5,42 @@ const defaultShowcaseState = {
   selectorOpen: true,
   onBoarding: true,
   chosenOptionData: mapStyles[0],
-  chosenId: 'null',
 };
 
 const defaultState = {
   mapSplit: false,
   showcase1: defaultShowcaseState,
   showcase2: defaultShowcaseState,
+  chosenOptionsIds: {
+    showcase1: null,
+    showcase2: null,
+  },
+  primaryShowcase: 'showcase1',
+};
+
+const showcaseToggler = {
+  showcase1: 'showcase2',
+  showcase2: 'showcase1',
 };
 
 // TOGGLE SELECTOR OPEN is a weird place to put onBoarding, but is actually effective...
 
 export const showcase = (state = defaultState, action) => {
   switch (action.type) {
-    case 'MAP_SPLIT':
+    case 'SPLIT_MAP':
       return {
         ...state,
         mapSplit: true,
+      };
+    case 'UNSPLIT_MAPS':
+      return {
+        ...state,
+        mapSplit: false,
+        chosenOptionsIds: {
+          ...state.chosenOptionsIds,
+          [action.showcaseId]: null,
+        },
+        primaryShowcase: showcaseToggler[action.showcaseId],
       };
     case 'TOGGLE_SELECTOR_OPEN':
       return {
@@ -35,10 +54,13 @@ export const showcase = (state = defaultState, action) => {
     case 'PREPARE_MAP_LOAD':
       return {
         ...state,
+        chosenOptionsIds: {
+          ...state.chosenOptionsIds,
+          [action.showcaseId]: action.chosenOptionId,
+        },
         [action.showcaseId]: {
           ...state[action.showcaseId],
           handlingMapChoice: true,
-          chosenId: action.chosenId,
           chosenOptionData: action.chosenOptionData,
         },
       };

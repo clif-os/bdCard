@@ -30,7 +30,14 @@ class AppInterface extends Component {
   }
 
   render() {
-    const { mapSplit, showcase1, showcase2 } = this.props;
+    const { mapSplit, showcase1, showcase2, chosenOptionsIds, primaryShowcase } = this.props;
+    console.log(chosenOptionsIds)
+    let pShowcase;
+    if (primaryShowcase === 'showcase1') {
+      pShowcase = { ...showcase1 };
+    } else if (primaryShowcase === 'showcase2') {
+      pShowcase = { ...showcase2 };
+    }
     return (
       <div className="AppInterface">
         {mapSplit
@@ -38,28 +45,30 @@ class AppInterface extends Component {
             <div className="showcase1-container">
               <MapShowcaser
                 showcaseId={'showcase1'}
-                chosenId={showcase1.chosenId} handlingMapChoice={showcase1.handlingMapChoice}
+                chosenOptionsIds={chosenOptionsIds} handlingMapChoice={showcase1.handlingMapChoice}
                 selectorOpen={showcase1.selectorOpen} onBoarding={showcase1.onBoarding}
-                chosenOptionData={showcase1.chosenOptionData}
+                chosenOptionData={showcase1.chosenOptionData} mapSplit={mapSplit}
               />
             </div>
             <div className="showcase2-container">
               <MapShowcaser
                 showcaseId={'showcase2'}
-                chosenId={showcase2.chosenId} handlingMapChoice={showcase2.handlingMapChoice}
+                chosenOptionsIds={chosenOptionsIds} handlingMapChoice={showcase2.handlingMapChoice}
                 selectorOpen={showcase2.selectorOpen} onBoarding={showcase2.onBoarding}
-                chosenOptionData={showcase2.chosenOptionData}
+                chosenOptionData={showcase2.chosenOptionData} mapSplit={mapSplit}
               />
             </div>
           </div>
-          : <MapShowcaser
-            showcaseId={'showcase1'}
-            chosenId={showcase1.chosenId} handlingMapChoice={showcase1.handlingMapChoice}
-            selectorOpen={showcase1.selectorOpen} onBoarding={showcase1.onBoarding}
-            chosenOptionData={showcase1.chosenOptionData}
-          />
+          : <div className="showcase-masterContainer">
+            <MapShowcaser
+              showcaseId={primaryShowcase}
+              chosenOptionsIds={chosenOptionsIds} handlingMapChoice={pShowcase.handlingMapChoice}
+              selectorOpen={pShowcase.selectorOpen} onBoarding={pShowcase.onBoarding}
+              chosenOptionData={pShowcase.chosenOptionData} mapSplit={mapSplit}
+            />
+            <MapSplitter />
+          </div>
         }
-        <MapSplitter />
       </div>
     );
   }
@@ -69,12 +78,16 @@ AppInterface.propTypes = {
   mapSplit: PropTypes.bool.isRequired,
   showcase1: PropTypes.object.isRequired,
   showcase2: PropTypes.object.isRequired,
+  chosenOptionsIds: PropTypes.object.chosenOptionsIds,
+  primaryShowcase: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
   mapSplit: state.showcase.mapSplit,
   showcase1: state.showcase.showcase1,
   showcase2: state.showcase.showcase2,
+  chosenOptionsIds: state.showcase.chosenOptionsIds,
+  primaryShowcase: state.showcase.primaryShowcase,
 });
 
 export default connect(

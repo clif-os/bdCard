@@ -18,7 +18,6 @@ class ReactMap extends Component {
   componentDidMount() {
     if (!this.firstLoad) {
       const { chosenOptionData, showcaseId } = this.props;
-      console.log(`reactMap-${showcaseId}`)
       const defaultStyle = chosenOptionData.styleUrl;
       this.map = new mapboxgl.Map({
         container: `reactMap-${showcaseId}`,
@@ -70,7 +69,6 @@ class ReactMap extends Component {
   bindMapEvents() {
     // // LISTEN FOR STYLE CHANGES ////
     const { showcaseId } = this.props;
-    console.log(showcaseId)
     window.addEventListener(`LOAD_MAP_${showcaseId}`, this.switchBasemaps.bind(this));
     // // internal map event handlers ////
     this.map.on('load', this.onMapLoaded.bind(this));
@@ -91,7 +89,6 @@ class ReactMap extends Component {
 
   render() {
     const { showcaseId } = this.props;
-    console.log(`reactMap-${showcaseId}`);
     return (
       <div id={`reactMap-${showcaseId}`} className="reactMap" />
     );

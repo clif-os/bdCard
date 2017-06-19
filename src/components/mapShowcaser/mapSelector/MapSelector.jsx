@@ -5,17 +5,18 @@ import './MapSelector.styl';
 import { toggleSelectorOpen } from '../../../actions/index.jsx';
 import MapOption from './MapOption.jsx';
 
-const renderOptions = (options, handleChoice, chosenId) => {
+const renderOptions = (options, handleChoice, chosenOptionsIds) => {
   const nodes = options.map((option, i) => {
     const { title, description, img } = option;
     const { url } = img;
-    const nodeId = `${i + 1}`;
     const key = i;
+    const chosenIds = Object.values(chosenOptionsIds);
     return (
       <MapOption
-        key={key} nodeId={nodeId} handleChoice={handleChoice}
+        key={key} handleChoice={handleChoice}
         title={title} description={description} imgUrl={url}
-        optionData={option} chosen={nodeId === chosenId}
+        optionId={title}
+        optionData={option} chosen={chosenIds.indexOf(title) > -1}
       />
     );
   });
@@ -38,7 +39,7 @@ class MapSelector extends Component {
   }
 
   render() {
-    const { handleMapChoice, chosenId, mapStyles, onBoarding } = this.props;
+    const { handleMapChoice, chosenOptionsIds, mapStyles, onBoarding } = this.props;
     const { open } = this.props;
     const icon = open ? 'close' : 'paint-brush';
     return (
@@ -49,7 +50,7 @@ class MapSelector extends Component {
             <span className={`mapSelector-button-icon fa fa-${icon}`} />
           </button>
         }
-        {renderOptions(mapStyles, handleMapChoice, chosenId)}
+        {renderOptions(mapStyles, handleMapChoice, chosenOptionsIds)}
       </div>
     );
   }
@@ -59,7 +60,7 @@ MapSelector.propTypes = {
   showcaseId: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   handleMapChoice: PropTypes.func.isRequired,
-  chosenId: PropTypes.string.isRequired,
+  chosenOptionsIds: PropTypes.object.isRequired,
   mapStyles: PropTypes.array.isRequired,
   onBoarding: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,

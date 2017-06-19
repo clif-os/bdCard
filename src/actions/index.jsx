@@ -1,5 +1,10 @@
-export const mapSplit = () => ({
-  type: 'MAP_SPLIT',
+export const splitMap = () => ({
+  type: 'SPLIT_MAP',
+});
+
+export const unsplitMaps = showcaseId => ({
+  type: 'UNSPLIT_MAPS',
+  showcaseId,
 });
 
 export const toggleSelectorOpen = showcaseId => ({
@@ -7,10 +12,10 @@ export const toggleSelectorOpen = showcaseId => ({
   showcaseId,
 });
 
-export const prepareMapLoad = (showcaseId, nodeId, optionData) => ({
+export const prepareMapLoad = (showcaseId, optionId, optionData) => ({
   type: 'PREPARE_MAP_LOAD',
   showcaseId,
-  chosenId: nodeId,
+  chosenOptionId: optionId,
   chosenOptionData: optionData,
 });
 

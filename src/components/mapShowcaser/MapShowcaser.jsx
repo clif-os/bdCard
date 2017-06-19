@@ -7,6 +7,7 @@ import ReactMap from './map/ReactMap.jsx';
 import { mapStyles } from './map/mapStyle_data.jsx';
 import LoadingPane from './loader/LoadingPane.jsx';
 import MapSelector from './mapSelector/MapSelector.jsx';
+import CloseButton from './CloseButton.jsx';
 
 const loadMap = (showcaseId) => {
   const evt = new CustomEvent(`LOAD_MAP_${showcaseId}`);
@@ -22,14 +23,13 @@ class MapShowcaser extends Component {
 
   handleMapLoaded() {
     const { showcaseId } = this.props;
-    console.log(`MAP ${showcaseId} LOADED`);
     this.props.dispatch(mapLoaded(showcaseId));
   }
 
-  handleMapChoice(optionData, nodeId) {
+  handleMapChoice(optionId, optionData) {
     const { showcaseId } = this.props;
     const { dispatch } = this.props;
-    dispatch(prepareMapLoad(showcaseId, nodeId, optionData));
+    dispatch(prepareMapLoad(showcaseId, optionId, optionData));
     // timeouts are for staggering animations,
     // need to set up a special way to cause instant transitions
     setTimeout(() => {
@@ -41,16 +41,17 @@ class MapShowcaser extends Component {
   }
 
   render() {
-    const { showcaseId, handlingMapChoice, chosenId,
-            onBoarding, chosenOptionData, selectorOpen } = this.props;
+    const { showcaseId, handlingMapChoice, chosenOptionsIds,
+            onBoarding, chosenOptionData, selectorOpen, mapSplit } = this.props;
     const { handleMapChoice, handleMapLoaded } = this;
     return (
       <div className="mapShowcaser">
         <LoadingPane active={handlingMapChoice} />
+        <CloseButton mapSplit={mapSplit} showcaseId={showcaseId} />
         <div className="mapSelector-container">
           <MapSelector
             showcaseId={showcaseId}
-            handleMapChoice={handleMapChoice} chosenId={chosenId}
+            handleMapChoice={handleMapChoice} chosenOptionsIds={chosenOptionsIds}
             mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen}
           />
         </div>
@@ -66,8 +67,9 @@ class MapShowcaser extends Component {
 
 MapShowcaser.propTypes = {
   showcaseId: PropTypes.string.isRequired,
+  mapSplit: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
-  chosenId: PropTypes.string.isRequired,
+  chosenOptionsIds: PropTypes.object.isRequired,
   handlingMapChoice: PropTypes.bool.isRequired,
   onBoarding: PropTypes.bool.isRequired,
   chosenOptionData: PropTypes.object.isRequired,

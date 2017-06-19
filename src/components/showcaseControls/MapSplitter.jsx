@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './MapSplitter.styl';
-import { mapSplit } from '../../actions/index.jsx';
+import { splitMap } from '../../actions/index.jsx';
 
 class MapSplitter extends Component {
   constructor() {
@@ -22,7 +22,10 @@ class MapSplitter extends Component {
     this.setState({ buttonHover: 'hover' });
   }
   unhoverButton() {
-    this.setState({ buttonHover: 'unhover' });
+    this.setState({
+      buttonHover: 'unhover',
+      buttonPress: 'unpress',
+    });
   }
   pressButton() {
     this.setState({ buttonPress: 'press' });
@@ -32,7 +35,7 @@ class MapSplitter extends Component {
   }
 
   splitMap() {
-    this.props.dispatch(mapSplit());
+    this.props.dispatch(splitMap());
   }
 
   render() {

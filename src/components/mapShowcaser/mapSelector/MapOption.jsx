@@ -6,7 +6,7 @@ import './MapOption.styl';
 function MapOption(props) {
   const { handleChoice, chosen, title, description,
           imgUrl, optionId, optionData, showcaseId,
-          optionSize, containerSize } = props;
+          classifier, containerSize } = props;
   const hClick = () => {
     if (!chosen) {
       handleChoice(optionId, optionData);
@@ -20,29 +20,29 @@ function MapOption(props) {
     chosenClass = 'notChosen';
   }
 
-  console.log({props})
-
   return (
-    <ContainerDimensions>
-      <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${optionSize} mapOption-${chosenClass}`} onClick={hClick} >
-        <div className="mapOption-info">
-          {chosen
-            ? <span className="mapOption-chosenIcon fa fa-check-circle-o" />
-            : null
-          }
-          <div className="mapOption-title-container">
-            <span>{title}</span>
+    <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${chosenClass}`} onClick={hClick} >
+      <ContainerDimensions>
+        { ({ width }) => <div className={`mapOption-${classifier(width)}`}>
+          <div className="mapOption-info">
+            {chosen
+              ? <span className="mapOption-chosenIcon fa fa-check-circle-o" />
+              : null
+            }
+            <div className="mapOption-title-container">
+              <span>{title}</span>
+            </div>
+            <div className="mapOption-underline-container">
+              <div className="mapOption-underline" />
+            </div>
+            <div className="mapOption-description-container">
+              {description}
+            </div>
           </div>
-          <div className="mapOption-underline-container">
-            <div className="mapOption-underline" />
-          </div>
-          <div className="mapOption-description-container">
-            {description}
-          </div>
-        </div>
-        <img className="mapOption-image" src={imgUrl} alt={title} />
-      </button>
-    </ContainerDimensions>
+          <img className="mapOption-image" src={imgUrl} alt={title} />
+        </div>}
+      </ContainerDimensions>
+    </button>
   );
 }
 
@@ -55,7 +55,7 @@ MapOption.propTypes = {
   imgUrl: PropTypes.string.isRequired,
   optionId: PropTypes.string.isRequired,
   optionData: PropTypes.object.isRequired,
-  optionSize: PropTypes.string.isRequired,
+  classifier: PropTypes.func.isRequired,
   containerSize: PropTypes.string.isRequired,
 };
 

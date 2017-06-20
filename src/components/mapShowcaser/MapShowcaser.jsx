@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleSelectorOpen, prepareMapLoad, mapLoaded,
-         registerResponsiveElement, unregisterResponsiveElement, respond } from '../../actions/index.jsx';
+import { toggleSelectorOpen, prepareMapLoad, mapLoaded } from '../../actions/index.jsx';
 import './MapShowcaser.styl';
 import ReactMap from './map/ReactMap.jsx';
 import { mapStyles } from './map/mapStyle_data.jsx';
 import LoadingPane from './loader/LoadingPane.jsx';
 import MapSelector from './mapSelector/MapSelector.jsx';
 import CloseButton from './CloseButton.jsx';
+import ContainerDimensions from 'react-container-dimensions';
 
 const loadMap = (showcaseId) => {
   const evt = new CustomEvent(`LOAD_MAP_${showcaseId}`);
   window.dispatchEvent(evt);
 };
 
-const classifier = (id) => {
-  const width = document.getElementById(id).clientWidth;
+const classifier = (width) => {
   if (width <= 325) {
     return 'extraSmall';
   } else if (width > 325 && width < 600) {
@@ -28,32 +27,12 @@ const classifier = (id) => {
   }
   return 'large';
 };
-const defaultClass = 'medium';
 
 class MapShowcaser extends Component {
   constructor() {
     super();
-    this.classification  = 'medium';
     this.handleMapLoaded = this.handleMapLoaded.bind(this);
     this.handleMapChoice = this.handleMapChoice.bind(this);
-    this.response = this.response.bind(this);
-  }
-
-  componentDidMount() {
-    // this is all for the responsive logic, the top-level component forces updates on resize for all others
-    const { showcaseId, dispatch } = this.props;
-    const id = `mapShowcaser-${showcaseId}`;
-    dispatch(registerResponsiveElement(id, classifier, defaultClass));
-    this.response();
-    window.addEventListener('resize', this.response.bind(this));
-  }
-  componentWillUnmount() {
-    const { showcaseId, dispatch } = this.props;
-    const id = `mapShowcaser-${showcaseId}`;
-    dispatch(unregisterResponsiveElement(id));
-  }
-  response() {
-    this.props.dispatch(respond());
   }
 
   handleMapLoaded() {
@@ -77,27 +56,31 @@ class MapShowcaser extends Component {
 
   render() {
     const { showcaseId, handlingMapChoice, chosenOptionsIds,
-            onBoarding, chosenOptionData, selectorOpen, mapSplit,
-            responsive } = this.props;
+            onBoarding, chosenOptionData, selectorOpen, mapSplit } = this.props;
     const { handleMapChoice, handleMapLoaded } = this;
-    const size = responsive[`mapShowcaser-${showcaseId}`] ? responsive[`mapShowcaser-${showcaseId}`].class : defaultClass;
     return (
-      <div className="mapShowcaser" id={`mapShowcaser-${showcaseId}`}>
-        <LoadingPane active={handlingMapChoice} />
-        <CloseButton mapSplit={mapSplit} showcaseId={showcaseId} containerSize={size} />
-        <div className="mapSelector-container">
-          <MapSelector
-            showcaseId={showcaseId}
-            handleMapChoice={handleMapChoice} chosenOptionsIds={chosenOptionsIds}
-            mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen} containerSize={size}
+      <ContainerDimensions>
+        {({ width }) => <div className="mapShowcaser" id={`mapShowcaser-${showcaseId}`}>
+          <LoadingPane active={handlingMapChoice} />
+          <CloseButton
+            mapSplit={mapSplit} showcaseId={showcaseId}
+            containerSize={classifier(width)}
           />
-        </div>
-        <ReactMap
-          showcaseId={showcaseId}
-          handleMapLoaded={handleMapLoaded} chosenOptionData={chosenOptionData}
-          onBoarding={onBoarding}
-        />
-      </div>
+          <div className="mapSelector-container">
+            <MapSelector
+              showcaseId={showcaseId}
+              handleMapChoice={handleMapChoice} chosenOptionsIds={chosenOptionsIds}
+              mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen}
+              containerSize={classifier(width)}
+            />
+          </div>
+          <ReactMap
+            showcaseId={showcaseId}
+            handleMapLoaded={handleMapLoaded} chosenOptionData={chosenOptionData}
+            onBoarding={onBoarding}
+          />
+        </div>}
+      </ContainerDimensions>
     );
   }
 }
@@ -111,7 +94,6 @@ MapShowcaser.propTypes = {
   onBoarding: PropTypes.bool.isRequired,
   chosenOptionData: PropTypes.object.isRequired,
   selectorOpen: PropTypes.bool.isRequired,
-  responsive: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

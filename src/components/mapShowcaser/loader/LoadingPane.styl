@@ -18,51 +18,37 @@
   z-index: 1000000;
   transition: bottom .3s ease-in, opacity 0.3s linear;
   overflow: hidden;
-  .loadingBar-container {
+  .loadingPane-spinner {
     position: absolute;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    height: 100%;
-    width: 100%;
-    top: 0px;
-    left: 0px;
-  }
-  .loadingBar {
-    position: relative
-    height: 30%;
-    width: 3px;
-    background-color: white;
-    animation: upDown .8s infinite linear;
-  }
-  .loadingBar-backdrop {
-    position: relative
-    height: 100%;
-    width: 3px;
-    background-color: rgba(255,255,255,.3);
+    z-index: 1000;
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #FFF;
+    animation: spin .5s infinite linear;
+    width: 80px;
+    height: 80px;
+    margin-top: -40px;
+    margin-left: -40px;
+    left: 50%;
+    top: 50%;
   }
 }
 
-  @-webkit-keyframes upDown {
-    0% {
-      -webkit-transform: translate3d(0px, 0px, 0px);
-    }
-    50% {
-      -webkit-transform: translate3d(0px, 70vh, 0px);
-    }
-    100% {
-      -webkit-transform: translate3d(0px, 0px, 0px);
-    }
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
   }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
-  @keyframes upDown {
-    0% {
-      transform: translate3d(0px, 0px, 0px);
-    }
-    50% {
-      transform: translate3d(0px, 70vh, 0px);
-    }
-    100% {
-      transform: translate3d(0px, 0px, 0px);
-    }
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(360deg);
+  }
+}

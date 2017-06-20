@@ -82,7 +82,7 @@ class MapShowcaser extends Component {
     const { size } = this.state;
     return (
       <div className="mapShowcaser" id={`mapShowcaser-${showcaseId}`}>
-        <LoadingPane active={handlingMapChoice} mapSplit={mapSplit} />
+        <LoadingPane active={handlingMapChoice} />
         <CloseButton mapSplit={mapSplit} showcaseId={showcaseId} containerSize={size} />
         <div className="mapSelector-container">
           <MapSelector

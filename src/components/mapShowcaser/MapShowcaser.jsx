@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { toggleSelectorOpen, prepareMapLoad, mapLoaded } from '../../actions/index.jsx';
+import { toggleSelectorOpen, prepareMapLoad, mapLoaded,
+         registerResponsiveElement, unregisterResponsiveElement, respond } from '../../actions/index.jsx';
 import './MapShowcaser.styl';
 import ReactMap from './map/ReactMap.jsx';
 import { mapStyles } from './map/mapStyle_data.jsx';
@@ -14,10 +15,8 @@ const loadMap = (showcaseId) => {
   window.dispatchEvent(evt);
 };
 
-const determineSize = (showcaseId) => {
-  const id = `mapShowcaser-${showcaseId}`;
-  const container = document.getElementById(id);
-  const width = container.clientWidth;
+const classifier = (id) => {
+  const width = document.getElementById(id).clientWidth;
   if (width <= 325) {
     return 'extraSmall';
   } else if (width > 325 && width < 600) {
@@ -29,31 +28,32 @@ const determineSize = (showcaseId) => {
   }
   return 'large';
 };
+const defaultClass = 'medium';
 
 class MapShowcaser extends Component {
   constructor() {
     super();
-    this.state = {
-      size: 'large',
-    };
+    this.classification  = 'medium';
     this.handleMapLoaded = this.handleMapLoaded.bind(this);
     this.handleMapChoice = this.handleMapChoice.bind(this);
+    this.response = this.response.bind(this);
   }
 
   componentDidMount() {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize.bind(this));
+    // this is all for the responsive logic, the top-level component forces updates on resize for all others
+    const { showcaseId, dispatch } = this.props;
+    const id = `mapShowcaser-${showcaseId}`;
+    dispatch(registerResponsiveElement(id, classifier, defaultClass));
+    this.response();
+    window.addEventListener('resize', this.response.bind(this));
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize.bind(this));
+    const { showcaseId, dispatch } = this.props;
+    const id = `mapShowcaser-${showcaseId}`;
+    dispatch(unregisterResponsiveElement(id));
   }
-  handleResize() {
-    const { showcaseId } = this.props;
-    const { size } = this.state;
-    const newSize = determineSize(showcaseId);
-    if (size !== newSize) {
-      this.setState({ size: newSize });
-    }
+  response() {
+    this.props.dispatch(respond());
   }
 
   handleMapLoaded() {
@@ -77,9 +77,10 @@ class MapShowcaser extends Component {
 
   render() {
     const { showcaseId, handlingMapChoice, chosenOptionsIds,
-            onBoarding, chosenOptionData, selectorOpen, mapSplit } = this.props;
+            onBoarding, chosenOptionData, selectorOpen, mapSplit,
+            responsive } = this.props;
     const { handleMapChoice, handleMapLoaded } = this;
-    const { size } = this.state;
+    const size = responsive[`mapShowcaser-${showcaseId}`] ? responsive[`mapShowcaser-${showcaseId}`].class : defaultClass;
     return (
       <div className="mapShowcaser" id={`mapShowcaser-${showcaseId}`}>
         <LoadingPane active={handlingMapChoice} />
@@ -110,6 +111,11 @@ MapShowcaser.propTypes = {
   onBoarding: PropTypes.bool.isRequired,
   chosenOptionData: PropTypes.object.isRequired,
   selectorOpen: PropTypes.bool.isRequired,
+  responsive: PropTypes.object.isRequired,
 };
 
-export default connect()(MapShowcaser);
+const mapStateToProps = state => ({
+  responsive: state.responsive,
+});
+
+export default connect(mapStateToProps)(MapShowcaser);

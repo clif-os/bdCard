@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ContainerDimensions from 'react-container-dimensions';
 import './MapOption.styl';
 
 function MapOption(props) {
@@ -19,25 +20,29 @@ function MapOption(props) {
     chosenClass = 'notChosen';
   }
 
+  console.log({props})
+
   return (
-    <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${optionSize} mapOption-${chosenClass}`} onClick={hClick} >
-      <div className="mapOption-info">
-        {chosen
-          ? <span className="mapOption-chosenIcon fa fa-check-circle-o" />
-          : null
-        }
-        <div className="mapOption-title-container">
-          <span>{title}</span>
+    <ContainerDimensions>
+      <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${optionSize} mapOption-${chosenClass}`} onClick={hClick} >
+        <div className="mapOption-info">
+          {chosen
+            ? <span className="mapOption-chosenIcon fa fa-check-circle-o" />
+            : null
+          }
+          <div className="mapOption-title-container">
+            <span>{title}</span>
+          </div>
+          <div className="mapOption-underline-container">
+            <div className="mapOption-underline" />
+          </div>
+          <div className="mapOption-description-container">
+            {description}
+          </div>
         </div>
-        <div className="mapOption-underline-container">
-          <div className="mapOption-underline" />
-        </div>
-        <div className="mapOption-description-container">
-          {description}
-        </div>
-      </div>
-      <img className="mapOption-image" src={imgUrl} alt={title} />
-    </button>
+        <img className="mapOption-image" src={imgUrl} alt={title} />
+      </button>
+    </ContainerDimensions>
   );
 }
 

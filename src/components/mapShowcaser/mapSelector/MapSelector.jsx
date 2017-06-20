@@ -2,8 +2,24 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './MapSelector.styl';
-import { toggleSelectorOpen } from '../../../actions/index.jsx';
+import { toggleSelectorOpen, registerResponsiveElement, unregisterResponsiveElement } from '../../../actions/index.jsx';
 import MapOption from './MapOption.jsx';
+
+const classifier = (className) => {
+  const child = document.getElementsByClassName(className)[0];
+  const width = child.clientWidth;
+  if (width <= 325) {
+    return 'extraSmall';
+  } else if (width > 325 && width < 450) {
+    return 'small';
+  } else if (width >= 450 && width < 600) {
+    return 'medium';
+  } else if (width >= 600) {
+    return 'large';
+  }
+  return 'large';
+};
+const defaultClass = 'medium';
 
 const renderOptions = (options, handleChoice, chosenOptionsIds,
                        showcaseId, optionSize, containerSize) => {
@@ -29,45 +45,28 @@ const renderOptions = (options, handleChoice, chosenOptionsIds,
   );
 };
 
-const determineOptionSize = (showcaseId) => {
-  const className = `mapOption-${showcaseId}`;
-  const child = document.getElementsByClassName(className)[0];
-  const width = child.clientWidth;
-  if (width <= 325) {
-    return 'extraSmall';
-  } else if (width > 325 && width < 450) {
-    return 'small';
-  } else if (width >= 450 && width < 600) {
-    return 'medium';
-  } else if (width >= 600) {
-    return 'large';
-  }
-  return 'large';
-};
-
 class MapSelector extends Component {
   constructor() {
     super();
-    this.state = {
-      optionSize: 'large',
-    };
     this.toggleSelectorOpen = this.toggleSelectorOpen.bind(this);
+    this.optionSize = defaultClass;
   }
-
   componentDidMount() {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize.bind(this));
+    const { showcaseId, dispatch } = this.props;
+    const className = `mapOption-${showcaseId}`;
+    dispatch(registerResponsiveElement(className, classifier, defaultClass));
   }
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize.bind(this));
+    const { showcaseId, dispatch } = this.props;
+    const className = `mapOption-${showcaseId}`;
+    dispatch(unregisterResponsiveElement(className));
   }
-  handleResize() {
-    const { showcaseId } = this.props;
-    const { size } = this.state;
-    const newSize = determineOptionSize(showcaseId);
-    if (size !== newSize) {
-      this.setState({ optionSize: newSize });
-    }
+  componentDidUpdate() {
+    const { showcaseId, responsive } = this.props;
+    const className = `mapOption-${showcaseId}`;
+    const optionSize = responsive[className].class;
+    const actualClass = classifier(className);
+    console.log({ optionSize }, { actualClass })
   }
 
   toggleSelectorOpen() {
@@ -77,11 +76,11 @@ class MapSelector extends Component {
 
   render() {
     const { open, handleMapChoice, chosenOptionsIds,
-            mapStyles, onBoarding, containerSize, showcaseId } = this.props;
-    const { optionSize } = this.state;
+            mapStyles, onBoarding, containerSize, showcaseId, responsive } = this.props;
+    this.optionSize = responsive[`mapOption-${showcaseId}`] ? responsive[`mapOption-${showcaseId}`].class : defaultClass;
     const icon = open ? 'close' : 'paint-brush';
     return (
-      <div className={`mapSelector mapSelector-open-${open} mapSelector-${containerSize}`}>
+      <div className={`mapSelector mapSelector-open-${open} mapSelector-${containerSize}`} >
         {onBoarding
           ? null
           : <button className="mapSelector-button bms-button" onClick={this.toggleSelectorOpen} >
@@ -89,7 +88,7 @@ class MapSelector extends Component {
           </button>
         }
         {renderOptions(mapStyles, handleMapChoice,
-                       chosenOptionsIds, showcaseId, optionSize, containerSize)}
+                       chosenOptionsIds, showcaseId, this.optionSize, containerSize)}
       </div>
     );
   }
@@ -104,6 +103,11 @@ MapSelector.propTypes = {
   onBoarding: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,
   containerSize: PropTypes.string.isRequired,
+  responsive: PropTypes.object.isRequired,
 };
 
-export default connect()(MapSelector);
+const mapStateToProps = state => ({
+  responsive: state.responsive,
+});
+
+export default connect(mapStateToProps)(MapSelector);

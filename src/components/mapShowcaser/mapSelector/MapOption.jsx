@@ -4,7 +4,8 @@ import './MapOption.styl';
 
 function MapOption(props) {
   const { handleChoice, chosen, title, description,
-          imgUrl, optionId, optionData } = props;
+          imgUrl, optionId, optionData, showcaseId,
+          optionSize, containerSize } = props;
   const hClick = () => {
     if (!chosen) {
       handleChoice(optionId, optionData);
@@ -19,10 +20,14 @@ function MapOption(props) {
   }
 
   return (
-    <button className={`mapOption mapOption-${chosenClass}`} onClick={hClick} >
+    <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${optionSize} mapOption-${chosenClass}`} onClick={hClick} >
       <div className="mapOption-info">
+        {chosen
+          ? <span className="mapOption-chosenIcon fa fa-check-circle-o" />
+          : null
+        }
         <div className="mapOption-title-container">
-          {title}
+          <span>{title}</span>
         </div>
         <div className="mapOption-underline-container">
           <div className="mapOption-underline" />
@@ -38,12 +43,15 @@ function MapOption(props) {
 
 MapOption.propTypes = {
   handleChoice: PropTypes.func.isRequired,
+  showcaseId: PropTypes.string.isRequired,
   chosen: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,
   optionId: PropTypes.string.isRequired,
   optionData: PropTypes.object.isRequired,
+  optionSize: PropTypes.string.isRequired,
+  containerSize: PropTypes.string.isRequired,
 };
 
 export default MapOption;

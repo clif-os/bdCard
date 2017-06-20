@@ -16,6 +16,7 @@ const defaultState = {
     showcase2: null,
   },
   primaryShowcase: 'showcase1',
+  controlledMap: 'null',
 };
 
 const showcaseToggler = {

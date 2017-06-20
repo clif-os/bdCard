@@ -7,21 +7,37 @@
   top: 0px;
   left: 0px;
   display: flex;
-  flex-direction: column;
-  vertical-align: center;
   align-items: center;
-  .mapSplitter {
-    height: 100%;
-    display: flex;
+  justify-content: center;
+  @media (max-width: 600px) {
+    flex-direction: row;
+    .mapSplitter {
+      width: 100%;
+      flex-direction: row;
+    }
+    .mapSplitter-dividerPreview {
+      height: 1.5px;
+    }
+  }
+  @media (min-width: 600.00001px) {
     flex-direction: column;
-    vertical-align: center;
+    .mapSplitter {
+      height: 100%;
+      flex-direction: column;
+    }
+    .mapSplitter-dividerPreview {
+      width: 1.5px;
+    }
+  }
+  .mapSplitter {
+    display: flex;
     align-items: center;
-    flex-wrap: none;
+    flex-wrap: nowrap;
+    z-index: 100;
     .mapSplitter-button {
       margin: 10px;
     }
     .mapSplitter-dividerPreview {
-      width: 1.5px;
       background-color: #3E95F8;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
       transition: opacity .1s linear, box-shadow .1s linear, margin 0.1s linear;

@@ -14,11 +14,46 @@ const loadMap = (showcaseId) => {
   window.dispatchEvent(evt);
 };
 
+const determineSize = (showcaseId) => {
+  const id = `mapShowcaser-${showcaseId}`;
+  const container = document.getElementById(id);
+  const width = container.clientWidth;
+  if (width <= 325) {
+    return 'extraSmall';
+  } else if (width > 325 && width < 600) {
+    return 'small';
+  } else if (width >= 600 && width < 800) {
+    return 'medium';
+  } else if (width >= 800) {
+    return 'large';
+  }
+  return 'large';
+};
+
 class MapShowcaser extends Component {
   constructor() {
     super();
+    this.state = {
+      size: 'large',
+    };
     this.handleMapLoaded = this.handleMapLoaded.bind(this);
     this.handleMapChoice = this.handleMapChoice.bind(this);
+  }
+
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize.bind(this));
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize.bind(this));
+  }
+  handleResize() {
+    const { showcaseId } = this.props;
+    const { size } = this.state;
+    const newSize = determineSize(showcaseId);
+    if (size !== newSize) {
+      this.setState({ size: newSize });
+    }
   }
 
   handleMapLoaded() {
@@ -44,15 +79,16 @@ class MapShowcaser extends Component {
     const { showcaseId, handlingMapChoice, chosenOptionsIds,
             onBoarding, chosenOptionData, selectorOpen, mapSplit } = this.props;
     const { handleMapChoice, handleMapLoaded } = this;
+    const { size } = this.state;
     return (
-      <div className="mapShowcaser">
-        <LoadingPane active={handlingMapChoice} />
-        <CloseButton mapSplit={mapSplit} showcaseId={showcaseId} />
+      <div className="mapShowcaser" id={`mapShowcaser-${showcaseId}`}>
+        <LoadingPane active={handlingMapChoice} mapSplit={mapSplit} />
+        <CloseButton mapSplit={mapSplit} showcaseId={showcaseId} containerSize={size} />
         <div className="mapSelector-container">
           <MapSelector
             showcaseId={showcaseId}
             handleMapChoice={handleMapChoice} chosenOptionsIds={chosenOptionsIds}
-            mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen}
+            mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen} containerSize={size}
           />
         </div>
         <ReactMap

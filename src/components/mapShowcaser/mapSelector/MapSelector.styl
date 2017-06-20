@@ -1,9 +1,9 @@
-buttonSize = 60px;
+buttonSize= 60px;
 transitionSpeed = .15s;
 
 .mapSelector-open-true {
-  height: 100%;
-  width: 100%;
+  height: 100%!important;
+  width: 100%!important;
   border-radius: 0%;
   .mapSelector-button {
     border-radius: 0% 0% 0% 100%;
@@ -18,9 +18,41 @@ transitionSpeed = .15s;
   }
 }
 
-.mapSelector-open-false {
+.mapSelector-large {
+  buttonSize= 60px;
   height: buttonSize;
   width: buttonSize;
+  .mapSelector-button {
+    height: buttonSize;
+    width: buttonSize;
+    padding: 10px;    
+    font-size: 15pt;
+  }
+}
+.mapSelector-medium {
+  buttonSize= 50px;
+  height: buttonSize;
+  width: buttonSize;
+  .mapSelector-button {
+    height: buttonSize;
+    width: buttonSize;
+    padding: 8px;
+    font-size: 15pt;
+  }
+}
+.mapSelector-small, .mapSelector-extraSmall {
+  buttonSize= 40px;
+  height: buttonSize;
+  width: buttonSize;
+  .mapSelector-button {
+    height: buttonSize;
+    width: buttonSize;
+    padding: 7px;
+    font-size: 12.5pt;
+  }
+}
+
+.mapSelector-open-false {
   border-radius: 50%;
   margin: 10px;
   .mapSelector-button {
@@ -47,12 +79,8 @@ transitionSpeed = .15s;
     z-index: 1000;
     top: 0px;
     right: 0px;
-    height: buttonSize;
-    width: buttonSize;
     display: flex;
     flex-direction: column;
-    font-size: 15pt; 
-    padding: 10px;
     transition: border-radius transitionSpeed linear, color 0.1s linear, background-color 0.1s linear, box-shadow 0.1s linear;
   }
   .mapOptions-container {

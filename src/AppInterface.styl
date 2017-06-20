@@ -10,19 +10,39 @@
   }
   .showcase1-container {
     position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 50%;
     background: none;
   }
   .showcase2-container {
     position: absolute;
-    top: 0px;
-    right: 0px;
-    height: 100%;
-    width: 50%;
     background: none;
+  }
+  @media (max-width: 600px) {
+    .showcase1-container {
+      top: 0px;
+      left: 0px;
+      height: 50%;
+      width: 100%;
+    }
+    .showcase2-container {
+      bottom: 0px;
+      left: 0px;
+      height: 50%;
+      width: 100%;
+    }
+  }
+  @media (min-width: 600.00001px) {
+    .showcase1-container {
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 50%;
+    }
+    .showcase2-container {
+      top: 0px;
+      right: 0px;
+      height: 100%;
+      width: 50%;
+    }
   }
 }
 

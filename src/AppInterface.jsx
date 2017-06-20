@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import './AppInterface.styl';
 import './styles/general.styl';
 import MapShowcaser from './components/mapShowcaser/MapShowcaser.jsx';
@@ -31,7 +31,6 @@ class AppInterface extends Component {
 
   render() {
     const { mapSplit, showcase1, showcase2, chosenOptionsIds, primaryShowcase } = this.props;
-    console.log(chosenOptionsIds)
     let pShowcase;
     if (primaryShowcase === 'showcase1') {
       pShowcase = { ...showcase1 };
@@ -78,7 +77,7 @@ AppInterface.propTypes = {
   mapSplit: PropTypes.bool.isRequired,
   showcase1: PropTypes.object.isRequired,
   showcase2: PropTypes.object.isRequired,
-  chosenOptionsIds: PropTypes.object.chosenOptionsIds,
+  chosenOptionsIds: PropTypes.object.isRequired,
   primaryShowcase: PropTypes.string.isRequired,
 };
 

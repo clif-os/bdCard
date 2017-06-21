@@ -35,8 +35,10 @@ const renderOptions = (options, handleChoice, chosenOptionsIds,
       />
     );
   });
+  // the spacer allows the header to exist without overlap at first,
+  // but also stay present during scrolling
   return (
-    <div className="mapOptions-container">
+    <div className={`mapOptions-container mapOptions-container-${containerSize}`}>
       {nodes}
     </div>
   );
@@ -65,8 +67,15 @@ class MapSelector extends Component {
             <span className={`mapSelector-button-icon fa fa-${icon}`} />
           </button>
         }
-        {renderOptions(mapStyles, handleMapChoice,
-                       chosenOptionsIds, showcaseId, optionClassifier, containerSize)}
+        <div className="mapSelector-collapsableContent-container">
+          <div className={`mapSelector-title-container mapSelector-title-container-${containerSize}`}>
+            <span className="mapSelector-title">
+              <span className="mapSelector-title-icon fa fa-hand-pointer-o" />Pick a Basemap
+            </span>
+          </div>
+          {renderOptions(mapStyles, handleMapChoice,
+                        chosenOptionsIds, showcaseId, optionClassifier, containerSize)}
+        </div>
       </div>
     );
   }

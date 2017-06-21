@@ -11,10 +11,25 @@ transitionSpeed = .15s;
     align-items: flex-end;
     transition: opacity 0.2s linear;
   }
-  .mapOptions-container {
+  .mapSelector-collapsableContent-container {
     opacity: 1;
     border-radius: 0%;
     pointer-events: auto;
+  }
+}
+
+.mapSelector-open-false {
+  border-radius: 50%;
+  margin: 10px;
+  .mapSelector-button {
+    border-radius: 50% 50% 50% 50%;
+    justify-content: center;
+    align-items: center;
+  }
+  .mapSelector-collapsableContent-container {
+    opacity: 0;
+    border-radius: 50%;
+    pointer-events: none;
   }
 }
 
@@ -52,21 +67,6 @@ transitionSpeed = .15s;
   }
 }
 
-.mapSelector-open-false {
-  border-radius: 50%;
-  margin: 10px;
-  .mapSelector-button {
-    border-radius: 50% 50% 50% 50%;
-    justify-content: center;
-    align-items: center;
-  }
-  .mapOptions-container {
-    opacity: 0;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-}
-
 .mapSelector {
   position: absolute;
   bottom: 0px;
@@ -76,26 +76,81 @@ transitionSpeed = .15s;
   transition: height transitionSpeed linear, width transitionSpeed linear;
   .mapSelector-button {
     position: absolute;
-    z-index: 1000;
+    z-index: 2001;
     top: 0px;
     right: 0px;
     display: flex;
     flex-direction: column;
     transition: border-radius transitionSpeed linear, color 0.1s linear, background-color 0.1s linear, box-shadow 0.1s linear;
   }
-  .mapOptions-container {
+  .mapSelector-collapsableContent-container {
     position: absolute;
     top: 0px;
-    right: 0px;
+    left: 0px;
     height: 100%;
     width: 100%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: stretch;
-    align-content: stretch;
-    background: black;
     transition: opacity transitionSpeed linear, border-radius transitionSpeed linear;
+    .mapSelector-title-container {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 100%;
+      z-index: 2000;
+      background: #3E95F8;
+      pointer-event: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+      .mapSelector-title {
+        color: white;
+        font-family: 'Noto Sans';
+        font-weight: 700;
+        // letter-spacing: 3px;
+        .mapSelector-title-icon {
+          margin-right: 10px;
+        }
+      }
+    }
+    .mapSelector-title-container-large {
+      height: 45px;
+      .mapSelector-title {
+        font-size: 18pt;
+      }
+    }
+    .mapSelector-title-container-medium {
+      height: 37.5px;
+      .mapSelector-title {
+        font-size: 16pt;
+      }
+    }
+    .mapSelector-title-container-small, .mapSelector-title-container-extraSmall {
+      height: 30px;
+      .mapSelector-title {
+        font-size: 14pt;
+      }
+    }
+    .mapOptions-container {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      width: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: stretch;
+      align-content: stretch;
+      background: black;
+    }
+    .mapOptions-container-large {
+      height: calc(100% - 45px);
+    }
+    .mapOptions-container-medium {
+      height: calc(100% - 37.5px);
+    }
+    .mapOptions-container-small, .mapOptions-container-extraSmall {
+      height: calc(100% - 30px);
+    }
   }
 }

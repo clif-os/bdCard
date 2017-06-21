@@ -23,19 +23,3 @@ export const mapLoaded = showcaseId => ({
   type: 'MAP_LOADED',
   showcaseId,
 });
-
-export const registerResponsiveElement = (elementId, elementClassifier, defaultClass) => ({
-  type: 'REGISTER_RESPONSIVE_ELEMENT',
-  elementId,
-  elementClassifier,
-  defaultClass,
-});
-
-export const unregisterResponsiveElement = elementId => ({
-  type: 'UNREGISTER_RESPONSIVE_ELEMENT',
-  elementId,
-});
-
-export const respond = () => ({
-  type: 'RESPOND',
-});

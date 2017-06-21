@@ -5,6 +5,7 @@ import './AppInterface.styl';
 import './styles/general.styl';
 import MapShowcaser from './components/mapShowcaser/MapShowcaser.jsx';
 import MapSplitter from './components/showcaseControls/MapSplitter.jsx';
+import MimioCredits from './components/mimioCredits/MimioCredits.jsx';
 
 global.mapboxgl = require('mapbox-gl');
 
@@ -39,6 +40,7 @@ class AppInterface extends Component {
     }
     return (
       <div className="AppInterface">
+        <MimioCredits mapSplit={mapSplit} />
         {mapSplit
           ? <div className="showcase-masterContainer">
             <div className="showcase1-container">

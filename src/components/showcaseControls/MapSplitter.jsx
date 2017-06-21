@@ -40,9 +40,15 @@ class MapSplitter extends Component {
 
   render() {
     const { buttonHover, buttonPress } = this.state;
+    const { tooltip } = this.props;
     return (
       <div className="mapSplitter-container">
         <div className="mapSplitter">
+          <div className={`mapSplitter-tooltip mapSplitter-tooltip-${tooltip}`}>
+            <span className="mapSplitter-tooltip-text">
+              <span className="fa fa-info-circle" /> Click To Compare Basemaps
+            </span>
+          </div>
           <button
             className="mapSplitter-button bms-button"
             onMouseOver={this.hoverButton}
@@ -66,13 +72,11 @@ class MapSplitter extends Component {
 
 MapSplitter.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  mapSplit: PropTypes.bool.isRequired,
+  tooltip: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  mapSplit: state.showcase.mapSplit,
+  tooltip: state.tooltips.mapSplitter,
 });
 
-export default connect(
-  mapStateToProps,
-)(MapSplitter);
+export default connect(mapStateToProps)(MapSplitter);

@@ -1,0 +1,40 @@
+.mimioCredits {
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+  transition: color 0.1s linear, background-color 0.1s linear, box-shadow 0.1s linear;
+  height: 30px;
+  border-radius: 15px;
+  pointer-events: auto;
+  z-index: 5;
+  color: tomato;
+  .mimioCredits-text {
+    font-family: 'Noto Sans';
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-left: 2px;
+  }
+  &:hover {
+    color: white
+    background-color: tomato;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+  }
+  &:active {
+    color: white
+    background-color: tomato;
+    box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.5);
+  }
+}
+.mimioCredits-mapSplit-true {
+  left: 50px;
+}
+.mimioCredits-mapSplit-false {
+  left: 10px;
+}

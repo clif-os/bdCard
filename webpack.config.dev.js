@@ -9,9 +9,7 @@ module.exports = {
     vendor: ['react', 'mapbox-gl']
   },
   resolve: {
-    extensions: [
-      '', '.js'
-    ],
+    extensions: ['', '.js', '.jsx'],
     alias: {
       'webworkify': 'webworkify-webpack',
       'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')

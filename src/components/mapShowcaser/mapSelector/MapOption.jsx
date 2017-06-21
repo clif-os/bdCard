@@ -21,7 +21,6 @@ function MapOption(props) {
   } else {
     chosenClass = 'notChosen';
   }
-  console.log(chosenClass);
   return (
     <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${chosenClass}`} onClick={hClick} >
       <ContainerDimensions>

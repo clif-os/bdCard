@@ -18,6 +18,9 @@ module.exports = {
     },
     modules: ['node_modules', 'src']
   },
+  resolveLoader: {
+    root: path.join(__dirname, 'node_modules'),
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

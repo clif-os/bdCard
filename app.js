@@ -4,7 +4,6 @@ const app = express();
 
 app.set('port', process.env.PORT || 3000);
 app.use('/', express.static('src'));
-app.use('/static', express.static('static'));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

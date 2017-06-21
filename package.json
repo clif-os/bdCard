@@ -1,7 +1,10 @@
 {
   "name": "basemap.showcase",
   "version": "1.0.0",
-  "description": "An application for showcasing a basemap portfolio.",
+  "engines": {
+    "node": "6.6.0"
+  },
+  "description": "An application for showcasing a basemap portfolio built with React, Redux, and MapboxGL.",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +17,12 @@
     "type": "git",
     "url": "git+https://github.com/ChiefKleef/basemapShowcase.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "redux",
+    "mapbox",
+    "mapboxgl"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {

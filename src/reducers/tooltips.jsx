@@ -1,3 +1,5 @@
+// tooltips depend on a simple binary switch
+// the rest of their behaviour is determined by CSS keyframes
 const defaultState = {
   mapSplitter: true,
 };

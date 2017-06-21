@@ -9,10 +9,16 @@ import './components/mapShowcaser/loader/LoadingPane.styl';
 import AppInterface from './AppInterface.jsx';
 
 // shims and polyfills for cross-browser
+import values from 'object.values';
+
+if (!Object.values) {
+  values.shim();
+}
 window.fetch = window.fetch || require('fetch-ie8');
 window.Promise = window.Promise || require('promise-polyfill');
 require('es6-shim');
 require('custom-event-polyfill');
+
 
 const store = createStore(
   bmShowcaseApp,

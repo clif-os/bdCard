@@ -68,7 +68,7 @@ class MapSelector extends Component {
         {onBoarding
           ? null
           : <button className="mapSelector-button bms-button" onClick={this.toggleSelectorOpen} >
-            <span className={`mapSelector-button-icon fa fa-${icon}`} />
+            <div><span className={`mapSelector-button-icon fa fa-${icon}`} /></div>
           </button>
         }
         <div className="mapSelector-collapsableContent-container">

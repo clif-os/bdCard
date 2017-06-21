@@ -43,6 +43,7 @@
     "mapbox-gl": "^0.28.0",
     "mapbox-gl-sync-move": "^0.1.0",
     "net": "^1.0.2",
+    "object.values": "^1.0.4",
     "promise-polyfill": "^6.0.2",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",

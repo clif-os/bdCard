@@ -23,7 +23,7 @@ module.exports = {
     chunkFilename: '[hash]/js/[id].js',
     hotUpdateMainFilename: '[hash]/update.json',
     hotUpdateChunkFilename: '[hash]/js/[id].update.js'
-  },		  },
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

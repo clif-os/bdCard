@@ -2,7 +2,8 @@
   "name": "basemap.showcase",
   "version": "1.0.0",
   "engines": {
-    "node": "6.6.0"
+    "node": "6.6.0",
+    "npm": "5.0.3"
   },
   "description": "An application for showcasing a basemap portfolio built with React, Redux, and MapboxGL.",
   "main": "index.jsx",

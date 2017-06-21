@@ -70,6 +70,7 @@ class MapShowcaser extends Component {
             <MapSelector
               showcaseId={showcaseId}
               handleMapChoice={handleMapChoice} chosenOptionsIds={chosenOptionsIds}
+              chosenOptionData={chosenOptionData}
               mapStyles={mapStyles} onBoarding={onBoarding} open={selectorOpen}
               containerSize={classifier(width)}
             />

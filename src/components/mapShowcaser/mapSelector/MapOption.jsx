@@ -4,7 +4,7 @@ import ContainerDimensions from 'react-container-dimensions';
 import './MapOption.styl';
 
 function MapOption(props) {
-  const { handleChoice, chosen, title, description,
+  const { handleChoice, chosen, chosenByThisComponent, title, description,
           imgUrl, optionId, optionData, showcaseId,
           classifier, containerSize } = props;
   const hClick = () => {
@@ -14,12 +14,14 @@ function MapOption(props) {
   };
 
   let chosenClass;
-  if (chosen) {
+  if (chosenByThisComponent) {
+    chosenClass = 'chosenByThisComponent';
+  } else if (chosen) {
     chosenClass = 'chosen';
   } else {
     chosenClass = 'notChosen';
   }
-
+  console.log(chosenClass);
   return (
     <button className={`mapOption mapOption-${showcaseId} mapOption-containerSize-${containerSize} mapOption-${chosenClass}`} onClick={hClick} >
       <ContainerDimensions>
@@ -50,6 +52,7 @@ MapOption.propTypes = {
   handleChoice: PropTypes.func.isRequired,
   showcaseId: PropTypes.string.isRequired,
   chosen: PropTypes.bool.isRequired,
+  chosenByThisComponent: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   imgUrl: PropTypes.string.isRequired,

@@ -18,19 +18,23 @@ const optionClassifier = (width) => {
   return 'large';
 };
 
-const renderOptions = (options, handleChoice, chosenOptionsIds,
+const renderOptions = (options, handleChoice, chosenOptionsIds, chosenOptionData,
                        showcaseId, classifier, containerSize) => {
   const nodes = options.map((option, i) => {
     const { title, description, img } = option;
     const { url } = img;
     const key = i;
     const chosenIds = Object.values(chosenOptionsIds);
+    const chosen = chosenIds.indexOf(title) > -1;
+    const titleChosenByComponent = chosenOptionData.title;
+    const chosenByThisComponent = titleChosenByComponent === title && chosen;
     return (
       <MapOption
         key={key} handleChoice={handleChoice} showcaseId={showcaseId}
         title={title} description={description} imgUrl={url}
         optionId={title}
-        optionData={option} chosen={chosenIds.indexOf(title) > -1}
+        optionData={option} chosen={chosen}
+        chosenByThisComponent={chosenByThisComponent}
         classifier={classifier} containerSize={containerSize}
       />
     );
@@ -56,7 +60,7 @@ class MapSelector extends Component {
   }
 
   render() {
-    const { open, handleMapChoice, chosenOptionsIds,
+    const { open, handleMapChoice, chosenOptionsIds, chosenOptionData,
             mapStyles, onBoarding, containerSize, showcaseId } = this.props;
     const icon = open ? 'close' : 'paint-brush';
     return (
@@ -74,7 +78,7 @@ class MapSelector extends Component {
             </span>
           </div>
           {renderOptions(mapStyles, handleMapChoice,
-                        chosenOptionsIds, showcaseId, optionClassifier, containerSize)}
+                        chosenOptionsIds, chosenOptionData, showcaseId, optionClassifier, containerSize)}
         </div>
       </div>
     );
@@ -86,6 +90,7 @@ MapSelector.propTypes = {
   dispatch: PropTypes.func.isRequired,
   handleMapChoice: PropTypes.func.isRequired,
   chosenOptionsIds: PropTypes.object.isRequired,
+  chosenOptionData: PropTypes.object.isRequired,
   mapStyles: PropTypes.array.isRequired,
   onBoarding: PropTypes.bool.isRequired,
   open: PropTypes.bool.isRequired,

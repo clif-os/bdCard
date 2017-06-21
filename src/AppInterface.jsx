@@ -7,6 +7,8 @@ import MapShowcaser from './components/mapShowcaser/MapShowcaser.jsx';
 import MapSplitter from './components/showcaseControls/MapSplitter.jsx';
 import MimioCredits from './components/mimioCredits/MimioCredits.jsx';
 
+import { handleAppResize } from './utils/resizer.jsx';
+
 global.mapboxgl = require('mapbox-gl');
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWltaW8iLCJhIjoiY2l6ZjJoenBvMDA4eDJxbWVkd2IzZjR0ZCJ9.ppwGNP_-LS2K4jUvgXG2pA';
@@ -28,6 +30,7 @@ class AppInterface extends Component {
     setTimeout(() => {
       handleAppLoad();
     }, 1500);
+    window.addEventListener('resize', handleAppResize.bind(this));
   }
 
   render() {

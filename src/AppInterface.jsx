@@ -30,6 +30,7 @@ class AppInterface extends Component {
     setTimeout(() => {
       handleAppLoad();
     }, 1500);
+    handleAppResize();
     window.addEventListener('resize', handleAppResize.bind(this));
   }
 

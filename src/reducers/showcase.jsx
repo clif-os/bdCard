@@ -9,8 +9,8 @@ const defaultShowcaseState = {
 
 const defaultState = {
   mapSplit: false,
-  showcase1: defaultShowcaseState,
-  showcase2: defaultShowcaseState,
+  showcase1: { ...defaultShowcaseState },
+  showcase2: { ...defaultShowcaseState },
   chosenOptionsIds: {
     showcase1: null,
     showcase2: null,

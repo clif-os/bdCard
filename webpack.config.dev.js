@@ -16,10 +16,7 @@ module.exports = {
       'webworkify': 'webworkify-webpack',
       'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js')
     },
-    modules: [
-      path.join(__dirname, 'src'),
-      'node_modules',
-    ],
+    modules: ['node_modules', 'src']
   },
   plugins: [
     new webpack.DefinePlugin({

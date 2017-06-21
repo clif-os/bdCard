@@ -9,8 +9,8 @@ module.exports = {
     vendor: ['react', 'mapbox-gl'],
   },
   output: {
-    path: path.resolve(__dirname, 'src'),
-    publicPath: '/',
+    path: path.resolve(__dirname, 'src/'),
+    publicPath: 'src/',
     filename: '[name].js',
   },
   resolve: {
@@ -19,10 +19,7 @@ module.exports = {
       webworkify: 'webworkify-webpack',
       'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js'),
     },
-    modules: [
-      path.join(__dirname, 'src'),
-      'node_modules',
-    ],
+    modules: ['node_modules', 'src'],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -69,13 +66,13 @@ module.exports = {
     },
     {
       test: '/\.(jpg|png)$/', //eslint-disable-line
-      loader: 'url-loader?mimetype=image/png',
+      loader: 'url-loader?mimetype=image/png'
     }
     ]
   },
   node: {
     fs: 'empty',
     net: 'empty',
-    tls: 'empty',
-  },
+    tls: 'empty'
+  }
 };

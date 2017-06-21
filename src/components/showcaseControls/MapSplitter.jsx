@@ -41,10 +41,11 @@ class MapSplitter extends Component {
   render() {
     const { buttonHover, buttonPress } = this.state;
     const { tooltip } = this.props;
+    const animate = tooltip === 1; // only animates after first load
     return (
       <div className="mapSplitter-container">
         <div className="mapSplitter">
-          <div className={`mapSplitter-tooltip mapSplitter-tooltip-${tooltip}`}>
+          <div className={`mapSplitter-tooltip mapSplitter-tooltip-${animate}`}>
             <span className="mapSplitter-tooltip-text">
               <span className="fa fa-info-circle" /> Click To Compare Basemaps
             </span>
@@ -72,7 +73,7 @@ class MapSplitter extends Component {
 
 MapSplitter.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  tooltip: PropTypes.bool.isRequired,
+  tooltip: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({

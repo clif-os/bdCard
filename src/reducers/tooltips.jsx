@@ -1,7 +1,7 @@
 // tooltips depend on a simple binary switch
 // the rest of their behaviour is determined by CSS keyframes
 const defaultState = {
-  mapSplitter: true,
+  mapSplitter: 0,
 };
 
 export const tooltips = (state = defaultState, action) => {
@@ -9,7 +9,7 @@ export const tooltips = (state = defaultState, action) => {
     case 'MAP_LOADED':
       return {
         ...state,
-        mapSplitter: false,
+        mapSplitter: state.mapSplitter + 1,
       };
     default:
       return state;

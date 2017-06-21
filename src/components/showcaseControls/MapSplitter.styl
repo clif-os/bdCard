@@ -21,7 +21,7 @@
     .mapSplitter-tooltip {
       left: 50px;
     }
-    .mapSplitter-tooltip-false {
+    .mapSplitter-tooltip-true {
       animation-name: fadeOutRight;
     }
   }
@@ -37,7 +37,7 @@
     .mapSplitter-tooltip {
       top: 50px;
     }
-    .mapSplitter-tooltip-false {
+    .mapSplitter-tooltip-true {
       animation-name: fadeOutRight;
     }
   }
@@ -47,7 +47,7 @@
     flex-wrap: nowrap;
     z-index: 100;
     position: relative;
-    .mapSplitter-tooltip-false {
+    .mapSplitter-tooltip-true {
       animation-delay: 3s;
       animation-duration: 4.5s;
       animation-delay: 1s;
@@ -92,6 +92,9 @@
         opacity: 0;
         margin-top: 20px;
       }
+    }
+    .mapSplitter-tooltip-false {
+      display: none!important;
     }
     .mapSplitter-tooltip {
       position: absolute;

@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import { showcase } from './showcase.jsx';
-import { tooltips } from './tooltips.jsx';
+import { colors } from './colors.jsx';
 
-const bmShowcaseApp = combineReducers({
-  showcase,
-  tooltips,
+const bdCard = combineReducers({
+  colors,
 });
 
-export default bmShowcaseApp;
+export default bdCard;

@@ -1,48 +1,17 @@
-.AppInterface {
+.appInterface {
   width: 100%;
   height: 100%;
-  .showcase-masterContainer {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%
-  }
-  .showcase1-container {
-    position: absolute;
-    background: none;
-  }
-  .showcase2-container {
-    position: absolute;
-    background: none;
-  }
-  @media (max-width: 725px) {
-    .showcase1-container {
-      top: 0px;
-      left: 0px;
-      height: 50%;
-      width: 100%;
-    }
-    .showcase2-container {
-      bottom: 0px;
-      left: 0px;
-      height: 50%;
-      width: 100%;
-    }
-  }
-  @media (min-width: 725.00001px) {
-    .showcase1-container {
-      top: 0px;
-      left: 0px;
-      height: 100%;
-      width: 50%;
-    }
-    .showcase2-container {
-      top: 0px;
-      right: 0px;
-      height: 100%;
-      width: 50%;
-    }
-  }
+  transition: background-color 1s linear;
 }
-
+.appInterface-colorIndex-1 {
+  background-color: #F9BDD6;
+}
+.appInterface-colorIndex-2 {
+  background-color: #D6ADFC;
+}
+.appInterface-colorIndex-3 {
+  background-color: #A1C5E5;
+}
+.appInterface-colorIndex-4 {
+  background-color: #AEDAE0;
+}

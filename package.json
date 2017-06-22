@@ -1,11 +1,11 @@
 {
-  "name": "basemap.showcase",
+  "name": "bday.card",
   "version": "1.0.0",
   "engines": {
     "node": "6.6.0",
     "npm": "5.0.3"
   },
-  "description": "An application for showcasing a basemap portfolio built with React, Redux, and MapboxGL.",
+  "description": "B-Day Card.",
   "main": "index.jsx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,22 +16,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChiefKleef/basemapShowcase.git"
+    "url": "git+https://github.com/ChiefKleef/bdCard.git"
   },
   "keywords": [
     "react",
-    "redux",
-    "mapbox",
-    "mapboxgl"
+    "redux"
   ],
-  "author": "Clifton Campbell, Michael Amos",
+  "author": "Clifton Campbell",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ChiefKleef/basemapShowcase/issues"
   },
   "homepage": "https://github.com/ChiefKleef/basemapShowcase#readme",
   "dependencies": {
-    "@mapbox/mapbox-gl-sync-move": "^0.2.0",
     "child_process": "^1.0.2",
     "custom-event-polyfill": "^0.3.0",
     "debounce": "^1.0.0",
@@ -40,8 +37,6 @@
     "fetch-ie8": "^1.5.0",
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
-    "mapbox-gl": "^0.28.0",
-    "mapbox-gl-sync-move": "^0.1.0",
     "net": "^1.0.2",
     "object.values": "^1.0.4",
     "promise-polyfill": "^6.0.2",

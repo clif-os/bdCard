@@ -6,13 +6,12 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     bundle: './src/index.jsx',
-    vendor: ['react', 'mapbox-gl'],
+    vendor: ['react'],
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
     alias: {
       webworkify: 'webworkify-webpack',
-      'mapbox-gl': path.resolve('./node_modules/mapbox-gl/dist/mapbox-gl.js'),
     },
     modules: ['node_modules', 'src'],
   },
@@ -54,10 +53,6 @@ module.exports = {
       test: /\.js$/,
       include: path.resolve(__dirname, 'node_modules/webworkify/index.js'),
       loader: 'worker',
-    },
-    {
-      test: /mapbox-gl.+\.js$/,
-      loader: 'transform/cacheable?brfs',
     },
     {
       test: /\.styl$/,

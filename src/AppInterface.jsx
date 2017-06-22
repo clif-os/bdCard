@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import './AppInterface.styl';
 
+import { Howl } from 'howler';
+
 import { handleAppResize } from './utils/resizer.jsx';
 
 import { incrementColor } from './actions/index.jsx';
@@ -15,10 +17,16 @@ class AppInterface extends Component {
     setInterval(() => {
       this.props.dispatch(incrementColor());
     }, 2000);
-    const audio = new Audio('bling.mp3');
-    audio.autoplay = true;
-    audio.loop = true;
-    audio.play();
+    const sound = new Howl({
+      src: ['bling.mp3'],
+      autoplay: true,
+      loop: true,
+      volume: 0.5,
+      onend: () => {
+        console.log('Finished Playing Drake-a-mon!');
+      },
+    });
+    sound.play();
   }
 
   render() {

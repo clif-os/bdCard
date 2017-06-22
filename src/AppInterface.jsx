@@ -16,6 +16,8 @@ class AppInterface extends Component {
       this.props.dispatch(incrementColor());
     }, 2000);
     const audio = new Audio('bling.mp3');
+    audio.autoplay = true;
+    audio.loop = true;
     audio.play();
   }
 

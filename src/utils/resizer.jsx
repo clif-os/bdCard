@@ -13,6 +13,7 @@ export const handleAppResize = () => {
   const newWidth = window.innerWidth;
   if (measurementIndex === 0 || newHeight !== lastMeasurement.height) {
     document.getElementById('appInterface-container').style.height = `${newHeight}px`;
+    document.getElementById('appInterface-loader').style.height = `${newHeight}px`;
   }
   lastMeasurement = {
     height: newHeight,

@@ -14,19 +14,19 @@ class AppInterface extends Component {
   componentDidMount() {
     handleAppResize();
     window.addEventListener('resize', handleAppResize.bind(this));
-    setInterval(() => {
-      this.props.dispatch(incrementColor());
-    }, 2000);
     const sound = new Howl({
       src: ['bling.mp3'],
       autoplay: true,
       loop: true,
-      volume: 0.5,
-      onend: () => {
-        console.log('Finished Playing Drake-a-mon!');
-      },
+      volume: 0.6,
     });
-    sound.play();
+    sound.once('load', () => {
+      document.getElementById('appInterface-loader').style.opacity = '0';
+      setInterval(() => {
+        this.props.dispatch(incrementColor());
+      }, 2000);
+      sound.play();
+    });
   }
 
   render() {

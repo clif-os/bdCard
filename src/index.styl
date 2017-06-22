@@ -1,40 +1,11 @@
+body {
+  background: #F9BDD6;
+}
+
 #appInterface-container {
   position: absolute;
   top: 0px;
   left: 0px;
   height: 100vh;
   width: 100vw;
-}
-
-#appInterface-loader {
-  z-index: 1000;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: #F9BDD6;
-  transition: opacity 2s linear;
-  opacity: 1;
-  #appInterface-loader-spinner {
-    width: 50px;
-    animation: spin 2s infinite linear;
-    letter-spacing: 3px;
-  }
-  #appInterface-loader-text {
-    margin-top: 50px;
-    color: white;
-  }
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 }

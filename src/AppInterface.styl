@@ -41,6 +41,55 @@
     }
   }
 }
+.appInterface-loader-true {
+  opacity: 0;
+}
+.appInterface-loader-false {
+  opacity: 1;
+}
+#appInterface-loader {
+  z-index: 1000;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #F9BDD6;
+  transition: opacity 2s linear;
+  #appInterface-loader-spinner {
+    width: 50px;
+    letter-spacing: 3px;
+    animation: spin 2s infinite linear;
+  }
+  #appInterface-loader-text {
+    margin-top: 50px;
+    color: #B25F99;
+    animation: hover 1s infinite linear;
+  }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes hover {
+    0% {
+      transform: translateY(2.5px);
+    }
+    50% {
+      transform: translateY(-2.5px);
+    }
+    100% {
+      transform: translateY(2.5px);
+    }
+  }
+}
 .appInterface-colorIndex-1 {
   background-color: #F9BDD6;
 }

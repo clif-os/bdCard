@@ -27,13 +27,15 @@ class AppInterface extends Component {
     setInterval(() => {
       this.props.dispatch(incrementColor());
     }, 2000);
+    // var audio = new Audio('bling.mp3');
+    // audio.play(); //1-800-KATRILLION.bling
   }
 
   render() {
     const { colorIndex } = this.props;
     return (
       <div className={`appInterface appInterface-colorIndex-${colorIndex}`}>
-        
+        <div className="repeatingText" />
       </div>
     );
   }

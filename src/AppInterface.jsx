@@ -23,6 +23,9 @@ class AppInterface extends Component {
     const { colorIndex } = this.props;
     return (
       <div className={`appInterface appInterface-colorIndex-${colorIndex}`}>
+        <div className="gif-container">
+          <img src="https://media.giphy.com/media/26BkNIqbzQIXdUi08/giphy.gif" alt="drakie mon" />
+        </div>
         <div className="repeatingText" />
       </div>
     );

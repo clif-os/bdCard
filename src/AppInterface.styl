@@ -8,9 +8,19 @@
     width: 100%;
     top: 0px;
     left: 0px;
-    background-image: url("https://assets3.thrillist.com/v1/image/1597304/size/tmg-slideshow_l.jpg");
+    background-image: url("http://i.imgur.com/vxtrm7S.png");
     background-repeat: repeat-y;
-    background-size: 100%;
+    background-size: 90%;
+    background-position: center -200px;
+    animation: movebg 20s linear infinite;
+  }
+  @keyframes movebg {
+    0% {
+      background-position: center -200px;
+    }
+    100% {
+      background-position: center 0px;
+    }
   }
 }
 .appInterface-colorIndex-1 {
@@ -23,5 +33,5 @@
   background-color: #A1C5E5;
 }
 .appInterface-colorIndex-4 {
-  background-color: #AEDAE0;
+  background-color: #E58EEC;
 }

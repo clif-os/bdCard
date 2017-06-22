@@ -7,28 +7,16 @@ import { handleAppResize } from './utils/resizer.jsx';
 
 import { incrementColor } from './actions/index.jsx';
 
-// const handleAppLoad = () => {
-//   const loadingPane = document.getElementById('primaryLoadingPane');
-//   loadingPane.classList.add('loadingPane-inactive');
-//   loadingPane.classList.remove('loadingPane-active');
-//   window.setTimeout(() => {
-//     loadingPane.style.display = 'none';
-//   }, 500);
-// };
-
 class AppInterface extends Component {
 
   componentDidMount() {
-    // setTimeout(() => {
-    //   handleAppLoad();
-    // }, 1500);
     handleAppResize();
     window.addEventListener('resize', handleAppResize.bind(this));
     setInterval(() => {
       this.props.dispatch(incrementColor());
     }, 2000);
-    // var audio = new Audio('bling.mp3');
-    // audio.play(); //1-800-KATRILLION.bling
+    const audio = new Audio('bling.mp3');
+    audio.play();
   }
 
   render() {

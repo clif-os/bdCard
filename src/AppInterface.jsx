@@ -16,7 +16,6 @@ class AppInterface extends Component {
     window.addEventListener('resize', handleAppResize.bind(this));
     const sound = new Howl({
       src: ['bling.mp3'],
-      autoplay: true,
       loop: true,
       volume: 0.6,
     });

@@ -5,11 +5,20 @@ import './MimioCredits.styl';
 function MimioCredits(props) {
   const { mapSplit } = props;
   return (
-    <a href="http://www.mimio.io/" target="_blank" rel="noopener noreferrer">
-      <button className={`mimioCredits mimioCredits-mapSplit-${mapSplit}`}>
-        <span className="mimioCredits-text"><span className="mimioCredits-text-icon fa fa-globe" /> MIMIO</span>
-      </button>
-    </a>
+    <div className={`mimioCredits-container mimioCredits-container-mapSplit-${mapSplit}`}>
+      <a href="http://www.mimio.io/" target="_blank" rel="noopener noreferrer">
+        <button className="mimioCredits-website mimioCredits-button">
+          <span className="mimioCredits-website-text">
+            <span className="mimioCredits-website-icon mimioCredits-icon fa fa-globe" /> MIMIO
+          </span>
+        </button>
+      </a>
+      <a href="https://github.com/mimio/basemapShowcase" target="_blank" rel="noopener noreferrer">
+        <button className="mimioCredits-github mimioCredits-button">
+          <span className="mimioCredits-github-icon mimioCredits-icon fa fa-github" />
+        </button>
+      </a>
+    </div>
   );
 }
 

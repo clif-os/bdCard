@@ -1,42 +1,67 @@
-.mimioCredits {
+.mimioCredits-container {
   position: absolute;
   top: 10px;
-  cursor: pointer;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
-  transition: color 0.1s linear, background-color 0.1s linear, box-shadow 0.1s linear;
-  height: 30px;
-  border-radius: 15px;
-  pointer-events: auto;
   z-index: 5;
-  color: tomato;
-  padding-left: 4px;
-  padding-right: 4px;
-  .mimioCredits-text {
-    font-family: 'Noto Sans';
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin-left: 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  .mimioCredits-button {
+    cursor: pointer;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.35);
+    transition: color 0.1s linear, background-color 0.1s linear, box-shadow 0.1s linear;
+    height: 30px;
+    border-radius: 15px;
+    pointer-events: auto;
+    font-size: 10pt;
   }
-  &:hover {
-    color: white
-    background-color: tomato;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+  .mimioCredits-website {
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: white;
+    color: tomato;
+    .mimioCredits-website-text {
+      font-family: 'Noto Sans';
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-left: 2px;
+    }
+    &:hover {
+      color: white
+      background-color: tomato;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+    }
+    &:active {
+      color: white
+      background-color: tomato;
+      box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.5);
+    }
   }
-  &:active {
-    color: white
+  .mimioCredits-github {
+    width: 30px;
+    margin-left: 10px;
+    font-size: 14pt;
     background-color: tomato;
-    box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.5);
+    color: white;
+    &:hover {
+      color: tomato
+      background-color: white;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.35);
+    }
+    &:active {
+      color: tomato
+      background-color: white;
+      box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.5);
+    }
   }
 }
-.mimioCredits-mapSplit-true {
+.mimioCredits-container-mapSplit-true {
   left: 50px;
 }
-.mimioCredits-mapSplit-false {
+.mimioCredits-container-mapSplit-false {
   left: 10px;
 }
